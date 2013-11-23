@@ -1,0 +1,30 @@
+Name: CarBudget
+Summary: Car expenses calculation
+Version: 0.2
+Release: 1
+Group: Qt/Qt
+License: GPLv3
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |-
+  Application to calculate all expenses from a Car
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- sailfishapp
+- Qt5Quick
+- Qt5Qml
+- Qt5Core
+Requires:
+- sailfishsilica-qt5
+Files:
+- /usr/share/icons/hicolor/86x86/apps
+- '%{_bindir}'
+- '%{_datadir}/%{name}/qml'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
+- /usr/bin
+- /usr/share/CarBudget
+- /usr/share/applications
+- /usr/share/icons/hicolor/86x86/apps
+PkgBR: []
