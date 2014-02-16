@@ -284,7 +284,7 @@ void Car::setCar(QString name)
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
 }
 
-void Car::addNewTank(QDate date, unsigned int distance, unsigned int quantity, double price, bool full, unsigned int station)
+void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station)
 {
     Tank *tank = new Tank(date, distance, quantity, price, full, station, this);
     _tanklist.append(tank);
@@ -293,6 +293,7 @@ void Car::addNewTank(QDate date, unsigned int distance, unsigned int quantity, d
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
     emit distanceChanged(this->distance());
+    emit tanksChanged();
 }
 
 void Car::delTank(Tank *tank)

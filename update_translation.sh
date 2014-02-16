@@ -1,1 +1,1 @@
-lupdate qml/pages/* -ts i18n/base.ts
+lupdate qml/pages/* -ts i18n/fr_FR.ts

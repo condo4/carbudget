@@ -96,7 +96,7 @@ Dialog {
                 label: qsTr("Price")
                 placeholderText: qsTr("Price")
 
-                validator: RegExpValidator { regExp: /^[0-9\.]{1,6}$/ }
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: costinput.focus = false
@@ -119,14 +119,14 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            manager.car.addNewCost(cost_date,kminput.text,descinput.text,costinput.text)
+            manager.car.addNewCost(cost_date,kminput.text,descinput.text,costinput.text.replace(",","."))
         }
         else
         {
             cost.date = cost_date
             cost.distance = kminput.text
             cost.description = descinput.text
-            cost.cost = costinput.text
+            cost.cost = costinput.text.replace(",",".")
             cost.save()
         }
     }

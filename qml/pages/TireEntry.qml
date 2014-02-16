@@ -25,17 +25,21 @@ import libcar 1.0
 
 
 Dialog {
-    id: addTire
     property Tire tire
     property date buy_date
     property date trash_date
 
     SilicaFlickable {
+
+        VerticalScrollDecorator {}
+
         anchors.fill: parent
+        contentHeight: column.height + Theme.paddingLarge
 
         Column {
             id: colum
             width: parent.width
+            spacing: Theme.paddingLarge
 
             DialogHeader { title: {
                     if(tire != undefined) return qsTr("Modify Tire")
@@ -83,57 +87,67 @@ Dialog {
 
             TextField {
                 id: nameinput
+                anchors { left: parent.left; right: parent.right }
+                focus: true
                 label: qsTr("Name")
                 placeholderText: qsTr("Name")
-                focus: true
-                width: parent.width
+
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: manufacturerinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
                 id: manufacturerinput
+                anchors { left: parent.left; right: parent.right }
                 label: qsTr("Manufacturer")
                 placeholderText: qsTr("Manufacturer")
-                width: parent.width
+
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: modelinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
                 id: modelinput
+                anchors { left: parent.left; right: parent.right }
                 label: qsTr("Model")
                 placeholderText: qsTr("Model")
-                width: parent.width
+
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: priceinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
 
             TextField {
                 id: priceinput
+                anchors { left: parent.left; right: parent.right }
                 label: qsTr("Price")
                 placeholderText: qsTr("Price")
-                width: parent.width
-                validator: RegExpValidator { regExp: /^[0-9\.]{1,6}$/ }
+
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
                 id: quantityinput
+                anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
                 placeholderText: qsTr("Quantity")
-                width: parent.width
+
                 validator: RegExpValidator { regExp: /^[2,4]$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = false
+                EnterKey.onClicked: quantityinput.focus = false
             }
         }
     }
-    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput
+    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput && quantityinput.acceptableInput && quantityinput.text > 1
 
     onOpened: {
         if(tire != undefined)
@@ -156,7 +170,7 @@ Dialog {
     onAccepted: {
         if(tire == undefined)
         {
-            manager.car.addNewTire(buy_date,trash_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text, quantityinput.text )
+            manager.car.addNewTire(buy_date,trash_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
         }
         else
         {
@@ -165,7 +179,7 @@ Dialog {
             tire.name = nameinput.text
             tire.manufacturer = manufacturerinput.text
             tire.modelname = modelinput.text
-            tire.price = priceinput.text
+            tire.price = priceinput.text.replace(",",".")
             tire.quantity = quantityinput.text
             tire.save()
         }

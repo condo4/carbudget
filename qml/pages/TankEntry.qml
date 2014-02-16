@@ -93,7 +93,7 @@ Dialog {
                 label: qsTr("Quantity")
                 placeholderText: qsTr("Quantity")
 
-                validator: RegExpValidator { regExp: /^[0-9\.]{1,6}$/ }
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -106,7 +106,7 @@ Dialog {
                 label: qsTr("Total Price")
                 placeholderText: qsTr("Total Price")
                 anchors { left: parent.left; right: parent.right }
-                validator: RegExpValidator { regExp: /^[0-9\.]{1,6}$/ }
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: cbstation.focus = true
@@ -117,9 +117,9 @@ Dialog {
                 id: unitpriceinput
                 label: qsTr("Unite Price")
                 anchors { left: parent.left; right: parent.right }
-                validator: RegExpValidator { regExp: /^[0-9\.]{1,6}$/ }
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 readOnly: true
-                text:  (priceinput.text / quanttityinput.text).toFixed(3) || 0
+                text:  (priceinput.text.replace(",",".") / quanttityinput.text.replace(",",".")).toFixed(3) || 0
             }
 
             ComboBox {
@@ -179,14 +179,14 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text,priceinput.text,fullinput.checked,station)
+            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station)
         }
         else
         {
             tank.date = tank_date
             tank.distance = kminput.text
-            tank.quantity = quanttityinput.text
-            tank.price = priceinput.text
+            tank.quantity = quanttityinput.text.replace(",",".")
+            tank.price = priceinput.text.replace(",",".")
             tank.full = fullinput.checked
             tank.station = station
             tank.save()

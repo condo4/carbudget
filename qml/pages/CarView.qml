@@ -50,7 +50,7 @@ Page {
 
             menu: ContextMenu {
                 MenuItem {
-                    text: "Select"
+                    text: qsTr("Select")
                     onClicked: {
                         manager.selectCar(model.modelData)
                         pageStack.clear()

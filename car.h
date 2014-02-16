@@ -96,7 +96,7 @@ signals:
     void tireMountedChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, unsigned int quantity, double price, bool full, unsigned int station);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station);
     void delTank(Tank *tank);
 
     void addNewStation(QString station);
