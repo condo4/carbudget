@@ -143,7 +143,6 @@ Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = false
-                EnterKey.onClicked: quantityinput.focus = false
             }
         }
     }
