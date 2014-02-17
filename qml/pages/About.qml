@@ -67,6 +67,12 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
             }
 
+            Label {
+                x: Theme.paddingLarge
+                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)")
+                font.pixelSize: Theme.fontSizeSmall
+            }
+
             Button {
                id: homepage
                anchors.horizontalCenter: parent.horizontalCenter
