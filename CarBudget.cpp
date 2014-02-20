@@ -58,11 +58,11 @@ int main(int argc, char *argv[])
         QGuiApplication::installTranslator(&translator);
     }
 
-    qmlRegisterType<Tank>(      "libcar",1,0,"Tank");
-    qmlRegisterType<Station>(   "libcar",1,0,"Station");
-    qmlRegisterType<Cost>(      "libcar",1,0,"Cost");
-    qmlRegisterType<Tire>(      "libcar",1,0,"Tire");
-    qmlRegisterType<Car>(       "libcar",1,0,"Car");
+    qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
+    qmlRegisterType<Station>(   "harbour.carbudget",1,0,"Station");
+    qmlRegisterType<Cost>(      "harbour.carbudget",1,0,"Cost");
+    qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");
+    qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
 
     CarManager manager;
 

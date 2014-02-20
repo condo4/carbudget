@@ -1,4 +1,4 @@
-Name: CarBudget
+Name: harbour-carbudget
 Summary: Car expenses calculation
 Version: 0.2
 Release: 5
@@ -18,13 +18,11 @@ PkgConfigBR:
 Requires:
 - sailfishsilica-qt5
 Files:
-- /usr/share/icons/hicolor/86x86/apps
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
 - '%{_datadir}/applications/%{name}.desktop'
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-- /usr/bin
-- /usr/share/CarBudget
-- /usr/share/applications
-- /usr/share/icons/hicolor/86x86/apps
+- '%{_datadir}/applications'
+- '%{_datadir}/icons/hicolor/86x86/apps'
+- '%{_datadir}/%{name}'
 PkgBR: []

@@ -6,7 +6,7 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
-TARGET = CarBudget
+TARGET = harbour-carbudget
 
 CONFIG += sailfishapp
 QT += sql
@@ -26,7 +26,7 @@ lupdate_only{
 
 OTHER_FILES += qml/cover/CoverPage.qml \
     rpm/CarBudget.yaml \
-    CarBudget.desktop \
+    harbour-carbudget.desktop \
     qml/Application.qml \
     qml/pages/CarView.qml \
     qml/pages/CarEntry.qml \
