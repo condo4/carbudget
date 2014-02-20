@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Car Budget");
 
     QTranslator translator;
-    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("fr_FR"), ":/i18n"))
+    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), ":/i18n"))
     {
         QGuiApplication::installTranslator(&translator);
     }
