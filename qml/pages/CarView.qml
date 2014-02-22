@@ -39,23 +39,25 @@ Page {
             title: qsTr("Car List")
         }
 
+        id: carView
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
         model: manager.cars
+        function select_car(data) {
+            manager.selectCar(data)
+            pageStack.clear()
+            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
+        }
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-
+            onClicked: carView.select_car(model.modelData)
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Select")
-                    onClicked: {
-                        manager.selectCar(model.modelData)
-                        pageStack.clear()
-                        pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-                    }
+                    onClicked: carView.select_car(model.modelData)
                 }
 
                 MenuItem {

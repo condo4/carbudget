@@ -25,7 +25,19 @@
 void CarManager::refresh()
 {
     _cars.clear();
-    QDir dir(QDir::homePath());
+    QDir home(QDir::homePath());
+    home.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+
+    home.setFilter(QDir::Files);
+    home.setNameFilters(QStringList()<<"*.cbg");
+    QStringList homeFileList = home.entryList();
+    foreach(QString file, homeFileList)
+    {
+        QFile::rename(QDir::homePath() + QDir::separator() + file,
+                      QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + file);
+    }
+
     dir.setFilter(QDir::Files);
     dir.setNameFilters(QStringList()<<"*.cbg");
     QStringList fileList = dir.entryList();
@@ -85,14 +97,14 @@ void CarManager::delCar(QString name)
         delete _car;
         _car = NULL;
     }
-    QFile::remove( QDir::homePath() + QDir::separator() + name + ".cbg");
+    QFile::remove( QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + name + ".cbg");
     refresh();
 }
 
 void CarManager::createCar(QString name)
 {
     bool error = false;
-    QString db_name = QDir::homePath() + QDir::separator() + name + ".cbg";
+    QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + name + ".cbg";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(db_name);
 

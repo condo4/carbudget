@@ -43,7 +43,7 @@ bool sortStationById(const Station *c1, const Station *c2)
 
 void Car::db_init()
 {
-    QString db_name = QDir::homePath() + QDir::separator() + _name + ".cbg";
+    QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
     this->db = QSqlDatabase::addDatabase("QSQLITE");
     this->db.setDatabaseName(db_name);
 
