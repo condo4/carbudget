@@ -48,10 +48,6 @@ int main(int argc, char *argv[])
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQuickView *view = SailfishApp::createView();
 
-    QCoreApplication::setOrganizationName("KaZoe");
-    QCoreApplication::setOrganizationDomain("kazoe.org");
-    QCoreApplication::setApplicationName("Car Budget");
-
     QTranslator translator;
     if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), ":/i18n"))
     {
