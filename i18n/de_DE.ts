@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_AT">
+<TS version="2.0" language="de_DE">
 <context>
     <name>About</name>
     <message>
@@ -38,7 +38,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="41"/>
         <source>About</source>
-        <translation>Info</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="61"/>
@@ -246,8 +246,8 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="106"/>
         <location filename="../qml/pages/TankEntry.qml" line="107"/>
-        <source>Gesamtpreis</source>
-        <translation>Prezzo totale</translation>
+        <source>Total Price</source>
+        <translation>Gesamtpreis</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="118"/>
