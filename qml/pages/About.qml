@@ -69,7 +69,7 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)")
+                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (harbour rules)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
