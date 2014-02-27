@@ -4,6 +4,10 @@ Version: 0.2
 Release: 5
 Group: Qt/Qt
 License: GPLv3
+Provides:
+ - CarBudget = %{version}
+Obsoletes:
+ - CarBudget < %{version}
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
