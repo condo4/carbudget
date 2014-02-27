@@ -37,7 +37,7 @@ Dialog {
         contentHeight: column.height + Theme.paddingLarge
 
         Column {
-            id: colum
+            id: column
             width: parent.width
             spacing: Theme.paddingLarge
 
