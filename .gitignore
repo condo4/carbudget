@@ -13,7 +13,8 @@
 *.a
 obj
 moc
-*.pro.user
+*.pro.user*
 CarBudget
 Makefile
 rpm/CarBudget.spec
+rpm/harbour-carbudget.spec
