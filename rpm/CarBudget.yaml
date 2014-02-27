@@ -1,13 +1,14 @@
 Name: harbour-carbudget
 Summary: Car expenses calculation
 Version: 0.2
-Release: 5
+Release: 6
 Group: Qt/Qt
-License: GPLv3
+License: GPL
+URL: https://github.com/condo4/carbudget
 Provides:
- - CarBudget = %{version}
+- CarBudget = %{version}
 Obsoletes:
- - CarBudget < %{version}
+- CarBudget < %{version}
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
