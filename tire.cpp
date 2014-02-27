@@ -188,7 +188,7 @@ void Tire::save()
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE TireList SET buydate='%1', trashdate=%2, name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%7;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
+        QString sql = QString("UPDATE TireList SET buydate='%1', trashdate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%7;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {
