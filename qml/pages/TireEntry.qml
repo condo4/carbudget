@@ -80,6 +80,7 @@ Dialog {
                 }
 
                 label: "Trash date"
+                visible: tire != undefined
                 value: trash_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                 width: parent.width
                 onClicked: openDateDialog()
@@ -169,7 +170,7 @@ Dialog {
     onAccepted: {
         if(tire == undefined)
         {
-            manager.car.addNewTire(buy_date,trash_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.addNewTire(buy_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
         }
         else
         {
