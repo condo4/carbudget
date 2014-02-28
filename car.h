@@ -49,6 +49,9 @@ class Car : public QObject
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
 
+    Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
+
 private:
     CarManager *_manager;
     QString _name;
@@ -82,7 +85,8 @@ public:
     void setCar(QString name);
     QString getName() const { return _name; }
 
-    //Car &operator=(const Car &car);
+    double budget_fuel();
+    double budget_cost();
 
 signals:
     void nbtankChanged(unsigned int nbtank);
@@ -94,6 +98,8 @@ signals:
     void costsChanged();
     void tiresChanged();
     void tireMountedChanged();
+
+    void budgetChanged();
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station);
