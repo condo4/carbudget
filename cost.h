@@ -24,56 +24,35 @@
 
 #include <QObject>
 #include <QDate>
+#include "carevent.h"
 
-class Car;
-
-class Cost : public QObject
+class Cost : public CarEvent
 {
     Q_OBJECT
-    Q_PROPERTY(QDateTime    date        READ date        WRITE setDate           NOTIFY dateChanged )
-    Q_PROPERTY(unsigned int distance    READ distance    WRITE setDistance       NOTIFY distanceChanged )
     Q_PROPERTY(QString      description READ description WRITE setDescription    NOTIFY descriptionChanged )
     Q_PROPERTY(double       cost        READ cost        WRITE setCost           NOTIFY costChanged )
-    Q_PROPERTY(unsigned int id          READ id          WRITE setId             NOTIFY idChanged )
-
-
 
 private:
-    Car *_car;
-    QDate _date;
-    unsigned int _distance;
     QString _description;
     double _cost;
-    int _id;
 
 public:
-    explicit Cost(QObject *parent = 0);
-    explicit Cost(QDate date,unsigned int distance, QString desc, double cost, int id = -1, Car *parent = 0);
+    explicit Cost(Car *parent = 0);
+    explicit Cost(QDate date,unsigned int distance, QString desc, double cost, unsigned int id = 0, Car *parent = 0);
 
 signals:
-    void dateChanged();
     void descriptionChanged();
     void costChanged();
-    void idChanged();
-    void distanceChanged();
 
 public slots:
-    QDateTime date() const;
-    void setDate(QDateTime date);
-
     QString description() const;
     void setDescription(QString desc);
-
-    unsigned int distance() const;
-    void setDistance(unsigned int distance);
 
     double cost() const;
     void setCost(double cost);
 
-    unsigned int id() const;
-    void setId(unsigned int id);
-
     void save();
+    void remove();
 };
 
 #endif // COST_H

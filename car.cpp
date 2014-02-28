@@ -25,6 +25,7 @@
 #include "station.h"
 #include <QDebug>
 
+#define CREATE_NEW_EVENT (0)
 
 bool sortTankByDistance(const Tank *c1, const Tank *c2)
 {
@@ -74,7 +75,7 @@ void Car::db_load()
             double price = query.value(4).toDouble();
             bool full = query.value(5).toBool();
             unsigned int station = query.value(6).toInt();
-            Tank *tank = new Tank(id, date, distance, quantity, price, full, station, this);
+            Tank *tank = new Tank(date, distance, quantity, price, full, station, id, this);
             _tanklist.append(tank);
         }
         emit nbtankChanged(_tanklist.count());
@@ -324,7 +325,7 @@ double Car::budget_cost()
 
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station)
 {
-    Tank *tank = new Tank(date, distance, quantity, price, full, station, this);
+    Tank *tank = new Tank(date, distance, quantity, price, full, station, CREATE_NEW_EVENT, this);
     _tanklist.append(tank);
     qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
     tank->save();
@@ -397,7 +398,7 @@ void Car::delStation(Station *station)
 
 void Car::addNewCost(QDate date, unsigned int distance, QString description, double price)
 {
-    Cost *cost = new Cost(date,distance,description,price,-1,this);
+    Cost *cost = new Cost(date,distance,description,price,CREATE_NEW_EVENT,this);
     _costlist.append(cost);
     qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
     cost->save();
@@ -409,19 +410,7 @@ void Car::delCost(Cost *cost)
     qDebug() << "Remove Cost " << cost->id();
     _costlist.removeAll(cost);
     qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
-    QSqlQuery query(db);
-    QString sql = QString("DELETE FROM CostList WHERE id=%1;").arg(cost->id());
-    if(query.exec(sql))
-    {
-        qDebug() << "DELETE Cost in database with id " << cost->id();
-        db.commit();
-    }
-    else
-    {
-        qDebug() << "Error during DELETE Cost in database";
-        qDebug() << query.lastError();
-    }
-
+    cost->remove();
     emit costsChanged();
     cost->deleteLater();
 }

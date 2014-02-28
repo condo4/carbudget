@@ -17,7 +17,8 @@ SOURCES += CarBudget.cpp \
     station.cpp \
     cost.cpp \
     tire.cpp \
-    carmanager.cpp
+    carmanager.cpp \
+    carevent.cpp
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -50,7 +51,8 @@ HEADERS += \
     station.h \
     cost.h \
     tire.h \
-    carmanager.h
+    carmanager.h \
+    carevent.h
 
 TRANSLATIONS = CarBudget_fr.ts \
                CarBudget_en.ts \

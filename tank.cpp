@@ -25,66 +25,25 @@
 #include <carmanager.h>
 
 Tank::Tank(Car *parent) :
-    QObject(parent),
-    _car(parent),
-    _id(-1),
-    _date(QDate::currentDate()),
-    _distance(0),
+    CarEvent(parent),
     _quantity(0),
     _price(0),
     _full(true),
     _station(0)
 {
+    connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, Car *parent) :
-    QObject(parent),
-    _car(parent),
-    _id(-1),
-    _date(date),
-    _distance(distance),
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, Car *parent):
+    CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
     _full(full),
     _station(station)
 {
+    connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(int id, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, Car *parent):
-    QObject(parent),
-    _car(parent),
-    _id(id),
-    _date(date),
-    _distance(distance),
-    _quantity(quantity),
-    _price(price),
-    _full(full),
-    _station(station)
-{
-}
-
-QDateTime Tank::date() const
-{
-    return QDateTime(_date);
-}
-
-void Tank::setDate(QDateTime date)
-{
-    _date = date.date();
-    emit dateChanged(date);
-}
-
-unsigned int Tank::distance() const
-{
-    return _distance;
-}
-
-void Tank::setDistance(unsigned int distance)
-{
-    _distance = distance;
-    emit distanceChanged(distance);
-    emit consumptionChanged(this->consumption());
-}
 
 double Tank::quantity() const
 {
@@ -95,7 +54,7 @@ void Tank::setQuantity(double quantity)
 {
     _quantity = quantity;
     emit quantityChanged(quantity);
-    emit consumptionChanged(this->consumption());
+    emit distanceChanged();
 }
 
 double Tank::price() const
@@ -153,51 +112,38 @@ void Tank::setStation(unsigned int station)
     emit stationChanged();
 }
 
-int Tank::id() const
-{
-    return _id;
-}
-
 void Tank::save()
 {
-    if(_id < 0)
+    if(_eventid == 0)
     {
-        QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO Event (id,date,distance) VALUES(NULL,'%1',%2)").arg(_date.toString("yyyy-MM-dd 00:00:00.00")).arg(_distance);
-        if(query.exec(sql))
+        _eventid = saveevent();
+        if(_eventid)
         {
-            _id = query.lastInsertId().toInt();
-            qDebug() << "Create Event(Tank) in database with id " << _id;
-
-            QString sql2 = QString("INSERT INTO TankList (event,quantity,price,full,station) VALUES(%1,%2,%3,%4,%5)").arg(_id).arg(_quantity).arg(_price).arg(_full).arg(_station);
-            if(query.exec(sql2))
+            QSqlQuery query(_car->db);
+            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station) VALUES(%1,%2,%3,%4,%5)").arg(_eventid).arg(_quantity).arg(_price).arg(_full).arg(_station);
+            if(query.exec(sql))
             {
-                _id = query.lastInsertId().toInt();
-                qDebug() << "Create Tank in database with id " << _id;
+                qDebug() << "Create Tank in database with id " << _eventid;
                 _car->db.commit();
             }
-            else _id = -1;
+            else _eventid = 0;
         }
-        else _id = -1;
 
-        if(_id == -1)
+        if(_eventid == 0)
         {
             qDebug() << "Error during Create Tank in database";
-            qDebug() << query.lastError();
             _car->db.rollback();
         }
     }
     else
     {
-        QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE Event SET date='%1', distance=%2 WHERE id=%3;").arg(_date.toString("yyyy-MM-dd 00:00:00.00")).arg(_distance).arg(_id);
-        if(query.exec(sql))
+        if(saveevent())
         {
-            qDebug() << "Update Event in database with id " << _id;
-            QString sql2 = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4 WHERE event=%5;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_id);
-            if(query.exec(sql2))
+            QSqlQuery query(_car->db);
+            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4 WHERE event=%5;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_eventid);
+            if(query.exec(sql))
             {
-                qDebug() << "Update Tank in database with id " << _id;
+                qDebug() << "Update Tank in database with id " << _eventid;
                 _car->db.commit();
             }
             else
@@ -209,7 +155,6 @@ void Tank::save()
         else
         {
             qDebug() << "Error during Update Tank in database";
-            qDebug() << query.lastError();
         }
     }
 }
@@ -217,13 +162,12 @@ void Tank::save()
 void Tank::remove()
 {
     QSqlQuery query(_car->db);
-    QString sql = QString("DELETE FROM TankList WHERE event=%1;").arg(_id);
+    QString sql = QString("DELETE FROM TankList WHERE event=%1;").arg(_eventid);
     if(query.exec(sql))
     {
-        QString sql2 = QString("DELETE FROM Event WHERE id=%1;").arg(_id);
-        if(query.exec(sql2))
+        if(delevent())
         {
-            qDebug() << "DELETE Tank in database with id " << _id;
+            qDebug() << "DELETE Tank in database with id " << _eventid;
             _car->db.commit();
             return;
         }

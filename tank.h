@@ -24,28 +24,21 @@
 
 #include <QObject>
 #include <QDate>
+#include "carevent.h"
 
-class Car;
-
-class Tank : public QObject
+class Tank : public CarEvent
 {
     Q_OBJECT
-    Q_PROPERTY(unsigned int distance    READ distance   WRITE setDistance       NOTIFY distanceChanged )
-    Q_PROPERTY(QDateTime    date        READ date       WRITE setDate           NOTIFY dateChanged )
     Q_PROPERTY(double       quantity    READ quantity   WRITE setQuantity       NOTIFY quantityChanged )
     Q_PROPERTY(double       price       READ price      WRITE setPrice          NOTIFY priceChanged )
     Q_PROPERTY(bool         full        READ full       WRITE setFull           NOTIFY fullChanged )
     Q_PROPERTY(unsigned int station     READ station    WRITE setStation        NOTIFY stationChanged )
-    Q_PROPERTY(double       consumption READ consumption                        NOTIFY consumptionChanged)
+    Q_PROPERTY(double       consumption READ consumption                        NOTIFY consumptionChanged )
     Q_PROPERTY(double       priceu      READ priceu                             NOTIFY priceuChanged )
-    Q_PROPERTY(unsigned int newDistance READ newDistance                        NOTIFY distanceChanged )
+    Q_PROPERTY(unsigned int newDistance READ newDistance                        NOTIFY consumptionChanged )
 
 
 private:
-    Car *_car;
-    int _id;
-    QDate _date;
-    unsigned int _distance;
     double _quantity;
     double _price;
     bool _full;
@@ -53,14 +46,7 @@ private:
 
 public:
     explicit Tank(Car *parent = 0);
-    Tank(int id, QDate date,unsigned int distance,double quantity,double price, bool full, unsigned int station, Car* parent);
-    Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, Car *parent);
-
-    QDateTime date() const;
-    void setDate(QDateTime date);
-
-    unsigned int distance() const;
-    void setDistance(unsigned int distance);
+    explicit Tank(QDate date,unsigned int distance,double quantity,double price, bool full, unsigned int station, unsigned int id, Car* parent);
 
     double quantity() const;
     void setQuantity(double quantity);
@@ -78,18 +64,14 @@ public:
     unsigned int station() const;
     void setStation(unsigned int station);
 
-    int id() const;
-
 signals:
-    void distanceChanged(unsigned int distance);
-    void dateChanged(QDateTime date);
     void quantityChanged(double quantity);
     void priceChanged(double price);
     void priceuChanged(double price);
     void previousChanged();
     void stationChanged();
     void fullChanged(bool full);
-    void consumptionChanged(double consumption);
+    void consumptionChanged();
 
 public slots:
     void save();
