@@ -178,6 +178,14 @@
     </message>
 </context>
 <context>
+    <name>CoverPage</name>
+    <message>
+        <location filename="../qml/cover/CoverPage.qml" line="28"/>
+        <source> for 100km</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Settings</name>
     <message>
         <location filename="../qml/pages/Settings.qml" line="43"/>
