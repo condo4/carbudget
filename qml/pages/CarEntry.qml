@@ -38,8 +38,8 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Budget")
-                onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
+                text: qsTr("Settings")
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
             }
 
             MenuItem {

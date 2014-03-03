@@ -84,7 +84,7 @@ Page {
                     }
 
                     Text {
-                        text: model.modelData.quantity +qsTr("l    ") + model.modelData.price + qsTr("€");
+                        text: model.modelData.quantity +qsTr("l    ") + model.modelData.price + manager.car.currency;
 
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
@@ -109,7 +109,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.priceu.toFixed(3)+qsTr("€/l");
+                        text: model.modelData.priceu.toFixed(3)+manager.car.currency+qsTr("/l");
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor

@@ -48,6 +48,7 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
+    Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
 
     Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
@@ -60,6 +61,8 @@ private:
     QList<Station*> _stationlist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
+
+    QString _currency;
 
     void db_init();
     void db_load();
@@ -98,6 +101,7 @@ signals:
     void costsChanged();
     void tiresChanged();
     void tireMountedChanged();
+    void currencyChanged();
 
     void budgetChanged();
 
@@ -120,6 +124,9 @@ public slots:
     int tireMounted() const;
 
     void simulation();
+
+    QString currency();
+    void setCurrency(QString currency);
 
 };
 

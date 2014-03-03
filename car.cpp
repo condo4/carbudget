@@ -550,6 +550,46 @@ int Car::tireMounted() const
     return 0;
 }
 
+QString Car::currency()
+{
+    if(_currency.length() < 1)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';"))
+        {
+            query.next();
+            _currency = query.value(0).toString();
+            qDebug() << "Find currency in database: " << _currency;
+        }
+        if(_currency.length() < 1)
+        {
+            qDebug() << "Default currency not set in database, set to €";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('currency','€');");
+            _currency = "€";
+        }
+    }
+
+    return _currency;
+}
+
+void Car::setCurrency(QString currency)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='currency';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('currency','%1');").arg(currency));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='currency';").arg(currency));
+
+        qDebug() << "Change currency in database: " << _currency;
+    }
+    _currency = currency;
+    emit currencyChanged();
+}
 
 void Car::simulation()
 {

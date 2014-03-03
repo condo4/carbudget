@@ -18,21 +18,21 @@
  * Authors: Fabien Proriol
  */
 
-
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
 
-Page {
+Dialog {
+    property Cost cost
+    property date cost_date
+
     SilicaFlickable {
 
         VerticalScrollDecorator {}
 
-        id: budgetView
         anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
+        contentHeight: column.height + Theme.paddingLarge
 
         Column {
             id: column
@@ -40,31 +40,30 @@ Page {
             spacing: Theme.paddingLarge
 
             DialogHeader {
-                title: "Car Budget for 100km"
+                title: qsTr("Settings")
             }
 
-            Row {
-                width: parent.width
-                Text {
-                    text : "Fuel: " + manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-            }
 
-            Row {
-                width: parent.width
-                Text {
-                    text : "Cost: " + manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-            }
+            TextField {
+                id: currencyinput
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Currency")
+                placeholderText: qsTr("Currency")
 
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                //EnterKey.onClicked: descinput.focus = true
+                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
         }
+    }
+    canAccept: currencyinput.acceptableInput
+
+    onOpened: {
+        currencyinput.text = manager.car.currency
+    }
+
+    onAccepted: {
+        manager.car.currency = currencyinput.text
     }
 }

@@ -99,7 +99,7 @@ Page {
                     }
 
                     Text {
-                        text: model.modelData.cost + "€";
+                        text: model.modelData.cost + manager.car.currency;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor

@@ -110,7 +110,7 @@ Page {
                         horizontalAlignment: Text.AlignLeft
                     }
                     Text {
-                        text: model.modelData.price + "€";
+                        text: model.modelData.price + manager.car.currency;
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: 0
