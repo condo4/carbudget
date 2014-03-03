@@ -197,7 +197,7 @@ double Car::consumption() const
 {
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
-    unsigned int totalConsumption = 0;
+    double totalConsumption = 0;
 
     foreach(Tank *tank, _tanklist)
     {
@@ -208,6 +208,14 @@ double Car::consumption() const
         totalConsumption += tank->quantity();
     }
     if(maxDistance == 0) return 0;
+    foreach(Tank *tank, _tanklist)
+    {
+        if(tank->distance() == minDistance)
+        {
+            totalConsumption -= tank->quantity();
+            break;
+        }
+    }
     return totalConsumption / ((maxDistance - minDistance)/ 100.0);
 }
 
