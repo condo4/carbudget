@@ -151,6 +151,11 @@ Dialog {
                 text: qsTr("Full tank")
                 checked: true
             }
+
+            TextArea {
+                anchors { left: parent.left; right: parent.right }
+                id: noteinput
+            }
         }
     }
     canAccept: kminput.acceptableInput && quanttityinput.acceptableInput && priceinput.acceptableInput
@@ -164,6 +169,7 @@ Dialog {
             priceinput.text = tank.price
             fullinput.checked = tank.full
             station = tank.station
+            noteinput.text = tank.note
             for(var i=0; i<stationslistrepeater.count; i++)
             {
                 if(stationslistrepeater.itemAt(i).dbid === tank.station)
@@ -179,7 +185,7 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station)
+            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station, noteinput.text)
         }
         else
         {
@@ -189,6 +195,7 @@ Dialog {
             tank.price = priceinput.text.replace(",",".")
             tank.full = fullinput.checked
             tank.station = station
+            tank.note = noteinput.text
             tank.save()
         }
     }

@@ -138,14 +138,12 @@ void CarManager::createCar(QString name)
         error = true;
     }
 
-
-
     if(!query.exec("CREATE TABLE Event (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, distance UNSIGNED BIG INT);"))
     {
         qDebug() << query.lastError();
         error = true;
     }
-    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER);"))
+    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, note TEXT);"))
     {
         qDebug() << query.lastError();
         error = true;

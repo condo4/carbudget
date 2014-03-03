@@ -29,17 +29,19 @@ Tank::Tank(Car *parent) :
     _quantity(0),
     _price(0),
     _full(true),
-    _station(0)
+    _station(0),
+    _note("")
 {
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, Car *parent):
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, QString note, Car *parent):
     CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
     _full(full),
-    _station(station)
+    _station(station),
+    _note(note)
 {
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
@@ -112,6 +114,17 @@ void Tank::setStation(unsigned int station)
     emit stationChanged();
 }
 
+QString Tank::note() const
+{
+    return _note;
+}
+
+void Tank::setNote(QString note)
+{
+    _note = note;
+    emit noteChanged();
+}
+
 void Tank::save()
 {
     if(_eventid == 0)
@@ -120,7 +133,7 @@ void Tank::save()
         if(_eventid)
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station) VALUES(%1,%2,%3,%4,%5)").arg(_eventid).arg(_quantity).arg(_price).arg(_full).arg(_station);
+            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station,note) VALUES(%1,%2,%3,%4,%5,'%6')").arg(_eventid).arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_note);
             if(query.exec(sql))
             {
                 qDebug() << "Create Tank in database with id " << _eventid;
@@ -140,7 +153,7 @@ void Tank::save()
         if(saveevent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4 WHERE event=%5;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_eventid);
+            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4, note='%5' WHERE event=%6;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_note).arg(_eventid);
             if(query.exec(sql))
             {
                 qDebug() << "Update Tank in database with id " << _eventid;
