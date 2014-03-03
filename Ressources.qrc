@@ -3,6 +3,7 @@
         <file alias="Pump.png">picture/Pump.png</file>
         <file alias="Wheel.png">picture/Wheel.png</file>
         <file alias="Wrench.png">picture/Wrench.png</file>
+        <file alias="Dollar.png">picture/Dollar.png</file>
     </qresource>
     <qresource prefix="/i18n">
         <file alias="fr_FR.qm">i18n/fr_FR.qm</file>

@@ -166,6 +166,36 @@ Page {
                     onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
                 }
             }
+            Row {
+                spacing: Theme.paddingLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: 500
+
+                Rectangle {
+                    border.color : "black"
+                    border.width : 5
+                    width: 110
+                    height: 110
+                    radius: 10
+
+                    Image {
+                        anchors.centerIn: parent
+                        source: "qrc:/Dollar.png"
+                        width: 90
+                        height: 90
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
+                    }
+                }
+
+                Button {
+                    text: qsTr("Budget")
+                    onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
+                }
+            }
         }
     }
 }
