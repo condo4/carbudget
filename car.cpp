@@ -316,7 +316,7 @@ double Car::budget_fuel()
     /* Return sum(fuel price) / ODO * 100 */
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
-    unsigned int totalPrice = 0;
+    double totalPrice = 0;
 
     foreach(Tank *tank, _tanklist)
     {
@@ -325,6 +325,14 @@ double Car::budget_fuel()
         if(tank->distance() < minDistance)
             minDistance = tank->distance();
         totalPrice += tank->price();
+    }
+    foreach(Tank *tank, _tanklist)
+    {
+        if(tank->distance() == minDistance)
+        {
+            totalPrice -= tank->price();
+            break;
+        }
     }
     if(maxDistance == 0) return 0;
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
@@ -335,7 +343,7 @@ double Car::budget_cost()
     /* Return sum(cost) / ODO * 100 */
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
-    unsigned int totalPrice = 0;
+    double totalPrice = 0;
 
     foreach(Cost *cost, _costlist)
     {
@@ -347,6 +355,11 @@ double Car::budget_cost()
     }
     if(maxDistance == 0) return 0;
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
+}
+
+double Car::budget()
+{
+    return budget_fuel() + budget_cost();
 }
 
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, QString note)

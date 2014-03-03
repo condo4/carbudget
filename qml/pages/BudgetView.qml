@@ -65,6 +65,17 @@ Page {
                 }
             }
 
+            Row {
+                width: parent.width
+                Text {
+                    text : "Total: " + manager.car.budget.toFixed(2) + " " + manager.car.currency
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }
+
         }
     }
 }

@@ -52,6 +52,7 @@ class Car : public QObject
 
     Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
+    Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
 private:
     CarManager *_manager;
@@ -92,6 +93,7 @@ public:
 
     double budget_fuel();
     double budget_cost();
+    double budget();
 
 signals:
     void nbtankChanged(unsigned int nbtank);
