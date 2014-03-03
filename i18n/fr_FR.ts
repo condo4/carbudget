@@ -28,6 +28,29 @@
     </message>
 </context>
 <context>
+    <name>BudgetView</name>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="43"/>
+        <source>Car Budget for 100km</source>
+        <translation>Budget pour 100km</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="49"/>
+        <source>Fuel: </source>
+        <translation>Pleins : </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="60"/>
+        <source>Cost: </source>
+        <translation>Frais : </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="71"/>
+        <source>Total: </source>
+        <translation>Total : </translation>
+    </message>
+</context>
+<context>
     <name>CarCreate</name>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="40"/>
@@ -51,7 +74,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="41"/>
         <source>Settings</source>
-        <translation>Paramètre</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="46"/>
@@ -198,7 +221,7 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="43"/>
         <source>Settings</source>
-        <translation>Paramètre</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="51"/>

@@ -40,13 +40,13 @@ Page {
             spacing: Theme.paddingLarge
 
             DialogHeader {
-                title: "Car Budget for 100km"
+                title: qsTr("Car Budget for 100km")
             }
 
             Row {
                 width: parent.width
                 Text {
-                    text : "Fuel: " + manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                    text : qsTr("Fuel: ") + manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -57,7 +57,7 @@ Page {
             Row {
                 width: parent.width
                 Text {
-                    text : "Cost: " + manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                    text : qsTr("Cost: ") + manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -68,7 +68,7 @@ Page {
             Row {
                 width: parent.width
                 Text {
-                    text : "Total: " + manager.car.budget.toFixed(2) + " " + manager.car.currency
+                    text : qsTr("Total: ") + manager.car.budget.toFixed(2) + " " + manager.car.currency
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

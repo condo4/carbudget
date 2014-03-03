@@ -20,6 +20,29 @@
     </message>
 </context>
 <context>
+    <name>BudgetView</name>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="43"/>
+        <source>Car Budget for 100km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="49"/>
+        <source>Fuel: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="60"/>
+        <source>Cost: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="71"/>
+        <source>Total: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CarCreate</name>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="40"/>
