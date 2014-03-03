@@ -25,7 +25,7 @@ CoverBackground {
     Label {
         id: label
         anchors.centerIn: parent
-        text: "CarBudget:\n"+manager.car.name
+        text: "CarBudget:\n\n"+manager.car.name+"\n"+manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" for 100km")
     }
 }
 
