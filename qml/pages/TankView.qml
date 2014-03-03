@@ -49,6 +49,8 @@ Page {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
 
+            onClicked: pageStack.push(Qt.resolvedUrl("TankEntryView.qml"), { tank: model.modelData })
+
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")

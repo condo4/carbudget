@@ -44,7 +44,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/CarCreate.qml \
     i18n/FR_fr.ts \
     qml/pages/BudgetView.qml \
-    qml/pages/Settings.qml
+    qml/pages/Settings.qml \
+    qml/pages/TankEntryView.qml
 
 HEADERS += \
     tank.h \
