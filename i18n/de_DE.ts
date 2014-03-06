@@ -24,22 +24,22 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="43"/>
         <source>Car Budget for 100km</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fahrzeugkosten pro 100km</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="49"/>
         <source>Fuel: </source>
-        <translation type="unfinished"></translation>
+        <translation>Treibstoff:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="60"/>
         <source>Cost: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kosten:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="71"/>
         <source>Total: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamt:</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="41"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="46"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="28"/>
         <source> for 100km</source>
-        <translation type="unfinished"></translation>
+        <translation>pro 100km</translation>
     </message>
 </context>
 <context>
@@ -213,13 +213,13 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="43"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="51"/>
         <location filename="../qml/pages/Settings.qml" line="52"/>
         <source>Currency</source>
-        <translation type="unfinished"></translation>
+        <translation>Währung</translation>
     </message>
 </context>
 <context>
@@ -330,53 +330,53 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="35"/>
         <source>Modify</source>
-        <translation type="unfinished">Bearbeiten</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="49"/>
         <source>Tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Tankfüllung</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="53"/>
         <source>Date: </source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="60"/>
         <source>ODO: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kilometerstand</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="68"/>
         <source>Quantity: </source>
-        <translation type="unfinished"></translation>
+        <translation>Menge</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="76"/>
         <source>Total Price: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtpreis</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="84"/>
         <source>Unite Price: </source>
-        <translation type="unfinished"></translation>
+        <translation>Preis pro Liter</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="93"/>
         <source>Full tank</source>
-        <translation type="unfinished">Vollbetankung</translation>
+        <translation>Vollbetankung</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="93"/>
         <source>Not a full tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Teilbetankung</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="101"/>
         <source>Note: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
 </context>
 <context>
