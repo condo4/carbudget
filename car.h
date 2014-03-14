@@ -41,7 +41,8 @@ class Car : public QObject
 
     Q_PROPERTY(unsigned int nbtank READ nbtank NOTIFY nbtankChanged)
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
-    Q_PROPERTY(unsigned int distance READ distance NOTIFY distanceChanged)
+    Q_PROPERTY(unsigned int maxdistance READ maxdistance NOTIFY maxdistanceChanged)
+    Q_PROPERTY(unsigned int mindistance READ mindistance NOTIFY mindistanceChanged)
     Q_PROPERTY(QQmlListProperty<Tank> tanks READ tanks NOTIFY tanksChanged())
     Q_PROPERTY(QQmlListProperty<Station> stations READ stations NOTIFY stationsChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
@@ -79,7 +80,8 @@ public:
 
     unsigned int nbtank() const;
     double consumption() const;
-    unsigned int distance() const;
+    unsigned int maxdistance() const;
+    unsigned int mindistance() const;
 
     QQmlListProperty<Tank> tanks();
     QQmlListProperty<Station> stations();
@@ -98,7 +100,8 @@ public:
 signals:
     void nbtankChanged(unsigned int nbtank);
     void consumptionChanged(double consumption);
-    void distanceChanged(double consumption);
+    void maxdistanceChanged(double consumption);
+    void mindistanceChanged(double consumption);
     void tanksChanged();
     void stationsChanged();
     void nameChanged();

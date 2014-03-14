@@ -81,7 +81,8 @@ void Car::db_load()
         }
         emit nbtankChanged(_tanklist.count());
         emit consumptionChanged(this->consumption());
-        emit distanceChanged(this->distance());
+        emit maxdistanceChanged(this->maxdistance());
+        emit mindistanceChanged(this->mindistance());
     }
     else
     {
@@ -237,16 +238,38 @@ double Car::consumption() const
     return totalConsumption / ((maxDistance - minDistance)/ 100.0);
 }
 
-unsigned int Car::distance() const
+unsigned int Car::maxdistance() const
 {
     unsigned long int maxDistance = 0;
 
+    foreach(Cost *cost, _costlist)
+    {
+        if(cost->distance() > maxDistance)
+            maxDistance = cost->distance();
+    }
     foreach(Tank *tank, _tanklist)
     {
         if(tank->distance() > maxDistance)
             maxDistance = tank->distance();
     }
     return maxDistance;
+}
+
+unsigned int Car::mindistance() const
+{
+    unsigned long int minDistance = 1000000;
+
+    foreach(Cost *cost, _costlist)
+    {
+        if(cost->distance() < minDistance)
+            minDistance = cost->distance();
+    }
+    foreach(Tank *tank, _tanklist)
+    {
+        if(tank->distance() < minDistance)
+            minDistance = tank->distance();
+    }
+    return minDistance;
 }
 
 QQmlListProperty<Tank> Car::tanks()
@@ -341,20 +364,13 @@ double Car::budget_fuel()
 double Car::budget_cost()
 {
     /* Return sum(cost) / ODO * 100 */
-    unsigned long int maxDistance = 0;
-    unsigned long int minDistance = 999999999;
     double totalPrice = 0;
 
     foreach(Cost *cost, _costlist)
     {
-        if(cost->distance() > maxDistance)
-            maxDistance = cost->distance();
-        if(cost->distance() < minDistance)
-            minDistance = cost->distance();
         totalPrice += cost->cost();
     }
-    if(maxDistance == 0) return 0;
-    return totalPrice / ((maxDistance - minDistance)/ 100.0);
+    return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
 
 double Car::budget()
@@ -370,7 +386,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     tank->save();
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
-    emit distanceChanged(this->distance());
+    emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();
 }
 
@@ -382,7 +398,7 @@ void Car::delTank(Tank *tank)
     tank->remove();
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
-    emit distanceChanged(this->distance());
+    emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();
     tank->deleteLater();
 }

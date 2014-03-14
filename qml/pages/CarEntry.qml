@@ -61,17 +61,18 @@ Page {
             PageHeader {
                 height: 10
             }
+
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Distance: %L1 km").arg(manager.car.distance)
+                text: qsTr("Distance: %L1 ~ %L2 km").arg(manager.car.mindistance).arg(manager.car.maxdistance)
                 font.pixelSize: Theme.fontSizeSmall
             }
+
             Label {
                 x: Theme.paddingLarge
                 text: qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
                 font.pixelSize: Theme.fontSizeSmall
             }
-
 
             Row {
                 spacing: Theme.paddingLarge
