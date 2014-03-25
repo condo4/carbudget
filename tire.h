@@ -44,6 +44,7 @@ class Tire : public QObject
     Q_PROPERTY(bool      trashed    READ trashed                                NOTIFY trashedChanged)
     Q_PROPERTY(bool      mounted    READ mounted                                NOTIFY mountChanged)
     Q_PROPERTY(bool      mountable  READ mountable                              NOTIFY mountChanged)
+    Q_PROPERTY(unsigned int  distance READ distance                             NOTIFY mountChanged)
 
     Q_PROPERTY(unsigned int id          READ id          WRITE setId            NOTIFY idChanged )
 private:
@@ -85,6 +86,9 @@ public:
 
     unsigned int quantity() const;
     void setQuantity(unsigned int quantity);
+
+    unsigned int distance() const;
+
 
     bool trashed() const;
     bool mounted() const;

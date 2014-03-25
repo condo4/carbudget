@@ -122,6 +122,37 @@ void Tire::setQuantity(unsigned int quantity)
     emit quantityChanged();
 }
 
+unsigned int Tire::distance() const
+{
+    unsigned int distance = 0;
+    QSqlQuery query(_car->db);
+    if(query.exec(QString("select sum(UEvent.distance - MEvent.distance) from TireUsage, Event as MEvent, Event as UEvent WHERE TireUsage.tire = %1 AND TireUsage.event_mount = MEvent.id AND TireUsage.event_umount = UEvent.id;").arg(_id)))
+    {
+        if(query.next())
+        {
+            distance = query.value(0).toInt();
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+
+    if(query.exec(QString("select MEvent.distance from TireUsage, Event as MEvent WHERE TireUsage.tire = %1 AND TireUsage.event_mount = MEvent.id AND TireUsage.event_umount = 0").arg(_id)))
+    {
+        if(query.next())
+        {
+            distance += _car->maxdistance() - query.value(0).toInt();
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+
+    return distance;
+}
+
 bool Tire::trashed() const
 {
     return _trashdate > _buydate;
