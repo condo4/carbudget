@@ -25,6 +25,7 @@ import harbour.carbudget 1.0
 
 
 Page {
+    allowedOrientations: Orientation.All
     SilicaListView {
         PullDownMenu {
             MenuItem {
