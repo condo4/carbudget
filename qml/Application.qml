@@ -25,6 +25,7 @@ import "pages"
 
 ApplicationWindow
 {
+    id: app
     initialPage: {
         return (manager.car == null)?Qt.resolvedUrl("pages/CarView.qml"):Qt.resolvedUrl("pages/CarEntry.qml");
     }

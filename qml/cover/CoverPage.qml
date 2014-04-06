@@ -28,7 +28,7 @@ CoverBackground {
         width: parent.width - 2*x
         spacing: Theme.paddingMedium
         Label {
-            height: 2*carName.height
+            height: 3*carName.height/2
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -55,6 +55,22 @@ CoverBackground {
             horizontalAlignment: Text.AlignHCenter
             text: manager.car.consumption.toFixed(2)+qsTr(" l / 100km")
             font.pixelSize: Theme.fontSizeSmall
+        }
+    }
+    CoverActionList {
+        CoverAction {
+            iconSource: "image://theme/icon-cover-new"
+            onTriggered: {
+                app.activate()
+                pageStack.push(Qt.resolvedUrl("../pages/TankEntry.qml"))
+            }
+        }
+        CoverAction {
+            iconSource: "image://theme/icon-cover-next"
+            onTriggered: {
+                app.activate()
+                pageStack.push(Qt.resolvedUrl("../pages/CarView.qml"))
+            }
         }
     }
 }
