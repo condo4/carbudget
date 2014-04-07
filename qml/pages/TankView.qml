@@ -25,6 +25,7 @@ import harbour.carbudget 1.0
 
 
 Page {
+    allowedOrientations: Orientation.All
     SilicaListView {
         PullDownMenu {
             MenuItem {
@@ -80,20 +81,8 @@ Page {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
-
-                        width: parent.width / 3
+                        width: parent.width / 2
                         horizontalAlignment: Text.AlignLeft
-                    }
-
-                    Text {
-                        text: model.modelData.quantity +qsTr("l    ") + model.modelData.price + manager.car.currency;
-
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-
-                        width: parent.width / 3
-                        horizontalAlignment: Text.AlignRight
                     }
 
                     Text {
@@ -102,8 +91,7 @@ Page {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
-
-                        width: parent.width / 3
+                        width: parent.width / 2
                         horizontalAlignment: Text.AlignRight
                     }
                 }
@@ -115,14 +103,30 @@ Page {
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
-                       width: parent.width / 2
+                        width: parent.width / 5
+                    }
+                    Text {
+                        text: model.modelData.quantity +qsTr("l")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 5
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    Text {
+                        text: model.modelData.price + manager.car.currency;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 5
+                        horizontalAlignment: Text.AlignRight
                     }
                     Text {
                         text: model.modelData.consumption.toFixed(2)+ qsTr("l/100km");
                         visible: model.modelData.consumption > 0
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
-                        width: parent.width / 2
+                        width: 2 * parent.width / 5
                         color: (model.modelData.consumption < manager.car.consumption)?("green"):("red")
                         horizontalAlignment: Text.AlignRight
                     }

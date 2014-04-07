@@ -22,10 +22,56 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: "CarBudget:\n\n"+manager.car.name+"\n"+manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" for 100km")
+    Column {
+        x: Theme.paddingMedium
+        y: Theme.paddingMedium
+        width: parent.width - 2*x
+        spacing: Theme.paddingMedium
+        Label {
+            height: 3*carName.height/2
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.bold: true
+            text: "CarBudget"
+        }
+        Label {
+            id: carName
+            text: manager.car.name+":"
+        }
+        Label {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            text: ("%L1 km").arg(manager.car.maxdistance - manager.car.mindistance)
+        }
+        Label {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            text: manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" / 100km")
+            font.pixelSize: Theme.fontSizeSmall
+        }
+        Label {
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+            text: manager.car.consumption.toFixed(2)+qsTr(" l / 100km")
+            font.pixelSize: Theme.fontSizeSmall
+        }
+    }
+    CoverActionList {
+        CoverAction {
+            iconSource: "image://theme/icon-cover-new"
+            onTriggered: {
+                app.activate()
+                pageStack.push(Qt.resolvedUrl("../pages/TankEntry.qml"))
+            }
+        }
+        CoverAction {
+            iconSource: "image://theme/icon-cover-next"
+            onTriggered: {
+                app.activate()
+                pageStack.push(Qt.resolvedUrl("../pages/CarView.qml"))
+            }
+        }
     }
 }
 
