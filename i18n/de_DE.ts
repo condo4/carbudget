@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="72"/>
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="43"/>
         <source>Car Budget for 100km</source>
-        <translation type="unfinished">Fahrzeugkosten pro 100km</translation>
+        <translation>Fahrzeugkosten pro 100km</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="49"/>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="67"/>
         <source>Distance: %L1 ~ %L2 km</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fahrtstrecke: %L1 ~ %L2 km</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="73"/>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="196"/>
         <source>Budget</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../qml/pages/CostView.qml" line="30"/>
         <source>Add cost</source>
-        <translation>Aggiungi un Costo</translation>
+        <translation>Kosten hinzufügen</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="38"/>
@@ -353,12 +353,12 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="53"/>
         <source>Date: </source>
-        <translation>Datum</translation>
+        <translation type="unfinished">Datum: </translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="60"/>
         <source>ODO: </source>
-        <translation>Kilometerstand</translation>
+        <translation type="unfinished">Kilometerstand: </translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="68"/>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="101"/>
-        <source>Note: 
+        <source>Note:
 </source>
         <translation>Notiz</translation>
     </message>
@@ -440,17 +440,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>l    </source>
+        <source>l </source>
         <translation type="obsolete">l </translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="102"/>
         <source>/l</source>
         <translation>/l</translation>
-    </message>
-    <message>
-        <source>l </source>
-        <translation type="obsolete">l </translation>
     </message>
     <message>
         <source>€</source>
