@@ -9,5 +9,6 @@
         <file alias="fr_FR.qm">i18n/fr_FR.qm</file>
         <file alias="it_IT.qm">i18n/it_IT.qm</file>
         <file alias="de_DE.qm">i18n/de_DE.qm</file>
+        <file alias="ru_RU.qm">i18n/ru_RU.qm</file>
     </qresource>
 </RCC>
