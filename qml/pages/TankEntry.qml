@@ -77,7 +77,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Km")
-                placeholderText: qsTr("Km")
+                placeholderText: qsTr("ODO")
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

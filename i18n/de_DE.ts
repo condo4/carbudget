@@ -306,9 +306,13 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="79"/>
-        <location filename="../qml/pages/TankEntry.qml" line="80"/>
         <source>Km</source>
         <translation>Km</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TankEntry.qml" line="80"/>
+        <source>ODO</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="93"/>
