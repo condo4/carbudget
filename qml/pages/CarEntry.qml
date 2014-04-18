@@ -59,7 +59,7 @@ Page {
             width: carEntry.width
             spacing: Theme.paddingLarge
             PageHeader {
-                height: 10
+                title: manager.car.name
             }
 
             Label {
