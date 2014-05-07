@@ -142,7 +142,8 @@ unsigned int Tire::distance() const
     {
         if(query.next())
         {
-            distance += _car->maxdistance() - query.value(0).toInt();
+            if(_car->maxdistance() > query.value(0).toInt())
+                distance += _car->maxdistance() - query.value(0).toInt();
         }
     }
     else
