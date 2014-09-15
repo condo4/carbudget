@@ -75,15 +75,18 @@ Page {
             }
 
             Row {
+                id: firstBigRow
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                x: Theme.paddingLarge
+                width: carEntry.width - 2*Theme.paddingLarge
 
                 Rectangle {
                     border.color : "black"
                     border.width : 5
-                    width: 110
-                    height: 110
+                    y: (parent.height - height)/2
+                    width: 150
+                    height: 150
                     radius: 10
 
                     Image {
@@ -98,23 +101,32 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("TankView.qml"))
                     }
                 }
-
-                Button {
-                    text: qsTr("New Tank")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
+                Column {
+                    y: (parent.height - height)/2
+                    Button {
+                        text: qsTr("New Tank")
+                        onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
+                    }
+                    Button {
+                        text: qsTr("List Tanks")
+                        onClicked: pageStack.push(Qt.resolvedUrl("TankView.qml"))
+                    }
                 }
             }
 
             Row {
                 spacing: Theme.paddingLarge
+                height: firstBigRow.height
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                x: Theme.paddingLarge
+                width: carEntry.width - 2*Theme.paddingLarge
 
                 Rectangle {
                     border.color : "black"
                     border.width : 5
-                    width: 110
-                    height: 110
+                    y: (parent.height - height)/2
+                    width: 150
+                    height: 150
                     radius: 10
 
                     Image {
@@ -129,23 +141,32 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"))
                     }
                 }
-
-                Button {
-                    text: qsTr("New Cost")
-                    onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
+                Column {
+                    y: (parent.height - height)/2
+                    Button {
+                        text: qsTr("New Cost")
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
+                    }
+                    Button {
+                        text: qsTr("List Costs")
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"))
+                    }
                 }
             }
 
             Row {
                 spacing: Theme.paddingLarge
+                height: firstBigRow.height
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                x: Theme.paddingLarge
+                width: carEntry.width - 2*Theme.paddingLarge
 
                 Rectangle {
+                    y: (parent.height - height)/2
                     border.color : "black"
                     border.width : 5
-                    width: 110
-                    height: 110
+                    width: 150
+                    height: 150
                     radius: 10
 
                     Image {
@@ -163,20 +184,24 @@ Page {
                 }
 
                 Button {
+                    y: (parent.height - height)/2
                     text: qsTr("Tire mounted: %1").arg(manager.car.tireMounted)
                     onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
                 }
             }
             Row {
                 spacing: Theme.paddingLarge
+                height: firstBigRow.height
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                x: Theme.paddingLarge
+                width: carEntry.width - 2*Theme.paddingLarge
 
                 Rectangle {
+                    y: (parent.height - height)/2
                     border.color : "black"
                     border.width : 5
-                    width: 110
-                    height: 110
+                    width: 150
+                    height: 150
                     radius: 10
 
                     Image {
@@ -193,6 +218,7 @@ Page {
                 }
 
                 Button {
+                    y: (parent.height - height)/2
                     text: qsTr("Budget")
                     onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
                 }
