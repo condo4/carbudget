@@ -76,7 +76,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.distance + ((model.modelData.consumption > 0)?(qsTr("km (+") + model.modelData.newDistance+qsTr("km)")):(qsTr("km")));
+                        text: model.modelData.distance + ((model.modelData.newDistance > 0)?(qsTr("km (+") + model.modelData.newDistance+qsTr("km)")):(qsTr("km")));
 
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
