@@ -90,16 +90,24 @@ void Tank::setFull(bool full)
 double Tank::consumption() const
 {
     const Tank *previous = _car->previousTank(_distance);
+    double quant = this->quantity();
+
+    if((previous == NULL) || (!full()))
+        return 0;
+    while((previous != NULL) && (!(previous->full()))) {
+        quant += previous->quantity();
+        previous = _car->previousTank(previous->distance());
+    }
     if(previous == NULL)
         return 0;
-    return _quantity / ((_distance - previous->distance()) / 100.0);
+    return quant / ((_distance - previous->distance()) / 100.0);
 }
 
 unsigned int Tank::newDistance() const
 {
     const Tank *previous = _car->previousTank(_distance);
     if(previous == NULL)
-        return _distance;
+        return 0;
     return _distance - previous->distance();
 }
 
