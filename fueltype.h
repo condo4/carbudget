@@ -26,7 +26,7 @@
 
 class Car;
 
-class Station : public QObject
+class Fueltype : public QObject
 {
     Q_OBJECT
 
