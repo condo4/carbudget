@@ -35,12 +35,6 @@ Page {
         XmlRole { name: "name"; query: "name/string()" }
     }
 
-    }
-    function importCar(name) {
-        // adds new car to the database
-        // first create car
-        manager.createCar(name);
-    }
 
     SilicaListView {
 
@@ -61,7 +55,7 @@ Page {
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Import")
-                    onClicked: importCar(model.modelData)
+                    onClicked: manager.importFromMyCar(name)
                 }
             }
 

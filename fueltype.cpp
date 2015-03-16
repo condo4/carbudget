@@ -69,7 +69,7 @@ void Fueltype::save()
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
-            qDebug() << "Create Fueltype in database with id " << _id;
+            qDebug() << "Create Fueltype in database with id " << _id << "and value " << _name;
             _car->db.commit();
         }
         else

@@ -9,7 +9,7 @@
 TARGET = harbour-carbudget
 
 CONFIG += sailfishapp
-QT += sql
+QT += sql xml
 
 SOURCES += CarBudget.cpp \
     tank.cpp \
@@ -60,7 +60,8 @@ HEADERS += \
     tire.h \
     carmanager.h \
     carevent.h \
-    fueltype.h
+    fueltype.h \
+
 
 TRANSLATIONS = CarBudget_fr.ts \
                CarBudget_en.ts \

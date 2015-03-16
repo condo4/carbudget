@@ -19,8 +19,8 @@
  */
 
 
-#ifndef FUELTYPE_H
-#define FUELTYPE_H
+#ifndef Fueltype_H
+#define Fueltype_H
 
 #include <QObject>
 
@@ -57,4 +57,4 @@ public slots:
 
 };
 
-#endif // FUELTYPE_H
+#endif // Fueltype_H

@@ -21,6 +21,8 @@
 
 #include "carmanager.h"
 #include <QSettings>
+#include <QtXml/QDomDocument>
+#include <QFile>
 
 void CarManager::refresh()
 {
@@ -66,7 +68,7 @@ CarManager::CarManager(QObject *parent) :
         _car = NULL;
     }
     emit carsChanged();
-    emit carChanged();
+    emit carChanged();;
 }
 
 QStringList CarManager::cars()
@@ -172,4 +174,26 @@ void CarManager::createCar(QString name)
     if(!error) db.commit();
     db.close();
     refresh();
+}
+
+void CarManager::importFromMyCar(QString name)
+{
+    createCar(name);
+    selectCar(name);
+    QDomDocument doc;
+    QFile file("/home/nemo/mycar_data.xml");
+    if (!file.open(QIODevice::ReadOnly) || !doc.setContent(&file))
+    {
+        qDebug() << "ERROR: fail to open myCar Backup file";
+        return;
+    }
+    QDomNodeList fueltypes= doc.elementsByTagName("FuelSubtype");
+    for (int i = 0; i < fueltypes.size(); i++) {
+        QDomNode n = fueltypes.item(i);
+        QDomElement type = n.firstChildElement("code");
+        if (type.isNull())
+            continue;
+        qDebug() << "Adding fuelltyp " << type.text();
+        _car->addNewFueltype(type.text());
+    }
 }

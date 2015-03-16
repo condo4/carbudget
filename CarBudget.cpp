@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
     }
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
+    qmlRegisterType<Fueltype>(  "harbour.carbudget",1,0,"Fueltype");
     qmlRegisterType<Station>(   "harbour.carbudget",1,0,"Station");
     qmlRegisterType<Cost>(      "harbour.carbudget",1,0,"Cost");
     qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");

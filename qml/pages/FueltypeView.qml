@@ -41,7 +41,7 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.car.stations
+        model: manager.car.fueltypes
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
@@ -50,7 +50,7 @@ Page {
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { station: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
                 }
 
                 MenuItem {

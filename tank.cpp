@@ -30,13 +30,13 @@ Tank::Tank(Car *parent) :
     _price(0),
     _full(true),
     _station(0),
-    _fueltype(""),
+    _fueltype(0),
     _note("")
 {
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, QString fueltype, QString note, Car *parent):
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, unsigned int id,  QString note, Car *parent):
     CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
@@ -124,12 +124,12 @@ void Tank::setStation(unsigned int station)
     emit stationChanged();
 }
 
-QString Tank::fueltype() const
+unsigned int Tank::fueltype() const
 {
     return _fueltype;
 }
 
-void Tank::setFueltype(QString fueltype)
+void Tank::setFueltype(unsigned int fueltype)
 {
     _fueltype = fueltype;
     emit fueltypeChanged();
