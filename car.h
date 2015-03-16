@@ -33,7 +33,7 @@
 
 
 class CarManager;
-#define DB_VERSION 2
+#define DB_VERSION 3
 
 class Car : public QObject
 {
@@ -71,6 +71,7 @@ private:
     int db_get_version();
 
     void db_upgrade_to_2();
+    void db_upgrade_to_3();
 
 public:
     QSqlDatabase db;
@@ -113,7 +114,7 @@ signals:
     void budgetChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, QString note);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, QString fueltype, QString note);
     void delTank(Tank *tank);
 
     void addNewStation(QString station);

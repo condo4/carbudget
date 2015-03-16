@@ -27,6 +27,7 @@ Dialog {
     property Tank tank
     property date tank_date
     property int station
+    property int fueltype
 
     SilicaFlickable {
         PullDownMenu {
@@ -34,6 +35,11 @@ Dialog {
                 text: qsTr("Manage stations")
                 onClicked: pageStack.push(Qt.resolvedUrl("StationView.qml"))
             }
+            MenuItem {
+                text: qsTr("Manage fuel types")
+                onClicked: pageStack.push(Qt.resolvedUrl("FueltypView.qml"))
+            }
+
         }
 
         VerticalScrollDecorator {}
@@ -123,6 +129,30 @@ Dialog {
             }
 
             ComboBox {
+                id: cbfueltype
+                label: qsTr("Fuel Type")
+                anchors { left: parent.left; right: parent.right }
+
+                menu: ContextMenu {
+                    Repeater {
+                        id: fueltypeslistrepeater
+                        model: manager.car.fueltypes
+                        MenuItem {
+                            property int dbid
+                            id: fueltypelistItem
+                            text: modelData.name
+                            dbid: modelData.id
+                            onClicked:{
+                                fueltype = modelData.id
+                                fullinput.focus = true
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            ComboBox {
                 id: cbstation
                 label: qsTr("Station")
                 anchors { left: parent.left; right: parent.right }
@@ -185,7 +215,7 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station, fueltype.checked.type, noteinput.text)
         }
         else
         {

@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Thomas Michel
  */
 
 
@@ -126,7 +126,11 @@ void CarManager::createCar(QString name)
         error = true;
     }
 
-
+    if(!query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
+    {
+        qDebug() << query.lastError();
+        error = true;
+    }
     if(!query.exec("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
     {
         qDebug() << query.lastError();
@@ -143,7 +147,7 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, note TEXT);"))
+    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype TEXT, note TEXT);"))
     {
         qDebug() << query.lastError();
         error = true;
