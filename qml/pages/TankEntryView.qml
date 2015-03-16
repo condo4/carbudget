@@ -95,7 +95,13 @@ Page {
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.primaryColor
             }
-
+            Text {
+                anchors { left: parent.left; right: parent.right }
+                text: qsTr("Fuel Type: \n") + tank.fueltype
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.primaryColor
+            }
             Text {
                 anchors { left: parent.left; right: parent.right }
                 text: qsTr("Note: \n") + tank.note

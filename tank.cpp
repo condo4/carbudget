@@ -30,17 +30,19 @@ Tank::Tank(Car *parent) :
     _price(0),
     _full(true),
     _station(0),
+    _fueltype(""),
     _note("")
 {
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, QString note, Car *parent):
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, unsigned int id, QString fueltype, QString note, Car *parent):
     CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
     _full(full),
     _station(station),
+    _fueltype(fueltype),
     _note(note)
 {
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
@@ -122,6 +124,18 @@ void Tank::setStation(unsigned int station)
     emit stationChanged();
 }
 
+QString Tank::fueltype() const
+{
+    return _fueltype;
+}
+
+void Tank::setFueltype(QString fueltype)
+{
+    _fueltype = fueltype;
+    emit fueltypeChanged();
+}
+
+
 QString Tank::note() const
 {
     return _note;
@@ -141,7 +155,7 @@ void Tank::save()
         if(_eventid)
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station,note) VALUES(%1,%2,%3,%4,%5,'%6')").arg(_eventid).arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_note);
+            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station,fueltype,note) VALUES(%1,%2,%3,%4,%5,'%6','%7')").arg(_eventid).arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_fueltype).arg(_note);
             if(query.exec(sql))
             {
                 qDebug() << "Create Tank in database with id " << _eventid;
@@ -161,7 +175,7 @@ void Tank::save()
         if(saveevent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4, note='%5' WHERE event=%6;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_note).arg(_eventid);
+            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4, fueltype='%5', note='%6' WHERE event=%7;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_fueltype).arg(_note).arg(_eventid);
             if(query.exec(sql))
             {
                 qDebug() << "Update Tank in database with id " << _eventid;
