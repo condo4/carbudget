@@ -68,7 +68,7 @@ Page {
                     Text {
                         text: name
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSize
                         color: Theme.primaryColor
                         width: parent.width
                         horizontalAlignment: Text.AlignLeft

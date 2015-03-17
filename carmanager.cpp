@@ -187,13 +187,80 @@ void CarManager::importFromMyCar(QString name)
         qDebug() << "ERROR: fail to open myCar Backup file";
         return;
     }
+    // First load all fuel types
+    qDebug() << "Start importing fuel types";
     QDomNodeList fueltypes= doc.elementsByTagName("FuelSubtype");
     for (int i = 0; i < fueltypes.size(); i++) {
         QDomNode n = fueltypes.item(i);
         QDomElement type = n.firstChildElement("code");
         if (type.isNull())
             continue;
-        qDebug() << "Adding fuelltyp " << type.text();
-        _car->addNewFueltype(type.text());
+        if (!_car->findFueltype(type.text()))
+        {
+            _car->addNewFueltype(type.text());
+        }
+    }
+    // Now import tank events
+
+    qDebug() << "Now import tank events";
+    QDomNodeList tanks= doc.elementsByTagName("refuel");
+    for (int i = 0; i < tanks.size(); i++) {
+        QDomNode n = tanks.item(i);
+        QDomElement n_carname = n.firstChildElement("car_name");
+        QDomElement n_station = n.firstChildElement("fuel_station");
+        QDomElement n_date = n.firstChildElement("refuelDate");
+        QDomElement n_quantity = n.firstChildElement("quantity");
+        QDomElement n_distance = n.firstChildElement("distance");
+        QDomElement n_price = n.firstChildElement("cost_def_curr");
+        QDomElement n_refuel_type = n.firstChildElement("refuel_type");
+        QDomElement n_fuel_subtype = n.firstChildElement("fuel_subtype");
+        if (n_carname.isNull())
+            continue;
+        if (n_carname.text() == _car->getName())
+        {
+            // First add stations
+            if (!n_station.isNull())
+            {
+                if (!_car->findStation(n_station.text()))
+                {
+                    _car->addNewStation(n_station.text());
+                }
+            }
+            //Now add fuelEvent
+            //QDomElements should not be empty, but just to make sure...
+            QDate t_date;
+            unsigned int t_distance=0;
+            double t_quantity=0;
+            double t_price=0;
+            bool t_refuel_type=true;
+            unsigned int t_station=0;
+            unsigned int t_fueltype=0;
+            if (!n_date.isNull())
+            {
+               QDateTime t_datetime;
+               t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+               t_date = t_datetime.date();
+            }
+            if (!n_distance.isNull()) t_distance = n_distance.text().toInt();
+            if (!n_quantity.isNull()) t_quantity = n_quantity.text().toDouble();
+            if (!n_price.isNull()) t_price = n_price.text().toDouble();
+            if (!n_refuel_type.isNull())
+                if (n_refuel_type.text().toInt()!=0) t_refuel_type=false;
+            if (!n_fuel_subtype.isNull())
+            {
+                Fueltype *fueltype = _car->findFueltype(n_fuel_subtype.text());
+                if (fueltype)
+                    t_fueltype=fueltype->id();
+            }
+            if (!n_station.isNull())
+            {
+                Station *station = _car->findStation(n_station.text());
+                if (station)
+                    t_station=station->id();
+            }
+            qDebug()<< "Date " << t_date.toString() << "Distance " << t_distance << "Station " << t_station;
+            qDebug()<<  "Refueltype " << t_refuel_type << "fuel type " << t_fueltype;
+            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fueltype,t_station,"");
+        }
     }
 }

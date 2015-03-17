@@ -198,7 +198,7 @@ Dialog {
             quanttityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
-            fulltype = tank.fueltype
+            fueltype = tank.fueltype
             station = tank.station
             noteinput.text = tank.note
             for(var i=0; i<fueltypeslistrepeater.count; i++)
@@ -224,7 +224,7 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, station, fueltype, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
         }
         else
         {

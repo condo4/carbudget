@@ -119,14 +119,18 @@ signals:
     void budgetChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, int fueltype, QString note);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
     void delTank(Tank *tank);
 
     void addNewFueltype(QString fueltype);
     void delFueltype(Fueltype *fueltype);
+    Fueltype* findFueltype(QString name);
+    QString getFueltypeName(unsigned int id);
 
     void addNewStation(QString station);
     void delStation(Station *station);
+    Station* findStation(QString name);
+    QString getStationName(unsigned int id);
 
     void addNewCost(QDate date, unsigned int distance, QString description, double price);
     void delCost(Cost *cost);

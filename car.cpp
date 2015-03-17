@@ -72,8 +72,11 @@ void Car::db_load()
 
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
+        qDebug() << "Start loading tank events";
+
         while(query.next())
         {
+            qDebug() << "Importing event from " << query.value(1);
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
@@ -83,7 +86,7 @@ void Car::db_load()
             unsigned int station = query.value(6).toInt();
             unsigned int fueltype = query.value(7).toInt();
             QString note = query.value(8).toString();
-            Tank *tank = new Tank(date, distance, quantity, price, full, station, id, fueltype, note, this);
+            Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, id, note, this);
             _tanklist.append(tank);
         }
         emit nbtankChanged(_tanklist.count());
@@ -424,10 +427,9 @@ double Car::budget()
 {
     return budget_fuel() + budget_cost();
 }
-
-void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, int fueltype, QString note)
+void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
 {
-    Tank *tank = new Tank(date, distance, quantity, price, full, station, CREATE_NEW_EVENT, fueltype, note, this);
+    Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, CREATE_NEW_EVENT,  note, this);
     _tanklist.append(tank);
     qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
     tank->save();
@@ -499,6 +501,26 @@ void Car::delFueltype(Fueltype *fueltype)
     fueltype->deleteLater();
 }
 
+Fueltype* Car::findFueltype(QString name)
+{
+    foreach (Fueltype *fueltype, _fueltypelist)
+    {
+        if (fueltype->name()==name)
+            return fueltype;
+    }
+    return NULL;
+}
+
+QString Car::getFueltypeName(unsigned int id)
+{
+    foreach (Fueltype *fueltype, _fueltypelist)
+    {
+        if (fueltype->id()==id)
+            return fueltype->name();
+    }
+    return "";
+}
+
 void Car::addNewStation(QString name)
 {
     Station *station = new Station(-1, name, this);
@@ -545,6 +567,26 @@ void Car::delStation(Station *station)
     }
     emit stationsChanged();
     station->deleteLater();
+}
+
+Station* Car::findStation(QString name)
+{
+    foreach (Station *station, _stationlist)
+    {
+        if (station->name()==name)
+            return station;
+    }
+    return NULL;
+}
+
+QString Car::getStationName(unsigned int id)
+{
+    foreach (Station *station, _stationlist)
+    {
+        if (station->id()==id)
+            return station->name();
+    }
+    return "";
 }
 
 void Car::addNewCost(QDate date, unsigned int distance, QString description, double price)
