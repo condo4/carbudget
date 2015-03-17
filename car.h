@@ -29,6 +29,7 @@
 #include <tire.h>
 #include <fueltype.h>
 #include <station.h>
+#include <costtype.h>
 #include <QtQuick>
 #include <QtSql/QtSql>
 
@@ -47,6 +48,7 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Tank> tanks READ tanks NOTIFY tanksChanged())
     Q_PROPERTY(QQmlListProperty<Fueltype> fueltypes READ fueltypes NOTIFY fueltypesChanged())
     Q_PROPERTY(QQmlListProperty<Station> stations READ stations NOTIFY stationsChanged())
+    Q_PROPERTY(QQmlListProperty<Costtype> costtypes READ costtypes NOTIFY costtypesChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
@@ -64,6 +66,7 @@ private:
     QList<Tank*>    _tanklist;
     QList<Fueltype*> _fueltypelist;
     QList<Station*> _stationlist;
+    QList<Costtype*>    _costtypelist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
 
@@ -90,6 +93,7 @@ public:
     QQmlListProperty<Tank> tanks();
     QQmlListProperty<Fueltype> fueltypes();
     QQmlListProperty<Station> stations();
+    QQmlListProperty<Costtype> costtypes();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
 
@@ -111,6 +115,7 @@ signals:
     void fueltypesChanged();
     void stationsChanged();
     void nameChanged();
+    void costtypesChanged();
     void costsChanged();
     void tiresChanged();
     void tireMountedChanged();
@@ -132,7 +137,12 @@ public slots:
     Station* findStation(QString name);
     QString getStationName(unsigned int id);
 
-    void addNewCost(QDate date, unsigned int distance, QString description, double price);
+    void addNewCosttype(QString costtype);
+    void delCosttype(Costtype *costtype);
+    Costtype* findCosttype(QString name);
+    QString getCosttypeName(unsigned int id);
+
+    void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
     void delCost(Cost *cost);
 
     Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);

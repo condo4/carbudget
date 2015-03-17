@@ -19,15 +19,14 @@
  * Authors: Thomas Michel
  */
 
-
-#ifndef Fueltype_H
-#define Fueltype_H
+#ifndef COSTTYPE_H
+#define COSTTYPE_H
 
 #include <QObject>
 
 class Car;
 
-class Fueltype : public QObject
+class Costtype : public QObject
 {
     Q_OBJECT
 
@@ -40,8 +39,8 @@ private:
     QString _name;
 
 public:
-    explicit Fueltype(QObject *parent = 0);
-    Fueltype(unsigned int id, QString name, Car *parent = 0);
+    explicit Costtype(QObject *parent = 0);
+    Costtype(unsigned int id, QString name, Car *parent = 0);
 
 signals:
     void idChanged();
@@ -57,5 +56,4 @@ public slots:
     void setName(QString name);
 
 };
-
-#endif // Fueltype_H
+#endif // COSTTYPE_H

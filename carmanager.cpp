@@ -128,11 +128,18 @@ void CarManager::createCar(QString name)
         error = true;
     }
 
+    if(!query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
+    {
+        qDebug() << query.lastError();
+        error = true;
+    }
+
     if(!query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
     {
         qDebug() << query.lastError();
         error = true;
     }
+
     if(!query.exec("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
     {
         qDebug() << query.lastError();
@@ -154,7 +161,7 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!query.exec("CREATE TABLE CostList (event INTEGER, cost DOUBLE, desc TEXT);"))
+    if(!query.exec("CREATE TABLE CostList (event INTEGER, costtype INTEGER, cost DOUBLE, desc TEXT);"))
     {
         qDebug() << query.lastError();
         error = true;

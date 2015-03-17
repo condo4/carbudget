@@ -38,6 +38,11 @@ bool sortCostByDistance(const Cost *c1, const Cost *c2)
     return c1->distance() > c2->distance();
 }
 
+bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
+{
+    return c1->id() < c2->id();
+}
+
 bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
 {
     return c1->id() < c2->id();
@@ -122,7 +127,20 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-
+    if(query.exec("SELECT id,name FROM CosttypeList;"))
+    {
+        while(query.next())
+        {
+            int id = query.value(0).toInt();
+            QString name = query.value(1).toString();
+            Costtype *costtype = new Costtype(id, name, this);
+            _costtypelist.append(costtype);
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
     if(query.exec("SELECT event,date,distance,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
     {
         while(query.next())
@@ -130,9 +148,10 @@ void Car::db_load()
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
-            double price = query.value(3).toDouble();
-            QString description = query.value(4).toString();
-            Cost *cost = new Cost(date,distance,description,price,id,this);
+            unsigned int costtype = query.value(3).toInt();
+            double price = query.value(4).toDouble();
+            QString description = query.value(5).toString();
+            Cost *cost = new Cost(date,distance,costtype,description,price,id,this);
             _costlist.append(cost);
         }
     }
@@ -213,9 +232,14 @@ void Car::db_upgrade_to_3()
         {
             if (query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
             {
-                this->db.commit();
-
-                return;
+                if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
+                {
+                    if (query.exec("ALTER TABLE CostList ADD COLUMN Costtype INTEGER;"))
+                    {
+                        this->db.commit();
+                        return;
+                    }
+                }
             }
         }
     }
@@ -331,6 +355,10 @@ QQmlListProperty<Station> Car::stations()
     return QQmlListProperty<Station>(this, _stationlist);
 }
 
+QQmlListProperty<Costtype> Car::costtypes()
+{
+    return QQmlListProperty<Costtype>(this, _costtypelist);
+}
 QQmlListProperty<Cost> Car::costs()
 {
     return QQmlListProperty<Cost>(this, _costlist);
@@ -589,9 +617,77 @@ QString Car::getStationName(unsigned int id)
     return "";
 }
 
-void Car::addNewCost(QDate date, unsigned int distance, QString description, double price)
+void Car::addNewCosttype(QString name)
 {
-    Cost *cost = new Cost(date,distance,description,price,CREATE_NEW_EVENT,this);
+    Costtype *costtype = new Costtype(-1, name, this);
+    _costtypelist.append(costtype);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    costtype->save();
+    emit costtypesChanged();
+}
+
+void Car::delCosttype(Costtype *costtype)
+{
+    qDebug() << "Remove Cost Type " << costtype->id();
+    _costtypelist.removeAll(costtype);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    QSqlQuery query(db);
+    QString sql = QString("UPDATE CostList SET costtype = 0 WHERE costtype=%1;").arg(costtype->id());
+
+    if(query.exec(sql))
+    {
+        QString sql2 = QString("DELETE FROM CosttypeList WHERE id=%1;").arg(costtype->id());
+        qDebug() << sql2;
+        if(query.exec(sql2))
+        {
+            qDebug() << "DELETE Costtype in database with id " << costtype->id();
+            db.commit();
+        }
+        else
+        {
+            qDebug() << "Error during DELETE Costtype in database";
+            qDebug() << query.lastError();
+        }
+    }
+    else
+    {
+        qDebug() << "Error during DELETE Costtype in database";
+        qDebug() << query.lastError();
+    }
+    foreach(Cost *cost, _costlist)
+    {
+        if(cost->costtype() == costtype->id())
+        {
+            cost->setCosttype(0);
+        }
+    }
+    emit costsChanged();
+    costtype->deleteLater();
+}
+
+Costtype* Car::findCosttype(QString name)
+{
+    foreach (Costtype *costtype, _costtypelist)
+    {
+        if (costtype->name()==name)
+            return costtype;
+    }
+    return NULL;
+}
+
+QString Car::getCosttypeName(unsigned int id)
+{
+    foreach (Costtype *costtype, _costtypelist)
+    {
+        if (costtype->id()==id)
+            return costtype->name();
+    }
+    return "";
+}
+
+void Car::addNewCost(QDate date, unsigned int distance, unsigned int costtype, QString description, double price)
+{
+    Cost *cost = new Cost(date,distance,costtype,description,price,CREATE_NEW_EVENT,this);
     _costlist.append(cost);
     qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
     cost->save();

@@ -1,7 +1,7 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
+ * Copyright (C) 2014 Fabien Proriol, 2015 Thomas Michel
  *
  * This file is part of CarBudget.
  *
@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Thomas Michel
  */
 
 import QtQuick 2.0
@@ -24,8 +24,8 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    id: addFueltype
-    property Fueltype fueltype
+    id: addCosttype
+    property Costtype costtype
 
     SilicaFlickable {
         anchors.fill: parent
@@ -35,8 +35,8 @@ Dialog {
             width: parent.width
 
             DialogHeader { title: {
-                    if(fueltype != undefined) return qsTr("Modify Fuel Type")
-                    else return qsTr("New Fuel Type")
+                    if(costtype != undefined) return qsTr("Modify Cost Type")
+                    else return qsTr("New Cost Type")
                 }
             }
 
@@ -52,21 +52,21 @@ Dialog {
     canAccept: nameinput.acceptableInput
 
     onOpened: {
-        if(fueltype != undefined)
+        if(costtype != undefined)
         {
-            nameinput.text = fueltype.name
+            nameinput.text = costtype.name
         }
     }
 
     onAccepted: {
-        if(fueltype == undefined)
+        if(costtype == undefined)
         {
-            manager.car.addNewFueltype(nameinput.text)
+            manager.car.addNewCosttype(nameinput.text)
         }
         else
         {
-            fueltype.name = nameinput.text
-            fueltype.save()
+            costtype.name = nameinput.text
+            costtype.save()
         }
     }
 }

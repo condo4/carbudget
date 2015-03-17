@@ -26,9 +26,15 @@ import harbour.carbudget 1.0
 Dialog {
     property Cost cost
     property date cost_date
+    property int costtype
 
     SilicaFlickable {
-
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Manage cost types")
+                onClicked: pageStack.push(Qt.resolvedUrl("CosttypeView.qml"))
+            }
+        }
         VerticalScrollDecorator {}
 
         anchors.fill: parent
@@ -78,6 +84,28 @@ Dialog {
                 EnterKey.onClicked: descinput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
+            ComboBox {
+                id: cbcosttype
+                label: qsTr("Cost Type")
+                anchors { left: parent.left; right: parent.right }
+
+                menu: ContextMenu {
+                    Repeater {
+                        id: costtypeslistrepeater
+                        model: manager.car.costtypes
+                        MenuItem {
+                            property int dbid
+                            id: costtypelistItem
+                            text: modelData.name
+                            dbid: modelData.id
+                            onClicked:{
+                                costtype = modelData.id
+                                descinput.focus = true
+                            }
+                        }
+                    }
+                }
+            }
 
             TextField {
                 id: descinput
@@ -110,8 +138,17 @@ Dialog {
         {
             cost_date = cost.date
             kminput.text = cost.distance
+            costtype = cost.costtype
             descinput.text = cost.description
             costinput.text = cost.cost
+            for(var i=0; i<costtypeslistrepeater.count; i++)
+            {
+                if(costtypeslistrepeater.itemAt(i).dbid === cost.costtype)
+                {
+                    cbcosttype.currentIndex = i
+                    break
+                }
+            }
         }
         else cost_date = new Date()
     }
@@ -119,12 +156,13 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            manager.car.addNewCost(cost_date,kminput.text,descinput.text,costinput.text.replace(",","."))
+            manager.car.addNewCost(cost_date,kminput.text,costtype,descinput.text,costinput.text.replace(",","."))
         }
         else
         {
             cost.date = cost_date
             cost.distance = kminput.text
+            cost.costtype = costtype
             cost.description = descinput.text
             cost.cost = costinput.text.replace(",",".")
             cost.save()
