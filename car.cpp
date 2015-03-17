@@ -33,9 +33,9 @@ bool sortTankByDistance(const Tank *c1, const Tank *c2)
     return c1->distance() > c2->distance();
 }
 
-bool sortCostByDistance(const Cost *c1, const Cost *c2)
+bool sortCostByDate(const Cost *c1, const Cost *c2)
 {
-    return c1->distance() > c2->distance();
+    return c1->date() > c2->date();
 }
 
 bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
@@ -141,7 +141,7 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT event,date,distance,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
+    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
     {
         while(query.next())
         {
@@ -181,7 +181,7 @@ void Car::db_load()
         qDebug() << query.lastError();
     }
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
-    qSort(_costlist.begin(),    _costlist.end(),    sortCostByDistance);
+    qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
 }
 
@@ -483,6 +483,9 @@ void Car::delTank(Tank *tank)
 
 void Car::addNewFueltype(QString name)
 {
+    // check for existing Fueltype
+    if (findFueltype(name))
+        return;
     Fueltype *fueltype = new Fueltype(-1, name, this);
     _fueltypelist.append(fueltype);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
@@ -551,6 +554,9 @@ QString Car::getFueltypeName(unsigned int id)
 
 void Car::addNewStation(QString name)
 {
+    //First check for existing station
+    if (findStation(name))
+        return;
     Station *station = new Station(-1, name, this);
     _stationlist.append(station);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
@@ -619,6 +625,9 @@ QString Car::getStationName(unsigned int id)
 
 void Car::addNewCosttype(QString name)
 {
+    //First check for existing costtype
+    if (findCosttype(name))
+        return;
     Costtype *costtype = new Costtype(-1, name, this);
     _costtypelist.append(costtype);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
@@ -689,7 +698,7 @@ void Car::addNewCost(QDate date, unsigned int distance, unsigned int costtype, Q
 {
     Cost *cost = new Cost(date,distance,costtype,description,price,CREATE_NEW_EVENT,this);
     _costlist.append(cost);
-    qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
+    qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->save();
     emit costsChanged();
 }
@@ -698,7 +707,7 @@ void Car::delCost(Cost *cost)
 {
     qDebug() << "Remove Cost " << cost->id();
     _costlist.removeAll(cost);
-    qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
+    qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->remove();
     emit costsChanged();
     cost->deleteLater();
