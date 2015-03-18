@@ -99,7 +99,7 @@ void Cost::save()
         if(saveevent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE CostList SET cost=%1, costtype='%2' desc='%2' WHERE event=%3;").arg(_cost).arg(_costtype).arg(_description).arg(_eventid);
+            QString sql = QString("UPDATE CostList SET cost=%1, costtype='%2', desc='%3' WHERE event=%4;").arg(_cost).arg(_costtype).arg(_description).arg(_eventid);
             if(query.exec(sql))
             {
                 qDebug() << "Update Cost in database with id " << _eventid;
