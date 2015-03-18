@@ -108,17 +108,6 @@ Dialog {
             }
 
             TextField {
-                id: descinput
-                anchors { left: parent.left; right: parent.right }
-                label: qsTr("Description")
-                placeholderText: qsTr("description")
-
-                EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: costinput.focus = true
-                EnterKey.iconSource: "image://theme/icon-m-enter-next"
-            }
-
-            TextField {
                 id: costinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Price")
@@ -129,6 +118,12 @@ Dialog {
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: costinput.focus = false
             }
+            TextArea {
+                anchors { left: parent.left; right: parent.right }
+                id: descinput
+                placeholderText: qsTr("description")
+            }
+
         }
     }
     canAccept: kminput.acceptableInput && descinput.acceptableInput && costinput.acceptableInput

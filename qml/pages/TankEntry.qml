@@ -88,12 +88,12 @@ Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: quanttityinput.focus = true
+                EnterKey.onClicked: quantityinput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
-                id: quanttityinput
+                id: quantityinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
                 placeholderText: qsTr("Quantity")
@@ -114,7 +114,7 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: cbstation.focus = true
+                EnterKey.onClicked: cbfueltype.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
@@ -124,7 +124,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 readOnly: true
-                text:  (priceinput.text.replace(",",".") / quanttityinput.text.replace(",",".")).toFixed(3) || 0
+                text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
             }
 
             ComboBox {
@@ -143,7 +143,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 fueltype = modelData.id
-                                fullinput.focus = true
+                                cbstation.focus = true
                             }
                         }
                     }
@@ -184,17 +184,19 @@ Dialog {
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: noteinput
+                placeholderText: qsTr("description")
+
             }
         }
     }
-    canAccept: kminput.acceptableInput && quanttityinput.acceptableInput && priceinput.acceptableInput
+    canAccept: kminput.acceptableInput && quantityinput.acceptableInput && priceinput.acceptableInput
 
     onOpened: {
         if(tank != undefined)
         {
             tank_date = tank.date
             kminput.text = tank.distance
-            quanttityinput.text = tank.quantity
+            quantityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
             fueltype = tank.fueltype
@@ -223,13 +225,13 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
         }
         else
         {
             tank.date = tank_date
             tank.distance = kminput.text
-            tank.quantity = quanttityinput.text.replace(",",".")
+            tank.quantity = quantityinput.text.replace(",",".")
             tank.price = priceinput.text.replace(",",".")
             tank.full = fullinput.checked
             tank.fueltype = fueltype

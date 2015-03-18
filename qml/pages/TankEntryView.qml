@@ -218,28 +218,22 @@ Page {
                         width:(parent.width-parent.spacing)/2
                     }
                 }
-                Row {
-                    id: notelabelrow
+                Text {
                     width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Note:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                    }
-                Row {
-                    id: noterow
-                    width:parent.width
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: tank.note
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                    }
+                    text: qsTr("Note:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
                 }
-              }
+                Text {
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                    text: tank.note
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    wrapMode:Text.Wrap
+
+                }
            }
         }
 }
