@@ -36,26 +36,23 @@ Page {
                 }
             }
             VerticalScrollDecorator {}
-
             anchors.fill: parent
-            //leftMargin: Theme.paddingMedium
-            //rightMargin: Theme.paddingMedium
-            //contentHeight: column.height
-            contentHeight: childrenRect.height
-
+            leftMargin: Theme.paddingMedium
+            rightMargin: Theme.paddingMedium
+            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             Column {
                 id: column
-                width: parent.width
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                 spacing: Theme.paddingLarge
-                //anchors.fill: parent
+                anchors.fill: parent
                 PageHeader {
                     title: qsTr("Tank")
                 }
                 Row
                 {
                     id: odorow
-                    width:parent.width
                     spacing: parent.spacing
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     Text {
                         text: qsTr("ODO:")
                         font.family: Theme.fontFamily
@@ -75,7 +72,7 @@ Page {
                 }
                 Row {
                     id: daterow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing: parent.spacing
                     Text {
                         text: qsTr("Date:")
@@ -97,7 +94,7 @@ Page {
                 }
                 Row {
                     id: quantityrow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Quantity:")
@@ -118,7 +115,7 @@ Page {
                 }
                 Row {
                     id: pricerow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Total Price:")
@@ -139,10 +136,10 @@ Page {
                 }
                 Row {
                     id: unitpricerow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
-                        text: qsTr("Unite Price:")
+                        text: qsTr("Unit Price:")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
@@ -160,7 +157,7 @@ Page {
                 }
                 Row {
                     id: fulltankrow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Full tank:")
@@ -181,7 +178,7 @@ Page {
                 }
                 Row {
                     id: fueltyperow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Fuel Type:")
@@ -202,7 +199,7 @@ Page {
                 }
                 Row {
                     id: stationrow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Station:")
@@ -223,7 +220,7 @@ Page {
                 }
                 Row {
                     id: notelabelrow
-                    width:parent.width
+                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
                         text: qsTr("Note:")
