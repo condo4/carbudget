@@ -1,7 +1,8 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
+ * Copyright (C) 2014 Fabien Proriol, 2015 Thomas Michel
+ *
  *
  * This file is part of CarBudget.
  *
@@ -15,46 +16,46 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Thomas Michel
  */
 
 
-#ifndef CARMANAGER_H
-#define CARMANAGER_H
+#ifndef Fueltype_H
+#define Fueltype_H
 
 #include <QObject>
-#include <QStringList>
-#include <QQmlListProperty>
-#include <car.h>
 
-class CarManager : public QObject
+class Car;
+
+class Fueltype : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QStringList cars READ cars NOTIFY carsChanged())
-    Q_PROPERTY(Car *car READ car NOTIFY carChanged())
+    Q_PROPERTY(unsigned int id    READ id       WRITE setId   NOTIFY idChanged )
+    Q_PROPERTY(QString      name  READ name     WRITE setName NOTIFY nameChanged )
 
 private:
-    QStringList _cars;
     Car *_car;
-
-    void refresh();
+    int _id;
+    QString _name;
 
 public:
-    explicit CarManager(QObject *parent = 0);
-
-    Q_INVOKABLE QStringList cars();
-    Car *car();
+    explicit Fueltype(QObject *parent = 0);
+    Fueltype(unsigned int id, QString name, Car *parent = 0);
 
 signals:
-    void carsChanged();
-    void carChanged();
+    void idChanged();
+    void nameChanged();
 
 public slots:
+    void save();
 
-    void selectCar(QString name);
-    void delCar(QString name);
-    void createCar(QString name);
-    void importFromMyCar(QString name);
+    unsigned int id() const;
+    void setId(unsigned int id);
+
+    QString name() const;
+    void setName(QString name);
+
 };
-#endif // CARMANAGER_H
+
+#endif // Fueltype_H

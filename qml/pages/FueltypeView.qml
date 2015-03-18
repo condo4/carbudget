@@ -15,63 +15,49 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Thomas Michel
  */
-
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
 
 Page {
     allowedOrientations: Orientation.All
     SilicaListView {
         PullDownMenu {
             MenuItem {
-                text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
-            }
-            MenuItem {
-                text: qsTr("Import from myCar")
-                onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"))
+                text: qsTr("Add new fuel type")
+                onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"))
             }
         }
-
-
 
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Car List")
+            title: qsTr("Fuel Type List")
         }
 
-        id: carView
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.cars
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-        }
+        model: manager.car.fueltypes
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-            onClicked: carView.select_car(model.modelData)
+
             menu: ContextMenu {
                 MenuItem {
-                    text: qsTr("Select")
-                    onClicked: carView.select_car(model.modelData)
+                    text: qsTr("Modify")
+                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
                 }
 
                 MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
-                        remorseAction("Deleting", function() {
-                            manager.delCar(model.modelData)
+                        remorseAction(qsTr("Deleting"), function() {
+                            manager.car.delFueltype(model.modelData)
                         })
                     }
                 }
@@ -82,12 +68,13 @@ Page {
 
                 Row {
                     width: parent.width
+
                     Text {
-                        text : model.modelData
+                        text: model.modelData.id + ": " + model.modelData.name;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
+                        width: parent.width
                     }
                 }
             }

@@ -9,7 +9,7 @@
 TARGET = harbour-carbudget
 
 CONFIG += sailfishapp
-QT += sql
+QT += sql xml
 
 SOURCES += CarBudget.cpp \
     tank.cpp \
@@ -18,7 +18,9 @@ SOURCES += CarBudget.cpp \
     cost.cpp \
     tire.cpp \
     carmanager.cpp \
-    carevent.cpp
+    fueltype.cpp \
+    carevent.cpp \
+    costtype.cpp
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -35,6 +37,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/TankEntry.qml \
     qml/pages/StationView.qml \
     qml/pages/StationEntry.qml \
+    qml/pages/FueltypeView.qml \
+    qml/pages/FueltypeEntry.qml \
     qml/pages/CostEntry.qml \
     qml/pages/CostView.qml \
     qml/pages/TireView.qml \
@@ -46,7 +50,11 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     i18n/RU_ru.ts \
     qml/pages/BudgetView.qml \
     qml/pages/Settings.qml \
-    qml/pages/TankEntryView.qml
+    qml/pages/TankEntryView.qml \
+    qml/pages/MyCarImportMainview.qml \
+    qml/pages/CosttypeEntry.qml \
+    qml/pages/CosttypeView.qml \
+    qml/pages/CostEntryView.qml
 
 HEADERS += \
     tank.h \
@@ -55,7 +63,10 @@ HEADERS += \
     cost.h \
     tire.h \
     carmanager.h \
-    carevent.h
+    carevent.h \
+    fueltype.h \
+    costtype.h
+
 
 TRANSLATIONS = CarBudget_fr.ts \
                CarBudget_en.ts \

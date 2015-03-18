@@ -46,6 +46,7 @@ Page {
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
+            onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
 
             menu: ContextMenu {
                 MenuItem {
@@ -91,7 +92,8 @@ Page {
                 Row {
                     width: parent.width
                     Text {
-                        text: model.modelData.description;
+                        //text: model.modelData.description;
+                        text: manager.car.getCosttypeName(model.modelData.costtype);
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
