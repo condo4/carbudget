@@ -46,6 +46,7 @@ Page {
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
+            onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
 
             menu: ContextMenu {
                 MenuItem {
