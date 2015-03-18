@@ -47,7 +47,6 @@ Dialog {
         anchors.fill: parent
         contentHeight: column.height + Theme.paddingLarge
 
-
         Column {
             id: column
             width: parent.width
