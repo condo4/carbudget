@@ -349,7 +349,10 @@ void CarManager::importFromMyCar(QString name)
             if (costtype) t_billtype = costtype->id();
         }
         if (!n_odo.isNull())
-            t_odo = n_odo.text().toInt();
+        {
+            t_odo =  (int) n_odo.text().toDouble();
+        qDebug() <<"Odo: " << n_odo.text() << "converted: " << t_odo;
+        }
         if (!n_date.isNull())
         {
            QDateTime t_datetime;
