@@ -68,6 +68,7 @@ Dialog {
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                         tank_date = dialog.date
+                        kminput.focus=true
                     })
                 }
 
@@ -114,7 +115,7 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: cbfueltype.focus = true
+                EnterKey.onClicked: noteinput.focus=true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
@@ -131,7 +132,6 @@ Dialog {
                 id: cbfueltype
                 label: qsTr("Fuel Type")
                 anchors { left: parent.left; right: parent.right }
-
                 menu: ContextMenu {
                     Repeater {
                         id: fueltypeslistrepeater
@@ -143,7 +143,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 fueltype = modelData.id
-                                cbstation.focus = true
+                                noteinput.focus = true
                             }
                         }
                     }
@@ -167,7 +167,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 station = modelData.id
-                                fullinput.focus = true
+                                noteinput.focus = true
                             }
                         }
                     }
@@ -179,6 +179,7 @@ Dialog {
                 id: fullinput
                 text: qsTr("Full tank")
                 checked: true
+                onCheckedChanged: noteinput.focus = true
             }
 
             TextArea {

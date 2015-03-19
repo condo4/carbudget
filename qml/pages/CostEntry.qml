@@ -61,6 +61,7 @@ Dialog {
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                         cost_date = dialog.date
+                        kminput.focus=true
                     })
                 }
 
@@ -81,7 +82,7 @@ Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: descinput.focus = true
+                EnterKey.onClicked: cbcosttype.clicked(0)
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             ComboBox {
@@ -100,7 +101,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 costtype = modelData.id
-                                descinput.focus = true
+                                costinput.focus = true
                             }
                         }
                     }
@@ -116,7 +117,8 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: costinput.focus = false
+                EnterKey.onClicked: descinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             TextArea {
                 anchors { left: parent.left; right: parent.right }
@@ -126,7 +128,7 @@ Dialog {
 
         }
     }
-    canAccept: kminput.acceptableInput && descinput.acceptableInput && costinput.acceptableInput
+    canAccept:  kminput.acceptableInput && costinput.acceptableInput
 
     onOpened: {
         if(cost != undefined)
