@@ -38,6 +38,16 @@ bool sortCostByDistance(const Cost *c1, const Cost *c2)
     return c1->distance() > c2->distance();
 }
 
+bool sortCostByDate(const Cost *c1, const Cost *c2)
+{
+    return c1->date() > c2->date();
+}
+
+bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
+{
+    return c1->id() < c2->id();
+}
+
 bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
 {
     return c1->id() < c2->id();
@@ -121,16 +131,31 @@ void Car::db_load()
         qDebug() << query.lastError();
     }
 
-    if(query.exec("SELECT event,date,distance,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
+    if(query.exec("SELECT id,name FROM CosttypeList;"))
+    {
+        while(query.next())
+        {
+            int id = query.value(0).toInt();
+            QString name = query.value(1).toString();
+            Costtype *costtype = new Costtype(id, name, this);
+            _costtypelist.append(costtype);
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
     {
         while(query.next())
         {
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
-            double price = query.value(3).toDouble();
-            QString description = query.value(4).toString();
-            Cost *cost = new Cost(date,distance,description,price,id,this);
+            unsigned int costtype = query.value(3).toInt();
+            double price = query.value(4).toDouble();
+            QString description = query.value(5).toString();
+            Cost *cost = new Cost(date,distance,costtype,description,price,id,this);
             _costlist.append(cost);
         }
     }
@@ -202,7 +227,7 @@ void Car::db_upgrade_to_2()
 
 void Car::db_upgrade_to_3()
 {
-    QString sql = "ALTER TABLE TankList ADD COLUMN Fueltype INTEGER;";
+    QString sql = "ALTER TABLE TankList ADD COLUMN fueltype INTEGER;";
     QSqlQuery query(this->db);
 
     if(query.exec(sql))
@@ -211,19 +236,33 @@ void Car::db_upgrade_to_3()
         {
             if (query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
             {
-                if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-                {
-                    if (query.exec("ALTER TABLE CostList ADD COLUMN Costtype INTEGER;"))
-                    {
-                        this->db.commit();
-                        return;
-                    }
-                }
+                this->db.commit();
+                return;
             }
         }
     }
     this->db.rollback();
 }
+
+void Car::db_upgrade_to_4()
+{
+    QString sql = "ALTER TABLE CostList ADD COLUMN costtype INTEGER;";
+    QSqlQuery query(this->db);
+
+    if(query.exec(sql))
+    {
+        if(query.exec("UPDATE CarBudget SET  value='4' WHERE id='version';"))
+        {
+            if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
+            {
+                this->db.commit();
+                return;
+            }
+        }
+    }
+    this->db.rollback();
+}
+
 Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 {
 
@@ -242,6 +281,10 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
         if(this->db_get_version() < 3)
         {
             db_upgrade_to_3();
+        }
+        if(this->db_get_version() < 4)
+        {
+            db_upgrade_to_4();
         }
     }
     qDebug() << "Database version " << this->db_get_version();
@@ -331,6 +374,10 @@ QQmlListProperty<Station> Car::stations()
     return QQmlListProperty<Station>(this, _stationlist);
 }
 
+QQmlListProperty<Costtype> Car::costtypes()
+{
+    return QQmlListProperty<Costtype>(this, _costtypelist);
+}
 QQmlListProperty<Cost> Car::costs()
 {
     return QQmlListProperty<Cost>(this, _costlist);
@@ -596,9 +643,80 @@ QString Car::getStationName(unsigned int id)
     return "";
 }
 
-void Car::addNewCost(QDate date, unsigned int distance, QString description, double price)
+void Car::addNewCosttype(QString name)
 {
-    Cost *cost = new Cost(date,distance,description,price,CREATE_NEW_EVENT,this);
+    //First check for existing costtype
+    if (findCosttype(name))
+        return;
+    Costtype *costtype = new Costtype(-1, name, this);
+    _costtypelist.append(costtype);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    costtype->save();
+    emit costtypesChanged();
+}
+
+void Car::delCosttype(Costtype *costtype)
+{
+    qDebug() << "Remove Cost Type " << costtype->id();
+    _costtypelist.removeAll(costtype);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    QSqlQuery query(db);
+    QString sql = QString("UPDATE CostList SET costtype = 0 WHERE costtype=%1;").arg(costtype->id());
+
+    if(query.exec(sql))
+    {
+        QString sql2 = QString("DELETE FROM CosttypeList WHERE id=%1;").arg(costtype->id());
+        qDebug() << sql2;
+        if(query.exec(sql2))
+        {
+            qDebug() << "DELETE Costtype in database with id " << costtype->id();
+            db.commit();
+        }
+        else
+        {
+            qDebug() << "Error during DELETE Costtype in database";
+            qDebug() << query.lastError();
+        }
+    }
+    else
+    {
+        qDebug() << "Error during DELETE Costtype in database";
+        qDebug() << query.lastError();
+    }
+    foreach(Cost *cost, _costlist)
+    {
+        if(cost->costtype() == costtype->id())
+        {
+            cost->setCosttype(0);
+        }
+    }
+    emit costsChanged();
+    costtype->deleteLater();
+}
+
+Costtype* Car::findCosttype(QString name)
+{
+    foreach (Costtype *costtype, _costtypelist)
+    {
+        if (costtype->name()==name)
+            return costtype;
+    }
+    return NULL;
+}
+
+QString Car::getCosttypeName(unsigned int id)
+{
+    foreach (Costtype *costtype, _costtypelist)
+    {
+        if (costtype->id()==id)
+            return costtype->name();
+    }
+    return "";
+}
+
+void Car::addNewCost(QDate date, unsigned int distance, unsigned int costtype, QString description, double price)
+{
+    Cost *cost = new Cost(date,distance,costtype,description,price,CREATE_NEW_EVENT,this);
     _costlist.append(cost);
     qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
     cost->save();
@@ -808,7 +926,7 @@ void Car::simulation()
     this->addNewTank(QDate(2010,11,15),km += 1042,47,63,true,0, 2,"t3");
     this->addNewTank(QDate(2010,11,29),km += 1021,48,60,true,0, 3,"t4");
     this->addNewTank(QDate(2010,12,15),km += 1051,60,70,true,0, 1,"t5");
-    this->addNewCost(QDate(2011, 1, 1),km += 100,"Revision 5000",50);
+    this->addNewCost(QDate(2011, 1, 1),km += 100, 0, "Revision 5000",50);
     this->addNewTank(QDate(2011, 1,29),km += 1101,60,70,true,0, 1,"t6");
     this->addNewTank(QDate(2011, 1,15),km += 1099,60,70,true,0, 2,"t7");
     this->addNewTank(QDate(2011, 1,29),km += 1080,60,70,true,0, 3,"t8");
@@ -826,7 +944,7 @@ void Car::simulation()
     this->mountTire(QDate(2011,4,5), km, summer1);
 
     this->addNewTank(QDate(2011, 4, 8),km += 1051,60,70,true,1, 1,"");
-    this->addNewCost(QDate(2011, 4,18),km += 10, "Vidange 15000",220);
+    this->addNewCost(QDate(2011, 4,18),km += 10, 0, "Vidange 15000",220);
     this->addNewTank(QDate(2011, 4,28),km += 1028,60,70,true,1, 3,"");
     this->addNewTank(QDate(2011, 5, 9),km += 1021,60,70,true,1, 3,"");
     this->addNewTank(QDate(2011, 5,18),km += 1022,60,70,true,1, 3,"");
@@ -844,7 +962,7 @@ void Car::simulation()
     this->addNewTank(QDate(2011, 9,18),km += 1011,60,70,true,1, 1,"");
     this->addNewTank(QDate(2011, 9,28),km += 1012,60,70,true,2, 2,"");
     this->addNewTank(QDate(2011,10, 1),km += 1013,60,70,true,2, 1,"");
-    this->addNewCost(QDate(2011,10, 8),km += 15,"Vidange 30000",220);
+    this->addNewCost(QDate(2011,10, 8),km += 15, 0, "Vidange 30000",220);
     this->addNewTank(QDate(2011,10,29),km += 1101,60,70,true,1, 1,"");
     this->umountTire(QDate(2011,10,30), km += 100, summer1);
     this->mountTire(QDate(2011,10,30), km, winter1);
@@ -887,7 +1005,7 @@ void Car::simulation()
     this->addNewTank(QDate(2012,11,29),km += 1080,60,70,true,1, 3,"");
     this->addNewTank(QDate(2012,12,15),km += 1010,60,70,true,1, 1,"");
     this->addNewTank(QDate(2012,12,29),km += 1071,60,70,true,1, 2,"");
-    this->addNewCost(QDate(2012,12,30),km += 15,"Vidange 60000",222);
+    this->addNewCost(QDate(2012,12,30),km += 15, 0, "Vidange 60000",222);
     this->addNewTank(QDate(2013, 1,15),km += 1031,60,70,true,1, 2,"");
     this->addNewTank(QDate(2013, 1,29),km += 1121,60,70,true,1, 3,"");
     this->addNewTank(QDate(2013, 2,15),km += 1134,60,70,true,1, 3,"");

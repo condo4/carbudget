@@ -248,6 +248,6 @@ Page {
                 wrapMode:Text.Wrap
             }
 
-}
+       }
     }
 }
