@@ -27,12 +27,17 @@ Dialog {
     property Tank tank
     property date tank_date
     property int station
+    property int fueltype
 
     SilicaFlickable {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Manage stations")
                 onClicked: pageStack.push(Qt.resolvedUrl("StationView.qml"))
+            }
+            MenuItem {
+                text: qsTr("Manage fuel types")
+                onClicked: pageStack.push(Qt.resolvedUrl("FueltypeView.qml"))
             }
         }
 
@@ -83,12 +88,12 @@ Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: quanttityinput.focus = true
+                EnterKey.onClicked: quantityinput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
-                id: quanttityinput
+                id: quantityinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
                 placeholderText: qsTr("Quantity")
@@ -109,7 +114,7 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: cbstation.focus = true
+                EnterKey.onClicked: cbfueltype.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
@@ -119,7 +124,29 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 readOnly: true
-                text:  (priceinput.text.replace(",",".") / quanttityinput.text.replace(",",".")).toFixed(3) || 0
+                text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
+            }
+            ComboBox {
+                id: cbfueltype
+                label: qsTr("Fuel Type")
+                anchors { left: parent.left; right: parent.right }
+
+                menu: ContextMenu {
+                    Repeater {
+                        id: fueltypeslistrepeater
+                        model: manager.car.fueltypes
+                        MenuItem {
+                            property int dbid
+                            id: fueltypelistItem
+                            text: modelData.name
+                            dbid: modelData.id
+                            onClicked:{
+                                fueltype = modelData.id
+                                cbstation.focus = true
+                            }
+                        }
+                    }
+                }
             }
 
             ComboBox {
@@ -155,21 +182,31 @@ Dialog {
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: noteinput
+                placeholderText: qsTr("description")
             }
         }
     }
-    canAccept: kminput.acceptableInput && quanttityinput.acceptableInput && priceinput.acceptableInput
+    canAccept: kminput.acceptableInput && quantityinput.acceptableInput && priceinput.acceptableInput
 
     onOpened: {
         if(tank != undefined)
         {
             tank_date = tank.date
             kminput.text = tank.distance
-            quanttityinput.text = tank.quantity
+            quantityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
+            fueltype = tank.fueltype
             station = tank.station
             noteinput.text = tank.note
+            for(var i=0; i<fueltypeslistrepeater.count; i++)
+            {
+                if(fueltypeslistrepeater.itemAt(i).dbid === tank.fueltype)
+                {
+                    cbfueltype.currentIndex = i
+                    break
+                }
+            }
             for(var i=0; i<stationslistrepeater.count; i++)
             {
                 if(stationslistrepeater.itemAt(i).dbid === tank.station)
@@ -185,15 +222,16 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quanttityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked,station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
         }
         else
         {
             tank.date = tank_date
             tank.distance = kminput.text
-            tank.quantity = quanttityinput.text.replace(",",".")
+            tank.quantity = quantityinput.text.replace(",",".")
             tank.price = priceinput.text.replace(",",".")
             tank.full = fullinput.checked
+            tank.fueltype = fueltype
             tank.station = station
             tank.note = noteinput.text
             tank.save()

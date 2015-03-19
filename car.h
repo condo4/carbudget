@@ -27,13 +27,14 @@
 #include <tank.h>
 #include <cost.h>
 #include <tire.h>
+#include <fueltype.h>
 #include <station.h>
 #include <QtQuick>
 #include <QtSql/QtSql>
 
 
 class CarManager;
-#define DB_VERSION 2
+#define DB_VERSION 3
 
 class Car : public QObject
 {
@@ -44,6 +45,7 @@ class Car : public QObject
     Q_PROPERTY(unsigned int maxdistance READ maxdistance NOTIFY maxdistanceChanged)
     Q_PROPERTY(unsigned int mindistance READ mindistance NOTIFY mindistanceChanged)
     Q_PROPERTY(QQmlListProperty<Tank> tanks READ tanks NOTIFY tanksChanged())
+    Q_PROPERTY(QQmlListProperty<Fueltype> fueltypes READ fueltypes NOTIFY fueltypesChanged())
     Q_PROPERTY(QQmlListProperty<Station> stations READ stations NOTIFY stationsChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
@@ -60,6 +62,7 @@ private:
     QString _name;
 
     QList<Tank*>    _tanklist;
+    QList<Fueltype*> _fueltypelist;
     QList<Station*> _stationlist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
@@ -71,6 +74,7 @@ private:
     int db_get_version();
 
     void db_upgrade_to_2();
+    void db_upgrade_to_3();
 
 public:
     QSqlDatabase db;
@@ -84,6 +88,7 @@ public:
     unsigned int mindistance() const;
 
     QQmlListProperty<Tank> tanks();
+    QQmlListProperty<Fueltype> fueltypes();
     QQmlListProperty<Station> stations();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
@@ -103,6 +108,7 @@ signals:
     void maxdistanceChanged(double consumption);
     void mindistanceChanged(double consumption);
     void tanksChanged();
+    void fueltypesChanged();
     void stationsChanged();
     void nameChanged();
     void costsChanged();
@@ -113,11 +119,17 @@ signals:
     void budgetChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int station, QString note);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
     void delTank(Tank *tank);
 
+    void addNewFueltype(QString fueltype);
+    void delFueltype(Fueltype *fueltype);
+    Fueltype* findFueltype(QString name);
+    QString getFueltypeName(unsigned int id);
     void addNewStation(QString station);
     void delStation(Station *station);
+    Station* findStation(QString name);
+    QString getStationName(unsigned int id);
 
     void addNewCost(QDate date, unsigned int distance, QString description, double price);
     void delCost(Cost *cost);
