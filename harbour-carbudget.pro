@@ -9,7 +9,7 @@
 TARGET = harbour-carbudget
 
 CONFIG += sailfishapp
-QT += sql
+QT += sql xml
 
 SOURCES += CarBudget.cpp \
     tank.cpp \
@@ -50,6 +50,7 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     i18n/RU_ru.ts \
     qml/pages/BudgetView.qml \
     qml/pages/Settings.qml \
+    qml/pages/MyCarImportMainview.qml \
     qml/pages/CosttypeEntry.qml \
     qml/pages/CosttypeView.qml \
     qml/pages/CostEntryView.qml \

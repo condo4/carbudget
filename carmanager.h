@@ -55,5 +55,6 @@ public slots:
     void selectCar(QString name);
     void delCar(QString name);
     void createCar(QString name);
+    void importFromMyCar(QString name);
 };
 #endif // CARMANAGER_H

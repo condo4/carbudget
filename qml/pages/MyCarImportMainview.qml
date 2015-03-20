@@ -1,7 +1,7 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
+ * Copyright (C) 2015 Thomas Michel
  *
  * This file is part of CarBudget.
  *
@@ -15,63 +15,47 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Thomas Michel
+ * Provides list view of all cars to import from a mycar xml backup file
  */
-
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
+import QtQuick.XmlListModel 2.0
+
 
 
 Page {
     allowedOrientations: Orientation.All
+    XmlListModel {
+        id: xmlCars
+        source: "/home/nemo/mycar_data.xml"
+        query: "/mycar/car"
+        XmlRole { name: "name"; query: "name/string()" }
+    }
+
+
     SilicaListView {
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
-            }
-            MenuItem {
-                text: qsTr("Import from myCar")
-                onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"))
-            }
-        }
 
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Car List")
+            title: qsTr("Cars in myCar")
         }
 
-        id: carView
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.cars
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-        }
+        model: xmlCars
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-            onClicked: carView.select_car(model.modelData)
             menu: ContextMenu {
                 MenuItem {
-                    text: qsTr("Select")
-                    onClicked: carView.select_car(model.modelData)
-                }
-
-                MenuItem {
-                    text: qsTr("Remove")
-                    onClicked: {
-                        remorseAction("Deleting", function() {
-                            manager.delCar(model.modelData)
-                        })
-                    }
+                    text: qsTr("Import")
+                    onClicked: manager.importFromMyCar(name)
                 }
             }
 
@@ -80,15 +64,19 @@ Page {
 
                 Row {
                     width: parent.width
+
                     Text {
-                        text : model.modelData
+                        text: name
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSize
                         color: Theme.primaryColor
+                        width: parent.width
                         horizontalAlignment: Text.AlignLeft
+
                     }
-                }
+
+            }
             }
         }
-    }
+     }
 }

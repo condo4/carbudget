@@ -21,6 +21,8 @@
 
 #include "carmanager.h"
 #include <QSettings>
+#include <QtXml/QDomDocument>
+#include <QFile>
 
 void CarManager::refresh()
 {
@@ -178,4 +180,194 @@ void CarManager::createCar(QString name)
     if(!error) db.commit();
     db.close();
     refresh();
+}
+
+void CarManager::importFromMyCar(QString name)
+{
+    createCar(name);
+    selectCar(name);
+    QDomDocument doc;
+    QFile file("/home/nemo/mycar_data.xml");
+    if (!file.open(QIODevice::ReadOnly) || !doc.setContent(&file))
+    {
+        qDebug() << "ERROR: fail to open myCar Backup file";
+        return;
+    }
+    // First load all fuel types
+    qDebug() << "Start importing fuel types";
+    QDomNodeList fueltypes= doc.elementsByTagName("FuelSubtype");
+    for (int i = 0; i < fueltypes.size(); i++) {
+        QDomNode n = fueltypes.item(i);
+        QDomElement type = n.firstChildElement("code");
+        if (type.isNull())
+            continue;
+            _car->addNewFueltype(type.text());
+    }
+    // Now import tank events
+
+    qDebug() << "Now import tank events";
+    QDomNodeList tanks= doc.elementsByTagName("refuel");
+    for (int i = 0; i < tanks.size(); i++) {
+        QDomNode n = tanks.item(i);
+        QDomElement n_carname = n.firstChildElement("car_name");
+        QDomElement n_station = n.firstChildElement("fuel_station");
+        QDomElement n_date = n.firstChildElement("refuelDate");
+        QDomElement n_quantity = n.firstChildElement("quantity");
+        QDomElement n_distance = n.firstChildElement("distance");
+        QDomElement n_price = n.firstChildElement("cost_def_curr");
+        QDomElement n_refuel_type = n.firstChildElement("refuel_type");
+        QDomElement n_fuel_subtype = n.firstChildElement("fuel_subtype");
+        if (n_carname.isNull())
+            continue;
+        if (n_carname.text() == _car->getName())
+        {
+            // First add stations
+            if (!n_station.isNull())
+            {
+                if (!_car->findStation(n_station.text()))
+                {
+                    _car->addNewStation(n_station.text());
+                }
+            }
+            //Now add fuelEvent
+            //QDomElements should not be empty, but just to make sure...
+            QDate t_date;
+            unsigned int t_distance=0;
+            double t_quantity=0;
+            double t_price=0;
+            bool t_refuel_type=true;
+            unsigned int t_station=0;
+            unsigned int t_fueltype=0;
+            if (!n_date.isNull())
+            {
+               QDateTime t_datetime;
+               t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+               t_date = t_datetime.date();
+            }
+            if (!n_distance.isNull()) t_distance = n_distance.text().toInt();
+            if (!n_quantity.isNull()) t_quantity = n_quantity.text().toDouble();
+            if (!n_price.isNull()) t_price = n_price.text().toDouble();
+            if (!n_refuel_type.isNull())
+                if (n_refuel_type.text().toInt()!=0) t_refuel_type=false;
+            if (!n_fuel_subtype.isNull())
+            {
+                Fueltype *fueltype = _car->findFueltype(n_fuel_subtype.text());
+                if (fueltype)
+                    t_fueltype=fueltype->id();
+            }
+            if (!n_station.isNull())
+            {
+                Station *station = _car->findStation(n_station.text());
+                if (station)
+                    t_station=station->id();
+            }
+            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fueltype,t_station,"");
+        }
+    }
+    // Now import cost types from bill types;
+    qDebug() << "Now import bill types as cost types";
+    QDomNodeList costtypes = doc.elementsByTagName("bill_type");
+    for (int i = 0; i < costtypes.size(); i++) {
+        QDomNode n = costtypes.item(i);
+        QDomElement type = n.firstChildElement("name");
+        if (type.isNull())
+            continue;
+         _car->addNewCosttype(type.text());
+    }
+    // We don't distinguish between service and bills, therefore add service types as cost types
+    qDebug() << "Now import service categories as cost types";
+    costtypes = doc.elementsByTagName("service_category");
+    for (int i = 0; i < costtypes.size(); i++) {
+        QDomNode n = costtypes.item(i);
+        QDomElement type = n.firstChildElement("name");
+        if (type.isNull())
+            continue;
+        _car->addNewCosttype(type.text());
+    }
+    //Now it's time to import the bills
+    qDebug() << "Now import bills as costs";
+    QDomNodeList bills = doc.elementsByTagName("bill");
+    for (int i = 0; i < bills.size(); i++) {
+        QDomNode n = bills.item(i);
+        QDomElement n_carname = n.firstChildElement("car_name");
+        if (n_carname.isNull())
+            continue;
+        if(n_carname.text()!=_car->getName())
+            continue;
+        QDomElement n_billtype = n.firstChildElement("bill_type_name");
+        QDomElement n_cost = n.firstChildElement("cost");
+        QDomElement n_date = n.firstChildElement("date");
+        QDomElement n_note = n.firstChildElement("note");
+        unsigned int t_billtype = 0;
+        unsigned int t_odo = 0;
+        double t_cost = 0;
+        QDate t_date;
+        QString t_note;
+        if (!n_billtype.isNull())
+        {
+            Costtype *costtype = _car->findCosttype(n_billtype.text());
+            if (costtype) t_billtype = costtype->id();
+        }
+        if (!n_date.isNull())
+        {
+           QDateTime t_datetime;
+           t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+           t_date = t_datetime.date();
+        }
+        if (!n_cost.isNull())
+            t_cost=n_cost.text().toDouble();
+        if (!n_note.isNull())
+            t_note=n_note.text();
+        // bills in myCar do not support distance but are needed in carbudet
+        // We simply set odo to distnace of last tank before bill date
+        // This is a bit ugly and should be improved :-)
+        t_odo = _car->getDistance(t_date);
+        _car->addNewCost(t_date,t_odo,t_billtype,t_note,t_cost);
+    }
+    //Now it's time to import the service records
+    qDebug() << "Now import service records as costs";
+    bills = doc.elementsByTagName("service_record");
+    for (int i = 0; i < bills.size(); i++) {
+        QDomNode n = bills.item(i);
+        QDomElement n_carname = n.firstChildElement("carName");
+        if (n_carname.isNull())
+            continue;
+        if(n_carname.text()!=_car->getName())
+            continue;
+        QDomElement n_billtype = n.firstChildElement("service_categories");
+        QDomElement n_cost = n.firstChildElement("cost");
+        QDomElement n_odo = n.firstChildElement("odometer");
+        QDomElement n_date = n.firstChildElement("date");
+        QDomElement n_note = n.firstChildElement("note");
+        QDomElement n_garage = n.firstChildElement("garage");
+        unsigned int t_billtype = 0;
+        unsigned int t_odo = 0;
+        double t_cost = 0;
+        QDate t_date;
+        QString t_note;
+        if (!n_billtype.isNull())
+        {
+            Costtype *costtype = _car->findCosttype(n_billtype.text());
+            if (costtype) t_billtype = costtype->id();
+        }
+        if (!n_odo.isNull())
+        {
+            t_odo =  (int) n_odo.text().toDouble();
+        }
+        if (!n_date.isNull())
+        {
+           QDateTime t_datetime;
+           t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+           t_date = t_datetime.date();
+        }
+        if (!n_cost.isNull())
+            t_cost=n_cost.text().toDouble();
+        if (!n_note.isNull())
+            t_note=n_note.text();
+        if (!n_garage.isNull())
+            t_note+="\n"+n_garage.text();
+        _car->addNewCost(t_date,t_odo,t_billtype,t_note,t_cost);
+    }
+
+
 }
