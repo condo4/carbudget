@@ -52,12 +52,7 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/Settings.qml \
     qml/pages/MyCarImportMainview.qml \
     qml/pages/CosttypeEntry.qml \
-    qml/pages/CosttypeView.qml \
-    qml/pages/CostEntryView.qml
-    qml/pages/CosttypeEntry.qml \
-    qml/pages/CosttypeView.qml \
-    qml/pages/CostEntryView.qml \
-    qml/pages/TankEntryView.qml
+    qml/pages/CosttypeView.qml
 
 HEADERS += \
     tank.h \
