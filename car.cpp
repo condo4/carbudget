@@ -98,6 +98,9 @@ void Car::db_load()
         }
         emit nbtankChanged(_tanklist.count());
         emit consumptionChanged(this->consumption());
+        emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionminChanged(this->consumptionmin());
+        emit fueltotalChanged(this->fueltotal());
         emit maxdistanceChanged(this->maxdistance());
         emit mindistanceChanged(this->mindistance());
     }
@@ -326,6 +329,36 @@ double Car::consumption() const
     return totalConsumption / ((maxDistance - minDistance)/ 100.0);
 }
 
+double Car::consumptionmax() const
+{
+    double con=0;
+    foreach (Tank *tank,_tanklist)
+    {
+        if (tank->consumption()>con)
+            con = tank->consumption();
+    }
+    return con;
+}
+
+double Car::consumptionmin() const
+{
+    double con=99999;
+    foreach (Tank *tank,_tanklist)
+    {
+        if ((tank->consumption()<con)&&(tank->consumption()!=0))
+            con = tank->consumption();
+    }
+    return con;
+}
+
+double Car::fueltotal() const
+{
+    double total=0;
+    foreach (Tank *tank,_tanklist)
+        total += tank->quantity();
+    return total;
+}
+
 unsigned int Car::maxdistance() const
 {
     unsigned long int maxDistance = 0;
@@ -431,6 +464,31 @@ void Car::setCar(QString name)
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
 }
 
+unsigned long int Car::getDistance(QDate date)
+{
+    // returns the approx distance at a date
+    // currently simply of last event
+    // needs to be improved
+    unsigned long int dist=0;
+    foreach(Tank *tank, _tanklist)
+    {
+        if (tank->date() < (QDateTime) date)
+            break;
+        dist=tank->distance();
+    }
+    return dist;
+}
+
+double Car::budget_fuel_total()
+{
+    double total = 0;
+    foreach (Tank *tank, _tanklist)
+    {
+        total += tank->price();
+    }
+    return total;
+}
+
 double Car::budget_fuel()
 {
     /* Return sum(fuel price) / ODO * 100 */
@@ -458,6 +516,16 @@ double Car::budget_fuel()
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
 }
 
+double Car::budget_cost_total()
+{
+    double total=0;
+    foreach(Cost *cost,_costlist)
+    {
+        total += cost->cost();
+    }
+    return total;
+}
+
 double Car::budget_cost()
 {
     /* Return sum(cost) / ODO * 100 */
@@ -468,6 +536,11 @@ double Car::budget_cost()
         totalPrice += cost->cost();
     }
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
+}
+
+double Car::budget_total()
+{
+    return budget_fuel_total() + budget_cost_total();
 }
 
 double Car::budget()
@@ -483,6 +556,9 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     tank->save();
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
+    emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionminChanged(this->consumptionmin());
+    emit fueltotalChanged(this->fueltotal());
     emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();
 }
@@ -495,6 +571,8 @@ void Car::delTank(Tank *tank)
     tank->remove();
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
+    emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionminChanged(this->consumptionmin());
     emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();
     tank->deleteLater();

@@ -25,6 +25,8 @@ import harbour.carbudget 1.0
 
 
 Page {
+    allowedOrientations: Orientation.All
+
     SilicaFlickable {
 
         VerticalScrollDecorator {}
@@ -33,49 +35,276 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
+        contentHeight:column.height
 
         Column {
             id: column
-            width: parent.width
             spacing: Theme.paddingLarge
-
-            DialogHeader {
-                title: qsTr("Car Budget for 100km")
+            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+            PageHeader {
+                title: qsTr("Statistics")
             }
-
             Row {
                 width: parent.width
                 Text {
-                    text : qsTr("Fuel: ") + manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                    width:parent.width/2
+                    text : qsTr("ODO ")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMdium
+                    font.bold: true
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.maxdistance
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("In Budget")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.maxdistance - manager.car.mindistance
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    text : qsTr("Fuel")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
+                    font.bold: true
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
                 }
             }
-
             Row {
                 width: parent.width
                 Text {
-                    text : qsTr("Cost: ") + manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                    width:parent.width/2
+                    text : qsTr("Total: ")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.fueltotal.toFixed(2) + " l"
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Average: ")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.consumption.toFixed(2) + " l"
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Min:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.consumptionmin.toFixed(2) + " l"
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Max:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text :  manager.car.consumptionmax.toFixed(2) + " l"
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    text : qsTr("Costs")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
+                    font.bold: true
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
                 }
             }
-
             Row {
                 width: parent.width
                 Text {
-                    text : qsTr("Total: ") + manager.car.budget.toFixed(2) + " " + manager.car.currency
+                    width:parent.width/2
+                    text : qsTr("Fuel:")
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
+                    font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
                 }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget_fuel_total.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
             }
-
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Bills:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget_cost_total.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Total:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget_total.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    text : qsTr("Costs per 100 Km")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    font.bold: true
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+            }            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Fuel:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Bills:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+            Row {
+                width: parent.width
+                Text {
+                    width:parent.width/2
+                    text : qsTr("Total:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                }
+                Text {
+                    width:parent.width/2
+                    text : manager.car.budget.toFixed(2) + " " + manager.car.currency
+                    font.family: "monospaced"
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
         }
     }
 }
