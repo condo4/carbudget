@@ -68,6 +68,7 @@ Dialog {
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                         tank_date = dialog.date
+                        kminput.focus=true
                     })
                 }
 
@@ -165,7 +166,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 station = modelData.id
-                                fullinput.focus = true
+                                noteinput.focus = true
                             }
                         }
                     }
@@ -177,6 +178,7 @@ Dialog {
                 id: fullinput
                 text: qsTr("Full tank")
                 checked: true
+                onCheckedChanged: noteinput.focus = true
             }
 
             TextArea {

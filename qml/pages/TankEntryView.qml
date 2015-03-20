@@ -24,10 +24,10 @@ import harbour.carbudget 1.0
 
 
 Page {
-    allowedOrientations: Orientation.All
-    property Tank tank
+        allowedOrientations: Orientation.All
+        property Tank tank
 
-    SilicaFlickable {
+        SilicaFlickable {
 
 
         PullDownMenu {

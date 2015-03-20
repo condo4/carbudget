@@ -63,6 +63,7 @@ Dialog {
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                         cost_date = dialog.date
+                        kminput.focus=true
                     })
                 }
 
@@ -83,14 +84,13 @@ Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: descinput.focus = true
+                EnterKey.onClicked: cbcosttype.clicked(0)
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             ComboBox {
                 id: cbcosttype
                 label: qsTr("Cost Type")
                 anchors { left: parent.left; right: parent.right }
-
 
                 menu: ContextMenu {
                     Repeater {
@@ -119,7 +119,8 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: costinput.focus = false
+                EnterKey.onClicked: descinput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextArea {
