@@ -39,7 +39,6 @@ Dialog {
                 text: qsTr("Manage fuel types")
                 onClicked: pageStack.push(Qt.resolvedUrl("FueltypeView.qml"))
             }
-
         }
 
         VerticalScrollDecorator {}
@@ -115,7 +114,7 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: noteinput.focus=true
+                EnterKey.onClicked: cbfueltype.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
@@ -127,7 +126,6 @@ Dialog {
                 readOnly: true
                 text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
             }
-
             ComboBox {
                 id: cbfueltype
                 label: qsTr("Fuel Type")
@@ -143,7 +141,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 fueltype = modelData.id
-                                noteinput.focus = true
+                                cbstation.focus = true
                             }
                         }
                     }
@@ -186,7 +184,6 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 id: noteinput
                 placeholderText: qsTr("description")
-
             }
         }
     }

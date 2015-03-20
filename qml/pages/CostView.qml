@@ -92,7 +92,6 @@ Page {
                 Row {
                     width: parent.width
                     Text {
-                        //text: model.modelData.description;
                         text: manager.car.getCosttypeName(model.modelData.costtype);
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall

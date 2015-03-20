@@ -19,8 +19,8 @@ SOURCES += CarBudget.cpp \
     tire.cpp \
     carmanager.cpp \
     fueltype.cpp \
-    carevent.cpp \
-    costtype.cpp
+    costtype.cpp \
+    carevent.cpp
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -50,11 +50,14 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     i18n/RU_ru.ts \
     qml/pages/BudgetView.qml \
     qml/pages/Settings.qml \
-    qml/pages/TankEntryView.qml \
     qml/pages/MyCarImportMainview.qml \
     qml/pages/CosttypeEntry.qml \
     qml/pages/CosttypeView.qml \
     qml/pages/CostEntryView.qml
+    qml/pages/CosttypeEntry.qml \
+    qml/pages/CosttypeView.qml \
+    qml/pages/CostEntryView.qml \
+    qml/pages/TankEntryView.qml
 
 HEADERS += \
     tank.h \
@@ -63,10 +66,9 @@ HEADERS += \
     cost.h \
     tire.h \
     carmanager.h \
-    carevent.h \
     fueltype.h \
-    costtype.h
-
+    costtype.h \
+    carevent.h
 
 TRANSLATIONS = CarBudget_fr.ts \
                CarBudget_en.ts \

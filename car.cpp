@@ -48,6 +48,21 @@ bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
     return c1->id() < c2->id();
 }
 
+bool sortCostByDate(const Cost *c1, const Cost *c2)
+{
+    return c1->date() > c2->date();
+}
+
+bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
+{
+    return c1->id() < c2->id();
+}
+
+bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
+{
+    return c1->id() < c2->id();
+}
+
 bool sortStationById(const Station *c1, const Station *c2)
 {
     return c1->id() < c2->id();
@@ -223,7 +238,7 @@ void Car::db_upgrade_to_2()
 
 void Car::db_upgrade_to_3()
 {
-    QString sql = "ALTER TABLE TankList ADD COLUMN Fueltype TEXT;";
+    QString sql = "ALTER TABLE TankList ADD COLUMN fueltype INTEGER;";
     QSqlQuery query(this->db);
 
     if(query.exec(sql))
@@ -232,20 +247,32 @@ void Car::db_upgrade_to_3()
         {
             if (query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
             {
-                if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-                {
-                    if (query.exec("ALTER TABLE CostList ADD COLUMN Costtype INTEGER;"))
-                    {
-                        this->db.commit();
-                        return;
-                    }
-                }
+                this->db.commit();
+                return;
             }
         }
     }
     this->db.rollback();
 }
 
+void Car::db_upgrade_to_4()
+{
+    QString sql = "ALTER TABLE CostList ADD COLUMN costtype INTEGER;";
+    QSqlQuery query(this->db);
+
+    if(query.exec(sql))
+    {
+        if(query.exec("UPDATE CarBudget SET  value='4' WHERE id='version';"))
+        {
+            if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
+            {
+                this->db.commit();
+                return;
+            }
+        }
+    }
+    this->db.rollback();
+}
 
 Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 {
@@ -265,6 +292,10 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
         if(this->db_get_version() < 3)
         {
             db_upgrade_to_3();
+        }
+        if(this->db_get_version() < 4)
+        {
+            db_upgrade_to_4();
         }
     }
     qDebug() << "Database version " << this->db_get_version();
@@ -349,7 +380,6 @@ QQmlListProperty<Fueltype> Car::fueltypes()
 {
     return QQmlListProperty<Fueltype>(this, _fueltypelist);
 }
-
 QQmlListProperty<Station> Car::stations()
 {
     return QQmlListProperty<Station>(this, _stationlist);
@@ -901,103 +931,120 @@ void Car::simulation()
 
     winter1 = this->addNewTire(QDate(2010,11,15),"Pneu hiver","Michelin","Alpin A4",160,4);
     this->mountTire(QDate(2012,11,15), km, winter1);
-/*
-    this->addNewTank(QDate(2010,11,15),km += 850,52,70,true,0,0, "t1");
-    this->addNewCost(QDate(2011, 1, 1),km += 100,"Revision 5000",50);
-    this->addNewTank(QDate(2011, 1,29),km += 1101,60,70,true,1,"t6");
-     this->umountTire(QDate(2011, 4, 5), km += 100, winter1);
+
+    this->addNewTank(QDate(2010,11,15),km += 850,52,70,true,0, 0,"t1");
+    this->addNewTank(QDate(2010,11,29),km += 981,55,74,true,0, 1,"t2");
+    this->addNewTank(QDate(2010,11,15),km += 1042,47,63,true,0, 2,"t3");
+    this->addNewTank(QDate(2010,11,29),km += 1021,48,60,true,0, 3,"t4");
+    this->addNewTank(QDate(2010,12,15),km += 1051,60,70,true,0, 1,"t5");
+    this->addNewCost(QDate(2011, 1, 1),km += 100, 0, "Revision 5000",50);
+    this->addNewTank(QDate(2011, 1,29),km += 1101,60,70,true,0, 1,"t6");
+    this->addNewTank(QDate(2011, 1,15),km += 1099,60,70,true,0, 2,"t7");
+    this->addNewTank(QDate(2011, 1,29),km += 1080,60,70,true,0, 3,"t8");
+    this->addNewTank(QDate(2011, 2,15),km += 1010,60,70,true,0, 1,"t9");
+
+    this->addNewFueltype("Diesel");
+
+    this->addNewTank(QDate(2011, 2,29),km += 1071,60,70,true,1, 2,"t10");
+    this->addNewTank(QDate(2011, 3, 5),km += 1031,60,70,true,1, 2,"t11");
+    this->addNewTank(QDate(2011, 3,19),km += 1121,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 3,25),km += 1134,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 3,30),km += 1021,60,70,true,1, 1,"");
+    this->umountTire(QDate(2011, 4, 5), km += 100, winter1);
     summer1 = this->addNewTire(QDate(2011,4,5),"Pneu été","Michelin","EnergySaver",110,4);
     this->mountTire(QDate(2011,4,5), km, summer1);
 
-    this->addNewTank(QDate(2011, 4, 8),km += 1051,60,70,true,1,"Diesel","");
-    this->addNewCost(QDate(2011, 4,18),km += 10, "Vidange 15000",220);
-    this->addNewTank(QDate(2011, 4,28),km += 1028,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011, 5, 9),km += 1021,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011, 5,18),km += 1022,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011, 5,20),km += 1023,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2011, 5,28),km += 1024,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2011, 6,18),km += 1025,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011, 6,28),km += 1026,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2011, 7,18),km += 1027,60,70,true,1,"Diesel", "A new note");
-    this->addNewTank(QDate(2011, 7,28),km += 1028,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2011, 8,18),km += 1029,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2011, 8,28),km += 1018,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011, 9,18),km += 1011,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2011, 9,28),km += 1012,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2011,10, 1),km += 1013,60,70,true,1,"Diesel", "");
-    this->addNewCost(QDate(2011,10, 8),km += 15,"Vidange 30000",220);
-    this->addNewTank(QDate(2011,10,29),km += 1101,60,70,true,1,"Diesel", "");
+    this->addNewTank(QDate(2011, 4, 8),km += 1051,60,70,true,1, 1,"");
+    this->addNewCost(QDate(2011, 4,18),km += 10, 0, "Vidange 15000",220);
+    this->addNewTank(QDate(2011, 4,28),km += 1028,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 5, 9),km += 1021,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 5,18),km += 1022,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 5,20),km += 1023,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2011, 5,28),km += 1024,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2011, 6,18),km += 1025,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011, 6,28),km += 1026,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2011, 7,18),km += 1027,60,70,true,1, 1,"A new note");
+    this->addNewTank(QDate(2011, 7,28),km += 1028,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2011, 8,18),km += 1029,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2011, 8,28),km += 1018,60,70,true,1, 3,"");
+
+    this->addNewFueltype("Super Diesel");
+
+    this->addNewTank(QDate(2011, 9,18),km += 1011,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2011, 9,28),km += 1012,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2011,10, 1),km += 1013,60,70,true,2, 1,"");
+    this->addNewCost(QDate(2011,10, 8),km += 15, 0, "Vidange 30000",220);
+    this->addNewTank(QDate(2011,10,29),km += 1101,60,70,true,1, 1,"");
     this->umountTire(QDate(2011,10,30), km += 100, summer1);
     this->mountTire(QDate(2011,10,30), km, winter1);
 
-    this->addNewTank(QDate(2011,11,15),km += 1099,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2011,11,29),km += 1080,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2011,12,15),km += 1010,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2011,12,29),km += 1071,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012, 1,15),km += 1031,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012, 1,29),km += 1121,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 2,15),km += 1134,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 2,27),km += 1021,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 3,15),km += 1051,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 4, 8),km += 1051,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 4,28),km += 1028,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 5, 9),km += 1021,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 5,18),km += 1022,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 5,20),km += 1023,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012, 5,28),km += 1024,60,70,true,1,"Diesel", "");
-    this->umountTire(QDate(2012, 5,30), km += 100,winter1,true);
+    this->addNewTank(QDate(2011,11,15),km += 1099,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2011,11,29),km += 1080,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2011,12,15),km += 1010,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2011,12,29),km += 1071,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2012, 1,15),km += 1031,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2012, 1,29),km += 1121,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2012, 2,15),km += 1134,60,70,true,2, 3,"");
+    this->addNewTank(QDate(2012, 2,27),km += 1021,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2012, 3,15),km += 1051,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012, 4, 8),km += 1051,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012, 4,28),km += 1028,60,70,true,2, 3,"");/*43*/
+    this->addNewTank(QDate(2012, 5, 9),km += 1021,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2012, 5,18),km += 1022,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2012, 5,20),km += 1023,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2012, 5,28),km += 1024,60,70,true,2, 1,"");
+    this->umountTire(QDate(2012, 5,30), km += 100,winter1,true); /* Trash it */
     this->mountTire(QDate(2012, 5,30), km,  summer1);
 
-    this->addNewTank(QDate(2012, 6,18),km += 1025,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 6,28),km += 1026,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012, 7,18),km += 1027,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 7,28),km += 1028,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012, 8,18),km += 1029,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 8,28),km += 1018,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012, 9,18),km += 1011,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012, 9,28),km += 1012,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012,10, 1),km += 1013,60,70,true,1,"Diesel", "");
+    this->addNewTank(QDate(2012, 6,18),km += 1025,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2012, 6,28),km += 1026,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2012, 7,18),km += 1027,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012, 7,28),km += 1028,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2012, 8,18),km += 1029,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2012, 8,28),km += 1018,60,70,true,2, 3,"");
+    this->addNewTank(QDate(2012, 9,18),km += 1011,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012, 9,28),km += 1012,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2012,10, 1),km += 1013,60,70,true,1, 1,""); /* 55 */
     winter1 = this->addNewTire(QDate(2012,10,9),"Pneu hiver AV","Michelin","Winter 2",160,2);
     winter2 = this->addNewTire(QDate(2014,10,9),"Pneu hiver AR","Michelin","Winter 2",160,2);
     this->umountTire(QDate(2012,10,10), km += 100, summer1);
     this->mountTire(QDate(2012,10,10), km, winter1);
     this->mountTire(QDate(2012,10,10), km, winter2);
 
-    this->addNewTank(QDate(2012,10,22),km += 1013,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012,11,15),km += 1099,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2012,11,29),km += 1080,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2012,12,15),km += 1010,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2012,12,29),km += 1071,60,70,true,2,"Diesel", "");
-    this->addNewCost(QDate(2012,12,30),km += 15,"Vidange 60000",222);
-    this->addNewTank(QDate(2013, 1,15),km += 1031,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013, 1,29),km += 1121,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2013, 2,15),km += 1134,60,70,true,3,"Diesel","");
-    this->addNewTank(QDate(2013, 2,27),km += 1021,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 3,15),km += 1051,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 4, 8),km += 1051,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 4,28),km += 1028,60,70,true,3,"Diesel", "");
+    this->addNewTank(QDate(2012,10,22),km += 1013,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012,11,15),km += 1099,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2012,11,29),km += 1080,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2012,12,15),km += 1010,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2012,12,29),km += 1071,60,70,true,1, 2,"");
+    this->addNewCost(QDate(2012,12,30),km += 15, 0, "Vidange 60000",222);
+    this->addNewTank(QDate(2013, 1,15),km += 1031,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2013, 1,29),km += 1121,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2013, 2,15),km += 1134,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2013, 2,27),km += 1021,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2013, 3,15),km += 1051,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2013, 4, 8),km += 1051,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2013, 4,28),km += 1028,60,70,true,1, 3,"");
     this->umountTire(QDate(2012,10,10), km, winter1);
     this->umountTire(QDate(2012,10,10), km, winter2);
     this->mountTire(QDate(2012,10,10), km += 100, summer1);
 
-    this->addNewTank(QDate(2013, 5, 9),km += 1021,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2013, 5,18),km += 1022,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2013, 5,20),km += 1023,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013, 5,28),km += 1024,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 6,18),km += 1025,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2013, 6,28),km += 1026,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013, 7,18),km += 1027,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 7,28),km += 1028,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013, 8,18),km += 1029,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 8,28),km += 1018,60,70,true,3,"Diesel", "");
-    this->addNewTank(QDate(2013, 9,18),km += 1011,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013, 9,28),km += 1012,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013,10,22),km += 1013,60,70,true,1,"Diesel", "");
-    this->addNewTank(QDate(2013,11,15),km += 1099,60,70,true,2,"Diesel", "");
-    this->addNewTank(QDate(2013,11,29),km += 1080,60,70,true,3,"Diesel", "Latest simulation entry");
-    this->umountTire(QDate(2012,10,10), km += 100, summer1,true);
+    this->addNewTank(QDate(2013, 5, 9),km += 1021,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2013, 5,18),km += 1022,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2013, 5,20),km += 1023,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2013, 5,28),km += 1024,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2013, 6,18),km += 1025,60,70,true,1, 3,"");
+    this->addNewTank(QDate(2013, 6,28),km += 1026,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2013, 7,18),km += 1027,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2013, 7,28),km += 1028,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2013, 8,18),km += 1029,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2013, 8,28),km += 1018,60,70,true,2, 3,"");
+    this->addNewTank(QDate(2013, 9,18),km += 1011,60,70,true,2, 1,"");
+    this->addNewTank(QDate(2013, 9,28),km += 1012,60,70,true,2, 2,"");
+    this->addNewTank(QDate(2013,10,22),km += 1013,60,70,true,1, 1,"");
+    this->addNewTank(QDate(2013,11,15),km += 1099,60,70,true,1, 2,"");
+    this->addNewTank(QDate(2013,11,29),km += 1080,60,70,true,1, 3,"Latest simulation entry");
+    this->umountTire(QDate(2012,10,10), km += 100, summer1,true); /* Trash it */
     this->mountTire(QDate(2012,10,10), km, winter1);
     this->mountTire(QDate(2012,10,10), km, winter2);
-    */
 }
 

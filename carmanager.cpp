@@ -133,7 +133,6 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-
     if(!query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
     {
         qDebug() << query.lastError();
@@ -156,7 +155,7 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype TEXT, note TEXT);"))
+    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype INTEGER, note TEXT);"))
     {
         qDebug() << query.lastError();
         error = true;

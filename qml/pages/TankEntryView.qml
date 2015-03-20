@@ -24,216 +24,230 @@ import harbour.carbudget 1.0
 
 
 Page {
-        allowedOrientations: Orientation.All
-        property Tank tank
+    allowedOrientations: Orientation.All
+    property Tank tank
 
         SilicaFlickable {
 
-            PullDownMenu {
-                MenuItem {
-                    text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: tank })
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Modify")
+                onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: tank })
+            }
+        }
+
+        VerticalScrollDecorator {}
+        anchors.fill: parent
+        leftMargin: Theme.paddingMedium
+        rightMargin: Theme.paddingMedium
+        width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+
+        Column {
+            id: column
+            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+            spacing: Theme.paddingLarge
+            anchors.fill: parent
+
+            PageHeader {
+                title: qsTr("Tank")
+            }
+
+
+            Row {
+                id: daterow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing: parent.spacing
+                Text {
+                    text: qsTr("Date:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+
+                Text {
+                    text: tank.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
                 }
             }
-            VerticalScrollDecorator {}
-            anchors.fill: parent
-            leftMargin: Theme.paddingMedium
-            rightMargin: Theme.paddingMedium
-            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-            Column {
-                id: column
+
+			Row
+			{
+				id: odorow
+				spacing: parent.spacing
+				width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+				Text {
+					text: qsTr("ODO:")
+					font.family: Theme.fontFamily
+					font.pixelSize: Theme.fontSizeMedium
+					color: Theme.primaryColor
+					horizontalAlignment: Text.AlignLeft
+					width:(parent.width-parent.spacing)/2
+				}
+				Text {
+					text: tank.distance
+					font.family: Theme.fontFamily
+					font.pixelSize: Theme.fontSizeMedium
+					color: Theme.primaryColor
+					horizontalAlignment: Text.AlignRight
+					width:(parent.width-parent.spacing)/2
+				}
+			}
+
+            Row {
+                id: quantityrow
                 width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                spacing: Theme.paddingLarge
-                anchors.fill: parent
-                PageHeader {
-                    title: qsTr("Tank")
-                }
-                Row
-                {
-                    id: odorow
-                    spacing: parent.spacing
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    Text {
-                        text: qsTr("ODO:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: tank.distance
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: daterow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing: parent.spacing
-                    Text {
-                        text: qsTr("Date:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-
-                    Text {
-                        text: tank.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: quantityrow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Quantity:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: tank.quantity.toFixed(2)
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: pricerow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Total Price:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: tank.price
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: unitpricerow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Unit Price:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: (tank.price / tank.quantity).toFixed(3)
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: fulltankrow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Full tank:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: (tank.full)?(qsTr("Yes")):(qsTr("No"))
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: fueltyperow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Fuel Type:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: manager.car.getFueltypeName(tank.fueltype)
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
-                Row {
-                    id: stationrow
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    spacing:Theme.paddingLarge
-                    Text {
-                        text: qsTr("Station:")
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                        width:(parent.width-parent.spacing)/2
-                    }
-                    Text {
-                        text: manager.car.getStationName(tank.station)
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignRight
-                        width:(parent.width-parent.spacing)/2
-                    }
-                }
+                spacing:Theme.paddingLarge
                 Text {
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    text: qsTr("Note:")
+                    text: qsTr("Quantity:")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-                    text: tank.note
+                    text: tank.quantity.toFixed(2)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
-                    wrapMode:Text.Wrap
-
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
                 }
-           }
-        }
+            }
+
+            Row {
+                id: pricerow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Total Price:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: tank.price
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
+            Row {
+                id: unitpricerow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Unit Price:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: (tank.price / tank.quantity).toFixed(3)
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
+            Row {
+                id: stationrow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Station:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: manager.car.getStationName(tank.station)
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
+            Row {
+                id: fueltyperow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Fuel Type:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: manager.car.getFueltypeName(tank.fueltype)
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
+            Row {
+                id: fulltankrow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Full tank:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: (tank.full)?(qsTr("Yes")):(qsTr("No"))
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
+            Text {
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                text: qsTr("Note:")
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.primaryColor
+            }
+            Text {
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                text: tank.note
+                font.family: Theme.fontFamily
+                font.pixelSize: Theme.fontSizeMedium
+                color: Theme.primaryColor
+                wrapMode:Text.Wrap
+            }
+
+       }
+    }
 }

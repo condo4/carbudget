@@ -101,7 +101,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 costtype = modelData.id
-                                costinput.focus = true
+                                descinput.focus = true
                             }
                         }
                     }
@@ -126,9 +126,14 @@ Dialog {
                 placeholderText: qsTr("description")
             }
 
+            TextArea {
+                anchors { left: parent.left; right: parent.right }
+                id: descinput
+                placeholderText: qsTr("description")
+            }
         }
     }
-    canAccept:  kminput.acceptableInput && costinput.acceptableInput
+    canAccept: kminput.acceptableInput && costinput.acceptableInput
 
     onOpened: {
         if(cost != undefined)

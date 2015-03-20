@@ -35,7 +35,7 @@
 
 
 class CarManager;
-#define DB_VERSION 3
+#define DB_VERSION 4
 
 class Car : public QObject
 {
@@ -78,6 +78,7 @@ private:
 
     void db_upgrade_to_2();
     void db_upgrade_to_3();
+    void db_upgrade_to_4();
 
 public:
     QSqlDatabase db;
@@ -131,17 +132,14 @@ public slots:
     void delFueltype(Fueltype *fueltype);
     Fueltype* findFueltype(QString name);
     QString getFueltypeName(unsigned int id);
-
     void addNewStation(QString station);
     void delStation(Station *station);
     Station* findStation(QString name);
     QString getStationName(unsigned int id);
-
     void addNewCosttype(QString costtype);
     void delCosttype(Costtype *costtype);
     Costtype* findCosttype(QString name);
     QString getCosttypeName(unsigned int id);
-
     void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
     void delCost(Cost *cost);
 
