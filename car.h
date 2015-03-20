@@ -112,6 +112,8 @@ public:
     void setCar(QString name);
     QString getName() const { return _name; }
 
+    unsigned long int getDistance(QDate Date);
+
     double budget_fuel_total();
     double budget_fuel();
     double budget_cost_total();

@@ -460,6 +460,21 @@ void Car::setCar(QString name)
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
 }
 
+unsigned long int Car::getDistance(QDate date)
+{
+    // returns the approx distance at a date
+    // currently simply of last event
+    // needs to be improved
+    unsigned long int dist=0;
+    foreach(Tank *tank, _tanklist)
+    {
+        if (tank->date() < (QDateTime) date)
+            break;
+        dist=tank->distance();
+    }
+    return dist;
+}
+
 double Car::budget_fuel_total()
 {
     double total = 0;

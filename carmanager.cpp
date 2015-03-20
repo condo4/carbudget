@@ -299,7 +299,6 @@ void CarManager::importFromMyCar(QString name)
         QDomElement n_date = n.firstChildElement("date");
         QDomElement n_note = n.firstChildElement("note");
         unsigned int t_billtype = 0;
-        // bills in myCar do not support distance, so set it to 0
         unsigned int t_odo = 0;
         double t_cost = 0;
         QDate t_date;
@@ -319,6 +318,10 @@ void CarManager::importFromMyCar(QString name)
             t_cost=n_cost.text().toDouble();
         if (!n_note.isNull())
             t_note=n_note.text();
+        // bills in myCar do not support distance but are needed in carbudet
+        // We simply set odo to distnace of last tank before bill date
+        // This is a bit ugly and should be improved :-)
+        t_odo = _car->getDistance(t_date);
         _car->addNewCost(t_date,t_odo,t_billtype,t_note,t_cost);
     }
     //Now it's time to import the service records
@@ -350,7 +353,6 @@ void CarManager::importFromMyCar(QString name)
         if (!n_odo.isNull())
         {
             t_odo =  (int) n_odo.text().toDouble();
-        qDebug() <<"Odo: " << n_odo.text() << "converted: " << t_odo;
         }
         if (!n_date.isNull())
         {
