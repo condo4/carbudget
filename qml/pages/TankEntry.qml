@@ -46,7 +46,6 @@ Dialog {
         anchors.fill: parent
         contentHeight: column.height + Theme.paddingLarge
 
-
         Column {
             id: column
             width: parent.width
@@ -131,7 +130,6 @@ Dialog {
                 id: cbfueltype
                 label: qsTr("Fuel Type")
                 anchors { left: parent.left; right: parent.right }
-
                 menu: ContextMenu {
                     Repeater {
                         id: fueltypeslistrepeater
@@ -149,6 +147,7 @@ Dialog {
                     }
                 }
             }
+
 
             ComboBox {
                 id: cbstation

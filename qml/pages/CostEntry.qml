@@ -29,14 +29,12 @@ Dialog {
     property int costtype
 
     SilicaFlickable {
-
         PullDownMenu {
             MenuItem {
                 text: qsTr("Manage cost types")
                 onClicked: pageStack.push(Qt.resolvedUrl("CosttypeView.qml"))
             }
         }
-
         VerticalScrollDecorator {}
 
         anchors.fill: parent
@@ -122,7 +120,6 @@ Dialog {
                 EnterKey.onClicked: descinput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
-
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: descinput

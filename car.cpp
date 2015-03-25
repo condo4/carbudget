@@ -33,11 +33,6 @@ bool sortTankByDistance(const Tank *c1, const Tank *c2)
     return c1->distance() > c2->distance();
 }
 
-bool sortCostByDistance(const Cost *c1, const Cost *c2)
-{
-    return c1->distance() > c2->distance();
-}
-
 bool sortCostByDate(const Cost *c1, const Cost *c2)
 {
     return c1->date() > c2->date();
@@ -82,8 +77,11 @@ void Car::db_load()
 
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
+        qDebug() << "Start loading tank events";
+
         while(query.next())
         {
+            qDebug() << "Importing event from " << query.value(1);
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
@@ -108,7 +106,6 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-
     if(query.exec("SELECT id,name FROM FueltypeList;"))
     {
         while(query.next())
@@ -133,7 +130,6 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-
     if(query.exec("SELECT id,name FROM CosttypeList;"))
     {
         while(query.next())
@@ -188,7 +184,7 @@ void Car::db_load()
         qDebug() << query.lastError();
     }
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
-    qSort(_costlist.begin(),    _costlist.end(),    sortCostByDistance);
+    qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
 }
 
@@ -547,7 +543,6 @@ double Car::budget()
 {
     return budget_fuel() + budget_cost();
 }
-
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
 {
     Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, CREATE_NEW_EVENT,  note, this);
@@ -796,7 +791,7 @@ void Car::addNewCost(QDate date, unsigned int distance, unsigned int costtype, Q
 {
     Cost *cost = new Cost(date,distance,costtype,description,price,CREATE_NEW_EVENT,this);
     _costlist.append(cost);
-    qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
+    qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->save();
     emit costsChanged();
 }
@@ -805,7 +800,7 @@ void Car::delCost(Cost *cost)
 {
     qDebug() << "Remove Cost " << cost->id();
     _costlist.removeAll(cost);
-    qSort(_costlist.begin(), _costlist.end(), sortCostByDistance);
+    qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->remove();
     emit costsChanged();
     cost->deleteLater();
@@ -986,6 +981,7 @@ void Car::setCurrency(QString currency)
     _currency = currency;
     emit currencyChanged();
 }
+
 
 void Car::simulation()
 {

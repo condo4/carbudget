@@ -153,12 +153,10 @@ public slots:
     void delStation(Station *station);
     Station* findStation(QString name);
     QString getStationName(unsigned int id);
-
     void addNewCosttype(QString costtype);
     void delCosttype(Costtype *costtype);
     Costtype* findCosttype(QString name);
     QString getCosttypeName(unsigned int id);
-
     void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
     void delCost(Cost *cost);
 
