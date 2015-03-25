@@ -55,15 +55,29 @@ Dialog {
                 //EnterKey.onClicked: descinput.focus = true
                 //EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
+
+            TextField {
+                id: distanceunity
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Distance Unity")
+                placeholderText: qsTr("Km or Mile")
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                //EnterKey.onClicked: descinput.focus = true
+                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
         }
     }
     canAccept: currencyinput.acceptableInput
 
     onOpened: {
         currencyinput.text = manager.car.currency
+        distanceunity.text = manager.car.distanceunity
     }
 
     onAccepted: {
-        manager.car.currency = currencyinput.text
+        manager.car.currency      = currencyinput.text
+        manager.car.distanceunity = distanceunity.text
     }
 }

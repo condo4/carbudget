@@ -76,7 +76,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.distance + ((model.modelData.newDistance > 0)?(qsTr("km (+") + model.modelData.newDistance+qsTr("km)")):(qsTr("km")));
+                        text: model.modelData.distance + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + model.modelData.newDistance+manager.car.distanceunity+")"):(manager.car.distanceunity));
 
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
@@ -122,7 +122,7 @@ Page {
                         horizontalAlignment: Text.AlignRight
                     }
                     Text {
-                        text: model.modelData.consumption.toFixed(2)+ qsTr("l/100km");
+                        text: model.modelData.consumption.toFixed(2)+ "l/100" + manager.car.distanceunity;
                         visible: model.modelData.consumption > 0
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall

@@ -976,12 +976,52 @@ void Car::setCurrency(QString currency)
         else
             query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='currency';").arg(currency));
 
-        qDebug() << "Change currency in database: " << _currency;
+        qDebug() << "Change currency in database: " << _currency << " >> " << currency;
     }
     _currency = currency;
     emit currencyChanged();
 }
 
+QString Car::distanceunity()
+{
+    if(_distanceunity.length() < 1)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';"))
+        {
+            query.next();
+            _distanceunity = query.value(0).toString();
+            qDebug() << "Find distanceunity in database: " << _distanceunity;
+        }
+        if(_distanceunity.length() < 1)
+        {
+            qDebug() << "Default distanceunity not set in database, set to Km";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','Km');");
+            _distanceunity = "Km";
+        }
+    }
+
+    return _distanceunity;
+}
+
+void Car::setDistanceunity(QString distanceunity)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='distanceunity';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','%1');").arg(distanceunity));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='distanceunity';").arg(distanceunity));
+
+        qDebug() << "Change distanceunity in database: " << _distanceunity << " >> " << distanceunity;
+    }
+    _distanceunity = distanceunity;
+    emit distanceunityChanged();
+}
 
 void Car::simulation()
 {

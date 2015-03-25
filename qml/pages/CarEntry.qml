@@ -64,13 +64,13 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Distance: %L1 ~ %L2 km").arg(manager.car.mindistance).arg(manager.car.maxdistance)
+                text: qsTr("Distance: %L1 ~ %L2 %3").arg(manager.car.mindistance).arg(manager.car.maxdistance).arg(manager.car.distanceunity)
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
+                text: qsTr("Consumption: %L1 l/100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceunity)
                 font.pixelSize: Theme.fontSizeSmall
             }
 
