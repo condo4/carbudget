@@ -32,10 +32,6 @@ Page {
                 text: qsTr("Create new car")
                 onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
             }
-            MenuItem {
-                text: qsTr("Import from myCar")
-                onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"))
-            }
         }
 
 
