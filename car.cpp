@@ -267,7 +267,7 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0)
 {
     this->db_init();
     while(this->db_get_version() < DB_VERSION)
@@ -292,6 +292,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
     this->_stationlist.append(new Station);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    nbtire();
 }
 
 unsigned int Car::nbtank() const
@@ -1021,6 +1022,47 @@ void Car::setDistanceunity(QString distanceunity)
     }
     _distanceunity = distanceunity;
     emit distanceunityChanged();
+}
+
+unsigned int Car::nbtire()
+{
+    if(_nbtire == 0)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';"))
+        {
+            query.next();
+            _nbtire = query.value(0).toInt();
+            qDebug() << "Find nbtire in database: " << _nbtire;
+        }
+        if(_nbtire == 0)
+        {
+            qDebug() << "Default nbtire not set in database, set to 4";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('nbtire','4');");
+            _nbtire = 4;
+        }
+    }
+
+    return _nbtire;
+}
+
+void Car::setNbtire(unsigned int nbtire)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='nbtire';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('nbtire','%1');").arg(nbtire));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='nbtire';").arg(nbtire));
+
+        qDebug() << "Change distanceunity in database: " << _nbtire;
+    }
+    _nbtire = nbtire;
+    emit nbtireChanged();
 }
 
 void Car::simulation()
