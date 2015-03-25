@@ -25,6 +25,7 @@
 #include "fueltype.h"
 #include "station.h"
 #include <QDebug>
+#include <stdlib.h>
 
 #define CREATE_NEW_EVENT (0)
 
@@ -981,7 +982,6 @@ void Car::setCurrency(QString currency)
     _currency = currency;
     emit currencyChanged();
 }
-
 
 void Car::simulation()
 {

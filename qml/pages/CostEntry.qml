@@ -101,7 +101,7 @@ Dialog {
                             dbid: modelData.id
                             onClicked:{
                                 costtype = modelData.id
-                                descinput.focus = true
+                                costinput.focus = true
                             }
                         }
                     }

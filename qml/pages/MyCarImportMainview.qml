@@ -28,9 +28,11 @@ import QtQuick.XmlListModel 2.0
 
 Page {
     allowedOrientations: Orientation.All
+    property string filename
+
     XmlListModel {
         id: xmlCars
-        source: "/home/nemo/mycar_data.xml"
+        source: manager.getEnv("HOME") + "/" + filename;
         query: "/mycar/car"
         XmlRole { name: "name"; query: "name/string()" }
     }
@@ -41,7 +43,7 @@ Page {
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Cars in myCar")
+            title: qsTr("Cars found in ") + filename;
         }
 
         anchors.fill: parent

@@ -29,12 +29,12 @@ Page {
     SilicaListView {
         PullDownMenu {
             MenuItem {
-                text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
+                text: qsTr("Import from myCar")
+                onClicked: pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"))
             }
             MenuItem {
-                text: qsTr("Import from myCar")
-                onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"))
+                text: qsTr("Create new car")
+                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
             }
         }
 
