@@ -1,6 +1,6 @@
 Name: harbour-carbudget
 Summary: Car expenses calculation
-Version: 0.9
+Version: 0.10
 Release: 0
 Group: Qt/Qt
 License: GPL
@@ -18,7 +18,6 @@ PkgConfigBR:
 - Qt5Core
 Requires:
 - sailfishsilica-qt5
-- qt5-qtdeclarative-import-xmllistmodel
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
