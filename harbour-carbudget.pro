@@ -66,10 +66,10 @@ HEADERS += \
     costtype.h \
     carevent.h
 
-TRANSLATIONS = CarBudget_fr.ts \
-               CarBudget_en.ts \
-               CarBudget_it.ts \
-               CarBudget_ru.ts
+TRANSLATIONS = i18n/de_DE.ts \
+               i18n/fr_FR.ts \
+               i18n/it_IT.ts \
+               i18n/ru_RU.ts
 
 RESOURCES += \
     Ressources.qrc
