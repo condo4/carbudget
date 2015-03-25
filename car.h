@@ -67,6 +67,7 @@ class Car : public QObject
     Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
+
 private:
     CarManager *_manager;
     QString _name;

@@ -53,7 +53,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/MyCarImportMainview.qml \
     qml/pages/CosttypeEntry.qml \
     qml/pages/CosttypeView.qml \
-    i18n/de_DE.ts
+    i18n/de_DE.ts \
+    qml/pages/SelectImportFile.qml
 
 HEADERS += \
     tank.h \

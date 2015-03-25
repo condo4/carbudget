@@ -46,6 +46,8 @@ public:
     Q_INVOKABLE QStringList cars();
     Car *car();
 
+    Q_INVOKABLE QString getEnv( QString name);
+
 signals:
     void carsChanged();
     void carChanged();
@@ -55,6 +57,6 @@ public slots:
     void selectCar(QString name);
     void delCar(QString name);
     void createCar(QString name);
-    void importFromMyCar(QString name);
+    void importFromMyCar( QString name);
 };
 #endif // CARMANAGER_H

@@ -25,6 +25,7 @@
 #include "fueltype.h"
 #include "station.h"
 #include <QDebug>
+#include <stdlib.h>
 
 #define CREATE_NEW_EVENT (0)
 
@@ -1064,7 +1065,6 @@ void Car::setNbtire(unsigned int nbtire)
     _nbtire = nbtire;
     emit nbtireChanged();
 }
-
 void Car::simulation()
 {
     Tire *winter1, *winter2, *summer1;

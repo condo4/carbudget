@@ -33,6 +33,9 @@
 #include "carmanager.h"
 
 #include <QtCore/QTranslator>
+#include <QQmlApplicationEngine>
+
+
 
 int main(int argc, char *argv[])
 {
@@ -61,6 +64,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Cost>(      "harbour.carbudget",1,0,"Cost");
     qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");
     qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
+
 
     CarManager manager;
 

@@ -18,63 +18,44 @@
  * Authors: Fabien Proriol
  */
 
-
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import Qt.labs.folderlistmodel 2.1
 
 Page {
     allowedOrientations: Orientation.All
     SilicaListView {
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Import from myCar")
-                onClicked: pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"))
-            }
-            MenuItem {
-                text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
-            }
-        }
-
-
 
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Car List")
+            title: qsTr("XML Files")
         }
 
-        id: carView
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.cars
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
+        model:folderModel
+
+        FolderListModel {
+            id: folderModel
+            folder: "file:///$HOME"
+            nameFilters: ["*.xml"]
+            showDirs: false
         }
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-            onClicked: carView.select_car(model.modelData)
+            onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"), { filename: filename.text })
+
             menu: ContextMenu {
                 MenuItem {
-                    text: qsTr("Select")
-                    onClicked: carView.select_car(model.modelData)
+                    text: qsTr("Import")
+                    onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"), { filename: filename.text })
                 }
 
-                MenuItem {
-                    text: qsTr("Remove")
-                    onClicked: {
-                        remorseAction("Deleting", function() {
-                            manager.delCar(model.modelData)
-                        })
-                    }
-                }
             }
 
             Column {
@@ -82,15 +63,20 @@ Page {
 
                 Row {
                     width: parent.width
+
                     Text {
-                        text : model.modelData
+                        id: filename
+                        text: fileName
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
+                        width: parent.width
                         horizontalAlignment: Text.AlignLeft
                     }
+
                 }
             }
         }
     }
 }
+

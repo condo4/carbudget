@@ -371,3 +371,9 @@ void CarManager::importFromMyCar(QString name)
 
 
 }
+
+QString CarManager::getEnv(QString name)
+{
+    qDebug() << "Find environment value for" << name << ": " << getenv(name.toStdString().c_str());
+    return getenv(name.toStdString().c_str());
+}
