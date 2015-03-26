@@ -79,7 +79,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.manufacturer + " (" + model.modelData.distance + qsTr("km") + ")";
+                        text: model.modelData.manufacturer + " (" + model.modelData.distance + manager.car.distanceunity + ")";
                         font.bold: model.modelData.mounted
 
                         font.family: Theme.fontFamily

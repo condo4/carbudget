@@ -71,7 +71,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.distance + qsTr("km");
+                        text: model.modelData.distance + manager.car.distanceunity;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor

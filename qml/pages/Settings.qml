@@ -55,15 +55,44 @@ Dialog {
                 //EnterKey.onClicked: descinput.focus = true
                 //EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
+
+            TextField {
+                id: distanceunity
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Distance Unity")
+                placeholderText: qsTr("Km or Mile")
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                //EnterKey.onClicked: descinput.focus = true
+                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+
+            TextField {
+                id: nbtire
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Number of wheels")
+                placeholderText: qsTr("2, 4, 6 or 8")
+                validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                //EnterKey.onClicked: descinput.focus = true
+                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
         }
     }
     canAccept: currencyinput.acceptableInput
 
     onOpened: {
         currencyinput.text = manager.car.currency
+        distanceunity.text = manager.car.distanceunity
+        nbtire.text        = manager.car.nbtire
     }
 
     onAccepted: {
-        manager.car.currency = currencyinput.text
+        manager.car.currency      = currencyinput.text
+        manager.car.distanceunity = distanceunity.text
+        manager.car.nbtire        = nbtire.text
     }
 }

@@ -61,8 +61,8 @@ Dialog {
 
             TextField {
                 id: kminput
-                label: qsTr("Km")
-                placeholderText: qsTr("Km")
+                label: manager.car.distanceunity
+                placeholderText: manager.car.distanceunity
                 focus: true
                 width: parent.width
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }

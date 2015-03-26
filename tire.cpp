@@ -179,7 +179,7 @@ bool Tire::mountable() const
     if(_trashdate != _buydate)
         return false;
 
-    if(_car->tireMounted() + _quantity > 4)
+    if(_car->tireMounted() + _quantity > _car->nbtire())
         return false;
 
     if(mounted())

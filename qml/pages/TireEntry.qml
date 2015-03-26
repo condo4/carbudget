@@ -140,7 +140,7 @@ Dialog {
                 label: qsTr("Quantity")
                 placeholderText: qsTr("Quantity")
 
-                validator: RegExpValidator { regExp: /^[2,4]$/ }
+                validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = false

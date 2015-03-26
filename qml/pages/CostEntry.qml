@@ -75,8 +75,8 @@ Dialog {
                 id: kminput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: qsTr("Km")
-                placeholderText: qsTr("Km")
+                label: manager.car.distanceunity
+                placeholderText: manager.car.distanceunity
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

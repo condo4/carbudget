@@ -42,18 +42,18 @@ CoverBackground {
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: ("%L1 km").arg(manager.car.maxdistance - manager.car.mindistance)
+            text: ("%L1 %2").arg(manager.car.maxdistance - manager.car.mindistance).arg(manager.car.distanceunity)
         }
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" / 100km")
+            text: manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
             font.pixelSize: Theme.fontSizeSmall
         }
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.consumption.toFixed(2)+qsTr(" l / 100km")
+            text: manager.car.consumption.toFixed(2)+qsTr(" l / 100")+manager.car.distanceunity
             font.pixelSize: Theme.fontSizeSmall
         }
     }
