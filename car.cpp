@@ -803,6 +803,7 @@ void Car::addNewCost(QDate date, unsigned int distance, unsigned int costtype, Q
     _costlist.append(cost);
     qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->save();
+    qDebug() << "Price for new cost: " << price;
     emit costsChanged();
 }
 

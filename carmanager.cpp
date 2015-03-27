@@ -384,11 +384,29 @@ void CarManager::importFromFuelpad(QString filename, QString name)
             qDebug() << "ERROR: fail to open Fuelpad database";
             return;
         }
+        // First insert Fuelpad costtypes
+        _car->addNewCosttype(QString("Service"));
+        _car->addNewCosttype(QString("Oil"));
+        _car->addNewCosttype(QString("Tires"));
+        _car->addNewCosttype(QString("Insurance"));
+        _car->addNewCosttype(QString("Other"));
+        // Get ids of costtypes for faster import
+        // We should probably think about addNewXXX to return the id, could make life easier
+        int t_serviceid=_car->findCosttype("Service")->id();
+        int t_oilid=_car->findCosttype("Oil")->id();
+        int t_tiresid=_car->findCosttype("Tires")->id();
+        int t_insuranceid=_car->findCosttype("Insurance")->id();
+        int t_otherid=_car->findCosttype("Other")->id();
         QSqlQuery query(db);
         QDate t_date;
         unsigned long int t_km;
         double t_fill;
         double t_price;
+        double t_service;
+        double t_oil;
+        double t_tires;
+        double t_insurance;
+        double t_other;
         QString t_notes;
         int t_id;
         if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
@@ -399,7 +417,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         }
         if (query.next())
             t_id = query.value(0).toInt();
-        if(query.exec(QString("SELECT day,km,fill,price,notes FROM record WHERE carid=%1;").arg(t_id)))
+        if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
         {
             while(query.next())
             {
@@ -407,8 +425,25 @@ void CarManager::importFromFuelpad(QString filename, QString name)
                 t_km = (int) query.value(1).toDouble();
                 t_fill = query.value(2).toDouble();
                 t_price = query.value(3).toDouble();
-                t_notes = query.value(4).toString();
-                _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
+                t_service = query.value(4).toDouble();
+                t_oil = query.value(5).toDouble();
+                t_tires = query.value(6).toDouble();
+                t_insurance = query.value(7).toDouble();
+                t_other = query.value(8).toDouble();
+                t_notes = query.value(9).toString();
+                if (t_fill!=0)
+                    _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
+                if (t_service!=0)
+                    _car->addNewCost(t_date,t_km,t_serviceid,t_notes,t_service);
+                if (t_oil!=0)
+                    _car->addNewCost(t_date,t_km,t_oilid,t_notes,t_oil);
+                if (t_tires!=0)
+                    _car->addNewCost(t_date,t_km,t_tiresid,t_notes,t_tires);
+                if (t_insurance!=0)
+                    _car->addNewCost(t_date,t_km,t_insuranceid,t_notes,t_insurance);
+                if (t_other!=0)
+                    _car->addNewCost(t_date,t_km,t_otherid,t_notes,t_other);
+                qDebug() << "Oil " << t_oil << " Insurance " << t_insurance;
             }
         }
         else
