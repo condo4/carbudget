@@ -75,6 +75,8 @@ void Car::db_load()
     _stationlist.clear();
     _tirelist.clear();
     _costlist.clear();
+    _fueltypelist.clear();
+    _costtypelist.clear();
 
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
@@ -187,6 +189,8 @@ void Car::db_load()
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
 }
 
 int Car::db_get_version()
@@ -293,6 +297,10 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
     this->_stationlist.append(new Station);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    this->_fueltypelist.append(new Fueltype);
+    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    this->_costtypelist.append(new Costtype);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
     nbtire();
 }
 
