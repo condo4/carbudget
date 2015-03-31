@@ -30,7 +30,7 @@ Page {
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("XML Files")
+            title: qsTr("File to import")
         }
 
         anchors.fill: parent
@@ -41,19 +41,19 @@ Page {
         FolderListModel {
             id: folderModel
             folder: "file:///$HOME"
-            nameFilters: ["*.xml"]
+            nameFilters: ["*.xml","*.db"]
             showDirs: false
         }
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-            onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"), { filename: filename.text })
+            onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(filename.text)), { filename: filename.text })
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Import")
-                    onClicked: pageStack.push(Qt.resolvedUrl("MyCarImportMainview.qml"), { filename: filename.text })
+                    onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(filename.text)), { filename: filename.text })
                 }
 
             }
@@ -77,6 +77,16 @@ Page {
                 }
             }
         }
+    }
+    function checkFileType(name)
+        {
+        // Checks if a DB file or an XML file has been chosen and returns appropriate qml target
+        if (name.indexOf(".db",name.length-3)!== -1)
+            return "FuelpadImport.qml";
+        if (name.indexOf(".xml",name.length-4)!== -1)
+            return "MycarImport.qml";
+        // We really should implement some error handling here...
+        return "";
     }
 }
 

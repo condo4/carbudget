@@ -47,6 +47,8 @@ public:
     Car *car();
 
     Q_INVOKABLE QString getEnv( QString name);
+    Q_INVOKABLE QStringList checkFuelpadDBforCars( QString name);
+
 
 signals:
     void carsChanged();
@@ -57,6 +59,7 @@ public slots:
     void selectCar(QString name);
     void delCar(QString name);
     void createCar(QString name);
-    void importFromMyCar( QString name);
+    void importFromMyCar( QString filename, QString name);
+    void importFromFuelpad( QString filenme, QString name);
 };
 #endif // CARMANAGER_H

@@ -50,11 +50,12 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     i18n/RU_ru.ts \
     qml/pages/BudgetView.qml \
     qml/pages/Settings.qml \
-    qml/pages/MyCarImportMainview.qml \
     qml/pages/CosttypeEntry.qml \
     qml/pages/CosttypeView.qml \
     i18n/de_DE.ts \
-    qml/pages/SelectImportFile.qml
+    qml/pages/SelectImportFile.qml \
+    qml/pages/MycarImport.qml \
+    qml/pages/FuelpadImport.qml
 
 HEADERS += \
     tank.h \

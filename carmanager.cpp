@@ -182,12 +182,12 @@ void CarManager::createCar(QString name)
     refresh();
 }
 
-void CarManager::importFromMyCar(QString name)
+void CarManager::importFromMyCar(QString filename, QString name)
 {
     createCar(name);
     selectCar(name);
     QDomDocument doc;
-    QFile file("/home/nemo/mycar_data.xml");
+    QFile file(filename);
     if (!file.open(QIODevice::ReadOnly) || !doc.setContent(&file))
     {
         qDebug() << "ERROR: fail to open myCar Backup file";
@@ -368,12 +368,123 @@ void CarManager::importFromMyCar(QString name)
             t_note+="\n"+n_garage.text();
         _car->addNewCost(t_date,t_odo,t_billtype,t_note,t_cost);
     }
+}
 
 
+void CarManager::importFromFuelpad(QString filename, QString name)
+    {
+        createCar(name);
+        selectCar(name);
+        filename=getenv("HOME")+QString("/")+filename;
+        QSqlDatabase db;
+        db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
+        db.setDatabaseName(filename);
+        if(!db.open())
+        {
+            qDebug() << "ERROR: fail to open Fuelpad database";
+            return;
+        }
+        // First insert Fuelpad costtypes
+        _car->addNewCosttype(QString("Service"));
+        _car->addNewCosttype(QString("Oil"));
+        _car->addNewCosttype(QString("Tires"));
+        _car->addNewCosttype(QString("Insurance"));
+        _car->addNewCosttype(QString("Other"));
+        // Get ids of costtypes for faster import
+        // We should probably think about addNewXXX to return the id, could make life easier
+        int t_serviceid=_car->findCosttype("Service")->id();
+        int t_oilid=_car->findCosttype("Oil")->id();
+        int t_tiresid=_car->findCosttype("Tires")->id();
+        int t_insuranceid=_car->findCosttype("Insurance")->id();
+        int t_otherid=_car->findCosttype("Other")->id();
+        QSqlQuery query(db);
+        QDate t_date;
+        unsigned long int t_km;
+        double t_fill;
+        double t_price;
+        double t_service;
+        double t_oil;
+        double t_tires;
+        double t_insurance;
+        double t_other;
+        QString t_notes;
+        int t_id;
+        if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
+        {
+            qDebug() << query.lastError();
+            db.close();
+            return;
+        }
+        if (query.next())
+            t_id = query.value(0).toInt();
+        if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
+        {
+            while(query.next())
+            {
+                t_date = query.value(0).toDate();
+                t_km = (int) query.value(1).toDouble();
+                t_fill = query.value(2).toDouble();
+                t_price = query.value(3).toDouble();
+                t_service = query.value(4).toDouble();
+                t_oil = query.value(5).toDouble();
+                t_tires = query.value(6).toDouble();
+                t_insurance = query.value(7).toDouble();
+                t_other = query.value(8).toDouble();
+                t_notes = query.value(9).toString();
+                if (t_fill!=0)
+                    _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
+                if (t_service!=0)
+                    _car->addNewCost(t_date,t_km,t_serviceid,t_notes,t_service);
+                if (t_oil!=0)
+                    _car->addNewCost(t_date,t_km,t_oilid,t_notes,t_oil);
+                if (t_tires!=0)
+                    _car->addNewCost(t_date,t_km,t_tiresid,t_notes,t_tires);
+                if (t_insurance!=0)
+                    _car->addNewCost(t_date,t_km,t_insuranceid,t_notes,t_insurance);
+                if (t_other!=0)
+                    _car->addNewCost(t_date,t_km,t_otherid,t_notes,t_other);
+                qDebug() << "Oil " << t_oil << " Insurance " << t_insurance;
+            }
+        }
+        else
+        {
+            qDebug() << query.lastError();
+        }
+        db.close();
 }
 
 QString CarManager::getEnv(QString name)
 {
     qDebug() << "Find environment value for" << name << ": " << getenv(name.toStdString().c_str());
     return getenv(name.toStdString().c_str());
+}
+
+QStringList CarManager::checkFuelpadDBforCars( QString name)
+{
+    name=getenv("HOME")+QString("/")+name;
+    QStringList fuelpadcars;
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
+    db.setDatabaseName(name);
+    if(!db.open())
+    {
+        qDebug() << "ERROR: fail to open Fuelpad database";
+        db.close();
+        return fuelpadcars;
+    }
+    QSqlQuery query(db);
+    if(query.exec("SELECT register FROM car;"))
+    {
+        while(query.next())
+        {
+            QString name = query.value(0).toString();
+            fuelpadcars.append(name);
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+    db.close();
+    return fuelpadcars;
 }

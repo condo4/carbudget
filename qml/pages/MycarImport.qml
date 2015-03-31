@@ -57,7 +57,7 @@ Page {
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Import")
-                    onClicked: manager.importFromMyCar(name)
+                    onClicked: manager.importFromMyCar(filename,name)
                 }
             }
 
