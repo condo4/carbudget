@@ -37,7 +37,9 @@ Page {
              }
         model:manager.car.fueltypes
         delegate: ListItem {
+            height:dataRow.height
             Row {
+                id:dataRow
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 Text {
                     text: model.modelData.name;
@@ -48,7 +50,7 @@ Page {
                 }
                 Text {
                     width:parent.width/2
-                    text : manager.car.budget_fuel_total_byid(model.modelData.id).toFixed(2) + " " + manager.car.currency
+                    text : manager.car.budget_fuel_total_byType(model.modelData.id).toFixed(2) + " " + manager.car.currency
                     font.family: "monospaced"
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

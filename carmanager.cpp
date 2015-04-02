@@ -408,7 +408,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         double t_insurance;
         double t_other;
         QString t_notes;
-        int t_id;
+        int t_id=0;
         if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
         {
             qDebug() << query.lastError();

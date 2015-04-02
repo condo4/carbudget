@@ -357,6 +357,7 @@ double Car::consumptionmin() const
     return con;
 }
 
+
 double Car::fueltotal() const
 {
     double total=0;
@@ -495,8 +496,9 @@ double Car::budget_fuel_total()
     return total;
 }
 
-double Car::budget_fuel_total_byid(unsigned int id)
+double Car::budget_fuel_total_byType(unsigned int id)
 {
+    // Returns total price of all tankstops by Type
     double total=0;
     foreach(Tank *tank,_tanklist)
     {
@@ -533,6 +535,65 @@ double Car::budget_fuel()
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
 }
 
+double Car::budget_consumption_byType(unsigned int id)
+{
+    /* Return sum(fuel price) / ODO * 100 for fueltype */
+    // We will calculate only full refills as partial refills cannat be calculated correctly
+    double totalDistance=0;
+    double totalQuantity=0;
+    //go to last tankstop
+    Tank *curTank = _tanklist.first();
+    const Tank *prevTank=NULL;
+    while (curTank)
+    {
+        prevTank=previousTank(curTank->distance());
+        if (!(prevTank==NULL))
+        {
+            //prevous tank must have correct fueltype
+            if (prevTank->fueltype()==id)
+                if (prevTank->full())
+                {
+                    totalDistance += curTank->distance()-prevTank->distance();
+                    totalQuantity += curTank->quantity();
+                }
+            //cannot set curTank to prevTank as it is const
+            curTank=NULL;
+            foreach(Tank *tmp,_tanklist)
+            {
+                if (tmp->id()==prevTank->id())
+                    curTank=tmp;
+            }
+        }
+        else {
+            curTank=NULL;
+        }
+    }
+    return (totalDistance==0) ? 0.0 : (totalQuantity / totalDistance * 100.0);
+}
+
+double Car::budget_consumption_max_byType(unsigned int type)
+{
+    double con=0;
+    foreach (Tank *tank,_tanklist)
+    {
+        if ((tank->consumption()>con)&&(tank->fueltype()==type))
+            con = tank->consumption();
+    }
+    return con;
+}
+
+double Car::budget_consumption_min_byType(unsigned int type)
+{
+    double con=99999;
+    foreach (Tank *tank,_tanklist)
+    {
+        if ((tank->consumption()<con)&&(tank->consumption()!=0)&& (tank->fueltype()==type))
+            con = tank->consumption();
+    }
+    return (con==99999) ? 0 : con;
+}
+
+
 double Car::budget_cost_total()
 {
     double total=0;
@@ -543,7 +604,7 @@ double Car::budget_cost_total()
     return total;
 }
 
-double Car::budget_cost_total_byid(unsigned int id)
+double Car::budget_cost_total_byType(unsigned int id)
 {
     double total=0;
     foreach(Cost *cost,_costlist)
@@ -566,7 +627,7 @@ double Car::budget_cost()
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
 
-double Car::budget_cost_byid(unsigned int id)
+double Car::budget_cost_byType(unsigned int id)
 {
     /* Return sum(cost) / ODO * 100 */
     double totalPrice = 0;

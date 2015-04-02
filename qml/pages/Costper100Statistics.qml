@@ -30,16 +30,18 @@ Page {
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
         width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-        //contentHeight: allfields.height
         VerticalScrollDecorator {}
         header:  PageHeader {
-                 title: qsTr("Costs per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                 title: qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
              }
         model:manager.car.costtypes
         delegate: ListItem {
+            height:dataRow.height
             Row {
+                id:dataRow
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 Text {
+                    id:test
                     text: model.modelData.name;
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
@@ -48,7 +50,7 @@ Page {
                 }
                 Text {
                     width:parent.width/2
-                    text : manager.car.budget_cost_byid(model.modelData.id).toFixed(2) + " " + manager.car.currency
+                    text : manager.car.budget_cost_byType(model.modelData.id).toFixed(2) + " " + manager.car.currency
                     font.family: "monospaced"
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

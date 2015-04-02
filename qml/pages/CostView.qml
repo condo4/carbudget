@@ -108,6 +108,26 @@ Page {
                         horizontalAlignment: Text.AlignRight
                     }
                 }
+                Row {
+                    width: parent.width
+                    Text {
+                        text: manager.car.getCosttypeName(model.modelData.costtype);
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignLeft
+                    }
+
+                    Text {
+                        text: model.modelData.cost + manager.car.currency;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignRight
+                    }
+                }
             }
         }
     }
