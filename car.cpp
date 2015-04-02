@@ -637,7 +637,7 @@ void Car::delFueltype(Fueltype *fueltype)
     _fueltypelist.removeAll(fueltype);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     QSqlQuery query(db);
-    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltyp=%1;").arg(fueltype->id());
+    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fueltype->id());
 
     if(query.exec(sql))
     {
