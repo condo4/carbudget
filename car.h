@@ -121,9 +121,12 @@ public:
     unsigned long int getDistance(QDate Date);
 
     double budget_fuel_total();
+    Q_INVOKABLE double budget_fuel_total_byid(unsigned int id);
     double budget_fuel();
     double budget_cost_total();
+    Q_INVOKABLE double budget_cost_total_byid(unsigned int id);
     double budget_cost();
+    Q_INVOKABLE double budget_cost_byid(unsigned int id);
     double budget_total();
     double budget();
 

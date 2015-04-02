@@ -495,6 +495,17 @@ double Car::budget_fuel_total()
     return total;
 }
 
+double Car::budget_fuel_total_byid(unsigned int id)
+{
+    double total=0;
+    foreach(Tank *tank,_tanklist)
+    {
+        if(tank->fueltype()==id)
+            total +=tank->price();
+    }
+    return total;
+}
+
 double Car::budget_fuel()
 {
     /* Return sum(fuel price) / ODO * 100 */
@@ -532,6 +543,17 @@ double Car::budget_cost_total()
     return total;
 }
 
+double Car::budget_cost_total_byid(unsigned int id)
+{
+    double total=0;
+    foreach(Cost *cost,_costlist)
+    {
+        if(cost->costtype()==id)
+            total +=cost->cost();
+    }
+    return total;
+}
+
 double Car::budget_cost()
 {
     /* Return sum(cost) / ODO * 100 */
@@ -540,6 +562,19 @@ double Car::budget_cost()
     foreach(Cost *cost, _costlist)
     {
         totalPrice += cost->cost();
+    }
+    return totalPrice / ((maxdistance() - mindistance())/ 100.0);
+}
+
+double Car::budget_cost_byid(unsigned int id)
+{
+    /* Return sum(cost) / ODO * 100 */
+    double totalPrice = 0;
+
+    foreach(Cost *cost, _costlist)
+    {
+        if (cost->costtype()==id)
+            totalPrice += cost->cost();
     }
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }

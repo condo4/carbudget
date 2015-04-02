@@ -66,7 +66,6 @@ Page {
 
             Column {
                 width: parent.width
-
                 Row {
                     width: parent.width
 

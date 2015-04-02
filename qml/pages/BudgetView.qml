@@ -190,6 +190,10 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
+                    MouseArea {
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                    }
                 }
                 Text {
                     width:parent.width/2
@@ -209,7 +213,10 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
-                }
+                    MouseArea {
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"))
+                    }                }
                 Text {
                     width:parent.width/2
                     text : manager.car.budget_cost_total.toFixed(2) + " " + manager.car.currency
@@ -276,6 +283,10 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
+                    MouseArea {
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+                    }
                 }
                 Text {
                     width:parent.width/2
