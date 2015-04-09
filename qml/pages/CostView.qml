@@ -24,112 +24,112 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
-    SilicaListView {
+    Drawer {
+        id: costviewDrawer
+        anchors.fill: parent
+        dock: Dock.Top
+        open: false
+        backgroundSize: costView.contentHeight
+    }
+    SilicaFlickable {
+        id:costview
+        interactive: !costlistView.flicking
+        pressDelay: 0
+        anchors.fill: parent
+        PageHeader {
+            id: header
+            title: qsTr("Cost List")
+        }
         PullDownMenu {
             MenuItem {
                 text: qsTr("Add cost")
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
             }
         }
+        SilicaListView {
 
-        VerticalScrollDecorator {}
+            VerticalScrollDecorator {}
+            id:costlistView
+            anchors.top: header.bottom
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: Theme.paddingSmall
+            anchors.rightMargin: Theme.paddingSmall
+            clip: true
+            leftMargin: Theme.paddingMedium
+            rightMargin: Theme.paddingMedium
+            model: manager.car.costs
 
-        header: PageHeader {
-            title: qsTr("Cost List")
-        }
+            delegate: ListItem {
+                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                showMenuOnPressAndHold: true
+                onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
 
-        anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
-        model: manager.car.costs
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Modify")
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"), { cost: model.modelData })
+                    }
 
-        delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-            showMenuOnPressAndHold: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
-
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"), { cost: model.modelData })
-                }
-
-                MenuItem {
-                    text: qsTr("Remove")
-                    onClicked: {
-                        remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delCost(model.modelData)
-                        })
+                    MenuItem {
+                        text: qsTr("Remove")
+                        onClicked: {
+                            remorseAction(qsTr("Deleting"), function() {
+                                manager.car.delCost(model.modelData)
+                            })
+                        }
                     }
                 }
-            }
 
-            Column {
-                width: parent.width
-                Row {
+                Column {
                     width: parent.width
+                    Row {
+                        width: parent.width
 
-                    Text {
-                        text: model.modelData.distance + manager.car.distanceunity;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
-                    }
+                        Text {
+                            text: model.modelData.distance + manager.car.distanceunity;
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.primaryColor
+                            width: parent.width / 2
+                            horizontalAlignment: Text.AlignLeft
+                        }
 
-                    Text {
-                        text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignRight
-                    }
+                        Text {
+                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.primaryColor
+                            width: parent.width / 2
+                            horizontalAlignment: Text.AlignRight
+                        }
 
-                }
-                Row {
-                    width: parent.width
-                    Text {
-                        text: manager.car.getCosttypeName(model.modelData.costtype);
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
                     }
+                    Row {
+                        width: parent.width
+                        Text {
+                            text: manager.car.getCosttypeName(model.modelData.costtype);
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            color: Theme.secondaryColor
+                            width: parent.width / 2
+                            horizontalAlignment: Text.AlignLeft
+                        }
 
-                    Text {
-                        text: model.modelData.cost + manager.car.currency;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignRight
-                    }
-                }
-                Row {
-                    width: parent.width
-                    Text {
-                        text: manager.car.getCosttypeName(model.modelData.costtype);
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
-                    }
-
-                    Text {
-                        text: model.modelData.cost + manager.car.currency;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignRight
+                        Text {
+                            text: model.modelData.cost + manager.car.currency;
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeExtraSmall
+                            color: Theme.secondaryColor
+                            width: parent.width / 2
+                            horizontalAlignment: Text.AlignRight
+                        }
                     }
                 }
             }
         }
+
     }
 }
 
