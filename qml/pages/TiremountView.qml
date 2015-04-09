@@ -24,91 +24,84 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
-    SilicaListView {
+    Drawer {
+        id: tiremountviewDrawer
+        anchors.fill: parent
+        dock: Dock.Top
+        open: false
+        backgroundSize: costView.contentHeight
+    }
+    SilicaFlickable {
+        id:tiremountview
+        interactive: !tiremountlistView.flicking
+        pressDelay: 0
+        anchors.fill: parent
+        PageHeader {
+            id: header
+            title: qsTr("Tire Mounts")
+        }
         PullDownMenu {
             MenuItem {
                 text: qsTr("Manage Tires")
                 onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
             }
         }
+        SilicaListView {
+            id: tiremountlistView
+            VerticalScrollDecorator {}
+            anchors.top: header.bottom
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            leftMargin: Theme.paddingMedium
+            rightMargin: Theme.paddingMedium
+            model: manager.car.tiremounts
 
-        VerticalScrollDecorator {}
+            delegate: ListItem {
+                id: mountitem
+                height: datacolumn.height
+                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
-        header: PageHeader {
-            title: qsTr("Tire Mounts")
-        }
-
-        anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
-
-        model: manager.car.tiremounts
-
-        delegate: ListItem {
-            id: mountitem
-            height: datacolumn.height
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-
-            Column {
-                id: datacolumn
-                width: parent.width
-                Row {
+                Column {
+                    id: datacolumn
                     width: parent.width
-
-                    Text {
-                        text:  model.modelData.tirename;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        width: parent.width
-                        horizontalAlignment: Text.AlignLeft                   }
-                }
-
-                Row {
+                    Row {
                         width: parent.width
 
                         Text {
-                            text: (model.modelData.unmountdistance==0) ? "" :  model.modelData.unmountdistance + manager.car.distanceunity;
+                            text:  model.modelData.tirename;
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
+                            color: Theme.primaryColor
+                            width: parent.width
+                            horizontalAlignment: Text.AlignLeft                   }
+                    }
+                     Row {
+                        width: parent.width
+                        Text {
+                            text: model.modelData.mountdistance + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + model.modelData.unmountdistance + manager.car.distanceunity)
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.primaryColor
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignLeft
                         }
 
                         Text {
-                            text: (model.modelData.unmountdistance==0) ? "" : model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                            text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy") + ((model.modelData.unmountdistance==0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy"))
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
+                            font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.primaryColor
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignRight
                         }
-                }
-                Row {
-                    width: parent.width
-
-                    Text {
-                        text: model.modelData.mountdistance + manager.car.distanceunity;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
-                    }
-
-                    Text {
-                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignRight
                     }
                 }
             }
         }
+
     }
+
 }
 
 
