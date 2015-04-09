@@ -27,6 +27,7 @@
 #include <tank.h>
 #include <cost.h>
 #include <tire.h>
+#include <tiremount.h>
 #include <fueltype.h>
 #include <station.h>
 #include <costtype.h>
@@ -54,6 +55,7 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Costtype> costtypes READ costtypes NOTIFY costtypesChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
+    Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
@@ -78,6 +80,7 @@ private:
     QList<Costtype*>    _costtypelist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
+    QList<Tiremount*>    _tiremountlist;
 
     QString _currency;
     QString _distanceunity;
@@ -112,6 +115,7 @@ public:
     QQmlListProperty<Costtype> costtypes();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
+    QQmlListProperty<Tiremount> tiremounts();
 
     const Tank *previousTank(unsigned int distance) const;
 
@@ -176,6 +180,7 @@ public slots:
 
     Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
     void delTire(Tire *tire);
+    QString getTireName(unsigned int id);
 
     void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
     void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);

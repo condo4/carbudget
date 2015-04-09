@@ -20,7 +20,8 @@ SOURCES += CarBudget.cpp \
     carmanager.cpp \
     fueltype.cpp \
     costtype.cpp \
-    carevent.cpp
+    carevent.cpp \
+    tiremount.cpp
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -59,7 +60,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/CostStatistics.qml \
     qml/pages/Costper100Statistics.qml \
     qml/pages/FuelStatistics.qml \
-    qml/pages/Fuelper100Statistics.qml
+    qml/pages/Fuelper100Statistics.qml \
+    qml/pages/TiremountView.qml
 
 HEADERS += \
     tank.h \
@@ -70,7 +72,8 @@ HEADERS += \
     carmanager.h \
     fueltype.h \
     costtype.h \
-    carevent.h
+    carevent.h \
+    tiremount.h
 
 TRANSLATIONS = i18n/de_DE.ts \
                i18n/fr_FR.ts \

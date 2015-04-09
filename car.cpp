@@ -77,6 +77,8 @@ void Car::db_load()
     _costlist.clear();
     _fueltypelist.clear();
     _costtypelist.clear();
+    _tirelist.clear();
+    _tiremountlist.clear();
 
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
@@ -185,6 +187,63 @@ void Car::db_load()
     else
     {
         qDebug() << query.lastError();
+    }
+    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
+    {
+        while(query.next())
+        {
+            int id = query.value(0).toInt();
+            QDate date = query.value(1).toDate();
+            unsigned int distance = query.value(2).toInt();
+            unsigned int costtype = query.value(3).toInt();
+            double price = query.value(4).toDouble();
+            QString description = query.value(5).toString();
+            Cost *cost = new Cost(date,distance,costtype,description,price,id,this);
+            _costlist.append(cost);
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+    // Now load tire mountings
+    // First load all unmount events (event_umount exists in events table)
+    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
+    {
+        while(query.next())
+        {
+            int mount_id = query.value(0).toInt();
+            QDate mount_date = query.value(1).toDate();
+            unsigned int mount_distance = query.value(2).toInt();
+            int unmount_id = query.value(3).toInt();
+            QDate unmount_date = query.value(4).toDate();
+            unsigned int unmount_distance = query.value(5).toInt();
+            unsigned int tire = query.value(6).toInt();
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,unmount_id,unmount_date,unmount_distance,tire,this);
+            _tiremountlist.append(tiremount);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to load tiremounts: " << query.lastError();
+    }
+    // Now load mounted tires
+    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
+    {
+        while(query.next())
+        {
+            int mount_id = query.value(0).toInt();
+            QDate mount_date = query.value(1).toDate();
+            unsigned int mount_distance = query.value(2).toInt();
+            unsigned int tire = query.value(3).toInt();
+            QDate unmount_date = QDate(1900,1,1);
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,0,unmount_date,0,tire,this);
+            _tiremountlist.append(tiremount);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to load tiremounts: " << query.lastError();
     }
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
@@ -426,6 +485,11 @@ QQmlListProperty<Cost> Car::costs()
 QQmlListProperty<Tire> Car::tires()
 {
     return QQmlListProperty<Tire>(this, _tirelist);
+}
+
+QQmlListProperty<Tiremount> Car::tiremounts()
+{
+    return QQmlListProperty<Tiremount>(this, _tiremountlist);
 }
 
 const Tank *Car::previousTank(unsigned int distance) const
@@ -940,6 +1004,16 @@ void Car::delTire(Tire *tire)
 
     emit tiresChanged();
     tire->deleteLater();
+}
+
+QString Car::getTireName(unsigned int id)
+{
+    foreach (Tire *tire, _tirelist)
+    {
+        if (tire->id()==id)
+            return tire->name();
+    }
+    return "";
 }
 
 void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)
