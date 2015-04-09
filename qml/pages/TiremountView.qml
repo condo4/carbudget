@@ -29,7 +29,7 @@ Page {
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: costView.contentHeight
+        backgroundSize: tiremountview.contentHeight
     }
     SilicaFlickable {
         id:tiremountview
@@ -61,6 +61,15 @@ Page {
                 id: mountitem
                 height: datacolumn.height
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                showMenuOnPressAndHold: true
+                onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tiremount: model.modelData })
+
+                menu: ContextMenu {
+                    MenuItem {
+                        text: qsTr("Modify")
+                        onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
+                    }
+                }
 
                 Column {
                     id: datacolumn

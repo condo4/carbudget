@@ -136,6 +136,10 @@ unsigned int Tiremount::unmountid() const
 
 void Tiremount::save()
 {
+    if (_mountEvent)
+        _mountEvent->saveevent();
+    if (_unmountEvent)
+        _unmountEvent->saveevent();
   }
 
 void Tiremount::remove()

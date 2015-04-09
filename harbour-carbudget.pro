@@ -61,7 +61,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/Costper100Statistics.qml \
     qml/pages/FuelStatistics.qml \
     qml/pages/Fuelper100Statistics.qml \
-    qml/pages/TiremountView.qml
+    qml/pages/TiremountView.qml \
+    qml/pages/TiremountEdit.qml
 
 HEADERS += \
     tank.h \
