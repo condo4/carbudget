@@ -54,6 +54,11 @@ bool sortStationById(const Station *c1, const Station *c2)
     return c1->id() < c2->id();
 }
 
+bool sortTiremountByDistance (const Tiremount *s1, const Tiremount * s2)
+{
+    return s1->mountdistance() > s2->mountdistance();
+}
+
 void Car::db_init()
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
@@ -250,6 +255,7 @@ void Car::db_load()
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
 }
 
 int Car::db_get_version()

@@ -65,27 +65,6 @@ Page {
                 }
 
                 Row {
-                    width: parent.width
-
-                    Text {
-                        text: model.modelData.mountdistance + manager.car.distanceunity;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
-                    }
-
-                    Text {
-                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width / 2
-                        horizontalAlignment: Text.AlignRight
-                    }
-                }
-                Row {
                         width: parent.width
 
                         Text {
@@ -105,6 +84,27 @@ Page {
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignRight
                         }
+                }
+                Row {
+                    width: parent.width
+
+                    Text {
+                        text: model.modelData.mountdistance + manager.car.distanceunity;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignLeft
+                    }
+
+                    Text {
+                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
         }
