@@ -1023,6 +1023,9 @@ void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)
         {
             id = query.lastInsertId().toInt();
             qDebug() << "Create TireUsage in database with id " << id;
+            // Now add new mount to the tiremountlist
+            Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,tire->id(),this);
+            _tiremountlist.append(tiremount);
             db.commit();
         }
         else id = -1;
@@ -1052,12 +1055,22 @@ void Car::umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool t
     if(query.exec(sql))
     {
         id = query.lastInsertId().toInt();
-        qDebug() << "Create Event(Tank) in database with id " << id;
+        qDebug() << "Create Event(Tirmount) in database with id " << id;
 
         QString sql2 = QString("UPDATE TireUsage SET event_umount=%1 WHERE tire=%2 AND event_umount=0").arg(id).arg(tire->id());
         if(query.exec(sql2))
         {
             qDebug() << "Update TireUsage in database";
+            //Now modify tiremountlist
+            foreach (Tiremount *tm, _tiremountlist)
+            {
+                if ((tm->unmountid()==0) && (tm->tire()==tire->id()))
+                {
+                    CarEvent *ev = new CarEvent(umountdate,distance,id,this);
+                    tm->setUnmountEvent(ev);
+                }
+            }
+
             db.commit();
         }
         else id = -1;

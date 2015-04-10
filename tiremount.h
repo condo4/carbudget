@@ -60,6 +60,7 @@ public:
     void setMountdate(QDateTime date);
     void setUnmountdistance(unsigned int distance);
     void setUnmountdate(QDateTime date);
+    void setUnmountEvent(CarEvent *ev);
 
     QString tirename() const;
     void setTire(unsigned int tire);
