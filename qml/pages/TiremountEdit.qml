@@ -114,6 +114,7 @@ Dialog {
         {
             mountdate = tiremount.mountdate
             mountdistance.text = tiremount.mountdistance
+            unmountdate = tiremount.unmountdate
             unmountdistance.text = tiremount.unmountdistance
             if (tiremount.unmountdistance==0)
             {
@@ -131,7 +132,7 @@ Dialog {
     onAccepted: {
         tiremount.mountdate = mountdate
         tiremount.mountdistance = mountdistance.text
-        if (tiremount.unmountdistance == 0)
+        if (tiremount.unmountdistance > 0)
         {
             tiremount.unmountdate = unmountdate
             tiremount.unmountdistance = unmountdistance.text
