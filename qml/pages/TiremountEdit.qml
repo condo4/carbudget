@@ -84,8 +84,8 @@ Dialog {
                     dialog.accepted.connect(function()
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
-                        mountdate = dialog.date
-                        mountdistance.focus=true
+                        unmountdate = dialog.date
+                        unmountdistance.focus=true
                     })
                 }
 
