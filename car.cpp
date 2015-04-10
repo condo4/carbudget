@@ -84,14 +84,10 @@ void Car::db_load()
     _costtypelist.clear();
     _tirelist.clear();
     _tiremountlist.clear();
-
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
-        qDebug() << "Start loading tank events";
-
         while(query.next())
         {
-            qDebug() << "Importing event from " << query.value(1);
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
@@ -187,24 +183,6 @@ void Car::db_load()
             unsigned int quantity = query.value(7).toInt();
             Tire *tire = new Tire(buydate,trashdate,name,manufacturer,model,price,quantity,id,this);
             _tirelist.append(tire);
-        }
-    }
-    else
-    {
-        qDebug() << query.lastError();
-    }
-    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
-    {
-        while(query.next())
-        {
-            int id = query.value(0).toInt();
-            QDate date = query.value(1).toDate();
-            unsigned int distance = query.value(2).toInt();
-            unsigned int costtype = query.value(3).toInt();
-            double price = query.value(4).toDouble();
-            QString description = query.value(5).toString();
-            Cost *cost = new Cost(date,distance,costtype,description,price,id,this);
-            _costlist.append(cost);
         }
     }
     else

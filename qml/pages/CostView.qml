@@ -47,7 +47,6 @@ Page {
             }
         }
         SilicaListView {
-
             VerticalScrollDecorator {}
             id:costlistView
             anchors.top: header.bottom
@@ -60,12 +59,10 @@ Page {
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
             model: manager.car.costs
-
             delegate: ListItem {
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
-
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
@@ -81,7 +78,6 @@ Page {
                         }
                     }
                 }
-
                 Column {
                     width: parent.width
                     Row {
