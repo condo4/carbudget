@@ -43,39 +43,7 @@ Page {
             PageHeader {
                 title: qsTr("Statistics")
             }
-            MouseArea {
-                id:fuelper100Mouse
-                anchors.top:fuelRow.top
-                anchors.bottom: costsRow.top
-                anchors.left: dataColumn.left
-                anchors.right: dataColumn.right
-                onClicked: pageStack.push(Qt.resolvedUrl("Fuelper100Statistics.qml"))
-            }
-            MouseArea {
-                id: billsper100Mouse
-                anchors.top: billsper100Row.top
-                anchors.bottom: totalper100Row.top
-                anchors.left: dataColumn.left
-                anchors.right: dataColumn.right
-                onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
-            }
-            MouseArea {
-                id:fuelcostsMouse
-                anchors.top:fuelcostsRow.top
-                anchors.bottom: billcostsRow.top
-                anchors.left: dataColumn.left
-                anchors.right: dataColumn.right
-                onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
-            }
-            MouseArea {
 
-                id: billcostsMouse
-                anchors.top: billcostsRow.top
-                anchors.bottom: totalcostsRow.top
-                anchors.left: dataColumn.left
-                anchors.right: dataColumn.right
-                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"))
-            }
             Row {
                 id:odoRow
                 width: parent.width
@@ -219,41 +187,68 @@ Page {
             Row {
                 id:fuelcostsRow
                 width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Fuel:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text : manager.car.budget_fuel_total.toFixed(2) + " " + manager.car.currency
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+                Rectangle {
+                    height: fueltext.height
+                    width: parent.width
+                    color: "transparent"
+                    Text {
+                        id: fueltext
+                        width:parent.width/2
+                        text : qsTr("Fuel:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        anchors.right:parent.right
+                        width:parent.width/2
+                        text : manager.car.budget_fuel_total.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    MouseArea {
+                        id:fuelcostsMouse
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                    }
                 }
             }
+
             Row {
                 id: billcostsRow
                 width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Bills:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text : manager.car.budget_cost_total.toFixed(2) + " " + manager.car.currency
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+                Rectangle {
+                    height: billtext.height
+                    width: parent.width
+                    color: "transparent"
+
+                    Text {
+                        id: billtext
+                        width:parent.width/2
+                        text : qsTr("Bills:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        width:parent.width/2
+                        anchors.right:parent.right
+                        text : manager.car.budget_cost_total.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    MouseArea {
+
+                        id: billcostsMouse
+                        anchors.fill: parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"))
+                    }
                 }
             }
             Row {
@@ -291,41 +286,67 @@ Page {
             Row {
                 id:fuelper100Row
                 width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Fuel:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text : manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+                Rectangle {
+                    height: fuelbtext.height
+                    width: parent.width
+                    color: "transparent"
+
+                    Text {
+                        id: fuelbtext
+                        width:parent.width/2
+                        text : qsTr("Fuel:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        width:parent.width/2
+                        anchors.right:parent.right
+                        text : manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    MouseArea {
+                        id:fuelper100Mouse
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("Fuelper100Statistics.qml"))
+                    }
                 }
             }
             Row {
                 id:billsper100Row
                 width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Bills:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text : manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+                Rectangle {
+                    height: billbtext.height
+                    width: parent.width
+                    color: "transparent"
+
+                    Text {
+                        id: billbtext
+                        width:parent.width/2
+                        text : qsTr("Bills:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        width:parent.width/2
+                        anchors.right:parent.right
+                        text : manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    MouseArea {
+                        id: billsper100Mouse
+                        anchors.fill: parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+                    }
                 }
             }
             Row {
