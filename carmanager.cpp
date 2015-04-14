@@ -217,6 +217,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
         QDomElement n_price = n.firstChildElement("cost_def_curr");
         QDomElement n_refuel_type = n.firstChildElement("refuel_type");
         QDomElement n_fuel_subtype = n.firstChildElement("fuel_subtype");
+        QDomElement n_note = n.firstChildElement("note");
         if (n_carname.isNull())
             continue;
         if (n_carname.text() == _car->getName())
@@ -238,6 +239,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
             bool t_refuel_type=true;
             unsigned int t_station=0;
             unsigned int t_fueltype=0;
+            QString t_note;
             if (!n_date.isNull())
             {
                QDateTime t_datetime;
@@ -261,7 +263,8 @@ void CarManager::importFromMyCar(QString filename, QString name)
                 if (station)
                     t_station=station->id();
             }
-            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fueltype,t_station,"");
+            if (!n_note.isNull()) t_note = n_note.text();
+            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fueltype,t_station,t_note);
         }
     }
     // Now import cost types from bill types;
@@ -408,7 +411,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         double t_insurance;
         double t_other;
         QString t_notes;
-        int t_id;
+        int t_id=0;
         if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
         {
             qDebug() << query.lastError();

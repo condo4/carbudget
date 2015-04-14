@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Thomas Michel
  */
 
 import QtQuick 2.0
@@ -25,99 +25,82 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     Drawer {
-        id: costviewDrawer
+        id: tiremountviewDrawer
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: costView.contentHeight
+        backgroundSize: tiremountview.contentHeight
     }
     SilicaFlickable {
-        id:costview
-        interactive: !costlistView.flicking
+        id:tiremountview
+        interactive: !tiremountlistView.flicking
         pressDelay: 0
         anchors.fill: parent
         PageHeader {
             id: header
-            title: qsTr("Cost List")
+            title: qsTr("Tire Mounts")
         }
         PullDownMenu {
             MenuItem {
-                text: qsTr("Add cost")
-                onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
+                text: qsTr("Manage Tires")
+                onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
             }
         }
         SilicaListView {
+            id: tiremountlistView
             VerticalScrollDecorator {}
-            id:costlistView
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: Theme.paddingSmall
-            anchors.rightMargin: Theme.paddingSmall
-            clip: true
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
-            model: manager.car.costs
+            model: manager.car.tiremounts
+
             delegate: ListItem {
+                id: mountitem
+                height: datacolumn.height
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 showMenuOnPressAndHold: true
-                onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
+                onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tiremount: model.modelData })
+
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
-                        onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"), { cost: model.modelData })
-                    }
-
-                    MenuItem {
-                        text: qsTr("Remove")
-                        onClicked: {
-                            remorseAction(qsTr("Deleting"), function() {
-                                manager.car.delCost(model.modelData)
-                            })
-                        }
+                        onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
                     }
                 }
+
                 Column {
+                    id: datacolumn
                     width: parent.width
                     Row {
                         width: parent.width
 
                         Text {
-                            text: model.modelData.distance + manager.car.distanceunity;
+                            text:  model.modelData.tirename;
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
-                        }
-
-                        Text {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
-                        }
-
+                            width: parent.width
+                            horizontalAlignment: Text.AlignLeft                   }
                     }
-                    Row {
+                     Row {
                         width: parent.width
                         Text {
-                            text: manager.car.getCosttypeName(model.modelData.costtype);
+                            text: model.modelData.mountdistance + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + model.modelData.unmountdistance + manager.car.distanceunity)
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.secondaryColor
+                            color: Theme.primaryColor
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignLeft
                         }
 
                         Text {
-                            text: model.modelData.cost + manager.car.currency;
+                            text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy") + ((model.modelData.unmountdistance==0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy"))
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.secondaryColor
+                            color: Theme.primaryColor
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignRight
                         }
@@ -127,5 +110,7 @@ Page {
         }
 
     }
+
 }
+
 

@@ -158,7 +158,7 @@ Page {
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("TiremountView.qml"))
                     }
                 }
 

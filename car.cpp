@@ -54,6 +54,11 @@ bool sortStationById(const Station *c1, const Station *c2)
     return c1->id() < c2->id();
 }
 
+bool sortTiremountByDistance (const Tiremount *s1, const Tiremount * s2)
+{
+    return s1->mountdistance() > s2->mountdistance();
+}
+
 void Car::db_init()
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
@@ -77,14 +82,12 @@ void Car::db_load()
     _costlist.clear();
     _fueltypelist.clear();
     _costtypelist.clear();
-
+    _tirelist.clear();
+    _tiremountlist.clear();
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
-        qDebug() << "Start loading tank events";
-
         while(query.next())
         {
-            qDebug() << "Importing event from " << query.value(1);
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
@@ -186,11 +189,51 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
+    // Now load tire mountings
+    // First load all unmount events (event_umount exists in events table)
+    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
+    {
+        while(query.next())
+        {
+            int mount_id = query.value(0).toInt();
+            QDate mount_date = query.value(1).toDate();
+            unsigned int mount_distance = query.value(2).toInt();
+            int unmount_id = query.value(3).toInt();
+            QDate unmount_date = query.value(4).toDate();
+            unsigned int unmount_distance = query.value(5).toInt();
+            unsigned int tire = query.value(6).toInt();
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,unmount_id,unmount_date,unmount_distance,tire,this);
+            _tiremountlist.append(tiremount);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to load tiremounts: " << query.lastError();
+    }
+    // Now load mounted tires
+    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
+    {
+        while(query.next())
+        {
+            int mount_id = query.value(0).toInt();
+            QDate mount_date = query.value(1).toDate();
+            unsigned int mount_distance = query.value(2).toInt();
+            unsigned int tire = query.value(3).toInt();
+            QDate unmount_date = QDate(1900,1,1);
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,0,unmount_date,0,tire,this);
+            _tiremountlist.append(tiremount);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to load tiremounts: " << query.lastError();
+    }
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
 }
 
 int Car::db_get_version()
@@ -357,6 +400,7 @@ double Car::consumptionmin() const
     return con;
 }
 
+
 double Car::fueltotal() const
 {
     double total=0;
@@ -427,6 +471,11 @@ QQmlListProperty<Tire> Car::tires()
     return QQmlListProperty<Tire>(this, _tirelist);
 }
 
+QQmlListProperty<Tiremount> Car::tiremounts()
+{
+    return QQmlListProperty<Tiremount>(this, _tiremountlist);
+}
+
 const Tank *Car::previousTank(unsigned int distance) const
 {
     const Tank *previous = NULL;
@@ -495,6 +544,18 @@ double Car::budget_fuel_total()
     return total;
 }
 
+double Car::budget_fuel_total_byType(unsigned int id)
+{
+    // Returns total price of all tankstops by Type
+    double total=0;
+    foreach(Tank *tank,_tanklist)
+    {
+        if(tank->fueltype()==id)
+            total +=tank->price();
+    }
+    return total;
+}
+
 double Car::budget_fuel()
 {
     /* Return sum(fuel price) / ODO * 100 */
@@ -522,12 +583,82 @@ double Car::budget_fuel()
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
 }
 
+double Car::budget_consumption_byType(unsigned int id)
+{
+    /* Return sum(fuel price) / ODO * 100 for fueltype */
+    // We will calculate only full refills as partial refills cannat be calculated correctly
+    double totalDistance=0;
+    double totalQuantity=0;
+    //go to last tankstop
+    Tank *curTank = _tanklist.first();
+    const Tank *prevTank=NULL;
+    while (curTank)
+    {
+        prevTank=previousTank(curTank->distance());
+        if (!(prevTank==NULL))
+        {
+            //prevous tank must have correct fueltype
+            if (prevTank->fueltype()==id)
+                if (prevTank->full())
+                {
+                    totalDistance += curTank->distance()-prevTank->distance();
+                    totalQuantity += curTank->quantity();
+                }
+            //cannot set curTank to prevTank as it is const
+            curTank=NULL;
+            foreach(Tank *tmp,_tanklist)
+            {
+                if (tmp->id()==prevTank->id())
+                    curTank=tmp;
+            }
+        }
+        else {
+            curTank=NULL;
+        }
+    }
+    return (totalDistance==0) ? 0.0 : (totalQuantity / totalDistance * 100.0);
+}
+
+double Car::budget_consumption_max_byType(unsigned int type)
+{
+    double con=0;
+    foreach (Tank *tank,_tanklist)
+    {
+        if ((tank->consumption()>con)&&(tank->fueltype()==type))
+            con = tank->consumption();
+    }
+    return con;
+}
+
+double Car::budget_consumption_min_byType(unsigned int type)
+{
+    double con=99999;
+    foreach (Tank *tank,_tanklist)
+    {
+        if ((tank->consumption()<con)&&(tank->consumption()!=0)&& (tank->fueltype()==type))
+            con = tank->consumption();
+    }
+    return (con==99999) ? 0 : con;
+}
+
+
 double Car::budget_cost_total()
 {
     double total=0;
     foreach(Cost *cost,_costlist)
     {
         total += cost->cost();
+    }
+    return total;
+}
+
+double Car::budget_cost_total_byType(unsigned int id)
+{
+    double total=0;
+    foreach(Cost *cost,_costlist)
+    {
+        if(cost->costtype()==id)
+            total +=cost->cost();
     }
     return total;
 }
@@ -540,6 +671,19 @@ double Car::budget_cost()
     foreach(Cost *cost, _costlist)
     {
         totalPrice += cost->cost();
+    }
+    return totalPrice / ((maxdistance() - mindistance())/ 100.0);
+}
+
+double Car::budget_cost_byType(unsigned int id)
+{
+    /* Return sum(cost) / ODO * 100 */
+    double totalPrice = 0;
+
+    foreach(Cost *cost, _costlist)
+    {
+        if (cost->costtype()==id)
+            totalPrice += cost->cost();
     }
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
@@ -602,7 +746,7 @@ void Car::delFueltype(Fueltype *fueltype)
     _fueltypelist.removeAll(fueltype);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     QSqlQuery query(db);
-    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltyp=%1;").arg(fueltype->id());
+    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fueltype->id());
 
     if(query.exec(sql))
     {
@@ -846,6 +990,16 @@ void Car::delTire(Tire *tire)
     tire->deleteLater();
 }
 
+QString Car::getTireName(unsigned int id)
+{
+    foreach (Tire *tire, _tirelist)
+    {
+        if (tire->id()==id)
+            return tire->name();
+    }
+    return "";
+}
+
 void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)
 {
     qDebug() << "Mount tire";
@@ -869,6 +1023,9 @@ void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)
         {
             id = query.lastInsertId().toInt();
             qDebug() << "Create TireUsage in database with id " << id;
+            // Now add new mount to the tiremountlist
+            Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,tire->id(),this);
+            _tiremountlist.append(tiremount);
             db.commit();
         }
         else id = -1;
@@ -898,12 +1055,22 @@ void Car::umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool t
     if(query.exec(sql))
     {
         id = query.lastInsertId().toInt();
-        qDebug() << "Create Event(Tank) in database with id " << id;
+        qDebug() << "Create Event(Tirmount) in database with id " << id;
 
         QString sql2 = QString("UPDATE TireUsage SET event_umount=%1 WHERE tire=%2 AND event_umount=0").arg(id).arg(tire->id());
         if(query.exec(sql2))
         {
             qDebug() << "Update TireUsage in database";
+            //Now modify tiremountlist
+            foreach (Tiremount *tm, _tiremountlist)
+            {
+                if ((tm->unmountid()==0) && (tm->tire()==tire->id()))
+                {
+                    CarEvent *ev = new CarEvent(umountdate,distance,id,this);
+                    tm->setUnmountEvent(ev);
+                }
+            }
+
             db.commit();
         }
         else id = -1;

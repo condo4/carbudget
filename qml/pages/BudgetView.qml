@@ -35,22 +35,55 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        contentHeight:column.height
-
+        contentHeight:dataColumn.height
         Column {
-            id: column
-            spacing: Theme.paddingLarge
+            id: dataColumn
+            //anchors.fill:parent
             width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             PageHeader {
                 title: qsTr("Statistics")
             }
+            MouseArea {
+                id:fuelper100Mouse
+                anchors.top:fuelRow.top
+                anchors.bottom: costsRow.top
+                anchors.left: dataColumn.left
+                anchors.right: dataColumn.right
+                onClicked: pageStack.push(Qt.resolvedUrl("Fuelper100Statistics.qml"))
+            }
+            MouseArea {
+                id: billsper100Mouse
+                anchors.top: billsper100Row.top
+                anchors.bottom: totalper100Row.top
+                anchors.left: dataColumn.left
+                anchors.right: dataColumn.right
+                onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+            }
+            MouseArea {
+                id:fuelcostsMouse
+                anchors.top:fuelcostsRow.top
+                anchors.bottom: billcostsRow.top
+                anchors.left: dataColumn.left
+                anchors.right: dataColumn.right
+                onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+            }
+            MouseArea {
+
+                id: billcostsMouse
+                anchors.top: billcostsRow.top
+                anchors.bottom: totalcostsRow.top
+                anchors.left: dataColumn.left
+                anchors.right: dataColumn.right
+                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"))
+            }
             Row {
+                id:odoRow
                 width: parent.width
                 Text {
                     width:parent.width/2
                     text : qsTr("ODO ")
                     font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMdium
+                    font.pixelSize: Theme.fontSizeMedium
                     font.bold: true
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
@@ -84,6 +117,7 @@ Page {
                 }
             }
             Row {
+                id: fuelRow
                 width: parent.width
                 Text {
                     text : qsTr("Fuel")
@@ -171,6 +205,7 @@ Page {
                 }
             }
             Row {
+                id:costsRow
                 width: parent.width
                 Text {
                     text : qsTr("Costs")
@@ -182,6 +217,7 @@ Page {
                 }
             }
             Row {
+                id:fuelcostsRow
                 width: parent.width
                 Text {
                     width:parent.width/2
@@ -201,6 +237,7 @@ Page {
                 }
             }
             Row {
+                id: billcostsRow
                 width: parent.width
                 Text {
                     width:parent.width/2
@@ -220,6 +257,7 @@ Page {
                 }
             }
             Row {
+                id: totalcostsRow
                 width: parent.width
                 Text {
                     width:parent.width/2
@@ -239,6 +277,7 @@ Page {
                 }
             }
             Row {
+                id: per100Row
                 width: parent.width
                 Text {
                     text : qsTr("Costs per 100 Km")
@@ -248,7 +287,9 @@ Page {
                     color: Theme.primaryColor
                     horizontalAlignment: Text.AlignLeft
                 }
-            }            Row {
+            }
+            Row {
+                id:fuelper100Row
                 width: parent.width
                 Text {
                     width:parent.width/2
@@ -268,6 +309,7 @@ Page {
                 }
             }
             Row {
+                id:billsper100Row
                 width: parent.width
                 Text {
                     width:parent.width/2
@@ -287,6 +329,7 @@ Page {
                 }
             }
             Row {
+                id: totalper100Row
                 width: parent.width
                 Text {
                     width:parent.width/2
