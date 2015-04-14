@@ -28,7 +28,7 @@ Page {
         id:fueltypelist
         VerticalScrollDecorator {}
         header:  PageHeader {
-                 title: qsTr("Consumption by Fuelype")
+                 title: qsTr("Consumption by fuel type")
              }
         anchors.fill: parent
         leftMargin: Theme.paddingMedium

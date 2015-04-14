@@ -33,7 +33,7 @@ Page {
         //contentHeight: allfields.height
         VerticalScrollDecorator {}
         header:  PageHeader {
-                 title: qsTr("Costs by Fuelype")
+                 title: qsTr("Costs by fuel type")
              }
         model:manager.car.fueltypes
         delegate: ListItem {
