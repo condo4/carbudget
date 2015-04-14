@@ -30,21 +30,24 @@ class Station : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(unsigned int id    READ id       WRITE setId   NOTIFY idChanged )
-    Q_PROPERTY(QString      name  READ name     WRITE setName NOTIFY nameChanged )
+    Q_PROPERTY(unsigned int id       READ id       WRITE setId   NOTIFY idChanged )
+    Q_PROPERTY(QString      name     READ name     WRITE setName NOTIFY nameChanged )
+    Q_PROPERTY(double       quantity READ quantity               NOTIFY quantityChanged )
 
 private:
     Car *_car;
     int _id;
     QString _name;
+    double _quantity;
 
 public:
     explicit Station(QObject *parent = 0);
-    Station(unsigned int id, QString name, Car *parent = 0);
+    Station(unsigned int id, QString name, double quantity, Car *parent = 0);
 
 signals:
     void idChanged();
     void nameChanged();
+    void quantityChanged();
 
 public slots:
     void save();
@@ -55,6 +58,8 @@ public slots:
     QString name() const;
     void setName(QString name);
 
+    double quantity() const;
+    void addQuantity(double newq);
 };
 
 #endif // STATION_H

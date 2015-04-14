@@ -29,11 +29,12 @@ Station::Station(QObject *parent) :
 {
 }
 
-Station::Station(unsigned int id, QString name, Car *parent):
+Station::Station(unsigned int id, QString name, double quantity, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
-    _name(name)
+    _name(name),
+    _quantity(quantity)
 {
 }
 
@@ -57,6 +58,16 @@ void Station::setName(QString name)
 {
     _name = name;
     emit nameChanged();
+}
+
+void Station::addQuantity(double newq)
+{
+    _quantity += newq;
+}
+
+double Station::quantity() const
+{
+    return _quantity;
 }
 
 void Station::save()

@@ -70,11 +70,20 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.id + ": " + model.modelData.name;
+                        text: model.modelData.name;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
-                        width: parent.width
+                        width: (parent.width / 3) * 2
+                    }
+
+                    Text {
+                        text: Math.round(model.modelData.quantity) + "L";
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 3
+                        horizontalAlignment: Text.AlignRight
                     }
                 }
             }

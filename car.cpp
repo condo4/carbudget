@@ -49,9 +49,9 @@ bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
     return c1->id() < c2->id();
 }
 
-bool sortStationById(const Station *c1, const Station *c2)
+bool sortStationByQuantity(const Station *c1, const Station *c2)
 {
-    return c1->id() < c2->id();
+    return c1->quantity() > c2->quantity();
 }
 
 bool sortTiremountByDistance (const Tiremount *s1, const Tiremount * s2)
@@ -122,13 +122,14 @@ void Car::db_load()
             _fueltypelist.append(fueltype);
         }
     }
-    if(query.exec("SELECT id,name FROM StationList;"))
+    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList, TankList WHERE StationList.id == TankList.station GROUP BY StationList.id;"))
     {
         while(query.next())
         {
             int id = query.value(0).toInt();
             QString name = query.value(1).toString();
-            Station *station = new Station(id, name, this);
+            double quantity = query.value(2).toDouble();
+            Station *station = new Station(id, name, quantity, this);
             _stationlist.append(station);
         }
     }
@@ -230,7 +231,7 @@ void Car::db_load()
     }
     qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
     qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
@@ -339,7 +340,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     this->db_load();
 
     this->_stationlist.append(new Station);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     this->_fueltypelist.append(new Fueltype);
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     this->_costtypelist.append(new Costtype);
@@ -516,7 +517,7 @@ void Car::setCar(QString name)
     this->db_load();
 
     this->_stationlist.append(new Station);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
 }
 
 unsigned long int Car::getDistance(QDate date)
@@ -804,9 +805,9 @@ void Car::addNewStation(QString name)
     //First check for existing station
     if (findStation(name))
         return;
-    Station *station = new Station(-1, name, this);
+    Station *station = new Station(-1, name, 0, this);
     _stationlist.append(station);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     station->save();
     emit stationsChanged();
 }
@@ -815,7 +816,7 @@ void Car::delStation(Station *station)
 {
     qDebug() << "Remove Station " << station->id();
     _stationlist.removeAll(station);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationById);
+    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET station = 0 WHERE station=%1;").arg(station->id());
 
