@@ -40,12 +40,6 @@ Page {
             id: header
             title: qsTr("Tire Mounts")
         }
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Manage Tires")
-                onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
-            }
-        }
         SilicaListView {
             id: tiremountlistView
             VerticalScrollDecorator {}

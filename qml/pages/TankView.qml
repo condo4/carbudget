@@ -31,7 +31,7 @@ Page {
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: tankView.contentHeight
+        backgroundSize: tankview.contentHeight
     }
     SilicaFlickable {
         id: tankview
@@ -46,6 +46,14 @@ Page {
             MenuItem {
                 text: qsTr("Add tank")
                 onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
+            }
+            MenuItem {
+                text: qsTr("Manage stations")
+                onClicked: pageStack.push(Qt.resolvedUrl("StationView.qml"))
+            }
+            MenuItem {
+                text: qsTr("Manage fuel types")
+                onClicked: pageStack.push(Qt.resolvedUrl("FueltypeView.qml"))
             }
         }
         SilicaListView {

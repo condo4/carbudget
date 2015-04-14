@@ -31,6 +31,10 @@ Page {
                 text: qsTr("Create new tire")
                 onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"))
             }
+            MenuItem {
+                text: qsTr("Show history")
+                onClicked: pageStack.push(Qt.resolvedUrl("TiremountView.qml"))
+            }
         }
 
         VerticalScrollDecorator {}
