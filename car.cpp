@@ -103,6 +103,7 @@ void Car::db_load()
         emit nbtankChanged(_tanklist.count());
         emit consumptionChanged(this->consumption());
         emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionlastChanged(this->consumptionlast());
         emit consumptionminChanged(this->consumptionmin());
         emit fueltotalChanged(this->fueltotal());
         emit maxdistanceChanged(this->maxdistance());
@@ -388,6 +389,12 @@ double Car::consumptionmax() const
             con = tank->consumption();
     }
     return con;
+}
+
+double Car::consumptionlast() const
+{
+    QList<Tank*>::const_iterator tank = _tanklist.constBegin();
+    return (*tank)->consumption();
 }
 
 double Car::consumptionmin() const
@@ -707,6 +714,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
     emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionlastChanged(this->consumptionlast());
     emit consumptionminChanged(this->consumptionmin());
     emit fueltotalChanged(this->fueltotal());
     emit maxdistanceChanged(this->maxdistance());
@@ -722,6 +730,7 @@ void Car::delTank(Tank *tank)
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
     emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionlastChanged(this->consumptionlast());
     emit consumptionminChanged(this->consumptionmin());
     emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();

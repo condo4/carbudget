@@ -29,7 +29,7 @@ Page {
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: costView.contentHeight
+        backgroundSize: costview.contentHeight
     }
     SilicaFlickable {
         id:costview

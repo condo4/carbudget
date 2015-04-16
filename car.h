@@ -46,6 +46,7 @@ class Car : public QObject
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
     Q_PROPERTY(double consumptionmax READ consumptionmax NOTIFY consumptionmaxChanged)
     Q_PROPERTY(double consumptionmin READ consumptionmin NOTIFY consumptionminChanged)
+    Q_PROPERTY(double consumptionlast READ consumptionlast NOTIFY consumptionlastChanged)
     Q_PROPERTY(double fueltotal READ fueltotal NOTIFY fueltotalChanged)
     Q_PROPERTY(unsigned int maxdistance READ maxdistance NOTIFY maxdistanceChanged)
     Q_PROPERTY(unsigned int mindistance READ mindistance NOTIFY mindistanceChanged)
@@ -106,6 +107,7 @@ public:
     double consumption() const;
     double consumptionmax() const;
     double consumptionmin() const;
+    double consumptionlast() const;
     unsigned int maxdistance() const;
     unsigned int mindistance() const;
 
@@ -141,6 +143,7 @@ signals:
     void nbtankChanged(unsigned int nbtank);
     void consumptionChanged(double consumption);
     void consumptionmaxChanged(double consumptionmax);
+    void consumptionlastChanged(double consumptionlast);
     void consumptionminChanged(double consumptionmin);
     void fueltotalChanged(double fueltotal);
     void maxdistanceChanged(double consumption);
