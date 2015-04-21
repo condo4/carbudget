@@ -23,6 +23,7 @@ import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
 Page {
+    property string filter: ""
     allowedOrientations: Orientation.All
     Drawer {
         id: costviewDrawer
@@ -58,7 +59,8 @@ Page {
             clip: true
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
-            model: manager.car.costs
+            onModelChanged: fillListModel()
+            model: listModel
             delegate: ListItem {
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 showMenuOnPressAndHold: true
@@ -126,6 +128,21 @@ Page {
             }
         }
 
+    }
+    ListModel {
+        id:listModel
+    }
+
+    // Fill list model
+    function fillListModel()
+    {
+        var costlist = manager.car.costs;
+        for (var i = 0;i < costlist.length ;i++)
+        {
+            if ((filter=="")||(manager.car.getCosttypeName(costlist[i].costtype)==filter))
+                listModel.append({"cost" : costlist[i]})
+        }
+        console.log("List Model filled")
     }
 }
 
