@@ -37,6 +37,7 @@ Page {
         model:manager.car.costtypes
         delegate: ListItem {
             height:dataRow.height
+            contentHeight: dataRow.height
             Row {
                 id:dataRow
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
