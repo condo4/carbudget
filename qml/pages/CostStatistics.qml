@@ -38,7 +38,7 @@ Page {
         delegate: ListItem {
             height:dataRow.height
             contentHeight: dataRow.height
-            onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.modelData.name })
+            onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.modelData.name , showDescription: true })
 
             Row {
                 id: dataRow
