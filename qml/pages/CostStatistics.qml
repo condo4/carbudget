@@ -37,6 +37,8 @@ Page {
         model:manager.car.costtypes
         delegate: ListItem {
             height:dataRow.height
+            onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.modelData.name })
+
             Row {
                 id: dataRow
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
