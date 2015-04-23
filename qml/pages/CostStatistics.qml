@@ -119,6 +119,7 @@ Page {
     {
         var costlist = manager.car.costtypes;
         var color
+        listModel.clear()
         for (var i = 0;i < costlist.length ;i++)
         {
             color=(i+1)/(costlist.length+2)
