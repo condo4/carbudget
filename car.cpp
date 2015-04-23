@@ -696,14 +696,31 @@ double Car::budget_cost_byType(unsigned int id)
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
 
+double Car::budget_tire()
+{
+    double totalPrice = 0;
+
+    return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
+}
+
+double Car::budget_tire_total()
+{
+    double total = 0;
+    foreach (Tire *tire, _tirelist)
+    {
+        total += tire->price();
+    }
+    return total;
+}
+
 double Car::budget_total()
 {
-    return budget_fuel_total() + budget_cost_total();
+    return budget_fuel_total() + budget_cost_total()+budget_tire_total();
 }
 
 double Car::budget()
 {
-    return budget_fuel() + budget_cost();
+    return budget_fuel() + budget_cost()+ budget_tire();
 }
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
 {

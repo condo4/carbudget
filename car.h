@@ -68,6 +68,8 @@ class Car : public QObject
     Q_PROPERTY(double budget_cost_total READ budget_cost_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
     Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_tire_total READ budget_tire_total NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_tire READ budget_tire NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
 
@@ -138,6 +140,8 @@ public:
     Q_INVOKABLE double budget_cost_byType(unsigned int id);
     double budget_total();
     double budget();
+    double budget_tire_total();
+    double budget_tire();
 
 signals:
     void nbtankChanged(unsigned int nbtank);

@@ -26,109 +26,115 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+    id: budgetPage
     Drawer {
         id: budgetviewDrawer
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: budgetView.contentHeight
+        //backgroundSize: budgetView.contentHeight
+    }
+    PageHeader {
+            id: header
+             title: qsTr("Statistics")
+         }
+    Canvas {
+        id: pieChart
+        width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        //width: budgetPage.width/2
+        //height:budgetPage.height/2
+        anchors.top: header.bottom
+        anchors.left: parent.left
+        onPaint: {
+            var ctx = pieChart.getContext('2d')
+            ctx.clearRect(0,0,width,height)
+            var centerX = width/2
+            var centerY = height/2
+            var radius = 0.8*width/2
+            var startangle=0.0
+            var endangle=0.0
+            var total = manager.car.budget_cost_total + manager.car.fueltotal
+            var angle = 6.28/total
+            ctx.lineWidth = 2
+            endangle = startangle+ manager.car.budget_cost_total * angle
+            ctx.fillStyle = "darkgrey"
+            ctx.beginPath()
+            ctx.moveTo(centerX,centerY)
+            ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+            ctx.lineTo(centerX,centerY)
+            ctx.fill()
+            ctx.stroke()
+            startangle=endangle
+            endangle = startangle+manager.car.fueltotal*angle
+            ctx.fillStyle = "lightgrey"
+            ctx.beginPath()
+            ctx.moveTo(centerX,centerY)
+            ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+            ctx.lineTo(centerX,centerY)
+            ctx.fill()
+            ctx.stroke()
+        }
+    }
+    Rectangle {
+        id: pieChartLegend
+        width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        anchors.top: header.bottom
+        anchors.right:  parent.right
+        color: "Transparent"
+        Column {
+            anchors.centerIn: pieChartLegend
+            width: parent.width
+            Row {
+                width:parent.width
+                Rectangle {
+                    color:"darkgrey"
+                    height:billLegend.height
+                    width:parent.width
+                    Text {
+                        id:billLegend
+                        text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+
+            }
+            Row {
+                width:parent.width
+                Rectangle {
+                    color: "lightgrey"
+                    width:parent.width
+                    height:fuelLegend.height
+                    Text {
+                        id:fuelLegend
+                        text : qsTr("Fuel:") + " " + (manager.car.fueltotal*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+            }
+        }
+
     }
     SilicaFlickable {
         id: budgetView
-        PageHeader {
-                id: header
-                 title: qsTr("Statistics")
-             }
         VerticalScrollDecorator {}
-        anchors.fill: parent
+        anchors.top: pieChart.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        //contentHeight: pieChart.height+dataColumn.height
-        Canvas {
-            id: pieChart
-            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            anchors.top: header.bottom
-            anchors.left: parent.left
-            onPaint: {
-                var ctx = pieChart.getContext('2d')
-                ctx.clearRect(0,0,width,height)
-                var centerX = width/2
-                var centerY = height/2
-                var radius = 0.8*width/2
-                var startangle=0.0
-                var endangle=0.0
-                var total = manager.car.budget_cost_total + manager.car.fueltotal
-                var angle = 6.28/total
-                ctx.lineWidth = 2
-                endangle = startangle+ manager.car.budget_cost_total * angle
-                ctx.fillStyle = "darkgrey"
-                ctx.beginPath()
-                ctx.moveTo(centerX,centerY)
-                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
-                ctx.lineTo(centerX,centerY)
-                ctx.fill()
-                ctx.stroke()
-                startangle=endangle
-                endangle = startangle+manager.car.fueltotal*angle
-                ctx.fillStyle = "lightgrey"
-                ctx.beginPath()
-                ctx.moveTo(centerX,centerY)
-                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
-                ctx.lineTo(centerX,centerY)
-                ctx.fill()
-                ctx.stroke()
-            }
-        }
-        Rectangle {
-            id: pieChartLegend
-            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            anchors.top: header.bottom
-            anchors.right:  parent.right
-            color: "Transparent"
-            Column {
-                anchors.centerIn: pieChartLegend
-                width: parent.width
-                Row {
-                    width:parent.width
-                    Rectangle {
-                        color:"darkgrey"
-                        height:billLegend.height
-                        width:parent.width
-                        Text {
-                            id:billLegend
-                            text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeMedium
-                            color: Theme.primaryColor
-                            horizontalAlignment: Text.AlignLeft
-                        }
-                    }
-
-                }
-                Row {
-                    width:parent.width
-                    Rectangle {
-                        color: "lightgrey"
-                        width:parent.width
-                        height:fuelLegend.height
-                        Text {
-                            id:fuelLegend
-                            text : qsTr("Fuel:") + " " + (manager.car.fueltotal*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeMedium
-                            color: Theme.primaryColor
-                            horizontalAlignment: Text.AlignLeft
-                        }
-                    }
-                }
-            }
-
-        }
+        contentHeight: dataColumn.height
         Column {
             id: dataColumn
-            anchors.top:pieChart.bottom
+            //anchors.top:pieChart.bottom
             width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             Row {
                 id:odoRow
@@ -337,6 +343,40 @@ Page {
                 }
             }
             Row {
+                id:tirecostsRow
+                width: parent.width
+                Rectangle {
+                    height: fueltext.height
+                    width: parent.width
+                    color: "transparent"
+                    Text {
+                        id: tiretext
+                        width:parent.width/2
+                        text : qsTr("Tires:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        anchors.right:parent.right
+                        width:parent.width/2
+                        text : manager.car.budget_tire_total.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    /*
+                    MouseArea {
+                        id:tirecostsMouse
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                    }
+                    */
+                }
+            }
+            Row {
                 id: totalcostsRow
                 width: parent.width
                 Text {
@@ -432,6 +472,41 @@ Page {
                         anchors.fill: parent
                         onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
                     }
+                }
+            }
+            Row {
+                id:tiresper100Row
+                width: parent.width
+                Rectangle {
+                    height: billbtext.height
+                    width: parent.width
+                    color: "transparent"
+
+                    Text {
+                        id: tiresper100text
+                        width:parent.width/2
+                        text : qsTr("Tires:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        width:parent.width/2
+                        anchors.right:parent.right
+                        text : manager.car.budget_tire.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+                    /*
+                    MouseArea {
+                        id: tiresper100Mouse
+                        anchors.fill: parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+                    }
+                    */
                 }
             }
             Row {
