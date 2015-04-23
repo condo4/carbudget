@@ -26,24 +26,110 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
-
+    Drawer {
+        id: budgetviewDrawer
+        anchors.fill: parent
+        dock: Dock.Top
+        open: false
+        backgroundSize: budgetView.contentHeight
+    }
     SilicaFlickable {
-
-        VerticalScrollDecorator {}
-
         id: budgetView
+        PageHeader {
+                id: header
+                 title: qsTr("Statistics")
+             }
+        VerticalScrollDecorator {}
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        //contentHeight:dataColumn.height+pieChart.height
-        Column {
-            id: dataColumn
-            //anchors.fill:parent
-            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-            PageHeader {
-                title: qsTr("Statistics")
+        //contentHeight: pieChart.height+dataColumn.height
+        Canvas {
+            id: pieChart
+            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+            anchors.top: header.bottom
+            anchors.left: parent.left
+            onPaint: {
+                var ctx = pieChart.getContext('2d')
+                ctx.clearRect(0,0,width,height)
+                var centerX = width/2
+                var centerY = height/2
+                var radius = 0.8*width/2
+                var startangle=0.0
+                var endangle=0.0
+                var total = manager.car.budget_cost_total + manager.car.fueltotal
+                var angle = 6.28/total
+                ctx.lineWidth = 2
+                endangle = startangle+ manager.car.budget_cost_total * angle
+                ctx.fillStyle = "darkgrey"
+                ctx.beginPath()
+                ctx.moveTo(centerX,centerY)
+                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+                ctx.lineTo(centerX,centerY)
+                ctx.fill()
+                ctx.stroke()
+                startangle=endangle
+                endangle = startangle+manager.car.fueltotal*angle
+                ctx.fillStyle = "lightgrey"
+                ctx.beginPath()
+                ctx.moveTo(centerX,centerY)
+                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+                ctx.lineTo(centerX,centerY)
+                ctx.fill()
+                ctx.stroke()
+            }
+        }
+        Rectangle {
+            id: pieChartLegend
+            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+            anchors.top: header.bottom
+            anchors.right:  parent.right
+            color: "Transparent"
+            Column {
+                anchors.centerIn: pieChartLegend
+                width: parent.width
+                Row {
+                    width:parent.width
+                    Rectangle {
+                        color:"darkgrey"
+                        height:billLegend.height
+                        width:parent.width
+                        Text {
+                            id:billLegend
+                            text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.primaryColor
+                            horizontalAlignment: Text.AlignLeft
+                        }
+                    }
+
+                }
+                Row {
+                    width:parent.width
+                    Rectangle {
+                        color: "lightgrey"
+                        width:parent.width
+                        height:fuelLegend.height
+                        Text {
+                            id:fuelLegend
+                            text : qsTr("Fuel:") + " " + (manager.car.fueltotal*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeMedium
+                            color: Theme.primaryColor
+                            horizontalAlignment: Text.AlignLeft
+                        }
+                    }
+                }
             }
 
+        }
+        Column {
+            id: dataColumn
+            anchors.top:pieChart.bottom
+            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             Row {
                 id:odoRow
                 width: parent.width
@@ -368,75 +454,6 @@ Page {
                     horizontalAlignment: Text.AlignRight
                 }
             }
-        }
-        Canvas {
-            id: pieChart
-            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            anchors.top: dataColumn.bottom
-            anchors.left: parent.left
-            onPaint: {
-                console.log("painting...")
-                var ctx = pieChart.getContext('2d')
-                ctx.clearRect(0,0,width,height)
-                var centerX = width/2
-                var centerY = height/2
-                var radius = 0.8*width/2
-                var startangle=0.0
-                var endangle=0.0
-                var total = manager.car.budget_cost_total + manager.car.fueltotal
-                var angle = 6.28/total
-                ctx.lineWidth = 2
-                endangle = startangle+ manager.car.budget_cost_total * angle
-                ctx.fillStyle = "Red"
-                ctx.beginPath()
-                ctx.moveTo(centerX,centerY)
-                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
-                ctx.lineTo(centerX,centerY)
-                ctx.fill()
-                ctx.stroke()
-                startangle=endangle
-                endangle = startangle+manager.car.fueltotal*angle
-                ctx.fillStyle = "Green"
-                ctx.beginPath()
-                ctx.moveTo(centerX,centerY)
-                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
-                ctx.lineTo(centerX,centerY)
-                ctx.fill()
-                ctx.stroke()
-            }
-        }
-        Rectangle {
-            id: pieChartLegend
-            width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-            anchors.top: dataColumn.bottom
-            anchors.right:  parent.right
-            color: "Transparent"
-            Column {
-                anchors.centerIn: pieChartLegend
-                Row {
-                    Text {
-                        //width:parent.width/2
-                        text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: "Red"
-                        horizontalAlignment: Text.AlignLeft
-                    }
-                }
-                Row {
-                    Text {
-                        //width:parent.width/2
-                        text : qsTr("Fuel:") + " " + (manager.car.fueltotal*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: "Green"
-                        horizontalAlignment: Text.AlignLeft
-                    }
-                }
-            }
-
         }
     }
 }
