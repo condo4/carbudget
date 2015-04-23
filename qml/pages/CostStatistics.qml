@@ -25,9 +25,15 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     id:coststatisticsPage
+    property bool  per100: false
     PageHeader {
             id: header
-             title: qsTr("Costs by Type")
+
+             title: {
+                 if (per100)
+                     return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                 return qsTr("Costs by Type")
+             }
          }
     Canvas {
         id: pieChart
@@ -110,6 +116,7 @@ Page {
 
      }
     }
+
     ListModel {
         id:listModel
     }
@@ -134,8 +141,14 @@ Page {
             var finalcolor = "#00"+color
             */
             var finalcolor = "#"+color+color+color
-            listModel.append({id: costlist[i].id , name: costlist[i].name, total: manager.car.budget_cost_total_byType(costlist[i].id), color: finalcolor})
+            var price;
+            if (per100)
+                price = manager.car.budget_cost_byType(costlist[i].id)
+            else price = manager.car.budget_cost_total_byType(costlist[i].id)
+            listModel.append({id: costlist[i].id , name: costlist[i].name, total: price, color: finalcolor})
         }
     }
     onVisibleChanged: {fillListModel()}
 }
+
+

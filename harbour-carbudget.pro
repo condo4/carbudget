@@ -58,7 +58,6 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/MycarImport.qml \
     qml/pages/FuelpadImport.qml \
     qml/pages/CostStatistics.qml \
-    qml/pages/Costper100Statistics.qml \
     qml/pages/FuelStatistics.qml \
     qml/pages/Fuelper100Statistics.qml \
     qml/pages/TiremountView.qml \

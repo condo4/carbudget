@@ -106,7 +106,7 @@ Page {
                         id:billLegend
                         text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/manager.car.budget_total ).toFixed(2) + "%"
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
                     }
@@ -123,7 +123,7 @@ Page {
                         id:fuelLegend
                         text : qsTr("Fuel:") + " " + (manager.car.budget_fuel_total*100/manager.car.budget_total).toFixed(2) + "%"
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
                     }
@@ -139,7 +139,7 @@ Page {
                         id:tireLegend
                         text : qsTr("Tires:") + " " + (manager.car.budget_tire_total*100/manager.car.budget_total).toFixed(2) + "%"
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
                     }
@@ -363,7 +363,7 @@ Page {
 
                         id: billcostsMouse
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false})
                     }
                 }
             }
@@ -495,7 +495,7 @@ Page {
                     MouseArea {
                         id: billsper100Mouse
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
                     }
                 }
             }
@@ -529,7 +529,7 @@ Page {
                     MouseArea {
                         id: tiresper100Mouse
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("Costper100Statistics.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
                     }
                     */
                 }
