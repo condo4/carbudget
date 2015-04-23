@@ -49,15 +49,15 @@ Page {
         onPaint: {
             var ctx = pieChart.getContext('2d')
             ctx.clearRect(0,0,width,height)
-            var centerX = width/2
-            var centerY = height/2
-            var radius = 0.8*width/2
+            var centerX = (width/2).toFixed(0)
+            var centerY = (height/2).toFixed(0)
+            var radius = (0.95*width/2).toFixed(0)
             var startangle=0.0
             var endangle=0.0
-            var total = manager.car.budget_cost_total + manager.car.fueltotal
+            var total = manager.car.budget_total
             var angle = 6.28/total
-            ctx.lineWidth = 2
-            endangle = startangle+ manager.car.budget_cost_total * angle
+            ctx.lineWidth = 1
+            endangle = manager.car.budget_cost_total * angle
             ctx.fillStyle = "darkgrey"
             ctx.beginPath()
             ctx.moveTo(centerX,centerY)
@@ -66,8 +66,18 @@ Page {
             ctx.fill()
             ctx.stroke()
             startangle=endangle
-            endangle = startangle+manager.car.fueltotal*angle
+            endangle = startangle+manager.car.budget_fuel_total*angle
             ctx.fillStyle = "lightgrey"
+            ctx.beginPath()
+            ctx.moveTo(centerX,centerY)
+            ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+            ctx.lineTo(centerX,centerY)
+            ctx.fill()
+            ctx.stroke()
+            startangle=endangle
+            endangle = startangle+manager.car.budget_tire_total*angle
+            console.log(manager.car.budget_tire_total)
+            ctx.fillStyle = "black"
             ctx.beginPath()
             ctx.moveTo(centerX,centerY)
             ctx.arc(centerX,centerY,radius,startangle,endangle,false)
@@ -85,7 +95,7 @@ Page {
         color: "Transparent"
         Column {
             anchors.centerIn: pieChartLegend
-            width: parent.width
+            width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             Row {
                 width:parent.width
                 Rectangle {
@@ -94,7 +104,7 @@ Page {
                     width:parent.width
                     Text {
                         id:billLegend
-                        text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                        text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/manager.car.budget_total ).toFixed(2) + "%"
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
@@ -111,7 +121,23 @@ Page {
                     height:fuelLegend.height
                     Text {
                         id:fuelLegend
-                        text : qsTr("Fuel:") + " " + (manager.car.fueltotal*100/(manager.car.budget_cost_total + manager.car.fueltotal)).toFixed(2) + "%"
+                        text : qsTr("Fuel:") + " " + (manager.car.budget_fuel_total*100/manager.car.budget_total).toFixed(2) + "%"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+            }
+            Row {
+                width:parent.width
+                Rectangle {
+                    color: "black"
+                    width:parent.width
+                    height:fuelLegend.height
+                    Text {
+                        id:tireLegend
+                        text : qsTr("Tires:") + " " + (manager.car.budget_tire_total*100/manager.car.budget_total).toFixed(2) + "%"
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
@@ -134,7 +160,6 @@ Page {
         contentHeight: dataColumn.height
         Column {
             id: dataColumn
-            //anchors.top:pieChart.bottom
             width: parent.width- Theme.paddingMedium - Theme.paddingMedium
             Row {
                 id:odoRow
