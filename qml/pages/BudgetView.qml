@@ -76,7 +76,6 @@ Page {
             ctx.stroke()
             startangle=endangle
             endangle = startangle+manager.car.budget_tire_total*angle
-            console.log(manager.car.budget_tire_total)
             ctx.fillStyle = "black"
             ctx.beginPath()
             ctx.moveTo(centerX,centerY)
