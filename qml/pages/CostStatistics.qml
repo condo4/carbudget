@@ -159,9 +159,11 @@ Page {
             var finalcolor = "#"+color+color+color
             var price
             var name
+            var id
             if (type=="costs")
             {
                 name = costlist[i].name
+                id = costlist[i].id
                 if (per100)
                     price = manager.car.budget_cost_byType(costlist[i].id)
                 else price = manager.car.budget_cost_total_byType(costlist[i].id)
@@ -169,11 +171,12 @@ Page {
             else
             {
                 name = fueltypelist[i].name
+                id = fueltypelist[i].id
                 if (per100)
-                    price = manager.car.budget_fuel_byType(costlist[i].id)
-                else price = manager.car.budget_fuel_total_byType(costlist[i].id)
+                    price = manager.car.budget_fuel_byType(fueltypelist[i].id)
+                else price = manager.car.budget_fuel_total_byType(fueltypelist[i].id)
             }
-            listModel.append({id: i , name: name, total: price, color: finalcolor})
+            listModel.append({id: id, name: name, total: price, color: finalcolor})
         }
     }
     onVisibleChanged: {fillListModel()}
