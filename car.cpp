@@ -552,6 +552,26 @@ double Car::budget_fuel_total()
     return total;
 }
 
+double Car::budget_fuel_byType(unsigned int id)
+{
+    // Returns average price of fuel type per 100Km
+    // Not sure if this really makes sense but it makes the statistic views consistent
+    double price =0;
+    double quantity = 0;
+    foreach (Tank *tank, _tanklist)
+    {
+        if (tank->fueltype()==id)
+        {
+            price += tank->price();
+            quantity += tank->quantity();
+        }
+    }
+    double average = 0;
+    if (quantity!=0)
+        average = price/quantity;
+    return average*budget_consumption_byType(id);
+}
+
 double Car::budget_fuel_total_byType(unsigned int id)
 {
     // Returns total price of all tankstops by Type
@@ -563,7 +583,6 @@ double Car::budget_fuel_total_byType(unsigned int id)
     }
     return total;
 }
-
 double Car::budget_fuel()
 {
     /* Return sum(fuel price) / ODO * 100 */
@@ -674,13 +693,7 @@ double Car::budget_cost_total_byType(unsigned int id)
 double Car::budget_cost()
 {
     /* Return sum(cost) / ODO * 100 */
-    double totalPrice = 0;
-
-    foreach(Cost *cost, _costlist)
-    {
-        totalPrice += cost->cost();
-    }
-    return totalPrice / ((maxdistance() - mindistance())/ 100.0);
+    return budget_cost_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 
 double Car::budget_cost_byType(unsigned int id)

@@ -202,91 +202,113 @@ Page {
                 }
             }
             Row {
-                id: fuelRow
+                id:consumptonRow
                 width: parent.width
-                Text {
-                    text : qsTr("Fuel")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    font.bold: true
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-            }
-            Row {
-                width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Total: ")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text :  manager.car.fueltotal.toFixed(2) + " l"
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
-                }
-            }
-            Row {
-                width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Average: ")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text :  manager.car.consumption.toFixed(2) + " l"
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
-                }
-            }
-            Row {
-                width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Min:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text :  manager.car.consumptionmin.toFixed(2) + " l"
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
-                }
-            }
-            Row {
-                width: parent.width
-                Text {
-                    width:parent.width/2
-                    text : qsTr("Max:")
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignLeft
-                }
-                Text {
-                    width:parent.width/2
-                    text :  manager.car.consumptionmax.toFixed(2) + " l"
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+                Rectangle {
+                    width: parent.width
+                    height:consumptionTable.height
+                    color: "Transparent"
+                    Column {
+                        id: consumptionTable
+                        width:parent.width
+                        Row {
+                            id: fuelRow
+                            width: parent.width
+                            Text {
+                                text : qsTr("Fuel")
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeMedium
+                                font.bold: true
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignLeft
+                            }
+                        }
+                        Row {
+                            id: fuelTotalRow
+                            width: parent.width
+                            Text {
+                                width:parent.width/2
+                                text : qsTr("Total: ")
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignLeft
+                            }
+                            Text {
+                                width:parent.width/2
+                                text :  manager.car.fueltotal.toFixed(2) + " l"
+                                font.family: "monospaced"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                        Row {
+                            id:fuelAverageRow
+                            width: parent.width
+                            Text {
+                                width:parent.width/2
+                                text : qsTr("Average: ")
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignLeft
+                            }
+                            Text {
+                                width:parent.width/2
+                                text :  manager.car.consumption.toFixed(2) + " l"
+                                font.family: "monospaced"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                        Row {
+                            id:fuelMinRow
+                            width: parent.width
+                            Text {
+                                width:parent.width/2
+                                text : qsTr("Min:")
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignLeft
+                            }
+                            Text {
+                                width:parent.width/2
+                                text :  manager.car.consumptionmin.toFixed(2) + " l"
+                                font.family: "monospaced"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                        Row {
+                            id: fuelMaxRow
+                            width: parent.width
+                            Text {
+                                width:parent.width/2
+                                text : qsTr("Max:")
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignLeft
+                            }
+                            Text {
+                                width:parent.width/2
+                                text :  manager.car.consumptionmax.toFixed(2) + " l"
+                                font.family: "monospaced"
+                                font.pixelSize: Theme.fontSizeSmall
+                                color: Theme.primaryColor
+                                horizontalAlignment: Text.AlignRight
+                            }
+                        }
+                    }
+                    MouseArea {
+                        id:consumptionMouse
+                        anchors.fill:parent
+                        onClicked: pageStack.push(Qt.resolvedUrl("ConsumptionStatistics.qml"))
+                    }
                 }
             }
             Row {
@@ -329,7 +351,7 @@ Page {
                     MouseArea {
                         id:fuelcostsMouse
                         anchors.fill:parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:false, type:"fuel"})
                     }
                 }
             }
@@ -360,10 +382,9 @@ Page {
                         horizontalAlignment: Text.AlignRight
                     }
                     MouseArea {
-
                         id: billcostsMouse
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false})
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false, type:"costs"})
                     }
                 }
             }
@@ -462,7 +483,7 @@ Page {
                     MouseArea {
                         id:fuelper100Mouse
                         anchors.fill:parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("Fuelper100Statistics.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:true, type:"fuel"})
                     }
                 }
             }

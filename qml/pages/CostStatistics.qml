@@ -26,13 +26,23 @@ Page {
     allowedOrientations: Orientation.All
     id:coststatisticsPage
     property bool  per100: false
+    property string type: "costs"
     PageHeader {
             id: header
 
              title: {
-                 if (per100)
-                     return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
-                 return qsTr("Costs by Type")
+                 if (type=="costs")
+                 {
+                     if (per100)
+                         return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                     return qsTr("Bills by Type")
+                 }
+                 else
+                 {
+                     if (per100)
+                         return  qsTr("Fuel per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                     return qsTr("Fuel by Type")
+                 }
              }
          }
     Canvas {
@@ -88,7 +98,11 @@ Page {
             height:dataRow.height
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             contentHeight: dataRow.height
-            onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.name , showDescription: true })
+            onClicked: {
+                if (type=="costs")
+                    pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.name , showDescription: true })
+                else pageStack.push(Qt.resolvedUrl("TankView.qml"), { filter: model.name , showDescription: true })
+            }
             Rectangle {
                 color:model.color
                 height:dataRow.height
@@ -124,12 +138,14 @@ Page {
     // Fill list model
     function fillListModel()
     {
-        var costlist = manager.car.costtypes;
+        var costlist = manager.car.costtypes
+        var fueltypelist = manager.car.fueltypes
         var color
         listModel.clear()
-        for (var i = 0;i < costlist.length ;i++)
+        var count = (type=="costs" ? costlist.length : fueltypelist.length)
+        for (var i = 0;i < count ;i++)
         {
-            color=(i+1)/(costlist.length+2)
+            color=(i+1)/(count+2)
             color=(255*color).toFixed(0)
             color=Number(color).toString(16).toUpperCase()
             /*
@@ -141,11 +157,23 @@ Page {
             var finalcolor = "#00"+color
             */
             var finalcolor = "#"+color+color+color
-            var price;
-            if (per100)
-                price = manager.car.budget_cost_byType(costlist[i].id)
-            else price = manager.car.budget_cost_total_byType(costlist[i].id)
-            listModel.append({id: costlist[i].id , name: costlist[i].name, total: price, color: finalcolor})
+            var price
+            var name
+            if (type=="costs")
+            {
+                name = costlist[i].name
+                if (per100)
+                    price = manager.car.budget_cost_byType(costlist[i].id)
+                else price = manager.car.budget_cost_total_byType(costlist[i].id)
+            }
+            else
+            {
+                name = fueltypelist[i].name
+                if (per100)
+                    price = manager.car.budget_fuel_byType(costlist[i].id)
+                else price = manager.car.budget_fuel_total_byType(costlist[i].id)
+            }
+            listModel.append({id: i , name: name, total: price, color: finalcolor})
         }
     }
     onVisibleChanged: {fillListModel()}
