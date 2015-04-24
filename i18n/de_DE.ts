@@ -69,7 +69,7 @@
         <translation>Min:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="160"/>
+        <location filename="../qml/pages/Budge  tView.qml" line="160"/>
         <source>Max:</source>
         <translation>Max:</translation>
     </message>

@@ -25,6 +25,7 @@ import harbour.carbudget 1.0
 
 
 Page {
+    property string filter: ""
     allowedOrientations: Orientation.All
     Drawer {
         id: tankviewDrawer
@@ -67,24 +68,20 @@ Page {
             anchors.leftMargin: Theme.paddingSmall
             anchors.rightMargin: Theme.paddingSmall
             clip: true
-
+            onModelChanged: fillListModel()
+            model: listModel
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
-            model: manager.car.tanks
             VerticalScrollDecorator { flickable: tanklistView }
-
             delegate: ListItem {
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 showMenuOnPressAndHold: true
-
                 onClicked: pageStack.push(Qt.resolvedUrl("TankEntryView.qml"), { tank: model.modelData })
-
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
                         onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
                     }
-
                     MenuItem {
                         text: qsTr("Remove")
                         onClicked: {
@@ -171,6 +168,20 @@ Page {
                     }
                 }
             }
+        }
+    }
+    ListModel {
+        id:listModel
+    }
+
+    // Fill list model
+    function fillListModel()
+    {
+        var tanklist = manager.car.tanks;
+        for (var i = 0;i < tanklist.length ;i++)
+        {
+            if ((filter=="")||(manager.car.getFueltypeName(tanklist[i].fueltype)==filter))
+                listModel.append({"fuel" : tanklist[i]})
         }
     }
 }
