@@ -136,7 +136,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="67"/>
         <source>Distance: %L1 ~ %L2 %3</source>
-        <translation>Entfernung: %L1 ~ %L2</translation>
+        <translation>Laufleistung: %L1 ~ %L2</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="73"/>
