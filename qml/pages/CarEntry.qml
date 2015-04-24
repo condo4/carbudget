@@ -73,7 +73,22 @@ Page {
                 text: qsTr("Consumption: %L1 l/100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceunity)
                 font.pixelSize: Theme.fontSizeSmall
             }
-
+            Label {
+                x: Theme.paddingLarge
+                text: qsTr("Last: %L1 l/100%2").arg(manager.car.consumptionlast.toFixed(2)).arg(manager.car.distanceunity)
+                font.pixelSize: Theme.fontSizeSmall
+                color: {
+                    if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"
+                    if(manager.car.consumptionlast < manager.car.consumption * 0.94) return "#40FF00"
+                    if(manager.car.consumptionlast < manager.car.consumption * 0.96) return "#80FF00"
+                    if(manager.car.consumptionlast < manager.car.consumption * 0.98) return "#C0FF00"
+                    if(manager.car.consumptionlast < manager.car.consumption * 1.00) return "#FFFF00"
+                    if(manager.car.consumptionlast < manager.car.consumption * 1.02) return "#FFC000"
+                    if(manager.car.consumptionlast < manager.car.consumption * 1.04) return "#FF8000"
+                    if(manager.car.consumptionlast < manager.car.consumption * 1.06) return "#FF4000"
+                    if(manager.car.consumptionlast < manager.car.consumption * 1.08) return "#FF2000"
+                    return "#FF0000"
+                }            }
             Row {
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter

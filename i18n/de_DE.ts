@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="72"/>
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dank an:&lt;br&gt;- Lorenzo Facca (Italienisch Übersetzung)&lt;br&gt;- Alois Spitzbart (Deutsche Übersetzung)&lt;br&gt;- Michal Hrusecky (Viele Verbesserungen)&lt;br&gt;- Denis Fedoseev (Russische Übersetzung)&lt;br &gt;- Thomas Michel (Viele Verbesserungen)</translation>
     </message>
 </context>
 <context>
@@ -69,14 +69,14 @@
         <translation>Min:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="160"/>
+        <location filename="../qml/pages/Budge  tView.qml" line="160"/>
         <source>Max:</source>
         <translation>Max:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="179"/>
         <source>Costs</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechnungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="197"/>
@@ -94,7 +94,7 @@
         <location filename="../qml/pages/BudgetView.qml" line="259"/>
         <location filename="../qml/pages/BudgetView.qml" line="357"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamt:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="278"/>
@@ -136,22 +136,22 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="67"/>
         <source>Distance: %L1 ~ %L2 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufleistung: %L1 ~ %L2</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="73"/>
         <source>Consumption: %L1 l/100%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbrauch: %L1 l/100%2</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="166"/>
         <source>Tires mounted: %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Reifen montiert: %1/%2</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="166"/>
         <source>Tires mounted</source>
-        <translation type="unfinished"></translation>
+        <translation>Reifen montiert</translation>
     </message>
     <message>
         <source>Distance: %L1 km</source>
@@ -199,7 +199,7 @@
     <message>
         <location filename="../qml/pages/CarView.qml" line="32"/>
         <source>Import Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Fahrzeug importieren</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="46"/>
@@ -307,7 +307,7 @@
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="35"/>
         <source>Costs by Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechnungen nach Typ</translation>
     </message>
 </context>
 <context>
@@ -347,12 +347,12 @@
     <message>
         <location filename="../qml/pages/Costper100Statistics.qml" line="35"/>
         <source>Bills per 100 </source>
-        <translation type="unfinished"></translation>
+        <translation>Rechnungen pro 100 </translation>
     </message>
     <message>
         <location filename="../qml/pages/Costper100Statistics.qml" line="35"/>
         <source> by Type</source>
-        <translation type="unfinished"></translation>
+        <translation>nach Typ</translation>
     </message>
 </context>
 <context>
@@ -411,12 +411,12 @@
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="50"/>
         <source> / 100</source>
-        <translation type="unfinished"></translation>
+        <translation> / 100</translation>
     </message>
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="56"/>
         <source> l / 100</source>
-        <translation type="unfinished"></translation>
+        <translation>l / 100</translation>
     </message>
 </context>
 <context>
@@ -424,7 +424,7 @@
     <message>
         <location filename="../qml/pages/FuelStatistics.qml" line="36"/>
         <source>Costs by fuel type</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosten nach Kraftstoffart</translation>
     </message>
 </context>
 <context>
@@ -432,12 +432,12 @@
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
         <source>Cars found in </source>
-        <translation type="unfinished"></translation>
+        <translation>Gefundene Fahrzeuge in</translation>
     </message>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="52"/>
         <source>Import</source>
-        <translation type="unfinished">Import</translation>
+        <translation>Import</translation>
     </message>
 </context>
 <context>
@@ -445,22 +445,22 @@
     <message>
         <location filename="../qml/pages/Fuelper100Statistics.qml" line="31"/>
         <source>Consumption by fuel type</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbrauch nach Kraftstoffart</translation>
     </message>
     <message>
         <location filename="../qml/pages/Fuelper100Statistics.qml" line="58"/>
         <source>Average: </source>
-        <translation type="unfinished">Durchschnitt:</translation>
+        <translation>Durchschnitt:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Fuelper100Statistics.qml" line="77"/>
         <source>Min:</source>
-        <translation type="unfinished">Min:</translation>
+        <translation>Min:</translation>
     </message>
     <message>
         <location filename="../qml/pages/Fuelper100Statistics.qml" line="96"/>
         <source>Max:</source>
-        <translation type="unfinished">Max:</translation>
+        <translation>Max:</translation>
     </message>
 </context>
 <context>
@@ -522,12 +522,12 @@
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="46"/>
         <source>Cars found in </source>
-        <translation type="unfinished"></translation>
+        <translation>Gefundene Fahrzeuge in</translation>
     </message>
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
         <source>Import</source>
-        <translation type="unfinished">Import</translation>
+        <translation>Import</translation>
     </message>
 </context>
 <context>
@@ -535,12 +535,12 @@
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="33"/>
         <source>File to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Import Date</translation>
     </message>
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="55"/>
         <source>Import</source>
-        <translation type="unfinished">Import</translation>
+        <translation>Import</translation>
     </message>
 </context>
 <context>
@@ -559,22 +559,22 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="63"/>
         <source>Distance Unity</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheit Entfernung</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Km or Mile</source>
-        <translation type="unfinished"></translation>
+        <translation>Km oder Meilen</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="75"/>
         <source>Number of wheels</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl Räder</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="76"/>
         <source>2, 4, 6 or 8</source>
-        <translation type="unfinished"></translation>
+        <translation>2, 4, 6 oder 8</translation>
     </message>
 </context>
 <context>
@@ -813,17 +813,17 @@
     <message>
         <location filename="../qml/pages/TankView.qml" line="47"/>
         <source>Add tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Tankvorgang</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="51"/>
         <source>Manage stations</source>
-        <translation type="unfinished">Tankstellen verwalten</translation>
+        <translation>Tankstellen verwalten</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="55"/>
         <source>Manage fuel types</source>
-        <translation type="unfinished">Kraftstoffart bearbeiten</translation>
+        <translation>Kraftstoffart bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="84"/>
@@ -855,7 +855,7 @@
     <message>
         <location filename="../qml/pages/TankView.qml" line="136"/>
         <source>l</source>
-        <translation type="unfinished"></translation>
+        <translation>l</translation>
     </message>
     <message>
         <source>l </source>
@@ -959,7 +959,7 @@
     <message>
         <location filename="../qml/pages/TireView.qml" line="35"/>
         <source>Show history</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie anzeigen</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="43"/>
@@ -1001,17 +1001,17 @@
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="43"/>
         <source>Modify Tire Mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Reifenmotage bearbeiten</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="59"/>
         <source>Mount date</source>
-        <translation type="unfinished"></translation>
+        <translation>Montage Datum</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="92"/>
         <source>Unmount date</source>
-        <translation type="unfinished"></translation>
+        <translation>Demontage Datum</translation>
     </message>
 </context>
 <context>
@@ -1019,12 +1019,12 @@
     <message>
         <location filename="../qml/pages/TiremountView.qml" line="41"/>
         <source>Tire Mounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Reifen Montagen</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountView.qml" line="63"/>
         <source>Modify</source>
-        <translation type="unfinished">Bearbeiten</translation>
+        <translation>Bearbeiten</translation>
     </message>
 </context>
 </TS>

@@ -23,13 +23,16 @@ import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
 Page {
+    property string filter: ""
+    // When in statistics drilldown, show description instead of cost type
+    property bool showDescription: false
     allowedOrientations: Orientation.All
     Drawer {
         id: costviewDrawer
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: costView.contentHeight
+        backgroundSize: costview.contentHeight
     }
     SilicaFlickable {
         id:costview
@@ -58,9 +61,12 @@ Page {
             clip: true
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
-            model: manager.car.costs
+            onModelChanged: fillListModel()
+            model: listModel
             delegate: ListItem {
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                height: dataColumn.height
+                contentHeight: dataColumn.height
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
                 menu: ContextMenu {
@@ -79,10 +85,10 @@ Page {
                     }
                 }
                 Column {
+                    id: dataColumn
                     width: parent.width
                     Row {
                         width: parent.width
-
                         Text {
                             text: model.modelData.distance + manager.car.distanceunity;
                             font.family: Theme.fontFamily
@@ -91,7 +97,6 @@ Page {
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignLeft
                         }
-
                         Text {
                             text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
                             font.family: Theme.fontFamily
@@ -100,19 +105,18 @@ Page {
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignRight
                         }
-
                     }
                     Row {
                         width: parent.width
                         Text {
-                            text: manager.car.getCosttypeName(model.modelData.costtype);
+                            text: {return showDescription ? model.modelData.description : manager.car.getCosttypeName(model.modelData.costtype)}
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.secondaryColor
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignLeft
+                            clip: true
                         }
-
                         Text {
                             text: model.modelData.cost + manager.car.currency;
                             font.family: Theme.fontFamily
@@ -126,6 +130,21 @@ Page {
             }
         }
 
+    }
+    ListModel {
+        id:listModel
+    }
+
+    // Fill list model
+    function fillListModel()
+    {
+        var costlist = manager.car.costs;
+        for (var i = 0;i < costlist.length ;i++)
+        {
+            if ((filter=="")||(manager.car.getCosttypeName(costlist[i].costtype)==filter))
+                listModel.append({"cost" : costlist[i]})
+        }
+        console.log("List Model filled")
     }
 }
 

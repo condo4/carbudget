@@ -46,6 +46,7 @@ class Car : public QObject
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
     Q_PROPERTY(double consumptionmax READ consumptionmax NOTIFY consumptionmaxChanged)
     Q_PROPERTY(double consumptionmin READ consumptionmin NOTIFY consumptionminChanged)
+    Q_PROPERTY(double consumptionlast READ consumptionlast NOTIFY consumptionlastChanged)
     Q_PROPERTY(double fueltotal READ fueltotal NOTIFY fueltotalChanged)
     Q_PROPERTY(unsigned int maxdistance READ maxdistance NOTIFY maxdistanceChanged)
     Q_PROPERTY(unsigned int mindistance READ mindistance NOTIFY mindistanceChanged)
@@ -67,6 +68,8 @@ class Car : public QObject
     Q_PROPERTY(double budget_cost_total READ budget_cost_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
     Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_tire_total READ budget_tire_total NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_tire READ budget_tire NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
 
@@ -106,6 +109,7 @@ public:
     double consumption() const;
     double consumptionmax() const;
     double consumptionmin() const;
+    double consumptionlast() const;
     unsigned int maxdistance() const;
     unsigned int mindistance() const;
 
@@ -125,6 +129,7 @@ public:
     unsigned long int getDistance(QDate Date);
 
     double budget_fuel_total();
+    Q_INVOKABLE double budget_fuel_byType(unsigned int id);
     Q_INVOKABLE double budget_fuel_total_byType(unsigned int id);
     double budget_fuel();
     Q_INVOKABLE double budget_consumption_byType(unsigned int id);
@@ -136,11 +141,14 @@ public:
     Q_INVOKABLE double budget_cost_byType(unsigned int id);
     double budget_total();
     double budget();
+    double budget_tire_total();
+    double budget_tire();
 
 signals:
     void nbtankChanged(unsigned int nbtank);
     void consumptionChanged(double consumption);
     void consumptionmaxChanged(double consumptionmax);
+    void consumptionlastChanged(double consumptionlast);
     void consumptionminChanged(double consumptionmin);
     void fueltotalChanged(double fueltotal);
     void maxdistanceChanged(double consumption);

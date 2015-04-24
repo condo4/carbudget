@@ -24,40 +24,162 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+    id:coststatisticsPage
+    property bool  per100: false
+    property string type: "costs"
+    PageHeader {
+            id: header
+
+             title: {
+                 if (type=="costs")
+                 {
+                     if (per100)
+                         return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                     return qsTr("Bills by Type")
+                 }
+                 else
+                 {
+                     if (per100)
+                         return  qsTr("Fuel per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                     return qsTr("Fuel by Type")
+                 }
+             }
+         }
+    Canvas {
+        id: pieChart
+        width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
+        anchors.top: header.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        onPaint: {
+            var ctx = pieChart.getContext('2d')
+            ctx.clearRect(0,0,width,height)
+            var centerX = (width/2).toFixed(0)
+            var centerY = (height/2).toFixed(0)
+            var radius = (0.95*width/2).toFixed(0)
+            var startangle=0.0
+            var endangle=0.0
+            var total=0.0
+            ctx.lineWidth = 1
+            var i
+            for (i =0; i < listModel.count;i++)
+            {
+                total += listModel.get(i).total
+            }
+            var angle = 6.28/total
+            for (i =0; i < listModel.count;i++)
+            {
+                endangle = startangle + listModel.get(i).total * angle
+                ctx.fillStyle=listModel.get(i).color
+                ctx.beginPath()
+                ctx.moveTo(centerX,centerY)
+                ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+                ctx.lineTo(centerX,centerY)
+                ctx.fill()
+                ctx.stroke()
+                startangle=endangle
+            }
+        }
+    }
     SilicaListView{
-        id:costlist
-        anchors.fill: parent
+        id:costlistView
+        anchors.top:pieChart.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        contentHeight: parent.height
+        width:parent.width
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+        clip: true
         VerticalScrollDecorator {}
-        header:  PageHeader {
-                 title: qsTr("Costs by Type")
-             }
-        model:manager.car.costtypes
+        model:listModel
         delegate: ListItem {
             height:dataRow.height
-            Row {
-                id: dataRow
-                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-                Text {
-                    text: model.modelData.name;
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: Theme.primaryColor
-                    width: parent.width/2
-                }
-                Text {
-                    width:parent.width/2
-                    text : manager.car.budget_cost_total_byType(model.modelData.id).toFixed(2) + " " + manager.car.currency
-                    font.family: "monospaced"
-                    font.pixelSize: Theme.fontSizeMedium
-                    color: Theme.primaryColor
-                    horizontalAlignment: Text.AlignRight
+            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+            contentHeight: dataRow.height
+            onClicked: {
+                if (type=="costs")
+                    pageStack.push(Qt.resolvedUrl("CostView.qml"), { filter: model.name , showDescription: true })
+                else pageStack.push(Qt.resolvedUrl("TankView.qml"), { filter: model.name , showDescription: true })
+            }
+            Rectangle {
+                color:model.color
+                height:dataRow.height
+                width: parent.width //- Theme.paddingMedium - Theme.paddingMedium
+                Row {
+                    id: dataRow
+                    width: parent.width
+                    Text {
+                        text: model.name;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.primaryColor
+                        width: parent.width/2
+                    }
+                    Text {
+                        width:parent.width/2
+                        text : model.total.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeMedium
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
+
      }
     }
+
+    ListModel {
+        id:listModel
+    }
+
+    // Fill list model
+    function fillListModel()
+    {
+        var costlist = manager.car.costtypes
+        var fueltypelist = manager.car.fueltypes
+        var color
+        listModel.clear()
+        var count = (type=="costs" ? costlist.length : fueltypelist.length)
+        for (var i = 0;i < count ;i++)
+        {
+            color=(i+1)/(count+2)
+            color=(255*color).toFixed(0)
+            color=Number(color).toString(16).toUpperCase()
+            /*
+            /* Optional use color model
+            color=(65536*color).toFixed(0)
+            while (color.length < 4) {
+                color = "0" + color;
+            }
+            var finalcolor = "#00"+color
+            */
+            var finalcolor = "#"+color+color+color
+            var price
+            var name
+            var id
+            if (type=="costs")
+            {
+                name = costlist[i].name
+                id = costlist[i].id
+                if (per100)
+                    price = manager.car.budget_cost_byType(costlist[i].id)
+                else price = manager.car.budget_cost_total_byType(costlist[i].id)
+            }
+            else
+            {
+                name = fueltypelist[i].name
+                id = fueltypelist[i].id
+                if (per100)
+                    price = manager.car.budget_fuel_byType(fueltypelist[i].id)
+                else price = manager.car.budget_fuel_total_byType(fueltypelist[i].id)
+            }
+            listModel.append({id: id, name: name, total: price, color: finalcolor})
+        }
+    }
+    onVisibleChanged: {fillListModel()}
 }
 
 

@@ -103,6 +103,7 @@ void Car::db_load()
         emit nbtankChanged(_tanklist.count());
         emit consumptionChanged(this->consumption());
         emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionlastChanged(this->consumptionlast());
         emit consumptionminChanged(this->consumptionmin());
         emit fueltotalChanged(this->fueltotal());
         emit maxdistanceChanged(this->maxdistance());
@@ -390,6 +391,12 @@ double Car::consumptionmax() const
     return con;
 }
 
+double Car::consumptionlast() const
+{
+    QList<Tank*>::const_iterator tank = _tanklist.constBegin();
+    return (*tank)->consumption();
+}
+
 double Car::consumptionmin() const
 {
     double con=99999;
@@ -545,6 +552,26 @@ double Car::budget_fuel_total()
     return total;
 }
 
+double Car::budget_fuel_byType(unsigned int id)
+{
+    // Returns average price of fuel type per 100Km
+    // Not sure if this really makes sense but it makes the statistic views consistent
+    double price =0;
+    double quantity = 0;
+    foreach (Tank *tank, _tanklist)
+    {
+        if (tank->fueltype()==id)
+        {
+            price += tank->price();
+            quantity += tank->quantity();
+        }
+    }
+    double average = 0;
+    if (quantity!=0)
+        average = price/quantity;
+    return average*budget_consumption_byType(id);
+}
+
 double Car::budget_fuel_total_byType(unsigned int id)
 {
     // Returns total price of all tankstops by Type
@@ -556,7 +583,6 @@ double Car::budget_fuel_total_byType(unsigned int id)
     }
     return total;
 }
-
 double Car::budget_fuel()
 {
     /* Return sum(fuel price) / ODO * 100 */
@@ -667,13 +693,7 @@ double Car::budget_cost_total_byType(unsigned int id)
 double Car::budget_cost()
 {
     /* Return sum(cost) / ODO * 100 */
-    double totalPrice = 0;
-
-    foreach(Cost *cost, _costlist)
-    {
-        totalPrice += cost->cost();
-    }
-    return totalPrice / ((maxdistance() - mindistance())/ 100.0);
+    return budget_cost_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 
 double Car::budget_cost_byType(unsigned int id)
@@ -689,14 +709,31 @@ double Car::budget_cost_byType(unsigned int id)
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
 
+double Car::budget_tire()
+{
+    double totalPrice = 0;
+
+    return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
+}
+
+double Car::budget_tire_total()
+{
+    double total = 0;
+    foreach (Tire *tire, _tirelist)
+    {
+        total += tire->price();
+    }
+    return total;
+}
+
 double Car::budget_total()
 {
-    return budget_fuel_total() + budget_cost_total();
+    return budget_fuel_total() + budget_cost_total()+budget_tire_total();
 }
 
 double Car::budget()
 {
-    return budget_fuel() + budget_cost();
+    return budget_fuel() + budget_cost()+ budget_tire();
 }
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
 {
@@ -707,6 +744,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
     emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionlastChanged(this->consumptionlast());
     emit consumptionminChanged(this->consumptionmin());
     emit fueltotalChanged(this->fueltotal());
     emit maxdistanceChanged(this->maxdistance());
@@ -722,6 +760,7 @@ void Car::delTank(Tank *tank)
     emit nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
     emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionlastChanged(this->consumptionlast());
     emit consumptionminChanged(this->consumptionmin());
     emit maxdistanceChanged(this->maxdistance());
     emit tanksChanged();
