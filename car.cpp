@@ -317,7 +317,7 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0),_buyingprice(0),_sellingprice(0),_lifetime(0)
 {
     this->db_init();
     while(this->db_get_version() < DB_VERSION)
@@ -347,6 +347,9 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     this->_costtypelist.append(new Costtype);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
     nbtire();
+    buyingprice();
+    sellingprice();
+    lifetime();
 }
 
 unsigned int Car::nbtank() const
@@ -542,16 +545,6 @@ unsigned long int Car::getDistance(QDate date)
     return dist;
 }
 
-double Car::budget_fuel_total()
-{
-    double total = 0;
-    foreach (Tank *tank, _tanklist)
-    {
-        total += tank->price();
-    }
-    return total;
-}
-
 double Car::budget_fuel_byType(unsigned int id)
 {
     // Returns average price of fuel type per 100Km
@@ -583,33 +576,6 @@ double Car::budget_fuel_total_byType(unsigned int id)
     }
     return total;
 }
-double Car::budget_fuel()
-{
-    /* Return sum(fuel price) / ODO * 100 */
-    unsigned long int maxDistance = 0;
-    unsigned long int minDistance = 999999999;
-    double totalPrice = 0;
-
-    foreach(Tank *tank, _tanklist)
-    {
-        if(tank->distance() > maxDistance)
-            maxDistance = tank->distance();
-        if(tank->distance() < minDistance)
-            minDistance = tank->distance();
-        totalPrice += tank->price();
-    }
-    foreach(Tank *tank, _tanklist)
-    {
-        if(tank->distance() == minDistance)
-        {
-            totalPrice -= tank->price();
-            break;
-        }
-    }
-    if(maxDistance == 0) return 0;
-    return totalPrice / ((maxDistance - minDistance)/ 100.0);
-}
-
 double Car::budget_consumption_byType(unsigned int id)
 {
     /* Return sum(fuel price) / ODO * 100 for fueltype */
@@ -645,7 +611,6 @@ double Car::budget_consumption_byType(unsigned int id)
     }
     return (totalDistance==0) ? 0.0 : (totalQuantity / totalDistance * 100.0);
 }
-
 double Car::budget_consumption_max_byType(unsigned int type)
 {
     double con=0;
@@ -656,7 +621,6 @@ double Car::budget_consumption_max_byType(unsigned int type)
     }
     return con;
 }
-
 double Car::budget_consumption_min_byType(unsigned int type)
 {
     double con=99999;
@@ -667,18 +631,6 @@ double Car::budget_consumption_min_byType(unsigned int type)
     }
     return (con==99999) ? 0 : con;
 }
-
-
-double Car::budget_cost_total()
-{
-    double total=0;
-    foreach(Cost *cost,_costlist)
-    {
-        total += cost->cost();
-    }
-    return total;
-}
-
 double Car::budget_cost_total_byType(unsigned int id)
 {
     double total=0;
@@ -689,13 +641,6 @@ double Car::budget_cost_total_byType(unsigned int id)
     }
     return total;
 }
-
-double Car::budget_cost()
-{
-    /* Return sum(cost) / ODO * 100 */
-    return budget_cost_total() / ((maxdistance() - mindistance())/ 100.0);
-}
-
 double Car::budget_cost_byType(unsigned int id)
 {
     /* Return sum(cost) / ODO * 100 */
@@ -708,16 +653,93 @@ double Car::budget_cost_byType(unsigned int id)
     }
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
-
-double Car::budget_tire()
+double Car::budget_fuel_total()
 {
+    double total = 0;
+    foreach (Tank *tank, _tanklist)
+    {
+        total += tank->price();
+    }
+    return total;
+}
+double Car::budget_fuel()
+{
+    /* Return sum(fuel price) / ODO * 100 */
+    unsigned long int maxDistance = 0;
+    unsigned long int minDistance = 999999999;
     double totalPrice = 0;
 
+    foreach(Tank *tank, _tanklist)
+    {
+        if(tank->distance() > maxDistance)
+            maxDistance = tank->distance();
+        if(tank->distance() < minDistance)
+            minDistance = tank->distance();
+        totalPrice += tank->price();
+    }
+    foreach(Tank *tank, _tanklist)
+    {
+        if(tank->distance() == minDistance)
+        {
+            totalPrice -= tank->price();
+            break;
+        }
+    }
+    if(maxDistance == 0) return 0;
+    return totalPrice / ((maxDistance - minDistance)/ 100.0);
+}
+double Car::budget_cost_total()
+{
+    // returns total costs for all bills
+    double total=0;
+    foreach(Cost *cost,_costlist)
+    {
+        total += cost->cost();
+    }
+    return total;
+}
+double Car::budget_cost()
+{
+    //returns costs for bills per 100KM
+    if (maxdistance()-mindistance() ==0) return 0;
+    return budget_cost_total() / ((maxdistance() - mindistance())/ 100.0);
+}
+double Car::budget_invest_total()
+{
+    //returns buying costs
+    return _buyingprice - _sellingprice;
+}
+double Car::budget_invest()
+{
+    //returns bying costs per 100 KM
+    QDate today = QDate::currentDate();
+    unsigned int monthsused = 1;
+    double valuecosts;
+    if (maxdistance()==mindistance() ) return 0.0;
+    if (_buyingdate.toString()=="")
+    {
+        qDebug() << "Invalid buying date ";
+        double tmp = (_buyingprice-_sellingprice)/(maxdistance()-mindistance())*100.0;
+        qDebug() << tmp;
+        return tmp;
+    }
+    while (_buyingdate.addMonths(monthsused) < today)
+    {
+        monthsused++;
+    }
+    if ((monthsused < _lifetime) && (_lifetime !=0))
+        valuecosts = (_buyingprice - _sellingprice)*monthsused/_lifetime;
+    else valuecosts = (_buyingprice - _sellingprice);
+    return valuecosts / ((maxdistance() - mindistance())/ 100.0);
+}
+double Car::budget_tire()
+{
+    //returns tire costs per 100km
     return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
 }
-
 double Car::budget_tire_total()
 {
+    //returns total tire costs
     double total = 0;
     foreach (Tire *tire, _tirelist)
     {
@@ -728,13 +750,15 @@ double Car::budget_tire_total()
 
 double Car::budget_total()
 {
-    return budget_fuel_total() + budget_cost_total()+budget_tire_total();
+    //returns all costs
+    return budget_cost_total() + budget_fuel_total() + budget_tire_total() + budget_invest_total();
 }
-
 double Car::budget()
 {
-    return budget_fuel() + budget_cost()+ budget_tire();
+    // Return total costs  / ODO * 100
+    return budget_cost()+budget_fuel()+budget_invest()+budget_tire();
 }
+
 void Car::addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
 {
     Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, CREATE_NEW_EVENT,  note, this);
@@ -1276,11 +1300,169 @@ void Car::setNbtire(unsigned int nbtire)
         else
             query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='nbtire';").arg(nbtire));
 
-        qDebug() << "Change distanceunity in database: " << _nbtire;
+        qDebug() << "Change number of tires in database: " << _nbtire;
     }
     _nbtire = nbtire;
     emit nbtireChanged();
 }
+
+double Car::buyingprice()
+{
+    if(_buyingprice == 0)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';"))
+        {
+            query.next();
+            _buyingprice = query.value(0).toDouble();
+            qDebug() << "Find buyingprice in database: " << _buyingprice;
+        }
+        if(_buyingprice == 0)
+        {
+            qDebug() << "Buying price not set in database, set to 0";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('buyingprice','0');");
+            _buyingprice = 0;
+        }
+    }
+    return _buyingprice;
+}
+
+void Car::setBuyingprice(double price)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingprice';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingprice','%1');").arg(price));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='buyingprice';").arg(price));
+
+        qDebug() << "Change buyingprice in database: " << price;
+    }
+    _buyingprice = price;
+    emit buyingpriceChanged();
+}
+
+double Car::sellingprice()
+{
+    if(_sellingprice == 0)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';"))
+        {
+            query.next();
+            _sellingprice = query.value(0).toDouble();
+            qDebug() << "Find sellingprice in database: " << _sellingprice;
+        }
+        if(_sellingprice == 0)
+        {
+            qDebug() << "Selling price not set in database, set to 0";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('sellingprice','0');");
+            _sellingprice = 0;
+        }
+    }
+    return _sellingprice;
+}
+
+void Car::setSellingprice(double price)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='sellingprice';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('sellingprice','%1');").arg(price));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='sellingprice';").arg(price));
+
+        qDebug() << "Change sellingprice in database: " << price;
+    }
+    _sellingprice = price;
+    emit sellingpriceChanged();
+}
+
+unsigned int Car::lifetime()
+{
+    if(_lifetime == 0)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';"))
+        {
+            query.next();
+            _lifetime = query.value(0).toInt();
+            qDebug() << "Find lifetime in database: " << _lifetime;
+        }
+        if(_lifetime == 0)
+        {
+            qDebug() << "Default lifetime not set in database, set to 0";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('lifetime','0');");
+            _lifetime = 0;
+        }
+    }
+    return _lifetime;
+}
+
+void Car::setLifetime(int months)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='lifetime';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('lifetime','%1');").arg(months));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='lifetime';").arg(months));
+
+        qDebug() << "Change lifetime in database: " << months;
+    }
+    _lifetime = months;
+    emit lifetimeChanged();
+}
+
+QDate Car::buyingdate()
+{
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';"))
+        {
+            query.next();
+            _buyingdate = QDate::fromString(query.value(0).toString());
+            qDebug() << "Find buying date in database: " << _buyingdate;
+        }
+        else
+        {
+            qDebug() << "buying date not set in database, set to today";
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingdate','%1');").arg(QDate::currentDate().toString()));
+            _buyingdate = QDate::currentDate();
+        }
+    return _buyingdate;
+}
+
+void Car::setBuyingdate(QDate date)
+{
+    QSqlQuery query(this->db);
+    qDebug() << "setBuyingdate invoked";
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingdate';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingdate','%1');").arg(date.toString()));
+        else
+            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='buyingdate';").arg(date.toString()));
+
+        qDebug() << "Change buying date in database: " << date;
+    }
+    _buyingdate = date;
+    emit buyingdateChanged();
+}
+
 void Car::simulation()
 {
     Tire *winter1, *winter2, *summer1;
