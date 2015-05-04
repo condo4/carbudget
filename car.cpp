@@ -711,8 +711,6 @@ double Car::budget_cost_byType(unsigned int id)
 
 double Car::budget_tire()
 {
-    double totalPrice = 0;
-
     return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 
