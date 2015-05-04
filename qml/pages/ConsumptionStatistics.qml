@@ -37,7 +37,7 @@ Page {
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             height: dataColumn.height
-            contentHeight: dataColumn
+            contentHeight: dataColumn.height
             Column {
                 id: dataColumn
                 width: parent.width
