@@ -111,7 +111,7 @@ Dialog {
                 label: qsTr("Total Price")
                 placeholderText: qsTr("Total Price")
                 anchors { left: parent.left; right: parent.right }
-                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: cbfueltype.focus = true
