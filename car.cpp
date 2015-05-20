@@ -664,7 +664,6 @@ double Car::budget_fuel_total()
 }
 double Car::budget_fuel()
 {
-<<<<<<< HEAD
     /* Return sum(fuel price) / ODO * 100 */
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
@@ -736,8 +735,6 @@ double Car::budget_invest()
 double Car::budget_tire()
 {
     //returns tire costs per 100km
-=======
->>>>>>> upstream/master
     return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 double Car::budget_tire_total()

@@ -42,10 +42,9 @@ Page {
         id: pieChart
         width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
         height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-        //width: budgetPage.width/2
-        //height:budgetPage.height/2
         anchors.top: header.bottom
         anchors.left: parent.left
+
         onPaint: {
             var ctx = pieChart.getContext('2d')
             ctx.clearRect(0,0,width,height)
@@ -182,6 +181,8 @@ Page {
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
         contentHeight: dataColumn.height
+        clip:true
+
         Column {
             id: dataColumn
             width: parent.width- Theme.paddingMedium - Theme.paddingMedium
