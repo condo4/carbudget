@@ -396,6 +396,7 @@ double Car::consumptionmax() const
 
 double Car::consumptionlast() const
 {
+    if(_tanklist.empty()) return 0;
     QList<Tank*>::const_iterator tank = _tanklist.constBegin();
     return (*tank)->consumption();
 }
