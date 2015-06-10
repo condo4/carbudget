@@ -42,10 +42,9 @@ Page {
         id: pieChart
         width: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
         height: { return parent.width < parent.height ? parent.width/2 : parent.height/2 }
-        //width: budgetPage.width/2
-        //height:budgetPage.height/2
         anchors.top: header.bottom
         anchors.left: parent.left
+
         onPaint: {
             var ctx = pieChart.getContext('2d')
             ctx.clearRect(0,0,width,height)
@@ -77,6 +76,15 @@ Page {
             startangle=endangle
             endangle = startangle+manager.car.budget_tire_total*angle
             ctx.fillStyle = "black"
+            ctx.beginPath()
+            ctx.moveTo(centerX,centerY)
+            ctx.arc(centerX,centerY,radius,startangle,endangle,false)
+            ctx.lineTo(centerX,centerY)
+            ctx.fill()
+            ctx.stroke()
+            startangle=endangle
+            endangle = startangle+manager.car.budget_invest_total*angle
+            ctx.fillStyle = "grey"
             ctx.beginPath()
             ctx.moveTo(centerX,centerY)
             ctx.arc(centerX,centerY,radius,startangle,endangle,false)
@@ -144,6 +152,22 @@ Page {
                     }
                 }
             }
+            Row {
+                width:parent.width
+                Rectangle {
+                    color: "grey"
+                    width:parent.width
+                    height:investLegend.height
+                    Text {
+                        id:investLegend
+                        text : qsTr("Invest:") + " " + (manager.car.budget_invest_total*100/manager.car.budget_total).toFixed(2) + "%"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                }
+            }
         }
 
     }
@@ -157,6 +181,8 @@ Page {
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
         contentHeight: dataColumn.height
+        clip:true
+
         Column {
             id: dataColumn
             width: parent.width- Theme.paddingMedium - Theme.paddingMedium
@@ -391,7 +417,7 @@ Page {
                 id:tirecostsRow
                 width: parent.width
                 Rectangle {
-                    height: fueltext.height
+                    height: tiretext.height
                     width: parent.width
                     color: "transparent"
                     Text {
@@ -419,6 +445,33 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
                     }
                     */
+                }
+            }
+            Row {
+                id:buyingcostsRow
+                width: parent.width
+                Rectangle {
+                    height: fueltext.height
+                    width: parent.width
+                    color: "transparent"
+                    Text {
+                        id: buyingcosttext
+                        width:parent.width/2
+                        text : qsTr("Invest:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        anchors.right:parent.right
+                        width:parent.width/2
+                        text : manager.car.budget_invest_total.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
             Row {
@@ -490,12 +543,12 @@ Page {
                 id:billsper100Row
                 width: parent.width
                 Rectangle {
-                    height: billbtext.height
+                    height: billsper100text.height
                     width: parent.width
                     color: "transparent"
 
                     Text {
-                        id: billbtext
+                        id: billsper100text
                         width:parent.width/2
                         text : qsTr("Bills:")
                         font.family: Theme.fontFamily
@@ -523,7 +576,7 @@ Page {
                 id:tiresper100Row
                 width: parent.width
                 Rectangle {
-                    height: billbtext.height
+                    height: tiresper100text.height
                     width: parent.width
                     color: "transparent"
 
@@ -552,6 +605,34 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
                     }
                     */
+                }
+            }
+            Row {
+                id:buyingper100Row
+                width: parent.width
+                Rectangle {
+                    height: buyingper100text.height
+                    width: parent.width
+                    color: "transparent"
+
+                    Text {
+                        id: buyingper100text
+                        width:parent.width/2
+                        text : qsTr("Buying:")
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+                    Text {
+                        width:parent.width/2
+                        anchors.right:parent.right
+                        text : manager.car.budget_invest.toFixed(2) + " " + manager.car.currency
+                        font.family: "monospaced"
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
                 }
             }
             Row {

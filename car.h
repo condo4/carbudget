@@ -62,14 +62,19 @@ class Car : public QObject
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
     Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged())
     Q_PROPERTY(unsigned int nbtire READ nbtire WRITE setNbtire NOTIFY nbtireChanged)
-
+    Q_PROPERTY(double buyingprice READ buyingprice WRITE setBuyingprice NOTIFY buyingpriceChanged)
+    Q_PROPERTY(double sellingprice READ sellingprice WRITE setSellingprice NOTIFY sellingpriceChanged)
+    Q_PROPERTY(unsigned int lifetime READ lifetime WRITE setLifetime NOTIFY lifetimeChanged)
+    Q_PROPERTY(QDate buyingdate READ buyingdate WRITE setBuyingdate NOTIFY buyingdateChanged)
     Q_PROPERTY(double budget_fuel_total READ budget_fuel_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost_total READ budget_cost_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget_tire_total READ budget_tire_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_tire READ budget_tire NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_invest_total READ budget_invest_total NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_invest READ budget_invest NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
 
@@ -89,6 +94,10 @@ private:
     QString _distanceunity;
 
     unsigned int _nbtire;
+    double _buyingprice;
+    double _sellingprice;
+    unsigned int _lifetime;
+    QDate _buyingdate;
 
     void db_init();
     void db_load();
@@ -128,21 +137,23 @@ public:
 
     unsigned long int getDistance(QDate Date);
 
-    double budget_fuel_total();
     Q_INVOKABLE double budget_fuel_byType(unsigned int id);
     Q_INVOKABLE double budget_fuel_total_byType(unsigned int id);
-    double budget_fuel();
     Q_INVOKABLE double budget_consumption_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_max_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_min_byType(unsigned int id);
-    double budget_cost_total();
     Q_INVOKABLE double budget_cost_total_byType(unsigned int id);
-    double budget_cost();
     Q_INVOKABLE double budget_cost_byType(unsigned int id);
-    double budget_total();
-    double budget();
+    double budget_fuel_total();
+    double budget_fuel();
+    double budget_cost_total();
+    double budget_cost();
     double budget_tire_total();
     double budget_tire();
+    double budget_invest_total();
+    double budget_invest();
+    double budget();
+    double budget_total();
 
 signals:
     void nbtankChanged(unsigned int nbtank);
@@ -164,7 +175,10 @@ signals:
     void currencyChanged();
     void distanceunityChanged();
     void nbtireChanged();
-
+    void sellingpriceChanged();
+    void buyingpriceChanged();
+    void lifetimeChanged();
+    void buyingdateChanged();
     void budgetChanged();
 
 public slots:
@@ -205,6 +219,18 @@ public slots:
 
     unsigned int nbtire();
     void setNbtire(unsigned int nbtire);
+
+    double buyingprice();
+    void setBuyingprice(double price);
+
+    double sellingprice();
+    void setSellingprice(double price);
+
+    unsigned int lifetime();
+    void setLifetime(int months);
+
+    QDate buyingdate();
+    void setBuyingdate(QDate date);
 
 
 };
