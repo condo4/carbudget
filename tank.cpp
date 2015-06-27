@@ -68,6 +68,7 @@ double Tank::price() const
 
 double Tank::priceu() const
 {
+    if (_quantity == 0) return 0;
     return _price / _quantity;
 }
 
@@ -96,17 +97,21 @@ QString Tank::stationname() const
 
 double Tank::consumption() const
 {
+    if (!full()) return 0.0;
     const Tank *previous = _car->previousTank(_distance);
     double quant = this->quantity();
-
-    if((previous == NULL) || (!full()))
-        return 0;
-    while((previous != NULL) && (!(previous->full()))) {
-        quant += previous->quantity();
-        previous = _car->previousTank(previous->distance());
+    while(previous != NULL)
+    {
+        if (!(previous->full()))
+        {
+            qDebug() << "prevous distance is " << previous->quantity();
+            quant += previous->quantity();
+            previous = _car->previousTank(previous->distance());
+        }
+        else break;
     }
-    if(previous == NULL)
-        return 0;
+    if (previous==NULL) return 0.0;
+    if (_distance ==previous->distance()) return 0.0;
     return quant / ((_distance - previous->distance()) / 100.0);
 }
 

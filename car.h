@@ -106,6 +106,7 @@ private:
     void db_upgrade_to_2();
     void db_upgrade_to_3();
     void db_upgrade_to_4();
+    bool db_loading;
 
 public:
     QSqlDatabase db;

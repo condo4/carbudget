@@ -24,7 +24,9 @@ import harbour.carbudget 1.0
 import Qt.labs.folderlistmodel 2.1
 
 Page {
+    id:page
     allowedOrientations: Orientation.All
+    property string dir: manager.getEnv("HOME")
     SilicaListView {
 
         VerticalScrollDecorator {}
@@ -36,24 +38,33 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model:folderModel
+        model:fileModel
 
-        FolderListModel {
-            id: folderModel
-            folder: "file:///$HOME"
-            nameFilters: ["*.xml","*.db"]
-            showDirs: false
+        FileModel {
+            id: fileModel
+            dir: page.dir
+            // page.status does not exactly work - root folder seems to be active always??
+            //active: page.status === PageStatus.Active
         }
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-            onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(filename.text)), { filename: filename.text })
+            //onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(filename.text)), { filename: filename.text })
+            onClicked: {
+                if (model.isDir)
+                    pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"),
+                                   { dir: fileModel.appendPath(txtfilename.text) });
+                else
+                   pageStack.push(Qt.resolvedUrl(checkFileType(txtfilename.text)),
+                                  { filename: dir+"/"+txtfilename.text });
+
+            }
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Import")
-                    onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(filename.text)), { filename: filename.text })
+                    onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(txtfilename.text)), { filename: dir+"/"+txtfilename.text })
                 }
 
             }
@@ -65,8 +76,8 @@ Page {
                     width: parent.width
 
                     Text {
-                        id: filename
-                        text: fileName
+                        id: txtfilename
+                        text: filename
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
