@@ -32,7 +32,7 @@ Page {
 
     XmlListModel {
         id: xmlCars
-        source: manager.getEnv("HOME") + "/" + filename;
+        source: filename;
         query: "/mycar/car"
         XmlRole { name: "name"; query: "name/string()" }
     }
