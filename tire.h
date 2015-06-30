@@ -47,9 +47,12 @@ class Tire : public QObject
     Q_PROPERTY(unsigned int  distance READ distance                             NOTIFY mountChanged)
 
     Q_PROPERTY(unsigned int id          READ id          WRITE setId            NOTIFY idChanged )
+    Q_PROPERTY(unsigned int tireset          READ tireset          WRITE setTireset )
+
 private:
     Car *_car;
     int _id;
+    int _tireset;
 
     QString _name;
     QString _manufacturer;
@@ -96,6 +99,8 @@ public:
 
     unsigned int id() const;
     void setId(unsigned int id);
+    unsigned int tireset() const;
+    void setTireset(unsigned int id);
 
 signals:
     void nameChanged();

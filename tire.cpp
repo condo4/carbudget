@@ -199,6 +199,16 @@ void Tire::setId(unsigned int id)
     emit idChanged();
 }
 
+unsigned int Tire::tireset() const
+{
+    return _tireset;
+}
+
+void Tire::setTireset (unsigned int id)
+{
+    _tireset = id;
+}
+
 void Tire::save()
 {
     if(_id < 0)
