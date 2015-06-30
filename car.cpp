@@ -359,6 +359,10 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
         {
             db_upgrade_to_4();
         }
+        if(this->db_get_version() < 5)
+        {
+            db_upgrade_to_5();
+        }
     }
     qDebug() << "Database version " << this->db_get_version();
 
