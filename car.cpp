@@ -1,4 +1,4 @@
-/**
+﻿/**
  * CarBudget, Sailfish application to manage car cost
  *
  * Copyright (C) 2014 Fabien Proriol
@@ -316,6 +316,25 @@ void Car::db_upgrade_to_4()
     this->db.rollback();
 }
 
+void Car::db_upgrade_to_5()
+{
+    QString sql = "CREATE TABLE Tireset (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);";
+    QSqlQuery query(this->db);
+
+    if(query.exec(sql))
+    {
+        if(query.exec("UPDATE CarBudget SET  value='5' WHERE id='version';"))
+        {
+            if (query.exec("UPDATE TABLE Tires ADD COLUMN tireset INTEGER;"))
+            {
+                this->db.commit();
+                return;
+            }
+        }
+    }
+    this->db.rollback();
+}
+
 Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 {
 
@@ -497,7 +516,7 @@ QQmlListProperty<Tiremount> Car::tiremounts()
 const Tank *Car::previousTank(unsigned int distance) const
 {
     const Tank *previous = NULL;
-    int currentPrevDistance=0;
+    unsigned int currentPrevDistance=0;
     foreach(Tank *tank, _tanklist)
     {
         if ((tank->distance() < distance) && (tank->distance() > currentPrevDistance))
