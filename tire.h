@@ -67,7 +67,7 @@ private:
 
 public:
     explicit Tire(Car *parent = 0);
-    explicit Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = 0);
+    explicit Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, int tireset = -1, Car *parent = 0);
 
     QString name() const;
     void setName(QString name);

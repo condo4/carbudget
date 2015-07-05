@@ -24,7 +24,8 @@ SOURCES += CarBudget.cpp \
     tiremount.cpp \
     filemodel.cpp \
     statfileinfo.cpp \
-    globals.cpp
+    globals.cpp \
+    tireset.cpp
 
 lupdate_only{
     SOURCES += qml/*.qml \
@@ -64,7 +65,9 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/TiremountView.qml \
     qml/pages/TiremountEdit.qml \
     qml/pages/ConsumptionStatistics.qml \
-    qml/pages/DirectoryPage.qml
+    qml/pages/DirectoryPage.qml \
+    qml/pages/TiresetView.qml \
+    qml/pages/TiresetEntry.qml
 
 HEADERS += \
     tank.h \
@@ -79,7 +82,8 @@ HEADERS += \
     tiremount.h \
     filemodel.h \
     statfileinfo.h \
-    globals.h
+    globals.h \
+    tireset.h
 
 TRANSLATIONS = i18n/de_DE.ts \
                i18n/fr_FR.ts \

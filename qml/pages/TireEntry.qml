@@ -26,6 +26,7 @@ import harbour.carbudget 1.0
 
 Dialog {
     property Tire tire
+    property Tireset tireset
     property date buy_date
     property date trash_date
 
@@ -134,22 +135,29 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
-            TextField {
+            ComboBox {
                 id: quantityinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
-                placeholderText: qsTr("Quantity")
-
-                validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
-                inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
-                EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: quantityinput.focus = false
+                menu: ContextMenu{
+                    // show only numbers up to maximum tires in current tireset
+                    id:quantityMenu
+                    Repeater
+                    {
+                        model:quantityModel
+                        MenuItem {
+                            text: model.quantity
+                        }
+                    }
+                }
             }
+
         }
     }
-    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput && quantityinput.acceptableInput && quantityinput.text > 1
+    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput
 
     onOpened: {
+        fillMenu()
         if(tire != undefined)
         {
             buy_date = tire.buydate
@@ -159,6 +167,7 @@ Dialog {
             modelinput.text = tire.modelname
             manufacturerinput.text = tire.manufacturer
             nameinput.text = tire.name
+            quantityinput.enabled = false //else we would change number of tires in a tireset which should not be allowed
         }
         else
         {
@@ -170,7 +179,7 @@ Dialog {
     onAccepted: {
         if(tire == undefined)
         {
-            manager.car.addNewTire(buy_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.addNewTire(buy_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.value,tireset.id )
         }
         else
         {
@@ -180,8 +189,21 @@ Dialog {
             tire.manufacturer = manufacturerinput.text
             tire.modelname = modelinput.text
             tire.price = priceinput.text.replace(",",".")
-            tire.quantity = quantityinput.text
+            tire.quantity = quantity
             tire.save()
+        }
+    }
+    ListModel {
+        id:quantityModel
+    }
+
+    function fillMenu()
+    {
+        quantityModel.clear()
+        for (var i=1;i <=manager.car.nbtire-tireset.tires_associated; i++)
+        {
+            console.log("Adding " + i.toString())
+            quantityModel.append({quantity: i})
         }
     }
 }

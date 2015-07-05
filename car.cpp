@@ -39,14 +39,19 @@ bool sortCostByDate(const Cost *c1, const Cost *c2)
     return c1->date() > c2->date();
 }
 
-bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
+bool sortCosttypeByName(const Costtype *c1, const Costtype *c2)
 {
-    return c1->id() < c2->id();
+    return c1->name() < c2->name();
 }
 
-bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
+bool sortTiresetByName(const Tireset *c1, const Tireset *c2)
 {
-    return c1->id() < c2->id();
+    return c1->name() < c2->name();
+}
+
+bool sortFueltypeByName(const Fueltype *c1, const Fueltype *c2)
+{
+    return c1->name() < c2->name();
 }
 
 bool sortStationByQuantity(const Station *c1, const Station *c2)
@@ -84,6 +89,7 @@ void Car::db_load()
     _fueltypelist.clear();
     _costtypelist.clear();
     _tirelist.clear();
+    _tiresetlist.clear();
     _tiremountlist.clear();
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
@@ -166,7 +172,21 @@ void Car::db_load()
         qDebug() << query.lastError();
     }
 
-    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;"))
+    if(query.exec("SELECT id,name FROM TiresetList;"))
+    {
+        while(query.next())
+        {
+            int id = query.value(0).toInt();
+            QString name = query.value(1).toString();
+            Tireset *tireset = new Tireset(id, name, this);
+            _tiresetlist.append(tireset);
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity,tireset FROM TireList;"))
     {
         while(query.next())
         {
@@ -178,8 +198,16 @@ void Car::db_load()
             QString manufacturer = query.value(5).toString();
             QString model = query.value(6).toString();
             unsigned int quantity = query.value(7).toInt();
-            Tire *tire = new Tire(buydate,trashdate,name,manufacturer,model,price,quantity,id,this);
+            int tireset = query.value(8).toInt();
+            Tire *tire = new Tire(buydate,trashdate,name,manufacturer,model,price,quantity,id,tireset,this);
             _tirelist.append(tire);
+            Tireset *t=findTiresetById(tireset);
+            qDebug() << "Tireset is " << tireset;
+            if (t) {
+                qDebug() << "Found matching tireset for numer of tirese" << quantity;
+                t->setTires_associated(t->tires_associated()+quantity);
+                qDebug() << "Associated tiresets are now " << t->tires_associated();
+            }
         }
     }
     else
@@ -228,8 +256,9 @@ void Car::db_load()
     if (!_tanklist.empty()) qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     if (!_costlist.empty()) qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
     if (!_stationlist.empty()) qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
-    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
-    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
+    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
+    if (!_tiresetlist.empty()) qSort(_tiresetlist.begin(), _tiresetlist.end(), sortTiresetByName);
    if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
     db_loading=false;
     nbtankChanged(_tanklist.count());
@@ -318,7 +347,7 @@ void Car::db_upgrade_to_4()
 
 void Car::db_upgrade_to_5()
 {
-    QString sql = "CREATE TABLE Tireset (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);";
+    QString sql = "CREATE TABLE TiresetList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,nbtire INTEGER,mounted TINYINT);";
     QSqlQuery query(this->db);
 
     if(query.exec(sql))
@@ -371,9 +400,9 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     this->_stationlist.append(new Station);
     qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     this->_fueltypelist.append(new Fueltype);
-    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
     this->_costtypelist.append(new Costtype);
-    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
     nbtire();
     buyingprice();
     sellingprice();
@@ -510,6 +539,11 @@ QQmlListProperty<Cost> Car::costs()
 QQmlListProperty<Tire> Car::tires()
 {
     return QQmlListProperty<Tire>(this, _tirelist);
+}
+
+QQmlListProperty<Tireset> Car::tiresets()
+{
+    return QQmlListProperty<Tireset>(this, _tiresetlist);
 }
 
 QQmlListProperty<Tiremount> Car::tiremounts()
@@ -835,7 +869,7 @@ void Car::addNewFueltype(QString name)
         return;
     Fueltype *fueltype = new Fueltype(-1, name, this);
     _fueltypelist.append(fueltype);
-    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
     fueltype->save();
     emit fueltypesChanged();
 }
@@ -844,7 +878,7 @@ void Car::delFueltype(Fueltype *fueltype)
 {
     qDebug() << "Remove Fuel Type " << fueltype->id();
     _fueltypelist.removeAll(fueltype);
-    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fueltype->id());
 
@@ -977,7 +1011,7 @@ void Car::addNewCosttype(QString name)
         return;
     Costtype *costtype = new Costtype(-1, name, this);
     _costtypelist.append(costtype);
-    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
     costtype->save();
     emit costtypesChanged();
 }
@@ -986,7 +1020,7 @@ void Car::delCosttype(Costtype *costtype)
 {
     qDebug() << "Remove Cost Type " << costtype->id();
     _costtypelist.removeAll(costtype);
-    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
     QSqlQuery query(db);
     QString sql = QString("UPDATE CostList SET costtype = 0 WHERE costtype=%1;").arg(costtype->id());
 
@@ -1061,12 +1095,13 @@ void Car::delCost(Cost *cost)
     cost->deleteLater();
 }
 
-Tire *Car::addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity)
+Tire *Car::addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int tireset)
 {
-    Tire *tire = new Tire(buydate,buydate,name,manufacturer,model,price,quantity,-1,this);
+    Tire *tire = new Tire(buydate,buydate,name,manufacturer,model,price,quantity,-1,tireset,this);
     _tirelist.append(tire);
     tire->save();
     emit tiresChanged();
+    qDebug() << "Quantity " << quantity;
     return tire;
 }
 
@@ -1096,6 +1131,50 @@ QString Car::getTireName(unsigned int id)
     {
         if (tire->id()==id)
             return tire->name();
+    }
+    return "";
+}
+
+
+void Car::addNewTireset(QString name)
+{
+    //First check for existing costtype
+    if (findTireset(name))
+        return;
+    Tireset *tireset = new Tireset(-1, name, this);
+    _tiresetlist.append(tireset);
+    qSort(_tiresetlist.begin(), _tiresetlist.end(), sortTiresetByName);
+    tireset->save();
+    emit tiresetsChanged();
+}
+
+Tireset* Car::findTireset(QString name)
+{
+    foreach (Tireset *tireset, _tiresetlist)
+    {
+        if (tireset->name()==name)
+            return tireset;
+    }
+    return NULL;
+}
+
+
+Tireset* Car::findTiresetById(int id)
+{
+    foreach (Tireset *tireset, _tiresetlist)
+    {
+        if (tireset->id()==id)
+            return tireset;
+    }
+    return NULL;
+}
+
+QString Car::getTiresetName(unsigned int id)
+{
+    foreach (Tireset *tireset, _tiresetlist)
+    {
+        if (tireset->id()==id)
+            return tireset->name();
     }
     return "";
 }
@@ -1507,8 +1586,9 @@ void Car::simulation()
     this->addNewStation("Saint Pal Mairie");
     this->addNewStation("Super U Craponne");
     this->addNewStation("Auchan Villard");
+    this->addNewTireset("Winter Tires");
 
-    winter1 = this->addNewTire(QDate(2010,11,15),"Pneu hiver","Michelin","Alpin A4",160,4);
+    winter1 = this->addNewTire(QDate(2010,11,15),"Pneu hiver","Michelin","Alpin A4",160,4,1);
     this->mountTire(QDate(2012,11,15), km, winter1);
 
     this->addNewTank(QDate(2010,11,15),km += 850,52,70,true,0, 0,"t1");
@@ -1530,7 +1610,7 @@ void Car::simulation()
     this->addNewTank(QDate(2011, 3,25),km += 1134,60,70,true,1, 3,"");
     this->addNewTank(QDate(2011, 3,30),km += 1021,60,70,true,1, 1,"");
     this->umountTire(QDate(2011, 4, 5), km += 100, winter1);
-    summer1 = this->addNewTire(QDate(2011,4,5),"Pneu été","Michelin","EnergySaver",110,4);
+    summer1 = this->addNewTire(QDate(2011,4,5),"Pneu été","Michelin","EnergySaver",110,4,1);
     this->mountTire(QDate(2011,4,5), km, summer1);
 
     this->addNewTank(QDate(2011, 4, 8),km += 1051,60,70,true,1, 1,"");
@@ -1584,8 +1664,8 @@ void Car::simulation()
     this->addNewTank(QDate(2012, 9,18),km += 1011,60,70,true,1, 1,"");
     this->addNewTank(QDate(2012, 9,28),km += 1012,60,70,true,2, 2,"");
     this->addNewTank(QDate(2012,10, 1),km += 1013,60,70,true,1, 1,""); /* 55 */
-    winter1 = this->addNewTire(QDate(2012,10,9),"Pneu hiver AV","Michelin","Winter 2",160,2);
-    winter2 = this->addNewTire(QDate(2014,10,9),"Pneu hiver AR","Michelin","Winter 2",160,2);
+    winter1 = this->addNewTire(QDate(2012,10,9),"Pneu hiver AV","Michelin","Winter 2",160,2,1);
+    winter2 = this->addNewTire(QDate(2014,10,9),"Pneu hiver AR","Michelin","Winter 2",160,2,1);
     this->umountTire(QDate(2012,10,10), km += 100, summer1);
     this->mountTire(QDate(2012,10,10), km, winter1);
     this->mountTire(QDate(2012,10,10), km, winter2);

@@ -217,7 +217,25 @@ Dialog {
                 }
             }
         }
-        else tank_date = new Date()
+        else {
+            tank_date = new Date()
+            for(var i=0; i<fueltypeslistrepeater.count; i++)
+            {
+                if(fueltypeslistrepeater.itemAt(i).dbid === 0)
+                {
+                    cbfueltype.currentIndex = i
+                    break
+                }
+            }
+            for(var i=0; i<stationslistrepeater.count; i++)
+            {
+                if(stationslistrepeater.itemAt(i).dbid === 0)
+                {
+                    cbstation.currentIndex = i
+                    break
+                }
+            }
+        }
     }
 
     onAccepted: {

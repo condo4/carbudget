@@ -144,7 +144,7 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!query.exec("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buydate DATE, trashdate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"))
+    if(!query.exec("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buydate DATE, trashdate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT,tireset INTEGER);"))
     {
         qDebug() << query.lastError();
         error = true;
@@ -170,7 +170,11 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-
+    if(!query.exec("CREATE TABLE TiresetList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,nbtire INTEGER,mounted TINYINT);"))
+    {
+        qDebug() << query.lastError();
+        error = true;
+    }
 
     if(!query.exec("CREATE TABLE PeriodicList (id INTEGER PRIMARY KEY AUTOINCREMENT, first DATE, last DATE, cost DOUBLE, desc TEXT, period INTEGER);"))
     {

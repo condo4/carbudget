@@ -27,6 +27,7 @@
 #include <tank.h>
 #include <cost.h>
 #include <tire.h>
+#include <tireset.h>
 #include <tiremount.h>
 #include <fueltype.h>
 #include <station.h>
@@ -36,7 +37,7 @@
 
 
 class CarManager;
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 class Car : public QObject
 {
@@ -56,6 +57,7 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Costtype> costtypes READ costtypes NOTIFY costtypesChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
+    Q_PROPERTY(QQmlListProperty<Tireset> tiresets READ tiresets NOTIFY tiresetsChanged())
     Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
@@ -88,6 +90,7 @@ private:
     QList<Costtype*>    _costtypelist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
+    QList<Tireset*>    _tiresetlist;
     QList<Tiremount*>    _tiremountlist;
 
     QString _currency;
@@ -130,6 +133,7 @@ public:
     QQmlListProperty<Costtype> costtypes();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
+    QQmlListProperty<Tireset> tiresets();
     QQmlListProperty<Tiremount> tiremounts();
 
     const Tank *previousTank(unsigned int distance) const;
@@ -173,6 +177,7 @@ signals:
     void costtypesChanged();
     void costsChanged();
     void tiresChanged();
+    void tiresetsChanged();
     void tireMountedChanged();
     void currencyChanged();
     void distanceunityChanged();
@@ -202,8 +207,14 @@ public slots:
     void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
     void delCost(Cost *cost);
 
-    Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
+    Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int tireset);
     void delTire(Tire *tire);
+    void addNewTireset(QString name);
+    //void delCosttype(Costtype *costtype);
+    Tireset* findTireset(QString name);
+    Tireset* findTiresetById(int id);
+    QString getTiresetName(unsigned int id);
+
     QString getTireName(unsigned int id);
 
     void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
