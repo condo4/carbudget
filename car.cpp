@@ -204,9 +204,7 @@ void Car::db_load()
             Tireset *t=findTiresetById(tireset);
             qDebug() << "Tireset is " << tireset;
             if (t) {
-                qDebug() << "Found matching tireset for numer of tirese" << quantity;
-                t->setTires_associated(t->tires_associated()+quantity);
-                qDebug() << "Associated tiresets are now " << t->tires_associated();
+                if (!tire->trashed())  t->setTires_associated(t->tires_associated()+quantity);
             }
         }
     }
@@ -1269,7 +1267,7 @@ void Car::umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool t
             if(query.exec(sql2))
             {
                 qDebug() << "Update TireList in database to trash";
-                tire->setTrashdate(QDateTime(umountdate));
+                tire->setTrashdate(umountdate);
                 db.commit();
                 emit tiresChanged();
             }

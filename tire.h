@@ -35,8 +35,8 @@ class Tire : public QObject
     Q_PROPERTY(QString manufacturer READ manufacturer   WRITE setManufacturer   NOTIFY manufacturerChanged )
     Q_PROPERTY(QString modelname    READ model          WRITE setModel          NOTIFY modelChanged )
 
-    Q_PROPERTY(QDateTime buydate    READ buydate        WRITE setBuydate        NOTIFY buydateChanged)
-    Q_PROPERTY(QDateTime trashdate  READ trashdate      WRITE setTrashdate      NOTIFY trashdateChanged)
+    Q_PROPERTY(QDate buydate    READ buydate        WRITE setBuydate        NOTIFY buydateChanged)
+    Q_PROPERTY(QDate trashdate  READ trashdate      WRITE setTrashdate      NOTIFY trashdateChanged)
 
     Q_PROPERTY(double    price      READ price          WRITE setPrice          NOTIFY priceChanged )
     Q_PROPERTY(unsigned int quantity          READ quantity WRITE setQuantity   NOTIFY quantityChanged )
@@ -77,12 +77,11 @@ public:
 
     QString model() const;
     void setModel(QString model);
+    QDate buydate() const;
+    void setBuydate(QDate date);
 
-    QDateTime buydate() const;
-    void setBuydate(QDateTime date);
-
-    QDateTime trashdate() const;
-    void setTrashdate(QDateTime date);
+    QDate trashdate() const;
+    Q_INVOKABLE void setTrashdate(QDate date=QDate::currentDate());
 
     double price() const;
     void setPrice(double price);

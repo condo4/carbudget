@@ -43,23 +43,44 @@ Dialog {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
             contentHeight: Theme.itemSizeExtraLarge
+            opacity: (model.modelData.trashed)?(0.6):(1)
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData, tireset: tireset})
                 }
-/*
+
                 MenuItem {
-                    text: qsTr("Remove")
-                    visible: !model.modelData.mounted
+                    text: qsTr("Trash")
+                    visible: !model.modelData.mounted && !model.modelData.trashed
                     onClicked: {
-                        remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delTire(model.modelData)
+                        remorseAction(qsTr("Trashing"), function() {
+                            model.modelData.setTrashdate()
+                            model.modelData.save()
+                            tireset.tires_associated = tireset.tires_associated - model.modelData.quantity
+                            fillListModel()
                         })
                     }
                 }
-                */
+                MenuItem {
+                    text: qsTr("Trash & Replace")
+                    onClicked: {
+                        tireset.tires_associated = tireset.tires_associated - model.modelData.quantity
+                        var p = pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset:tireset })
+                        p.accepted.connect(function()
+                        {
+                            model.modelData.setTrashdate()
+                            model.modelData.save()
+                            fillListModel()
+                        })
+                        p.rejected.connect(function()
+                        {
+                            tireset.tires_associated = tireset.tires_associated + model.modelData.quantity
+                            fillListModel()
+                        })
+                    }
+                }
             }
 
             Column {
