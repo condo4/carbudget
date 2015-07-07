@@ -74,6 +74,7 @@ void Car::db_init()
 
 void Car::db_load()
 {
+    db_loading=true;
     QSqlQuery query(this->db);
 
     _tanklist.clear();
@@ -88,6 +89,7 @@ void Car::db_load()
     {
         while(query.next())
         {
+            qDebug() << "Adding tank " << query.value(2).toInt();
             int id = query.value(0).toInt();
             QDate date = query.value(1).toDate();
             unsigned int distance = query.value(2).toInt();
@@ -100,14 +102,7 @@ void Car::db_load()
             Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, id, note, this);
             _tanklist.append(tank);
         }
-        emit nbtankChanged(_tanklist.count());
-        emit consumptionChanged(this->consumption());
-        emit consumptionmaxChanged(this->consumptionmax());
-        emit consumptionlastChanged(this->consumptionlast());
-        emit consumptionminChanged(this->consumptionmin());
-        emit fueltotalChanged(this->fueltotal());
-        emit maxdistanceChanged(this->maxdistance());
-        emit mindistanceChanged(this->mindistance());
+
     }
     else
     {
@@ -230,12 +225,21 @@ void Car::db_load()
     {
         qDebug() << "Failed to load tiremounts: " << query.lastError();
     }
-    qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
-    qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
-    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
-    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
-    qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
+    if (!_tanklist.empty()) qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
+    if (!_costlist.empty()) qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
+    if (!_stationlist.empty()) qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
+    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+   if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
+    db_loading=false;
+    nbtankChanged(_tanklist.count());
+    emit consumptionChanged(this->consumption());
+    emit consumptionmaxChanged(this->consumptionmax());
+    emit consumptionlastChanged(this->consumptionlast());
+    emit consumptionminChanged(this->consumptionmin());
+    emit fueltotalChanged(this->fueltotal());
+    emit maxdistanceChanged(this->maxdistance());
+    emit mindistanceChanged(this->mindistance());
 }
 
 int Car::db_get_version()
@@ -320,6 +324,7 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
 Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0),_buyingprice(0),_sellingprice(0),_lifetime(0)
 {
     this->db_init();
+    db_loading=false;
     while(this->db_get_version() < DB_VERSION)
     {
         qDebug() << "Update configuation database " << this->db_get_version() << " >> " << DB_VERSION;
@@ -359,11 +364,11 @@ unsigned int Car::nbtank() const
 
 double Car::consumption() const
 {
+    if (_tanklist.empty()) return 0.0;
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
     double totalConsumption = 0;
     double partConsumption = 0;
-
     foreach(Tank *tank, _tanklist)
     {
         if(tank->full())
@@ -396,9 +401,10 @@ double Car::consumptionmax() const
 
 double Car::consumptionlast() const
 {
-    if(_tanklist.empty()) return 0;
+    if (_tanklist.empty()) return 0.0;
     QList<Tank*>::const_iterator tank = _tanklist.constBegin();
-    return (*tank)->consumption();
+    if (*tank)  return (*tank)->consumption();
+       else return 0;
 }
 
 double Car::consumptionmin() const
@@ -491,16 +497,13 @@ QQmlListProperty<Tiremount> Car::tiremounts()
 const Tank *Car::previousTank(unsigned int distance) const
 {
     const Tank *previous = NULL;
-
+    int currentPrevDistance=0;
     foreach(Tank *tank, _tanklist)
     {
-        if(previous == NULL && tank->distance() < distance)
+        if ((tank->distance() < distance) && (tank->distance() > currentPrevDistance))
         {
             previous = tank;
-        }
-        else if(tank->distance() < distance && tank->distance() > previous->distance())
-        {
-            previous = tank;
+            currentPrevDistance=tank->distance();
         }
     }
     return previous;
@@ -652,6 +655,7 @@ double Car::budget_cost_byType(unsigned int id)
         if (cost->costtype()==id)
             totalPrice += cost->cost();
     }
+    if (maxdistance()==mindistance()) return 0;
     return totalPrice / ((maxdistance() - mindistance())/ 100.0);
 }
 double Car::budget_fuel_total()
@@ -686,7 +690,7 @@ double Car::budget_fuel()
             break;
         }
     }
-    if(maxDistance == 0) return 0;
+    if((maxDistance == 0) || (maxDistance == minDistance)) return 0;
     return totalPrice / ((maxDistance - minDistance)/ 100.0);
 }
 double Car::budget_cost_total()
@@ -702,7 +706,7 @@ double Car::budget_cost_total()
 double Car::budget_cost()
 {
     //returns costs for bills per 100KM
-    if (maxdistance()-mindistance() ==0) return 0;
+    if (maxdistance() ==mindistance()) return 0;
     return budget_cost_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 double Car::budget_invest_total()
@@ -713,6 +717,7 @@ double Car::budget_invest_total()
 double Car::budget_invest()
 {
     //returns bying costs per 100 KM
+    if (maxdistance()== mindistance()) return 0;
     QDate today = QDate::currentDate();
     unsigned int monthsused = 1;
     double valuecosts;
@@ -728,7 +733,7 @@ double Car::budget_invest()
     {
         monthsused++;
     }
-    if ((monthsused < _lifetime) && (_lifetime !=0))
+    if ((monthsused < _lifetime) && (_lifetime !=0) )
         valuecosts = (_buyingprice - _sellingprice)*monthsused/_lifetime;
     else valuecosts = (_buyingprice - _sellingprice);
     return valuecosts / ((maxdistance() - mindistance())/ 100.0);
@@ -736,6 +741,7 @@ double Car::budget_invest()
 double Car::budget_tire()
 {
     //returns tire costs per 100km
+    if (maxdistance() == mindistance()) return 0;
     return budget_tire_total() / ((maxdistance() - mindistance())/ 100.0);
 }
 double Car::budget_tire_total()
@@ -766,29 +772,35 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     _tanklist.append(tank);
     qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
     tank->save();
-    emit nbtankChanged(_tanklist.count());
-    emit consumptionChanged(this->consumption());
-    emit consumptionmaxChanged(this->consumptionmax());
-    emit consumptionlastChanged(this->consumptionlast());
-    emit consumptionminChanged(this->consumptionmin());
-    emit fueltotalChanged(this->fueltotal());
-    emit maxdistanceChanged(this->maxdistance());
-    emit tanksChanged();
+    if (!db_loading)
+    {
+        emit nbtankChanged(_tanklist.count());
+        emit consumptionChanged(this->consumption());
+        emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionlastChanged(this->consumptionlast());
+        emit consumptionminChanged(this->consumptionmin());
+        emit fueltotalChanged(this->fueltotal());
+        emit maxdistanceChanged(this->maxdistance());
+        emit tanksChanged();
+    }
 }
 
 void Car::delTank(Tank *tank)
 {
     qDebug() << "Remove tank " << tank->id();
     _tanklist.removeAll(tank);
-    qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
+    if (!_tanklist.empty()) qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
     tank->remove();
-    emit nbtankChanged(_tanklist.count());
-    emit consumptionChanged(this->consumption());
-    emit consumptionmaxChanged(this->consumptionmax());
-    emit consumptionlastChanged(this->consumptionlast());
-    emit consumptionminChanged(this->consumptionmin());
-    emit maxdistanceChanged(this->maxdistance());
-    emit tanksChanged();
+    if (!db_loading)
+    {
+        emit nbtankChanged(_tanklist.count());
+        emit consumptionChanged(this->consumption());
+        emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionlastChanged(this->consumptionlast());
+        emit consumptionminChanged(this->consumptionmin());
+        emit maxdistanceChanged(this->maxdistance());
+        emit tanksChanged();
+    }
     tank->deleteLater();
 }
 
@@ -809,7 +821,7 @@ void Car::delFueltype(Fueltype *fueltype)
 {
     qDebug() << "Remove Fuel Type " << fueltype->id();
     _fueltypelist.removeAll(fueltype);
-    qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
+    if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fueltype->id());
 
@@ -880,7 +892,7 @@ void Car::delStation(Station *station)
 {
     qDebug() << "Remove Station " << station->id();
     _stationlist.removeAll(station);
-    qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
+    if (!_stationlist.empty()) qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET station = 0 WHERE station=%1;").arg(station->id());
 
@@ -951,7 +963,7 @@ void Car::delCosttype(Costtype *costtype)
 {
     qDebug() << "Remove Cost Type " << costtype->id();
     _costtypelist.removeAll(costtype);
-    qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
     QSqlQuery query(db);
     QString sql = QString("UPDATE CostList SET costtype = 0 WHERE costtype=%1;").arg(costtype->id());
 
@@ -1020,7 +1032,7 @@ void Car::delCost(Cost *cost)
 {
     qDebug() << "Remove Cost " << cost->id();
     _costlist.removeAll(cost);
-    qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
+    if (!_costlist.empty()) qSort(_costlist.begin(), _costlist.end(), sortCostByDate);
     cost->remove();
     emit costsChanged();
     cost->deleteLater();

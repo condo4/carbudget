@@ -376,9 +376,9 @@ void CarManager::importFromMyCar(QString filename, QString name)
 
 void CarManager::importFromFuelpad(QString filename, QString name)
     {
+    qDebug() << "Importing from Fuelpad";
         createCar(name);
         selectCar(name);
-        filename=getenv("HOME")+QString("/")+filename;
         QSqlDatabase db;
         db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
         db.setDatabaseName(filename);
@@ -420,6 +420,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         }
         if (query.next())
             t_id = query.value(0).toInt();
+        qDebug() << "Car id: " <<  t_id;
         if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
         {
             while(query.next())
@@ -464,7 +465,6 @@ QString CarManager::getEnv(QString name)
 
 QStringList CarManager::checkFuelpadDBforCars( QString name)
 {
-    name=getenv("HOME")+QString("/")+name;
     QStringList fuelpadcars;
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
