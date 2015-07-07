@@ -44,9 +44,15 @@ bool sortCosttypeByName(const Costtype *c1, const Costtype *c2)
     return c1->name() < c2->name();
 }
 
+
 bool sortTiresetByName(const Tireset *c1, const Tireset *c2)
 {
     return c1->name() < c2->name();
+}
+
+bool sortTireByDate(const Tire *c1, const Tire *c2)
+{
+    return c1->buydate() > c2->buydate();
 }
 
 bool sortFueltypeByName(const Fueltype *c1, const Fueltype *c2)
@@ -256,6 +262,7 @@ void Car::db_load()
     if (!_stationlist.empty()) qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
     if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
+    if (!_tirelist.empty()) qSort(_tirelist.begin(), _tirelist.end(), sortTireByDate);
     if (!_tiresetlist.empty()) qSort(_tiresetlist.begin(), _tiresetlist.end(), sortTiresetByName);
    if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
     db_loading=false;
@@ -1099,7 +1106,7 @@ Tire *Car::addNewTire(QDate buydate, QString name, QString manufacturer, QString
     _tirelist.append(tire);
     tire->save();
     emit tiresChanged();
-    qDebug() << "Quantity " << quantity;
+    qSort(_tirelist.begin(), _tirelist.end(), sortTireByDate);
     return tire;
 }
 
@@ -1121,6 +1128,7 @@ void Car::delTire(Tire *tire)
 
     emit tiresChanged();
     tire->deleteLater();
+    if (!_tirelist.empty()) qSort(_tirelist.begin(), _tirelist.end(), sortTireByDate);
 }
 
 QString Car::getTireName(unsigned int id)
