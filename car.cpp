@@ -264,7 +264,7 @@ void Car::db_load()
     if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
     if (!_tirelist.empty()) qSort(_tirelist.begin(), _tirelist.end(), sortTireByDate);
     if (!_tiresetlist.empty()) qSort(_tiresetlist.begin(), _tiresetlist.end(), sortTiresetByName);
-   if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
+    if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
     db_loading=false;
     nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
@@ -1164,6 +1164,10 @@ Tireset* Car::findTireset(QString name)
     return NULL;
 }
 
+void Car::updateTiresets()
+{
+    emit tiresChanged();
+}
 
 Tireset* Car::findTiresetById(int id)
 {

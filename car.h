@@ -210,12 +210,12 @@ public slots:
     Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int tireset);
     void delTire(Tire *tire);
     void addNewTireset(QString name);
-    //void delCosttype(Costtype *costtype);
+    void updateTiresets();
     Tireset* findTireset(QString name);
     Tireset* findTiresetById(int id);
     QString getTiresetName(unsigned int id);
-
     QString getTireName(unsigned int id);
+
 
     void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
     void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);

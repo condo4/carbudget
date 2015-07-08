@@ -44,6 +44,7 @@ Tire::Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, Q
     _quantity(quantity)
 {
     connect(_car, SIGNAL(tireMountedChanged()), this, SLOT(updateMountState()));
+    connect(this, SIGNAL(trashdateChanged()), _car, SLOT(updateTiresets()));
 }
 
 QString Tire::name() const

@@ -69,6 +69,7 @@ signals:
 public slots:
     void save();
     void updateMountState();
+    void updateTires_associated();
 
 };
 

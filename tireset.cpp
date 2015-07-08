@@ -38,6 +38,7 @@ Tireset::Tireset(int id, QString name, Car *parent):
 {
     _tires_associated=0;
     connect(_car, SIGNAL(TiresetMountedChanged()), this, SLOT(updateMountState()));
+    connect(_car, SIGNAL(tiresChanged()), this, SLOT(updateTires_associated()));
 }
 
 QString Tireset::name() const
@@ -135,6 +136,27 @@ void Tireset::save()
             qDebug() << query.lastError();
         }
     }
+}
+
+void Tireset::updateTires_associated()
+{
+    QSqlQuery query(_car->db);
+    qDebug() << "updating tires associated";
+    if(query.exec("SELECT buydate,trashdate,quantity,tireset FROM TireList;"))
+    {
+        while(query.next())
+        {
+            QDate buydate = query.value(0).toDate();
+            QDate trashdate = query.value(1).toDate();
+            unsigned int quantity = query.value(2).toInt();
+            int tireset = query.value(3).toInt();
+            if (tireset == _id)
+            {
+                if (trashdate <= buydate)  _tires_associated+=quantity;
+            }
+        }
+    }
+
 }
 
 void Tireset::updateMountState()

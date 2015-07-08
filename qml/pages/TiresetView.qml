@@ -25,11 +25,12 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     SilicaListView {
+        id: tiresetlist
         PullDownMenu {
             MenuItem {
                 text: qsTr("Add new tire set")
                 onClicked: pageStack.push(Qt.resolvedUrl("TiresetEntry.qml"))
-            }
+                }
             MenuItem {
                 text: qsTr("Show history")
                 onClicked: pageStack.push(Qt.resolvedUrl("TiremountView.qml"))
@@ -58,7 +59,13 @@ Page {
                 MenuItem{
                     text: qsTr("Add tires")
                     enabled: model.modelData.tires_associated < manager.car.nbtire? true:false
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset: model.modelData })
+                    onClicked:
+                    {
+                        var p = pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset: model.modelData })
+                        p.accepted.connect(function() {
+                            tiresetlist.update()
+                        })
+                    }
                 }
             }
 

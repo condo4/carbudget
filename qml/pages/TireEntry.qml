@@ -79,7 +79,7 @@ Dialog {
                         trash_date = dialog.date
                     })
                 }
-
+                id:btnTrash
                 label: "Trash date"
                 visible: tire != undefined
                 value: trash_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
@@ -162,8 +162,9 @@ Dialog {
         {
             buy_date = tire.buydate
             trash_date = tire.trashdate
+            btnTrash.enabled = false
             priceinput.text = tire.price
-            quantityinput.text = tire.quantity
+            //quantityinput.value = tire.quantity
             modelinput.text = tire.modelname
             manufacturerinput.text = tire.manufacturer
             nameinput.text = tire.name
@@ -171,6 +172,7 @@ Dialog {
         }
         else
         {
+            console.log("Tire is undefined")
             buy_date = new Date()
             trash_date = new Date()
         }
@@ -189,7 +191,7 @@ Dialog {
             tire.manufacturer = manufacturerinput.text
             tire.modelname = modelinput.text
             tire.price = priceinput.text.replace(",",".")
-            tire.quantity = quantity
+            //tire.quantity = quantity
             tire.save()
         }
     }
