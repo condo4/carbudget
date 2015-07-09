@@ -25,9 +25,8 @@ import harbour.carbudget 1.0
 
 Dialog {
     id: mountTire
-    property Tire tire
+    property Tireset tireset
     property date mount_date
-    property date umount_date
 
     SilicaFlickable {
         anchors.fill: parent
@@ -37,7 +36,7 @@ Dialog {
             width: parent.width
 
             DialogHeader {
-                title: (tire.mounted)?(qsTr("Umount Tire")):(qsTr("Mount Tire"));
+                title: qsTr("Mount Tire");
             }
 
             ValueButton {
@@ -70,14 +69,6 @@ Dialog {
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: accept()
             }
-
-            TextSwitch {
-                anchors { left: parent.left; right: parent.right }
-                visible: tire.mounted
-                id: totrashinput
-                text: qsTr("To trash")
-                checked: false
-            }
         }
     }
 
@@ -88,9 +79,6 @@ Dialog {
     }
 
     onAccepted: {
-        if(tire.mounted)
-            manager.car.umountTire(mount_date, kminput.text, tire, totrashinput.checked)
-        else
-            manager.car.mountTire(mount_date, kminput.text, tire)
+        manager.car.mountTireset(mount_date, kminput.text, tireset)
     }
 }

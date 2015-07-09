@@ -1140,6 +1140,15 @@ QString Car::getTireName(unsigned int id)
     }
     return "";
 }
+Tire* Car::findTireById(unsigned int id)
+{
+    foreach (Tire *tire, _tirelist)
+    {
+        if (tire->id()==id)
+            return tire;
+    }
+    return NULL;
+}
 
 
 void Car::addNewTireset(QString name)
@@ -1169,7 +1178,7 @@ void Car::updateTiresets()
     emit tiresChanged();
 }
 
-Tireset* Car::findTiresetById(int id)
+Tireset* Car::findTiresetById(unsigned int id)
 {
     foreach (Tireset *tireset, _tiresetlist)
     {
@@ -1187,6 +1196,81 @@ QString Car::getTiresetName(unsigned int id)
             return tireset->name();
     }
     return "";
+}
+
+void Car::mountTireset(QDate mountdate, unsigned int distance, Tireset *tireset)
+{
+    qDebug() << "Mount tire";
+    QSqlQuery query(db);
+
+    if(!tireset->mountable())
+    {
+        qDebug() << "Can't mount this tire";
+        return;
+    }
+
+    int id;
+    QString sql = QString("INSERT INTO Event (id,date,distance) VALUES(NULL,'%1',%2)").arg(mountdate.toString("yyyy-MM-dd 00:00:00.00")).arg(distance);
+    if(query.exec(sql))
+    {
+        id = query.lastInsertId().toInt();
+        qDebug() << "Create Event(mount) in database with id " << id;
+        // First umnount all mounted tires
+        qDebug() << "Unmounting all tires";
+        foreach (Tire *t, _tirelist) {
+            if (t->mounted())
+            {
+                QString sql2 = QString("UPDATE TireUsage SET event_umount=%1 WHERE tire=%2 AND event_umount=0").arg(id).arg(t->id());
+                if(query.exec(sql2))
+                {
+                    qDebug() << "Update TireUsage in database";
+                    //Now modify tiremountlist
+                    foreach (Tiremount *tm, _tiremountlist)
+                    {
+                        if ((tm->unmountid()==0) && (tm->tire()==t->id()))
+                        {
+                            CarEvent *ev = new CarEvent(mountdate,distance,id,this);
+                            tm->setUnmountEvent(ev);
+                        }
+                    }
+                }
+                else {
+                    id =-1;
+                    break;
+                }
+            }
+        }
+        // Now loop through tires to check which ones are associated with current tireset
+        qDebug() << " Mounting all associated tires";
+        foreach (Tire *t, _tirelist) {
+            if ((t->tireset()==tireset->id()) && (!t->trashed()))
+            {
+                QString sql3 = QString("INSERT INTO TireUsage (event_mount,event_umount,tire) VALUES(%1,0,%2)").arg(id).arg(t->id());
+                if(query.exec(sql3))
+                {
+                    id = query.lastInsertId().toInt();
+                    qDebug() << "Create TireUsage in database with id " << id;
+                    // Now add new mount to the tiremountlist
+                    Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,t->id(),this);
+                    _tiremountlist.append(tiremount);
+                }
+                else {
+                    id = -1;
+                    break;
+                }
+            }
+        }
+    }
+    else id =-1;
+    if(id == -1)
+    {
+        qDebug() << "Can't mount this tire set (db error)";
+        qDebug() << query.lastError();
+    }
+    else {
+        emit tireMountedChanged();
+        db.commit();
+    }
 }
 
 void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)

@@ -67,7 +67,17 @@ Page {
                         })
                     }
                 }
-            }
+                MenuItem{
+                    text: qsTr("Mount")
+                    enabled: model.modelData.mountable? true:false
+                    onClicked:
+                    {
+                        var p = pageStack.push(Qt.resolvedUrl("TireMount.qml"), { tireset: model.modelData })
+                        p.accepted.connect(function() {
+                            tiresetlist.update()
+                        })
+                    }
+                }            }
 
 /*
                 MenuItem {

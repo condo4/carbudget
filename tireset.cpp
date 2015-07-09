@@ -57,13 +57,21 @@ void Tireset::setName(QString name)
 bool Tireset::mounted() const
 {
     QSqlQuery query(_car->db);
-    QString sql = QString("SELECT count(*) FROM TireUsage WHERE Tireset=%1 AND event_umount == 0").arg(_id);
-    if(query.exec(sql))
+    qDebug() << "Checking for mount state";
+    if(query.exec("SELECT buydate,trashdate,quantity,tireset,id FROM TireList;"))
     {
-        query.next();
-        if(query.value(0).toInt() != 0)
+        while(query.next())
         {
-            return true;
+            QDate buydate = query.value(0).toDate();
+            QDate trashdate = query.value(1).toDate();
+            unsigned int quantity = query.value(2).toInt();
+            int tireset = query.value(3).toInt();
+            int id = query.value(4).toInt();
+            if (tireset == _id)
+            {
+                // if on tire is mounted, all should
+                if ((trashdate <= buydate) && (_car->findTireById(id)->mounted())) return true;
+            }
         }
     }
     return false;
