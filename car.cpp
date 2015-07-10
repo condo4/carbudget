@@ -497,7 +497,7 @@ QQmlListProperty<Tiremount> Car::tiremounts()
 const Tank *Car::previousTank(unsigned int distance) const
 {
     const Tank *previous = NULL;
-    int currentPrevDistance=0;
+    unsigned int currentPrevDistance=0;
     foreach(Tank *tank, _tanklist)
     {
         if ((tank->distance() < distance) && (tank->distance() > currentPrevDistance))
