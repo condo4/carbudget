@@ -25,9 +25,13 @@
 
 Tireset::Tireset(Car *parent) :
     QObject(parent),
-    _car(parent)
+    _car(parent),
+    _id(0),
+    _name("Not Set"),
+    _tires_associated(0)
 {
-    _tires_associated=0;
+    connect(_car, SIGNAL(TiresetMountedChanged()), this, SLOT(updateMountState()));
+    connect(_car, SIGNAL(tiresChanged()), this, SLOT(updateTires_associated()));
 }
 
 Tireset::Tireset(int id, QString name, Car *parent):
@@ -56,22 +60,15 @@ void Tireset::setName(QString name)
 
 bool Tireset::mounted() const
 {
+    if (!_car) return false;
     QSqlQuery query(_car->db);
-    qDebug() << "Checking for mount state";
-    if(query.exec("SELECT buydate,trashdate,quantity,tireset,id FROM TireList;"))
+    QString sql = QString("SELECT count(*) FROM TireUsage WHERE tireset=%1 AND event_umount == 0").arg(_id);
+    if(query.exec(sql))
     {
-        while(query.next())
+        query.next();
+        if(query.value(0).toInt() != 0)
         {
-            QDate buydate = query.value(0).toDate();
-            QDate trashdate = query.value(1).toDate();
-            unsigned int quantity = query.value(2).toInt();
-            int tireset = query.value(3).toInt();
-            int id = query.value(4).toInt();
-            if (tireset == _id)
-            {
-                // if on tire is mounted, all should
-                if ((trashdate <= buydate) && (_car->findTireById(id)->mounted())) return true;
-            }
+            return true;
         }
     }
     return false;
@@ -79,6 +76,7 @@ bool Tireset::mounted() const
 
 bool Tireset::mountable() const
 {
+    if (!_car) return false;
     if(mounted())
         return false;
     if (_tires_associated == _car->nbtire())

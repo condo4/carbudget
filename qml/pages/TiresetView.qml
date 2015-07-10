@@ -22,7 +22,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
-Page {
+Dialog {
     allowedOrientations: Orientation.All
     SilicaListView {
         id: tiresetlist
@@ -46,9 +46,11 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.car.tiresets
+        onModelChanged: fillListModel()
+        model: listModel
 
         delegate: ListItem {
+            id: listDelegate
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
             menu: ContextMenu {
@@ -63,7 +65,7 @@ Page {
                     {
                         var p = pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset: model.modelData })
                         p.accepted.connect(function() {
-                            tiresetlist.update()
+                            fillListModel()
                         })
                     }
                 }
@@ -74,7 +76,7 @@ Page {
                     {
                         var p = pageStack.push(Qt.resolvedUrl("TireMount.qml"), { tireset: model.modelData })
                         p.accepted.connect(function() {
-                            tiresetlist.update()
+                            fillListModel()
                         })
                     }
                 }            }
@@ -106,6 +108,18 @@ Page {
                     }
                 }
             }
+        }
+    }
+    ListModel {
+        id:listModel
+    }
+    function fillListModel()
+    {
+        var tiresetlist = manager.car.tiresets;
+        listModel.clear()
+        for (var i = 0;i < tiresetlist.length ;i++)
+        {
+            listModel.append({"tireset" : tiresetlist[i]})
         }
     }
 }

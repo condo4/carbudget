@@ -220,7 +220,7 @@ void Car::db_load()
     }
     // Now load tire mountings
     // First load all unmount events (event_umount exists in events table)
-    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
+    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire, t.tireset FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
     {
         while(query.next())
         {
@@ -231,7 +231,8 @@ void Car::db_load()
             QDate unmount_date = query.value(4).toDate();
             unsigned int unmount_distance = query.value(5).toInt();
             unsigned int tire = query.value(6).toInt();
-            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,unmount_id,unmount_date,unmount_distance,tire,this);
+            unsigned int tireset = query.value(7).toInt();
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,unmount_id,unmount_date,unmount_distance,tire,tireset,this);
             _tiremountlist.append(tiremount);
         }
     }
@@ -240,7 +241,7 @@ void Car::db_load()
         qDebug() << "Failed to load tiremounts: " << query.lastError();
     }
     // Now load mounted tires
-    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
+    if(query.exec("SELECT m.id, m.date, m.distance, t.tire, t.tireset FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
     {
         while(query.next())
         {
@@ -248,8 +249,9 @@ void Car::db_load()
             QDate mount_date = query.value(1).toDate();
             unsigned int mount_distance = query.value(2).toInt();
             unsigned int tire = query.value(3).toInt();
+            unsigned int tireset = query.value(4).toInt();
             QDate unmount_date = QDate(1900,1,1);
-            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,0,unmount_date,0,tire,this);
+            Tiremount *tiremount = new Tiremount(mount_id,mount_date,mount_distance,0,unmount_date,0,tire,tireset,this);
             _tiremountlist.append(tiremount);
         }
     }
@@ -361,8 +363,11 @@ void Car::db_upgrade_to_5()
         {
             if (query.exec("UPDATE TABLE Tires ADD COLUMN tireset INTEGER;"))
             {
-                this->db.commit();
-                return;
+                if (query.exec("UPDATE TABLE Tireusage ADD COLUMN tireset INTEGER;"))
+                {
+                    this->db.commit();
+                    return;
+                }
             }
         }
     }
@@ -408,6 +413,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeByName);
     this->_costtypelist.append(new Costtype);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeByName);
+    this->_tiresetlist.append(new Tireset());
     nbtire();
     buyingprice();
     sellingprice();
@@ -1245,13 +1251,13 @@ void Car::mountTireset(QDate mountdate, unsigned int distance, Tireset *tireset)
         foreach (Tire *t, _tirelist) {
             if ((t->tireset()==tireset->id()) && (!t->trashed()))
             {
-                QString sql3 = QString("INSERT INTO TireUsage (event_mount,event_umount,tire) VALUES(%1,0,%2)").arg(id).arg(t->id());
+                QString sql3 = QString("INSERT INTO TireUsage (event_mount,event_umount,tire,tireset) VALUES(%1,0,%2,%3)").arg(id).arg(t->id()).arg(t->tireset());
                 if(query.exec(sql3))
                 {
                     id = query.lastInsertId().toInt();
                     qDebug() << "Create TireUsage in database with id " << id;
                     // Now add new mount to the tiremountlist
-                    Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,t->id(),this);
+                    Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,t->id(),t->tireset(),this);
                     _tiremountlist.append(tiremount);
                 }
                 else {
@@ -1268,6 +1274,7 @@ void Car::mountTireset(QDate mountdate, unsigned int distance, Tireset *tireset)
         qDebug() << query.lastError();
     }
     else {
+        qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
         emit tireMountedChanged();
         db.commit();
     }
@@ -1291,13 +1298,13 @@ void Car::mountTire(QDate mountdate, unsigned int distance, Tire *tire)
         id = query.lastInsertId().toInt();
         qDebug() << "Create Event(Tank) in database with id " << id;
 
-        QString sql2 = QString("INSERT INTO TireUsage (event_mount,event_umount,tire) VALUES(%1,0,%2)").arg(id).arg(tire->id());
+        QString sql2 = QString("INSERT INTO TireUsage (event_mount,event_umount,tire,tireset) VALUES(%1,0,%2,%3)").arg(id).arg(tire->id()).arg(tire->tireset());
         if(query.exec(sql2))
         {
             id = query.lastInsertId().toInt();
             qDebug() << "Create TireUsage in database with id " << id;
             // Now add new mount to the tiremountlist
-            Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,tire->id(),this);
+            Tiremount *tiremount = new Tiremount(id,mountdate,distance,0,QDate(1900,1,1),0,tire->id(),tire->tireset(),this);
             _tiremountlist.append(tiremount);
             db.commit();
         }
