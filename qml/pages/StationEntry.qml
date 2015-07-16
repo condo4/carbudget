@@ -26,7 +26,7 @@ import harbour.carbudget 1.0
 Dialog {
     id: addStation
     property Station station
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
 

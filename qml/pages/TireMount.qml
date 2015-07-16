@@ -28,7 +28,7 @@ Dialog {
     property Tire tire
     property date mount_date
     property date umount_date
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
 
