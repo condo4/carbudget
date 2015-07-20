@@ -28,7 +28,7 @@ Dialog {
     property Tire tire
     property date buy_date
     property date trash_date
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
 
         VerticalScrollDecorator {}

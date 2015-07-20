@@ -27,7 +27,7 @@ Dialog {
     property Cost cost
     property date cost_date
     property int costtype
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         PullDownMenu {
             MenuItem {
