@@ -26,6 +26,7 @@ import harbour.carbudget 1.0
 Dialog {
     id: addCosttype
     property Costtype costtype
+    allowedOrientations: Orientation.All
 
     SilicaFlickable {
         anchors.fill: parent

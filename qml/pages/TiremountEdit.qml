@@ -27,7 +27,7 @@ Dialog {
     property Tiremount tiremount
     property date mountdate
     property date unmountdate
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         VerticalScrollDecorator {}
 

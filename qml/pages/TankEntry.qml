@@ -28,7 +28,7 @@ Dialog {
     property date tank_date
     property int station
     property int fueltype
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         PullDownMenu {
             MenuItem {

@@ -25,6 +25,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: carEntry
+    allowedOrientations: Orientation.All
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {

@@ -25,7 +25,7 @@ import harbour.carbudget 1.0
 
 Dialog {
     property date buying_date
-
+    allowedOrientations: Orientation.All
     SilicaFlickable {
 
         VerticalScrollDecorator {}
