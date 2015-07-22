@@ -31,6 +31,9 @@ lupdate_only{
     SOURCES += qml/pages/*.qml
 }
 
+
+DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+
 OTHER_FILES += qml/cover/CoverPage.qml \
     rpm/CarBudget.yaml \
     harbour-carbudget.desktop \

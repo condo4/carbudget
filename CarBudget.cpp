@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     {
         QGuiApplication::installTranslator(&translator);
     }
+    app->setApplicationVersion(QString(APP_VERSION));
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
     qmlRegisterType<Fueltype>(  "harbour.carbudget",1,0,"Fueltype");

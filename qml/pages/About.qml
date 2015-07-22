@@ -53,7 +53,7 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: "CarBudget 0.12"
+                title: "CarBudget " + Qt.application.version
             }
 
             Label {
