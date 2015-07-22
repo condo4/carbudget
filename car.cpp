@@ -717,11 +717,11 @@ double Car::budget_invest_total()
 double Car::budget_invest()
 {
     //returns bying costs per 100 KM
-    if (maxdistance()== mindistance()) return 0;
+    if (maxdistance()== mindistance()) return 0.0;
     QDate today = QDate::currentDate();
     unsigned int monthsused = 1;
     double valuecosts;
-    if (maxdistance()==mindistance() ) return 0.0;
+
     if (_buyingdate.toString()=="")
     {
         qDebug() << "Invalid buying date ";
