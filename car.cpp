@@ -118,7 +118,7 @@ void Car::db_load()
             _fueltypelist.append(fueltype);
         }
     }
-    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList, TankList WHERE StationList.id == TankList.station GROUP BY StationList.id;"))
+    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;"))
     {
         while(query.next())
         {
