@@ -53,10 +53,11 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView();
 
     QTranslator translator;
-    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), ":/i18n"))
+    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), "/usr/share/harbour-carbudget/translations/"))
     {
         QGuiApplication::installTranslator(&translator);
     }
+
     app->setApplicationVersion(QString(APP_VERSION));
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");

@@ -4,17 +4,22 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../qml/pages/About.qml" line="61"/>
+        <location filename="../qml/pages/About.qml" line="39"/>
+        <source>Simulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/About.qml" line="63"/>
         <source>License: GPLv3</source>
         <translation>Licens: GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="66"/>
+        <location filename="../qml/pages/About.qml" line="68"/>
         <source>Created by condo4 (Fabien Proriol)</source>
         <translation>Skapad av condo4 (Fabien Proriol)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="72"/>
+        <location filename="../qml/pages/About.qml" line="74"/>
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
         <translation>Tack till:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)&lt;br &gt;- Åke Engelbrektson (Swedish translation)</translation>
     </message>
