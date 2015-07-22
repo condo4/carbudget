@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");
     qmlRegisterType<Tiremount>( "harbour.carbudget",1,0,"Tiremount");
     qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
-    qmlRegisterType<FileModel>("harbour.carbudget", 1, 0, "FileModel");
+    qmlRegisterType<FileModel>( "harbour.carbudget",1,0,"FileModel");
 
 
     CarManager manager;
