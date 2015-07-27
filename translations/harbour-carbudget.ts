@@ -404,17 +404,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CosttypeView.qml" line="52"/>
+        <location filename="../qml/pages/CosttypeView.qml" line="53"/>
         <source>Modify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CosttypeView.qml" line="57"/>
+        <location filename="../qml/pages/CosttypeView.qml" line="59"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CosttypeView.qml" line="59"/>
+        <location filename="../qml/pages/CosttypeView.qml" line="61"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -500,17 +500,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FueltypeView.qml" line="52"/>
+        <location filename="../qml/pages/FueltypeView.qml" line="53"/>
         <source>Modify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FueltypeView.qml" line="57"/>
+        <location filename="../qml/pages/FueltypeView.qml" line="59"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FueltypeView.qml" line="59"/>
+        <location filename="../qml/pages/FueltypeView.qml" line="61"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -524,7 +524,7 @@
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="55"/>
-        <source>Cars can be imported from Android App My Cars or from Nokia app Fuelpad.</source>
+        <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -650,17 +650,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationView.qml" line="52"/>
+        <location filename="../qml/pages/StationView.qml" line="53"/>
         <source>Modify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationView.qml" line="57"/>
+        <location filename="../qml/pages/StationView.qml" line="59"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationView.qml" line="59"/>
+        <location filename="../qml/pages/StationView.qml" line="61"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
