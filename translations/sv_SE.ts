@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="39"/>
         <source>Simulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulering</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="63"/>
