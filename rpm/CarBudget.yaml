@@ -1,6 +1,6 @@
 Name: harbour-carbudget
 Summary: Car expenses calculation
-Version: 0.12
+Version: 0.13
 Release: 0
 Group: Qt/Qt
 License: GPL
@@ -22,9 +22,12 @@ Requires:
 Files:
 - '%{_bindir}'
 - '%{_datadir}/%{name}/qml'
+- '%{_datadir}/%{name}/translations'
 - '%{_datadir}/applications/%{name}.desktop'
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 - '%{_datadir}/applications'
 - '%{_datadir}/icons/hicolor/86x86/apps'
 - '%{_datadir}/%{name}'
 PkgBR: []
+QMakeOptions:
+    - VERSION=%{version}

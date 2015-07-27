@@ -118,7 +118,7 @@ void Car::db_load()
             _fueltypelist.append(fueltype);
         }
     }
-    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList, TankList WHERE StationList.id == TankList.station GROUP BY StationList.id;"))
+    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;"))
     {
         while(query.next())
         {
@@ -717,11 +717,11 @@ double Car::budget_invest_total()
 double Car::budget_invest()
 {
     //returns bying costs per 100 KM
-    if (maxdistance()== mindistance()) return 0;
+    if (maxdistance()== mindistance()) return 0.0;
     QDate today = QDate::currentDate();
     unsigned int monthsused = 1;
     double valuecosts;
-    if (maxdistance()==mindistance() ) return 0.0;
+
     if (_buyingdate.toString()=="")
     {
         qDebug() << "Invalid buying date ";
