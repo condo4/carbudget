@@ -160,42 +160,42 @@
 <context>
     <name>CarEntry</name>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="36"/>
+        <location filename="../qml/pages/CarEntry.qml" line="37"/>
         <source>Select another car</source>
         <translation>Sélectionner un autre véhicule</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="41"/>
+        <location filename="../qml/pages/CarEntry.qml" line="42"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="46"/>
+        <location filename="../qml/pages/CarEntry.qml" line="47"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="67"/>
+        <location filename="../qml/pages/CarEntry.qml" line="68"/>
         <source>Distance: %L1 ~ %L2 %3</source>
         <translation>Distance : %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="73"/>
+        <location filename="../qml/pages/CarEntry.qml" line="74"/>
         <source>Consumption: %L1 l/100%2</source>
         <translation>Consommation : %L1 l/100%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="78"/>
+        <location filename="../qml/pages/CarEntry.qml" line="79"/>
         <source>Last: %L1 l/100%2</source>
         <translation>Dernière : %L1 l/100%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="181"/>
+        <location filename="../qml/pages/CarEntry.qml" line="182"/>
         <source>Tires mounted: %1/%2</source>
         <translation>Pneus montés : %1/%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="181"/>
+        <location filename="../qml/pages/CarEntry.qml" line="182"/>
         <source>Tires mounted</source>
         <translation>Pneus montés</translation>
     </message>
@@ -212,12 +212,12 @@
         <translation type="obsolete">Consommation : %L1 l/100km</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="118"/>
+        <location filename="../qml/pages/CarEntry.qml" line="119"/>
         <source>New Tank</source>
         <translation>Nouveau plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="149"/>
+        <location filename="../qml/pages/CarEntry.qml" line="150"/>
         <source>New Cost</source>
         <translation>Nouveau frais</translation>
     </message>
@@ -226,7 +226,7 @@
         <translation type="obsolete">Pneus montés : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="212"/>
+        <location filename="../qml/pages/CarEntry.qml" line="213"/>
         <source>Budget</source>
         <translation>Budget</translation>
     </message>
@@ -234,7 +234,7 @@
 <context>
     <name>CarView</name>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="37"/>
+        <location filename="../qml/pages/CarView.qml" line="36"/>
         <source>Create new car</source>
         <translation>Créer un nouveau véhicule</translation>
     </message>
@@ -248,17 +248,17 @@
         <translation>Importer une voiture</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="47"/>
+        <location filename="../qml/pages/CarView.qml" line="46"/>
         <source>Car List</source>
         <translation>Liste des véhicules</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="67"/>
+        <location filename="../qml/pages/CarView.qml" line="66"/>
         <source>Select</source>
         <translation>Selectionner</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="72"/>
+        <location filename="../qml/pages/CarView.qml" line="71"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -450,18 +450,18 @@
 <context>
     <name>CosttypeEntry</name>
     <message>
-        <location filename="../qml/pages/CosttypeEntry.qml" line="38"/>
+        <location filename="../qml/pages/CosttypeEntry.qml" line="39"/>
         <source>Modify Cost Type</source>
         <translation>Modifier type de frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CosttypeEntry.qml" line="39"/>
+        <location filename="../qml/pages/CosttypeEntry.qml" line="40"/>
         <source>New Cost Type</source>
         <translation>Nouveau type de frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CosttypeEntry.qml" line="45"/>
         <location filename="../qml/pages/CosttypeEntry.qml" line="46"/>
+        <location filename="../qml/pages/CosttypeEntry.qml" line="47"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
@@ -626,6 +626,29 @@
         <location filename="../qml/pages/FueltypeView.qml" line="59"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
+    </message>
+</context>
+<context>
+    <name>ImportHelp</name>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="46"/>
+        <source>Import Car</source>
+        <translation type="unfinished">Importer une voiture</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="55"/>
+        <source>Cars can be imported from Android App My Cars or from Nokia app Fuelpad.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="63"/>
+        <source>My Cars import file must be XML Export from My Cars.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="71"/>
+        <source>Fuelpad import file must be a db file.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

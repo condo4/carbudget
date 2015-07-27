@@ -73,7 +73,8 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/TiremountView.qml \
     qml/pages/TiremountEdit.qml \
     qml/pages/ConsumptionStatistics.qml \
-    qml/pages/DirectoryPage.qml
+    qml/pages/DirectoryPage.qml \
+    qml/pages/ImportHelp.qml
 
 HEADERS += \
     tank.h \
