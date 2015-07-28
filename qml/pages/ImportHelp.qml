@@ -31,18 +31,6 @@ Page {
         anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        PullDownMenu {
-            enabled: manager.is_debug
-            visible: manager.is_debug
-
-            MenuItem {
-                text: qsTr("Simulation")
-                onClicked: {
-                    manager.car.simulation()
-                }
-            }
-        }
-
 
         // Tell SilicaFlickable the height of its content.
         contentHeight: column.height
@@ -55,33 +43,40 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: "CarBudget " + Qt.application.version
+                title: qsTr("Import Car")
             }
 
-            Label {
-                x: Theme.paddingLarge
-                text: qsTr("License: GPLv3")
-                font.pixelSize: Theme.fontSizeSmall
-            }
-            Label {
-                x: Theme.paddingLarge
-                text: qsTr("Created by condo4 (Fabien Proriol)")
-                font.pixelSize: Theme.fontSizeSmall
-            }
 
-            Label {
+            Text {
                 x: Theme.paddingLarge
-                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (Many improvments)<br\>- Denis Fedoseev (Russion translation)<br \>- Thomas Michel (Many improvments)")
+                width: parent.width - Theme.paddingLarge - Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                color: Theme.primaryColor
+                text: qsTr("Cars can be imported from Android app My Cars or from Nokia app Fuelpad.")
+                font.pixelSize: Theme.fontSizeSmall
+            }
+            Text {
+                x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge - Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                color: Theme.primaryColor
+                text: qsTr("My Cars import file must be XML Export from My Cars.")
+                font.pixelSize: Theme.fontSizeSmall
+            }
+            Text {
+                x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge - Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                color: Theme.primaryColor
+                text: qsTr("Fuelpad import file must be a db file.")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Button {
-               id: homepage
+               id: btnImport
                anchors.horizontalCenter: parent.horizontalCenter
-               text: "<a href=\"https://github.com/condo4/carbudgetr\">Sourcecode on Github</a>"
-               onClicked: {
-                   Qt.openUrlExternally("https://github.com/condo4/carbudget")
-               }
+               text: "Select Import File"
+               onClicked: pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"))
             }
         }
     }
