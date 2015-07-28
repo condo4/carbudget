@@ -520,22 +520,22 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="46"/>
         <source>Import Car</source>
-        <translation type="unfinished">Importera bil</translation>
+        <translation>Importera bil</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="55"/>
         <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilar kan importeras från Android-appen My Cars och från Nokia-appen Fuelpad.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="63"/>
         <source>My Cars import file must be XML Export from My Cars.</source>
-        <translation type="unfinished"></translation>
+        <translation>My Cars importfil måste vara en XML-export från My Cars.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="71"/>
         <source>Fuelpad import file must be a db file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuelpad importfil måste vara en db-fil.</translation>
     </message>
 </context>
 <context>
