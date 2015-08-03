@@ -83,6 +83,37 @@ void Car::db_init()
     qDebug() << "DB:" << db_name;
 }
 
+void Car::migrateTiresToTiresets()
+{
+    // Migrates tires used before db versio 5 to tiresets
+    // Each Tire will be migrated to a single tireset
+    // If the mounted tires are equal to the amount of wheels, this tireset will be mounted
+    QSqlQuery query(this->db);
+    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;"))
+    {
+        while(query.next())
+        {
+            int id = query.value(0).toInt();
+            QDate buydate = query.value(1).toDate();
+            QDate trashdate = query.value(2).toDate();
+            double price = query.value(3).toDouble();
+            QString name = query.value(4).toString();
+            QString manufacturer = query.value(5).toString();
+            QString model = query.value(6).toString();
+            unsigned int quantity = query.value(7).toInt();
+            // first create corresponding tireset
+            Tireset *tireset = new Tireset(this);
+            tireset->setName("Migrated "+ name);
+            tireset->save();
+            _tiresetlist.append(tireset);
+            Tire *tire = new Tire(buydate,trashdate,name,manufacturer,model,price,quantity,id,tireset->id(),this);
+            _tirelist.append(tire);
+            // Now create tireset
+
+        }
+    }
+}
+
 void Car::db_load()
 {
     db_loading=true;
@@ -366,6 +397,7 @@ void Car::db_upgrade_to_5()
                 if (query.exec("UPDATE TABLE Tireusage ADD COLUMN tireset INTEGER;"))
                 {
                     this->db.commit();
+                    migrateTiresToTiresets();
                     return;
                 }
             }

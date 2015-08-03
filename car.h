@@ -103,6 +103,7 @@ private:
     QDate _buyingdate;
 
     void db_init();
+    void migrateTiresToTiresets();
     void db_load();
     int db_get_version();
 
