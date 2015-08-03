@@ -107,9 +107,8 @@ void Car::migrateTiresToTiresets()
             tireset->save();
             _tiresetlist.append(tireset);
             Tire *tire = new Tire(buydate,trashdate,name,manufacturer,model,price,quantity,id,tireset->id(),this);
+            tire->save();
             _tirelist.append(tire);
-            // Now create tireset
-
         }
     }
 }
@@ -1431,6 +1430,19 @@ int Car::tireMounted() const
     return 0;
 }
 
+QString Car::tiresetMounted() const
+{
+    if (_tiresetlist.isEmpty()) return "";
+    foreach (Tireset *t , _tiresetlist)
+    {
+        if (t->mounted())
+        {
+            return t->name();
+        }
+        return "";
+    }
+
+}
 QString Car::currency()
 {
     if(_currency.length() < 1)

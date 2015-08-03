@@ -60,6 +60,7 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Tireset> tiresets READ tiresets NOTIFY tiresetsChanged())
     Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
+    Q_PROPERTY(QString tiresetMounted READ tiresetMounted NOTIFY tiresetMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
     Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged())
@@ -180,6 +181,7 @@ signals:
     void tiresChanged();
     void tiresetsChanged();
     void tireMountedChanged();
+    void tiresetMountedChanged();
     void currencyChanged();
     void distanceunityChanged();
     void nbtireChanged();
@@ -223,6 +225,8 @@ public slots:
     void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);
 
     int tireMounted() const;
+    QString tiresetMounted() const;
+
 
     void simulation();
 
