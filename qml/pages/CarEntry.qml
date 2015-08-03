@@ -179,7 +179,7 @@ Page {
                 }
 
                 Button {
-                    text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
+                    text: manager.car.tiresetMounted == "" ? (qsTr("No tires mounted")):(manager.car.tiresetMounted)
                     color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
                     onClicked: pageStack.push(Qt.resolvedUrl("TiresetView.qml"))
                 }
