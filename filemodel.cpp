@@ -2,6 +2,7 @@
 #include <QDateTime>
 #include <QGuiApplication>
 #include "globals.h"
+#include <unistd.h>
 
 enum {
     FilenameRole = Qt::UserRole + 1,
