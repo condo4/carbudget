@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="39"/>
         <source>Simulation</source>
-        <translation type="unfinished">Simulation</translation>
+        <translation>Simulation</translation>
     </message>
     <message>
         <source>Distance: %L1 km</source>
@@ -24,8 +24,12 @@
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="74"/>
+        <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Åke Engelbrektson (Swedish translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
+        <translation>Remerciments :&lt;br&gt;- Lorenzo Facca (Italien)&lt;br&gt;- Alois Spitzbart (Allemand)&lt;br&gt;- Denis Fedoseev (Russe)&lt;br &gt;- Åke Engelbrektson (Suédois)&lt;br &gt;- Michal Hrusecky (Divers améliorations)&lt;br&gt;- Thomas Michel (Divers améliorations)</translation>
+    </message>
+    <message>
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
-        <translation>Remerciments :&lt;br&gt;- Lorenzo Facca (Italien)&lt;br&gt;- Alois Spitzbart (Allemand)&lt;br&gt;- Denis Fedoseev (Russe)&lt;br&gt;- Michal Hrusecky (divers améliorations)&lt;br &gt;- Thomas Michel (divers améliorations)</translation>
+        <translation type="vanished">Remerciments :&lt;br&gt;- Lorenzo Facca (Italien)&lt;br&gt;- Alois Spitzbart (Allemand)&lt;br&gt;- Denis Fedoseev (Russe)&lt;br&gt;- Michal Hrusecky (divers améliorations)&lt;br &gt;- Thomas Michel (divers améliorations)</translation>
     </message>
     <message>
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Import MyCar and many improvments)</source>

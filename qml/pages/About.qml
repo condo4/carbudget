@@ -71,7 +71,7 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (Many improvments)<br\>- Denis Fedoseev (Russion translation)<br \>- Thomas Michel (Many improvments)")
+                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (Many improvments)<br\>- Denis Fedoseev (Russion translation)<br \>- Åke Engelbrektson (Swedish translation)<br \>- Thomas Michel (Many improvments)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
