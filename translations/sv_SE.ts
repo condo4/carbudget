@@ -23,10 +23,6 @@
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Åke Engelbrektson (Swedish translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
-        <translation type="vanished">Tack till:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Thomas Michel (Many improvments)&lt;br &gt;- Åke Engelbrektson (Swedish translation)</translation>
-    </message>
 </context>
 <context>
     <name>BudgetView</name>
@@ -914,10 +910,6 @@
         <location filename="../qml/pages/TireMount.qml" line="40"/>
         <source>Mount Tire</source>
         <translation>Montering däck</translation>
-    </message>
-    <message>
-        <source>Km</source>
-        <translation type="obsolete">Km</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireMount.qml" line="78"/>

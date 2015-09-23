@@ -9,10 +9,6 @@
         <translation type="unfinished">Simulation</translation>
     </message>
     <message>
-        <source>Distance: %L1 km</source>
-        <translation type="obsolete">Пробег: %L1 km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/About.qml" line="63"/>
         <source>License: GPLv3</source>
         <translation>Лицензия: GPLv3</translation>
@@ -27,25 +23,9 @@
         <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Åke Engelbrektson (Swedish translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (harbour rules)</source>
-        <translation type="obsolete">Remerciments :&lt;br&gt;- Lorenzo Facca (Traduction Italien)&lt;br&gt;- Alois Spitzbart (Traduction Allemand)&lt;br&gt;- Michal Hrusecky (Règles harbour)</translation>
-    </message>
 </context>
 <context>
     <name>BudgetView</name>
-    <message>
-        <source>Car Budget for 100km</source>
-        <translation type="obsolete">Расходы 100км</translation>
-    </message>
-    <message>
-        <source>Fuel: </source>
-        <translation type="obsolete">Топливо: </translation>
-    </message>
-    <message>
-        <source>Cost: </source>
-        <translation type="obsolete">Стоимость: </translation>
-    </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="39"/>
         <source>Statistics</source>
@@ -192,14 +172,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Distance: %L1 km</source>
-        <translation type="obsolete">Пробег: %L1 км</translation>
-    </message>
-    <message>
-        <source>Consumption: %L1 l/100km</source>
-        <translation type="obsolete">Расход: %L1 л/100км</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/CarEntry.qml" line="119"/>
         <source>New Tank</source>
         <translation>Добавить заправку</translation>
@@ -208,10 +180,6 @@
         <location filename="../qml/pages/CarEntry.qml" line="150"/>
         <source>New Cost</source>
         <translation>Добавить ТО</translation>
-    </message>
-    <message>
-        <source>Tire mounted: %1</source>
-        <translation type="obsolete">Резина установлена: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="213"/>
@@ -293,17 +261,9 @@
         <translation>Дата</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">км</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/CostEntry.qml" line="90"/>
         <source>Cost Type</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Описание</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="126"/>
@@ -411,10 +371,6 @@
         <source>Deleting</source>
         <translation>Удаляется</translation>
     </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">км</translation>
-    </message>
 </context>
 <context>
     <name>CosttypeEntry</name>
@@ -465,10 +421,6 @@
 </context>
 <context>
     <name>CoverPage</name>
-    <message>
-        <source> for 100km</source>
-        <translation type="obsolete"> на 100км</translation>
-    </message>
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="50"/>
         <source> / 100</source>
@@ -741,10 +693,6 @@
         <translation>Дата</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">Км</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankEntry.qml" line="85"/>
         <source>ODO</source>
         <translation type="unfinished"></translation>
@@ -854,47 +802,9 @@
         <source>Note:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Date: </source>
-        <translation type="obsolete">Дата: </translation>
-    </message>
-    <message>
-        <source>ODO: </source>
-        <translation type="obsolete">Пробег: </translation>
-    </message>
-    <message>
-        <source>Quantity: </source>
-        <translation type="obsolete">Объем: </translation>
-    </message>
-    <message>
-        <source>Total Price: </source>
-        <translation type="obsolete">Итого: </translation>
-    </message>
-    <message>
-        <source>Unite Price: </source>
-        <translation type="obsolete">Цена за литр: </translation>
-    </message>
-    <message>
-        <source>Full tank</source>
-        <translation type="obsolete">Полный баг</translation>
-    </message>
-    <message>
-        <source>Not a full tank</source>
-        <translation type="obsolete">Не полный бак</translation>
-    </message>
-    <message>
-        <source>Note: 
-</source>
-        <translation type="obsolete">Примечание:
-</translation>
-    </message>
 </context>
 <context>
     <name>TankView</name>
-    <message>
-        <source>Add full tank</source>
-        <translation type="obsolete">Заправка до полного</translation>
-    </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="44"/>
         <source>Tank List</source>
@@ -931,42 +841,14 @@
         <translation>Удаляется</translation>
     </message>
     <message>
-        <source>km (+</source>
-        <translation type="obsolete">км (+</translation>
-    </message>
-    <message>
-        <source>km)</source>
-        <translation type="obsolete">км)</translation>
-    </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">км</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankView.qml" line="133"/>
         <source>l</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>l    </source>
-        <translation type="obsolete">л </translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankView.qml" line="126"/>
         <source>/l</source>
         <translation>/л</translation>
-    </message>
-    <message>
-        <source>€</source>
-        <translation type="obsolete">€</translation>
-    </message>
-    <message>
-        <source>€/l</source>
-        <translation type="obsolete">€/л</translation>
-    </message>
-    <message>
-        <source>l/100km</source>
-        <translation type="obsolete">л/100км</translation>
     </message>
 </context>
 <context>
@@ -1030,10 +912,6 @@
         <translation>Поставить колеса</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">Км</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TireMount.qml" line="78"/>
         <source>To trash</source>
         <translation>Удалить</translation>
@@ -1080,10 +958,6 @@
         <location filename="../qml/pages/TireView.qml" line="73"/>
         <source>Mount</source>
         <translation>Поставить</translation>
-    </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">км</translation>
     </message>
 </context>
 <context>

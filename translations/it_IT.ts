@@ -172,14 +172,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Distance: %L1 km</source>
-        <translation type="obsolete">Distanza : %L1 km</translation>
-    </message>
-    <message>
-        <source>Consumption: %L1 l/100km</source>
-        <translation type="obsolete">Consumo : %L1 l/100km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/CarEntry.qml" line="119"/>
         <source>New Tank</source>
         <translation>Nuovo Rifornimento</translation>
@@ -188,10 +180,6 @@
         <location filename="../qml/pages/CarEntry.qml" line="150"/>
         <source>New Cost</source>
         <translation>Nuovo Costo</translation>
-    </message>
-    <message>
-        <source>Tire mounted: %1</source>
-        <translation type="obsolete">Pneumatici montati: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="213"/>
@@ -273,17 +261,9 @@
         <translation>Data</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">Km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/CostEntry.qml" line="90"/>
         <source>Cost Type</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Descrizione</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="126"/>
@@ -390,10 +370,6 @@
         <location filename="../qml/pages/CostView.qml" line="81"/>
         <source>Deleting</source>
         <translation>Eliminazione</translation>
-    </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">km</translation>
     </message>
 </context>
 <context>
@@ -717,10 +693,6 @@
         <translation>Data</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">Km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankEntry.qml" line="85"/>
         <source>ODO</source>
         <translation type="unfinished"></translation>
@@ -830,17 +802,9 @@
         <source>Note:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Full tank</source>
-        <translation type="obsolete">Rifornimento pieno</translation>
-    </message>
 </context>
 <context>
     <name>TankView</name>
-    <message>
-        <source>Add full tank</source>
-        <translation type="obsolete">Aggiungi Rifornimento</translation>
-    </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="44"/>
         <source>Tank List</source>
@@ -877,42 +841,14 @@
         <translation>Eliminazione</translation>
     </message>
     <message>
-        <source>km (+</source>
-        <translation type="obsolete">km (+</translation>
-    </message>
-    <message>
-        <source>km)</source>
-        <translation type="obsolete">km)</translation>
-    </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankView.qml" line="133"/>
         <source>l</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>l    </source>
-        <translation type="obsolete">l </translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TankView.qml" line="126"/>
         <source>/l</source>
         <translation>/l</translation>
-    </message>
-    <message>
-        <source>€</source>
-        <translation type="obsolete">€</translation>
-    </message>
-    <message>
-        <source>€/l</source>
-        <translation type="obsolete">€/l</translation>
-    </message>
-    <message>
-        <source>l/100km</source>
-        <translation type="obsolete">l/100km</translation>
     </message>
 </context>
 <context>
@@ -976,10 +912,6 @@
         <translation>Monta pneumatici</translation>
     </message>
     <message>
-        <source>Km</source>
-        <translation type="obsolete">Km</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/TireMount.qml" line="78"/>
         <source>To trash</source>
         <translation>Da cambiare</translation>
@@ -1026,10 +958,6 @@
         <location filename="../qml/pages/TireView.qml" line="73"/>
         <source>Mount</source>
         <translation>Monta</translation>
-    </message>
-    <message>
-        <source>km</source>
-        <translation type="obsolete">km</translation>
     </message>
 </context>
 <context>
