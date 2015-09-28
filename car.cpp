@@ -994,7 +994,7 @@ void Car::delCosttype(Costtype *costtype)
             cost->setCosttype(0);
         }
     }
-    emit costsChanged();
+    emit costtypesChanged();
     costtype->deleteLater();
 }
 
