@@ -461,6 +461,15 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         db.close();
 }
 
+bool CarManager::is_debug() const
+{
+#ifdef QT_NO_DEBUG
+    return false;
+#else
+    return true;
+#endif
+}
+
 QString CarManager::getEnv(QString name)
 {
     qDebug() << "Find environment value for" << name << ": " << getenv(name.toStdString().c_str());

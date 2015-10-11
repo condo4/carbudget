@@ -49,11 +49,13 @@ Page {
 
             menu: ContextMenu {
                 MenuItem {
+                    enabled: model.modelData.id > 0 ? true:false
                     text: qsTr("Modify")
                     onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
                 }
 
                 MenuItem {
+                    enabled: model.modelData.id > 0 ? true:false
                     text: qsTr("Remove")
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {

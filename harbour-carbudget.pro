@@ -32,6 +32,18 @@ lupdate_only{
     SOURCES += qml/pages/*.qml
 }
 
+
+CONFIG += sailfishapp_i18n
+
+TRANSLATIONS = translations/de_DE.ts \
+               translations/fr_FR.ts \
+               translations/it_IT.ts \
+               translations/ru_RU.ts \
+               translations/sv_SE.ts
+
+
+DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+
 OTHER_FILES += qml/cover/CoverPage.qml \
     rpm/CarBudget.yaml \
     harbour-carbudget.desktop \
@@ -51,13 +63,10 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/TireMount.qml \
     qml/pages/About.qml \
     qml/pages/CarCreate.qml \
-    i18n/FR_fr.ts \
-    i18n/RU_ru.ts \
     qml/pages/BudgetView.qml \
     qml/pages/Settings.qml \
     qml/pages/CosttypeEntry.qml \
     qml/pages/CosttypeView.qml \
-    i18n/de_DE.ts \
     qml/pages/SelectImportFile.qml \
     qml/pages/MycarImport.qml \
     qml/pages/FuelpadImport.qml \
@@ -68,6 +77,7 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/DirectoryPage.qml \
     qml/pages/TiresetView.qml \
     qml/pages/TiresetEntry.qml
+    qml/pages/ImportHelp.qml
 
 HEADERS += \
     tank.h \
@@ -85,10 +95,6 @@ HEADERS += \
     globals.h \
     tireset.h
 
-TRANSLATIONS = i18n/de_DE.ts \
-               i18n/fr_FR.ts \
-               i18n/it_IT.ts \
-               i18n/ru_RU.ts
 
 RESOURCES += \
     Ressources.qrc
