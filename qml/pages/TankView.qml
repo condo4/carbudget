@@ -27,6 +27,21 @@ import harbour.carbudget 1.0
 Page {
     property string filter: ""
     allowedOrientations: Orientation.All
+    property string distanceunit
+    property real distanceunitfactor
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     Drawer {
         id: tankviewDrawer
         anchors.fill: parent
@@ -100,7 +115,7 @@ Page {
                         width: parent.width
 
                         Text {
-                            text: model.modelData.distance + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + model.modelData.newDistance+manager.car.distanceunity+")"):(manager.car.distanceunity));
+                            text: model.modelData.distance/distanceunitfactor + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + model.modelData.newDistance/distanceunitfactor+manager.car.distanceunity+")"):(manager.car.distanceunity));
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
