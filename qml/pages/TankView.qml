@@ -115,7 +115,7 @@ Page {
                         width: parent.width
 
                         Text {
-                            text: model.modelData.distance/distanceunitfactor + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + model.modelData.newDistance/distanceunitfactor+manager.car.distanceunity+")"):(manager.car.distanceunity));
+                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceunity+")"):(manager.car.distanceunity));
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall

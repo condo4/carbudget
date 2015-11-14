@@ -106,7 +106,7 @@ Page {
 					width:(parent.width-parent.spacing)/2
 				}
 				Text {
-					text: tank.distance/distanceunitfactor
+                    text: (tank.distance/distanceunitfactor).toFixed(0)
 					font.family: Theme.fontFamily
 					font.pixelSize: Theme.fontSizeMedium
 					color: Theme.primaryColor

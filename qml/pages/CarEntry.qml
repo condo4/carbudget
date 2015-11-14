@@ -79,7 +79,7 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Distance: %L1 ~ %L2 %3").arg(manager.car.mindistance/distanceunitfactor).arg(manager.car.maxdistance/distanceunitfactor).arg(manager.car.distanceunity)
+                text: qsTr("Distance: %L1 ~ %L2 %3").arg((manager.car.mindistance/distanceunitfactor).toFixed(0)).arg((manager.car.maxdistance/distanceunitfactor).toFixed(0)).arg(manager.car.distanceunity)
                 font.pixelSize: Theme.fontSizeSmall
             }
 

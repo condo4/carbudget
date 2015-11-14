@@ -204,7 +204,7 @@ Dialog {
         if(tank != undefined)
         {
             tank_date = tank.date
-            kminput.text = tank.distance / distanceunitfactor
+            kminput.text = (tank.distance / distanceunitfactor).toFixed(0)
             quantityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
