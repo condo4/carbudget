@@ -26,6 +26,20 @@ import Sailfish.Silica 1.0
 Page {
     id: carEntry
     allowedOrientations: Orientation.All
+    property string distanceunit
+    property real distanceunitfactor
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -65,7 +79,7 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Distance: %L1 ~ %L2 %3").arg(manager.car.mindistance).arg(manager.car.maxdistance).arg(manager.car.distanceunity)
+                text: qsTr("Distance: %L1 ~ %L2 %3").arg((manager.car.mindistance/distanceunitfactor).toFixed(0)).arg((manager.car.maxdistance/distanceunitfactor).toFixed(0)).arg(manager.car.distanceunity)
                 font.pixelSize: Theme.fontSizeSmall
             }
 

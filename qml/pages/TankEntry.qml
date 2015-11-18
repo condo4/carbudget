@@ -28,6 +28,8 @@ Dialog {
     property date tank_date
     property int station
     property int fueltype
+    property string distanceunit
+    property real distanceunitfactor
     allowedOrientations: Orientation.All
     SilicaFlickable {
         PullDownMenu {
@@ -190,10 +192,19 @@ Dialog {
     canAccept: kminput.acceptableInput && quantityinput.acceptableInput && priceinput.acceptableInput
 
     onOpened: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi" )
+        {
+            distanceunitfactor = 1.609
+        }
         if(tank != undefined)
         {
             tank_date = tank.date
-            kminput.text = tank.distance
+            kminput.text = (tank.distance / distanceunitfactor).toFixed(0)
             quantityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
@@ -223,12 +234,12 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
         }
         else
         {
             tank.date = tank_date
-            tank.distance = kminput.text
+            tank.distance = kminput.text * distanceunitfactor
             tank.quantity = quantityinput.text.replace(",",".")
             tank.price = priceinput.text.replace(",",".")
             tank.full = fullinput.checked
