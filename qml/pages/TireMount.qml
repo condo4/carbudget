@@ -88,9 +88,18 @@ Dialog {
     }
 
     onAccepted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi" )
+        {
+            distanceunitfactor = 1.609
+        }
         if(tire.mounted)
-            manager.car.umountTire(mount_date, kminput.text, tire, totrashinput.checked)
+            manager.car.umountTire(mount_date, kminput.text * distanceunitfactor, tire, totrashinput.checked)
         else
-            manager.car.mountTire(mount_date, kminput.text, tire)
+            manager.car.mountTire(mount_date, kminput.text * distanceunitfactor, tire)
     }
 }

@@ -26,6 +26,21 @@ import harbour.carbudget 1.0
 Page {
         allowedOrientations: Orientation.All
         property Cost cost
+    property string distanceunit
+    property real distanceunitfactor
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
 
         SilicaFlickable {
 
@@ -62,7 +77,7 @@ Page {
                         width:(parent.width-parent.spacing)/2
                     }
                     Text {
-                        text: cost.distance
+                        text: (cost.distance/distanceunitfactor).toFixed(0)
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

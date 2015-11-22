@@ -110,12 +110,21 @@ Dialog {
     canAccept: mountdistance.acceptableInput && unmountdistance.acceptableInput
 
     onOpened: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi" )
+        {
+            distanceunitfactor = 1.609
+        }
         if(tiremount != undefined)
         {
             mountdate = tiremount.mountdate
-            mountdistance.text = tiremount.mountdistance
+            mountdistance.text = (tiremount.mountdistance / distanceunitfactor).toFixed(0)
             unmountdate = tiremount.unmountdate
-            unmountdistance.text = tiremount.unmountdistance
+            unmountdistance.text = (tiremount.unmountdistance / distanceunitfactor).toFixed(0)
             if (tiremount.unmountdistance==0)
             {
                 unmountdistance.visible=false;
@@ -131,11 +140,11 @@ Dialog {
     }
     onAccepted: {
         tiremount.mountdate = mountdate
-        tiremount.mountdistance = mountdistance.text
+        tiremount.mountdistance = mountdistance.text * distanceunitfactor
         if (tiremount.unmountdistance > 0)
         {
             tiremount.unmountdate = unmountdate
-            tiremount.unmountdistance = unmountdistance.text
+            tiremount.unmountdistance = unmountdistance.text * distanceunitfactor
         }
         tiremount.save()
     }

@@ -25,6 +25,21 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+    property string distanceunit
+    property real distanceunitfactor
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "km")
+        {
+            distanceunitfactor = 1
+        }
+        else if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     SilicaListView {
         PullDownMenu {
             MenuItem {
@@ -83,7 +98,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text: model.modelData.manufacturer + " (" + model.modelData.distance + manager.car.distanceunity + ")";
+                        text: model.modelData.manufacturer + " (" + (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ")";
                         font.bold: model.modelData.mounted
 
                         font.family: Theme.fontFamily
