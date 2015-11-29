@@ -25,15 +25,11 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     property string distanceunit
-    property real distanceunitfactor
+    property real distanceunitfactor: 1
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceunity
-        if(distanceunit == "km")
-        {
-            distanceunitfactor = 1
-        }
-        else if(distanceunit == "mi")
+        if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
         }

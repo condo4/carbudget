@@ -89,11 +89,7 @@ Dialog {
 
     onAccepted: {
         distanceunit = manager.car.distanceunity
-        if(distanceunit == "km")
-        {
-            distanceunitfactor = 1
-        }
-        else if(distanceunit == "mi" )
+        if(distanceunit == "mi" )
         {
             distanceunitfactor = 1.609
         }
