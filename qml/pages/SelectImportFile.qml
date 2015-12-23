@@ -21,11 +21,11 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
+import Qt.labs.folderlistmodel 2.1
 
 Page {
     id:page
     allowedOrientations: Orientation.All
-    property string dir: manager.getEnv("HOME")
     SilicaListView {
 
         VerticalScrollDecorator {}
@@ -37,53 +37,42 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model:fileModel
+        model: folderModel
 
-        FileModel {
-            id: fileModel
-            dir: page.dir
+        FolderListModel {
+            id: folderModel
+            folder: "file:///home/nemo"
+            nameFilters: ["*.xml", "*.db"]
         }
 
-        delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-            showMenuOnPressAndHold: true
+        delegate: BackgroundItem {
+            id: fileDelegate
+            Label {
+                x: Theme.paddingMedium
+                text: fileName
+                //showMenuOnPressAndHold: true
+            }
             onClicked: {
-                if (model.isDir)
-                    pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"),
-                                   { dir: fileModel.appendPath(txtfilename.text) });
-                else
-                   pageStack.push(Qt.resolvedUrl(checkFileType(txtfilename.text)),
-                                  { filename: dir+"/"+txtfilename.text });
+                if (folderModel.isFolder(index)) {
+                    console.log("Clicked dir: " + fileName + " index: " + index)
+                    folderModel.folder = folderModel.folder + "/" + fileName
+                }
+                else {
+                    console.log("Clicked file: " + fileName + " index: " + index)
+                    pageStack.push(Qt.resolvedUrl(checkFileType(fileName)),
+                                  { filename: folderModel.folder+"/"+fileName });
 
-            }
-
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Import")
-                    onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(txtfilename.text)), { filename: dir+"/"+txtfilename.text })
                 }
 
             }
-
-            Column {
-                width: parent.width
-
-                Row {
-                    width: parent.width
-
-                    Text {
-                        id: txtfilename
-                        text: filename
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        width: parent.width
-                        horizontalAlignment: Text.AlignLeft
-                    }
-
-                }
+            //menu: ContextMenu {
+                //MenuItem {
+                    //text: qsTr("Import")
+                    //onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(fileName)),
+                                                             //{ filename: folderModel.folder+"/"+fileName })
+                    //}
+                //}
             }
-        }
     }
     function checkFileType(name)
         {
