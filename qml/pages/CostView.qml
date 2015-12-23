@@ -27,6 +27,17 @@ Page {
     // When in statistics drilldown, show description instead of cost type
     property bool showDescription: false
     allowedOrientations: Orientation.All
+    property string distanceunit
+    property real distanceunitfactor: 1
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     Drawer {
         id: costviewDrawer
         anchors.fill: parent
@@ -90,7 +101,7 @@ Page {
                     Row {
                         width: parent.width
                         Text {
-                            text: model.modelData.distance + manager.car.distanceunity;
+                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity;
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor

@@ -24,6 +24,17 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+    property string distanceunit
+    property real distanceunitfactor: 1
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     Drawer {
         id: tiremountviewDrawer
         anchors.fill: parent
@@ -82,7 +93,7 @@ Page {
                      Row {
                         width: parent.width
                         Text {
-                            text: model.modelData.mountdistance + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + model.modelData.unmountdistance + manager.car.distanceunity)
+                            text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.primaryColor

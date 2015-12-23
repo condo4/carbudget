@@ -27,6 +27,8 @@ Dialog {
     property Cost cost
     property date cost_date
     property int costtype
+    property string distanceunit
+    property real distanceunitfactor: 1
     allowedOrientations: Orientation.All
     SilicaFlickable {
         PullDownMenu {
@@ -130,10 +132,15 @@ Dialog {
     canAccept: kminput.acceptableInput && costinput.acceptableInput
 
     onOpened: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "mi" )
+        {
+            distanceunitfactor = 1.609
+        }
         if(cost != undefined)
         {
             cost_date = cost.date
-            kminput.text = cost.distance
+            kminput.text = (cost.distance / distanceunitfactor)
             costtype = cost.costtype
             descinput.text = cost.description
             costinput.text = cost.cost
@@ -152,12 +159,12 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            manager.car.addNewCost(cost_date,kminput.text,costtype,descinput.text,costinput.text.replace(",","."))
+            manager.car.addNewCost(cost_date,kminput.text * distanceunitfactor,costtype,descinput.text,costinput.text.replace(",","."))
         }
         else
         {
             cost.date = cost_date
-            cost.distance = kminput.text
+            cost.distance = kminput.text * distanceunitfactor
             cost.costtype = costtype
             cost.description = descinput.text
             cost.cost = costinput.text.replace(",",".")

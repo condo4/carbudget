@@ -27,6 +27,17 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     id: budgetPage
+    property string distanceunit
+    property real distanceunitfactor: 1
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     Drawer {
         id: budgetviewDrawer
         anchors.fill: parent
@@ -200,7 +211,7 @@ Page {
                 }
                 Text {
                     width:parent.width/2
-                    text :  manager.car.maxdistance
+                    text :  (manager.car.maxdistance/distanceunitfactor).toFixed(0)
                     font.family: "monospaced"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
@@ -219,7 +230,7 @@ Page {
                 }
                 Text {
                     width:parent.width/2
-                    text :  manager.car.maxdistance - manager.car.mindistance
+                    text :  ((manager.car.maxdistance - manager.car.mindistance)/distanceunitfactor).toFixed(0)
                     font.family: "monospaced"
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.primaryColor
