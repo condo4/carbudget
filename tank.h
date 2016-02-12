@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QDate>
 #include "carevent.h"
+#include "charttypes.h"
 
 class Tank : public CarEvent
 {
@@ -43,6 +44,8 @@ class Tank : public CarEvent
 
 
 private:
+    double calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const;
+
     double _quantity;
     double _price;
     bool _full;

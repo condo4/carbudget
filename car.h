@@ -33,7 +33,7 @@
 #include <costtype.h>
 #include <QtQuick>
 #include <QtSql/QtSql>
-
+#include "charttypes.h"
 
 class CarManager;
 #define DB_VERSION 4
@@ -41,13 +41,6 @@ class CarManager;
 class Car : public QObject
 {
     Q_OBJECT
-
-    enum chartType
-    {
-        chartTypeConsumptionOf100,
-        chartTypeCostsOf100,
-        chartTypeOilPrice
-    };
 
     Q_PROPERTY(unsigned int nbtank READ nbtank NOTIFY nbtankChanged)
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
@@ -117,8 +110,8 @@ private:
     void db_upgrade_to_4();
     bool db_loading;
 
-    enum chartType chartType_;
-    void setChartType(enum chartType type);
+    enum chartTypeTankStatistics chartType_;
+    void setChartType(enum chartTypeTankStatistics type);
 
 public:
     QSqlDatabase db;

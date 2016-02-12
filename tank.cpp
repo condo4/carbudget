@@ -97,42 +97,54 @@ QString Tank::stationname() const
 
 double Tank::consumption() const
 {
-    if (!full()) return 0.0;
-    const Tank *previous = _car->previousTank(_distance);
-    double quant = this->quantity();
-    while(previous != NULL)
-    {
-        if (!(previous->full()))
-        {
-            qDebug() << "prevous distance is " << previous->quantity();
-            quant += previous->quantity();
-            previous = _car->previousTank(previous->distance());
-        }
-        else break;
-    }
-    if (previous==NULL) return 0.0;
-    if (_distance ==previous->distance()) return 0.0;
-    return quant / ((_distance - previous->distance()) / 100.0);
+    return this->calcCostsOrConsumptionType(chartTypeConsumptionOf100);
 }
 
 double Tank::costsOn100() const
 {
+    return this->calcCostsOrConsumptionType(chartTypeCostsOf100);
+}
+
+double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
+{
     if (!full()) return 0.0;
+
+    if (type != chartTypeConsumptionOf100 && type != chartTypeCostsOf100)
+    {
+        return 0.0;
+    }
+
     const Tank *previous = _car->previousTank(_distance);
-    double price = this->price();
+    double value;
+    if (type == chartTypeConsumptionOf100)
+    {
+        value = this->quantity();
+    }
+    else if (type == chartTypeCostsOf100)
+    {
+        value = this->price();
+    }
     while(previous != NULL)
     {
         if (!(previous->full()))
         {
-            qDebug() << "prevous price is " << previous->price();
-            price += previous->price();
+            if (type == chartTypeConsumptionOf100)
+            {
+                qDebug() << "prevous distance is " << previous->quantity();
+                value += previous->quantity();
+            }
+            else if (type == chartTypeCostsOf100)
+            {
+                qDebug() << "prevous price is " << previous->price();
+                value += previous->price();
+            }
             previous = _car->previousTank(previous->distance());
         }
         else break;
     }
     if (previous==NULL) return 0.0;
     if (_distance ==previous->distance()) return 0.0;
-    return price / ((_distance - previous->distance()) / 100.0);
+    return value / ((_distance - previous->distance()) / 100.0);
 }
 
 

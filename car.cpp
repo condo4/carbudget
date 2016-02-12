@@ -464,7 +464,7 @@ unsigned int Car::mindistance() const
     return minDistance;
 }
 
-void Car::setChartType(enum chartType type)
+void Car::setChartType(enum chartTypeTankStatistics type)
 {
     chartType_ = type;
 }
@@ -503,11 +503,13 @@ QJsonObject Car::getChartData()
         if ( (i == 0) || (i == _tanklist.length() - 2))
         {
             //labelArray.append(_tanklist[i]->date().toString());
-            labelArray.append(QString::number(i));
+            //labelArray.append(QString::number(i));
+            labelArray.append(QString(""));
         }
         else
         {
-            labelArray.append(QString::number(i));
+            //labelArray.append(QString::number(i));
+            labelArray.append(QString(""));
         }
 
         if (chartType_ == chartTypeConsumptionOf100)

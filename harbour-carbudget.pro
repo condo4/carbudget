@@ -89,7 +89,8 @@ HEADERS += \
     tiremount.h \
     filemodel.h \
     statfileinfo.h \
-    globals.h
+    globals.h \
+    charttypes.h
 
 
 RESOURCES += \
