@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
 
     CarManager manager;
 
+    view->engine()->addImportPath("/usr/share/harbour-carbudget/qml");
     view->rootContext()->setContextProperty("manager", &manager);
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();

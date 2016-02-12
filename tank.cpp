@@ -115,6 +115,27 @@ double Tank::consumption() const
     return quant / ((_distance - previous->distance()) / 100.0);
 }
 
+double Tank::costsOn100() const
+{
+    if (!full()) return 0.0;
+    const Tank *previous = _car->previousTank(_distance);
+    double price = this->price();
+    while(previous != NULL)
+    {
+        if (!(previous->full()))
+        {
+            qDebug() << "prevous price is " << previous->price();
+            price += previous->price();
+            previous = _car->previousTank(previous->distance());
+        }
+        else break;
+    }
+    if (previous==NULL) return 0.0;
+    if (_distance ==previous->distance()) return 0.0;
+    return price / ((_distance - previous->distance()) / 100.0);
+}
+
+
 unsigned int Tank::newDistance() const
 {
     const Tank *previous = _car->previousTank(_distance);

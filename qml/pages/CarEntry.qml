@@ -129,6 +129,10 @@ Page {
                     text: qsTr("New Tank")
                     onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
                 }
+                Button {
+                    text: qsTr("Statistics")
+                    onClicked: pageStack.push(Qt.resolvedUrl("Statistics.qml"))
+                }
             }
 
             Row {

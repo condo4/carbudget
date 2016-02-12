@@ -65,6 +65,7 @@ public:
     void setFull(bool full);
 
     double consumption() const;
+    double costsOn100() const;
     unsigned int newDistance() const;
 
     unsigned int station() const;

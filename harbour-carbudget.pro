@@ -94,3 +94,6 @@ HEADERS += \
 
 RESOURCES += \
     Ressources.qrc
+
+DISTFILES += \
+    qml/pages/Statistics.qml

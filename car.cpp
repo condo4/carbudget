@@ -25,7 +25,10 @@
 #include "fueltype.h"
 #include "station.h"
 #include <QDebug>
+#include <QJsonObject>
+#include <QJsonArray>
 #include <stdlib.h>
+
 
 #define CREATE_NEW_EVENT (0)
 
@@ -316,12 +319,12 @@ void Car::db_upgrade_to_4()
     this->db.rollback();
 }
 
-Car::Car(CarManager *parent) : QObject(parent), _manager(parent)
+Car::Car(CarManager *parent) : QObject(parent), _manager(parent), chartType_(chartTypeConsumptionOf100)
 {
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0),_buyingprice(0),_sellingprice(0),_lifetime(0)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _nbtire(0),_buyingprice(0),_sellingprice(0),_lifetime(0), chartType_(chartTypeConsumptionOf100)
 {
     this->db_init();
     db_loading=false;
@@ -460,6 +463,81 @@ unsigned int Car::mindistance() const
     }
     return minDistance;
 }
+
+void Car::setChartType(enum chartType type)
+{
+    chartType_ = type;
+}
+
+void Car::setChartTypeOilPrice()
+{
+    this->setChartType(chartTypeOilPrice);
+
+    emit statisticTypeChanged();
+}
+
+void Car::setChartTypeConsumption()
+{
+    this->setChartType(chartTypeConsumptionOf100);
+
+    emit statisticTypeChanged();
+}
+
+void Car::setChartTypeCosts()
+{
+    this->setChartType(chartTypeCostsOf100);
+
+    emit statisticTypeChanged();
+}
+
+QJsonObject Car::getChartData()
+{
+    QJsonArray labelArray;
+    QJsonArray dataArray;
+    QJsonObject dataSet;
+    QJsonArray dataSetArray;
+    QJsonObject jsonO;
+
+    for (int i = nbtank() - 2; i > 0 ; i--) // -2 cos consumption is 0 on very first (oldest) entry
+    {
+        if ( (i == 0) || (i == _tanklist.length() - 2))
+        {
+            //labelArray.append(_tanklist[i]->date().toString());
+            labelArray.append(QString::number(i));
+        }
+        else
+        {
+            labelArray.append(QString::number(i));
+        }
+
+        if (chartType_ == chartTypeConsumptionOf100)
+        {
+            dataArray.append(_tanklist[i]->consumption());
+        }
+        else if (chartType_ == chartTypeOilPrice)
+        {
+            dataArray.append(_tanklist[i]->priceu());
+        }
+        else
+        {
+            dataArray.append(_tanklist[i]->costsOn100());
+        }
+    }
+
+    dataSet.insert("fillColor", QString("rgba(151,187,205,0.5)"));
+    dataSet.insert("strokeColor", QString("rgba(151,187,205,1)"));
+
+    dataSet.insert("data", dataArray);
+    dataSetArray.append(dataSet);
+
+    jsonO.insert("labels", labelArray);
+    jsonO.insert("datasets", dataSetArray);
+
+//    qDebug() << jsonO;
+
+    return jsonO;
+}
+
 
 QQmlListProperty<Tank> Car::tanks()
 {
@@ -1474,6 +1552,27 @@ void Car::setBuyingdate(QDate date)
     }
     _buyingdate = date;
     emit buyingdateChanged();
+}
+
+QString Car::getStatisticType()
+{
+    QString statisticType = "";
+
+    switch (chartType_) {
+    case chartTypeConsumptionOf100:
+        statisticType = "Consumption";
+        break;
+    case chartTypeCostsOf100:
+        statisticType = "Costs";
+        break;
+    default: // oil price
+        statisticType = "Oil Price";
+        break;
+    }
+
+    //emit statisticTypeChanged();
+
+    return statisticType;
 }
 
 void Car::simulation()

@@ -42,6 +42,13 @@ class Car : public QObject
 {
     Q_OBJECT
 
+    enum chartType
+    {
+        chartTypeConsumptionOf100,
+        chartTypeCostsOf100,
+        chartTypeOilPrice
+    };
+
     Q_PROPERTY(unsigned int nbtank READ nbtank NOTIFY nbtankChanged)
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
     Q_PROPERTY(double consumptionmax READ consumptionmax NOTIFY consumptionmaxChanged)
@@ -77,6 +84,8 @@ class Car : public QObject
     Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
+    Q_PROPERTY(QJsonObject chartData READ getChartData)
+    Q_PROPERTY(QString statisticType READ getStatisticType NOTIFY statisticTypeChanged)
 
 private:
     CarManager *_manager;
@@ -108,6 +117,9 @@ private:
     void db_upgrade_to_4();
     bool db_loading;
 
+    enum chartType chartType_;
+    void setChartType(enum chartType type);
+
 public:
     QSqlDatabase db;
     explicit Car(CarManager *parent = 0);
@@ -136,6 +148,8 @@ public:
     void setCar(QString name);
     QString getName() const { return _name; }
 
+    QJsonObject getChartData();
+
     unsigned long int getDistance(QDate Date);
 
     Q_INVOKABLE double budget_fuel_byType(unsigned int id);
@@ -145,6 +159,10 @@ public:
     Q_INVOKABLE double budget_consumption_min_byType(unsigned int id);
     Q_INVOKABLE double budget_cost_total_byType(unsigned int id);
     Q_INVOKABLE double budget_cost_byType(unsigned int id);
+    Q_INVOKABLE void setChartTypeOilPrice();
+    Q_INVOKABLE void setChartTypeConsumption();
+    Q_INVOKABLE void setChartTypeCosts();
+
     double budget_fuel_total();
     double budget_fuel();
     double budget_cost_total();
@@ -181,6 +199,7 @@ signals:
     void lifetimeChanged();
     void buyingdateChanged();
     void budgetChanged();
+    void statisticTypeChanged();
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
@@ -233,6 +252,7 @@ public slots:
     QDate buyingdate();
     void setBuyingdate(QDate date);
 
+    QString getStatisticType();
 
 };
 
