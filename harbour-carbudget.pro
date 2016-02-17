@@ -74,7 +74,9 @@ OTHER_FILES += qml/cover/CoverPage.qml \
     qml/pages/TiremountEdit.qml \
     qml/pages/ConsumptionStatistics.qml \
     qml/pages/DirectoryPage.qml \
-    qml/pages/ImportHelp.qml
+    qml/pages/ImportHelp.qml \
+    qml/pages/Statistics.qml \
+    qml/pages/SelectTankDate.qml
 
 HEADERS += \
     tank.h \
@@ -95,6 +97,3 @@ HEADERS += \
 
 RESOURCES += \
     Ressources.qrc
-
-DISTFILES += \
-    qml/pages/Statistics.qml

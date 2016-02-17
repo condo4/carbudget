@@ -94,6 +94,25 @@ Page {
                 chartType: Charts.ChartType.LINE;
                 chartData: manager.car.chartData;
             }
+
+            Row {
+                spacing: Theme.paddingSmall
+                Button {
+                    //anchors.left: statisticsChart.left
+                    width: page.width / 4;
+                    text: "Begin"
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"))
+                    //horizontalAlignment: Button.AlignLeft
+                }
+                Button {
+                    //anchors.left: undefined
+                    //anchors.right: statisticsChart.right
+                    width: page.width / 4;
+                    text: "End"
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"))
+                    //horizontalAlignment: Button.AlignRight
+                }
+            }
         }
     }
 

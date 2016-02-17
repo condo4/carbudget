@@ -124,14 +124,16 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("TankView.qml"))
                     }
                 }
-
-                Button {
-                    text: qsTr("New Tank")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
-                }
-                Button {
-                    text: qsTr("Statistics")
-                    onClicked: pageStack.push(Qt.resolvedUrl("Statistics.qml"))
+                Column {
+                    spacing: Theme.paddingSmall
+                    Button {
+                        text: qsTr("New Tank")
+                        onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
+                    }
+                    Button {
+                        text: qsTr("Statistics")
+                        onClicked: pageStack.push(Qt.resolvedUrl("Statistics.qml"))
+                    }
                 }
             }
 
