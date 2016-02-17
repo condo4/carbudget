@@ -28,6 +28,10 @@ Page {
     id: page
 
     allowedOrientations: Orientation.All
+
+    property int beginIndex: 1
+    property int endIndex: 9999
+
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
@@ -100,16 +104,16 @@ Page {
                 Button {
                     //anchors.left: statisticsChart.left
                     width: page.width / 4;
-                    text: "Begin"
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"))
+                    text: beginIndex.toString()
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { beginIndex: beginIndex, endIndex:endIndex })
                     //horizontalAlignment: Button.AlignLeft
                 }
                 Button {
                     //anchors.left: undefined
                     //anchors.right: statisticsChart.right
                     width: page.width / 4;
-                    text: "End"
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"))
+                    text: endIndex.toString()
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { beginIndex: beginIndex, endIndex:endIndex })
                     //horizontalAlignment: Button.AlignRight
                 }
             }

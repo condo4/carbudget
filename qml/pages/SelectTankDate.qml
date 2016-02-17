@@ -25,21 +25,21 @@ import harbour.carbudget 1.0
 
 
 Page {
-    property string filter: ""
     allowedOrientations: Orientation.All
-    property string distanceunit
-    property real distanceunitfactor : 1.0
+
+    property int beginIndex
+    property int endIndex
 
     Drawer {
         id: selectTankDateViewer
         anchors.fill: parent
         dock: Dock.Top
         open: false
-        backgroundSize: tankview.contentHeight
+        backgroundSize: selectTankDate.contentHeight
     }
     SilicaFlickable {
-        id: tankview
-        interactive: !tanklistView.flicking
+        id: selectTankDate
+        interactive: !selectTankDateView.flicking
         pressDelay: 0
         anchors.fill: parent
         PageHeader {
@@ -49,7 +49,7 @@ Page {
         SilicaListView {
 
             VerticalScrollDecorator {}
-            id:tanklistView
+            id:selectTankDateView
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
             anchors.left: parent.left
@@ -61,7 +61,7 @@ Page {
             model: listModel
             leftMargin: Theme.paddingMedium
             rightMargin: Theme.paddingMedium
-            VerticalScrollDecorator { flickable: tanklistView }
+            VerticalScrollDecorator { flickable: selectTankDateView }
             delegate: ListItem {
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
@@ -71,15 +71,32 @@ Page {
                     Row {
                         width: parent.width
 
+
                         Text {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                            //text: "test"
+                            text: model.modelData.id.toString();
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor
                             width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
+                            horizontalAlignment: Text.AlignLeft
+                        }
+
+                        Text {
+                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+
+                            font.family: Theme.fontFamily
+                            font.pixelSize: Theme.fontSizeSmall
+                            //color: Theme.primaryColor
+                            width: parent.width / 2
+                            horizontalAlignment: Text.AlignLeft
+
+                            color: {
+                                if(model.modelData.id === beginIndex || model.modelData.id === endIndex)
+                                    return "#00FF00"
+                                return Theme.primaryColor
+                            }
+
                         }
                     }
                 }
@@ -96,7 +113,6 @@ Page {
         var tanklist = manager.car.tanks;
         for (var i = 0;i < tanklist.length ;i++)
         {
-            //if ((filter=="")||(manager.car.getFueltypeName(tanklist[i].fueltype)==filter))
                 listModel.append({"fuel" : tanklist[i]})
         }
     }
