@@ -358,6 +358,9 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     buyingprice();
     sellingprice();
     lifetime();
+
+    beginChartIndex_ = nbtank() - 2;
+    endChartIndex_ = 0;
 }
 
 unsigned int Car::nbtank() const
@@ -490,6 +493,45 @@ void Car::setChartTypeCosts()
     emit statisticTypeChanged();
 }
 
+void Car::setChartBeginIndex(unsigned int index)
+{
+    setChartBorders(index, endChartIndex_);
+}
+
+void Car::setChartEndIndex(unsigned int index)
+{
+    setChartBorders(beginChartIndex_, index);
+}
+
+unsigned int Car::getChartBeginIndex()
+{
+    return beginChartIndex_;
+}
+
+unsigned int Car::getChartEndIndex()
+{
+    return endChartIndex_;
+}
+
+// begin is the earlier tank entry. So, the begin index must be bigger then the end index
+void Car::setChartBorders(unsigned int begin, unsigned int end)
+{
+    // swap the indexes, if in wrong order
+    if (begin < end)
+    {
+        unsigned int tmp = begin;
+        begin = end;
+        end = tmp;
+    }
+
+    // check the border
+    if (begin > nbtank() - 2)
+        begin = nbtank() - 2;
+
+    beginChartIndex_ = begin;
+    endChartIndex_ = end;
+}
+
 QJsonObject Car::getChartData()
 {
     QJsonArray labelArray;
@@ -498,9 +540,9 @@ QJsonObject Car::getChartData()
     QJsonArray dataSetArray;
     QJsonObject jsonO;
 
-    for (int i = nbtank() - 2; i > 0 ; i--) // -2 cos consumption is 0 on very first (oldest) entry
+    for (unsigned int i = beginChartIndex_; i > endChartIndex_ ; i--) // -2 cos consumption is 0 on very first (oldest) entry
     {
-        if ( (i == 0) || (i == _tanklist.length() - 2))
+        if ( (i == 0) || (i == _tanklist.length() - 2U))
         {
             //labelArray.append(_tanklist[i]->date().toString());
             //labelArray.append(QString::number(i));

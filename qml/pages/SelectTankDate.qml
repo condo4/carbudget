@@ -27,8 +27,8 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
 
-    property int beginIndex
-    property int endIndex
+    property int type
+    property int index
 
     Drawer {
         id: selectTankDateViewer
@@ -71,7 +71,6 @@ Page {
                     Row {
                         width: parent.width
 
-
                         Text {
                             text: model.modelData.id.toString();
 
@@ -92,11 +91,15 @@ Page {
                             horizontalAlignment: Text.AlignLeft
 
                             color: {
-                                if(model.modelData.id === beginIndex || model.modelData.id === endIndex)
+                                if(model.modelData.id === index)
                                     return "#00FF00"
                                 return Theme.primaryColor
                             }
 
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: updatIndex(model.modelData.id)
+                            }
                         }
                     }
                 }
@@ -115,5 +118,23 @@ Page {
         {
                 listModel.append({"fuel" : tanklist[i]})
         }
+    }
+
+    function updatIndex(index)
+    {
+        //console.log("updatIndex")
+        //console.log(index.toString())
+
+        var indexToUpadate = manager.car.nbtank - index;
+        if (type === 0)
+        {
+            manager.car.beginIndex = indexToUpadate;
+        }
+        else
+        {
+            manager.car.endIndex = indexToUpadate;
+        }
+
+        pageStack.pop()
     }
 }

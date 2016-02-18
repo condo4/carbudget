@@ -79,6 +79,8 @@ class Car : public QObject
 
     Q_PROPERTY(QJsonObject chartData READ getChartData)
     Q_PROPERTY(QString statisticType READ getStatisticType NOTIFY statisticTypeChanged)
+    Q_PROPERTY(unsigned int beginIndex READ getChartBeginIndex WRITE setChartBeginIndex)
+    Q_PROPERTY(unsigned int endIndex READ getChartEndIndex WRITE setChartEndIndex)
 
 private:
     CarManager *_manager;
@@ -101,6 +103,9 @@ private:
     unsigned int _lifetime;
     QDate _buyingdate;
 
+    unsigned int beginChartIndex_;
+    unsigned int endChartIndex_;
+
     void db_init();
     void db_load();
     int db_get_version();
@@ -112,6 +117,7 @@ private:
 
     enum chartTypeTankStatistics chartType_;
     void setChartType(enum chartTypeTankStatistics type);
+    void setChartBorders(unsigned int begin, unsigned int end);
 
 public:
     QSqlDatabase db;
@@ -155,6 +161,8 @@ public:
     Q_INVOKABLE void setChartTypeOilPrice();
     Q_INVOKABLE void setChartTypeConsumption();
     Q_INVOKABLE void setChartTypeCosts();
+    Q_INVOKABLE void setChartBeginIndex(unsigned int index);
+    Q_INVOKABLE void setChartEndIndex(unsigned int index);
 
     double budget_fuel_total();
     double budget_fuel();
@@ -166,6 +174,8 @@ public:
     double budget_invest();
     double budget();
     double budget_total();
+    unsigned int getChartBeginIndex();
+    unsigned int getChartEndIndex();
 
 signals:
     void nbtankChanged(unsigned int nbtank);

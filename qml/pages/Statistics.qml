@@ -29,8 +29,8 @@ Page {
 
     allowedOrientations: Orientation.All
 
-    property int beginIndex: 1
-    property int endIndex: 9999
+    property int beginIndex: manager.car.beginIndex
+    property int endIndex: manager.car.endIndex
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -105,15 +105,18 @@ Page {
                     //anchors.left: statisticsChart.left
                     width: page.width / 4;
                     text: beginIndex.toString()
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { beginIndex: beginIndex, endIndex:endIndex })
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 0, index:beginIndex })
                     //horizontalAlignment: Button.AlignLeft
+                    //onClicked: updatechart()
                 }
+
+
                 Button {
                     //anchors.left: undefined
                     //anchors.right: statisticsChart.right
                     width: page.width / 4;
                     text: endIndex.toString()
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { beginIndex: beginIndex, endIndex:endIndex })
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 1, index:endIndex })
                     //horizontalAlignment: Button.AlignRight
                 }
             }
