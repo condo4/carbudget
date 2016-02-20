@@ -28,7 +28,8 @@ Page {
     allowedOrientations: Orientation.All
 
     property int type       // 0 means beginDate. Else endDate
-    property int index
+    property int theIndex
+    property int nrOfEntrys: manager.car.nbtank
 
     Drawer {
         id: selectTankDateViewer
@@ -70,7 +71,7 @@ Page {
 
                     Row {
                         width: parent.width
-
+/*
                         Text {
                             text: model.modelData.id.toString();
 
@@ -80,25 +81,30 @@ Page {
                             width: parent.width / 2
                             horizontalAlignment: Text.AlignLeft
                         }
-
+*/
                         Text {
                             text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             //color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
+                            width: parent.width
+                            horizontalAlignment: Text.AlignHCenter
 
                             color: {
-                                if(model.modelData.id === index)
+                                //console.log(nrOfEntrys)
+                                //console.log(model.modelData.id)
+                                //console.log((nrOfEntrys - model.modelData.id))
+                                console.log(theIndex)
+
+                                if( (nrOfEntrys - model.modelData.id) == theIndex)
                                     return "#00FF00"
                                 return Theme.primaryColor
                             }
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: updatIndex(model.modelData.id)
+                                onClicked: updatIndexWithId(model.modelData.id)
                             }
                         }
                     }
@@ -120,12 +126,9 @@ Page {
         }
     }
 
-    function updatIndex(index)
+    function updatIndexWithId(id)
     {
-        //console.log("updatIndex")
-        //console.log(index.toString())
-
-        var indexToUpadate = manager.car.nbtank - index;
+        var indexToUpadate = nrOfEntrys - id;
         if (type === 0)
         {
             manager.car.beginIndex = indexToUpadate;

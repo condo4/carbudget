@@ -108,20 +108,22 @@ Page {
                 spacing: Theme.paddingSmall
                 Button {
                     //anchors.left: statisticsChart.left
-                    width: page.width / 4;
-                    text: beginIndex.toString()
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 0, index:beginIndex })
+                    width: page.width / 3;
+                    text: manager.car.tanks[beginIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 0, theIndex:beginIndex })
                     //horizontalAlignment: Button.AlignLeft
-                    //onClicked: updatechart()
                 }
 
+                Text{
+                    width: page.width / 3.5;
+                }
 
                 Button {
                     //anchors.left: undefined
                     //anchors.right: statisticsChart.right
-                    width: page.width / 4;
-                    text: endIndex.toString()
-                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 1, index:endIndex })
+                    width: page.width / 3;
+                    text: manager.car.tanks[endIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                    onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 1, theIndex:endIndex })
                     //horizontalAlignment: Button.AlignRight
                 }
             }
@@ -132,6 +134,5 @@ Page {
           statisticsChart.chartData = manager.car.chartData;
           statisticsChart.update();
           statisticsChart.repaint();
-          //console.log("Repainting")
-          }
+    }
 }
