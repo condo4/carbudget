@@ -27,7 +27,7 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
 
-    property int type
+    property int type       // 0 means beginDate. Else endDate
     property int index
 
     Drawer {

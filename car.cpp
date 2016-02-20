@@ -496,11 +496,13 @@ void Car::setChartTypeCosts()
 void Car::setChartBeginIndex(unsigned int index)
 {
     setChartBorders(index, endChartIndex_);
+    emit chartDataChanged();
 }
 
 void Car::setChartEndIndex(unsigned int index)
 {
     setChartBorders(beginChartIndex_, index);
+    emit chartDataChanged();
 }
 
 unsigned int Car::getChartBeginIndex()

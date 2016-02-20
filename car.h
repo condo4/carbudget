@@ -77,10 +77,10 @@ class Car : public QObject
     Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
-    Q_PROPERTY(QJsonObject chartData READ getChartData)
+    Q_PROPERTY(QJsonObject chartData READ getChartData NOTIFY chartDataChanged)
     Q_PROPERTY(QString statisticType READ getStatisticType NOTIFY statisticTypeChanged)
-    Q_PROPERTY(unsigned int beginIndex READ getChartBeginIndex WRITE setChartBeginIndex)
-    Q_PROPERTY(unsigned int endIndex READ getChartEndIndex WRITE setChartEndIndex)
+    Q_PROPERTY(unsigned int beginIndex READ getChartBeginIndex WRITE setChartBeginIndex NOTIFY chartDataChanged)
+    Q_PROPERTY(unsigned int endIndex READ getChartEndIndex WRITE setChartEndIndex NOTIFY chartDataChanged)
 
 private:
     CarManager *_manager;
@@ -203,6 +203,7 @@ signals:
     void buyingdateChanged();
     void budgetChanged();
     void statisticTypeChanged();
+    void chartDataChanged();
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);

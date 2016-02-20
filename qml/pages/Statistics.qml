@@ -27,6 +27,11 @@ import jbQuick.Charts 1.0
 Page {
     id: page
 
+    Connections {
+        target: manager.car
+        onChartDataChanged: updatechart()
+    }
+
     allowedOrientations: Orientation.All
 
     property int beginIndex: manager.car.beginIndex
