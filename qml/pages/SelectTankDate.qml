@@ -1,8 +1,6 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
- *
  * This file is part of CarBudget.
  *
  * CarBudget is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,7 +13,6 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
  */
 
 
@@ -45,7 +42,7 @@ Page {
         anchors.fill: parent
         PageHeader {
             id: header
-            title: qsTr("Tank Dates")
+            title: qsTr("Select Tank Date")
         }
         SilicaListView {
 
@@ -57,6 +54,7 @@ Page {
             anchors.right: parent.right
             anchors.leftMargin: Theme.paddingSmall
             anchors.rightMargin: Theme.paddingSmall
+
             clip: true
             onModelChanged: fillListModel()
             model: listModel
@@ -71,30 +69,16 @@ Page {
 
                     Row {
                         width: parent.width
-/*
-                        Text {
-                            text: model.modelData.id.toString();
 
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
-                        }
-*/
                         Text {
                             text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
-                            //color: Theme.primaryColor
                             width: parent.width
                             horizontalAlignment: Text.AlignHCenter
 
                             color: {
-                                //console.log(nrOfEntrys)
-                                //console.log(model.modelData.id)
-                                //console.log((nrOfEntrys - model.modelData.id))
                                 console.log(theIndex)
 
                                 if( (nrOfEntrys - model.modelData.id) == theIndex)

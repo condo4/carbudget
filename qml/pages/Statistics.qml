@@ -1,7 +1,6 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
  *
  * This file is part of CarBudget.
  *
@@ -15,7 +14,6 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
  */
 
 
@@ -83,13 +81,15 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: "Statistics"
+                title: qsTr("Statistics")
             }
 
 
             Label {
                 x: Theme.paddingLarge
-                text: manager.car.statisticType
+                text: manager.car.statisticType + " (" + qsTr("Distance:") +
+                      (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance) +
+                      + " " + manager.car.distanceunity + ")"
                 font.pixelSize: Theme.fontSizeMedium
             }
 
@@ -98,8 +98,6 @@ Page {
                 width: page.width;
                 height: page.height / 2;
                 chartAnimated: false;
-                //chartAnimationEasing: Easing.InOutElastic;
-                //chartAnimationDuration: 2000;
                 chartType: Charts.ChartType.LINE;
                 chartData: manager.car.chartData;
             }
@@ -107,11 +105,9 @@ Page {
             Row {
                 spacing: Theme.paddingSmall
                 Button {
-                    //anchors.left: statisticsChart.left
                     width: page.width / 3;
                     text: manager.car.tanks[beginIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
                     onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 0, theIndex:beginIndex })
-                    //horizontalAlignment: Button.AlignLeft
                 }
 
                 Text{
@@ -119,12 +115,9 @@ Page {
                 }
 
                 Button {
-                    //anchors.left: undefined
-                    //anchors.right: statisticsChart.right
                     width: page.width / 3;
                     text: manager.car.tanks[endIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
                     onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 1, theIndex:endIndex })
-                    //horizontalAlignment: Button.AlignRight
                 }
             }
         }
