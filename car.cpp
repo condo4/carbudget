@@ -544,17 +544,7 @@ QJsonObject Car::getChartData()
 
     for (unsigned int i = beginChartIndex_; i > endChartIndex_ ; i--) // -2 cos consumption is 0 on very first (oldest) entry
     {
-        if ( (i == 0) || (i == _tanklist.length() - 2U))
-        {
-            //labelArray.append(_tanklist[i]->date().toString());
-            //labelArray.append(QString::number(i));
-            labelArray.append(QString(""));
-        }
-        else
-        {
-            //labelArray.append(QString::number(i));
-            labelArray.append(QString(""));
-        }
+        labelArray.append(QString(""));
 
         if (chartType_ == chartTypeConsumptionOf100)
         {
