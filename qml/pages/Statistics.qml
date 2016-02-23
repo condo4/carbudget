@@ -87,9 +87,9 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: manager.car.statisticType + " (" + qsTr("Distance:") +
-                      (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance) +
-                      + " " + manager.car.distanceunity + ")"
+                text: manager.car.statisticType + " (" + qsTr("Distance") + ": " +
+                       + (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance)
+                       + manager.car.distanceunity + ")"
                 font.pixelSize: Theme.fontSizeMedium
             }
 
@@ -98,6 +98,7 @@ Page {
                 width: page.width;
                 height: page.height / 2;
                 chartAnimated: false;
+                chartOptions: ({scaleFontSize: 24, scaleFontColor: "#fff"});
                 chartType: Charts.ChartType.LINE;
                 chartData: manager.car.chartData;
             }

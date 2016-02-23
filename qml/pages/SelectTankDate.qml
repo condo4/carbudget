@@ -79,8 +79,6 @@ Page {
                             horizontalAlignment: Text.AlignHCenter
 
                             color: {
-                                console.log(theIndex)
-
                                 if( (nrOfEntrys - model.modelData.id) == theIndex)
                                     return "#00FF00"
                                 return Theme.primaryColor
