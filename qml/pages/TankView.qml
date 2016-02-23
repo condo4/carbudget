@@ -157,7 +157,7 @@ Page {
                             horizontalAlignment: Text.AlignRight
                         }
                         Text {
-                            text: model.modelData.consumption.toFixed(2)+ "l/100" + manager.car.distanceunity;
+                            text: model.modelData.consumption.toFixed(2)+ "l/100" + "km";
                             visible: model.modelData.consumption > 0
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall

@@ -81,12 +81,12 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Consumption: %L1 l/100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceunity)
+                text: qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
                 font.pixelSize: Theme.fontSizeSmall
             }
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Last: %L1 l/100%2").arg(manager.car.consumptionlast.toFixed(2)).arg(manager.car.distanceunity)
+                text: qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
                 font.pixelSize: Theme.fontSizeSmall
                 color: {
                     if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"
