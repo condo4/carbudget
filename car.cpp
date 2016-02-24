@@ -359,8 +359,8 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     sellingprice();
     lifetime();
 
-    beginChartIndex_ = nbtank() - 2;
-    endChartIndex_ = 0;
+    _beginChartIndex = nbtank() - 2; // -2 is the one with the first valid data
+    _endChartIndex = 0;
 }
 
 unsigned int Car::nbtank() const
@@ -495,24 +495,24 @@ void Car::setChartTypeCosts()
 
 void Car::setChartBeginIndex(unsigned int index)
 {
-    setChartBorders(index, endChartIndex_);
+    setChartBorders(index, _endChartIndex);
     emit chartDataChanged();
 }
 
 void Car::setChartEndIndex(unsigned int index)
 {
-    setChartBorders(beginChartIndex_, index);
+    setChartBorders(_beginChartIndex, index);
     emit chartDataChanged();
 }
 
 unsigned int Car::getChartBeginIndex()
 {
-    return beginChartIndex_;
+    return _beginChartIndex;
 }
 
 unsigned int Car::getChartEndIndex()
 {
-    return endChartIndex_;
+    return _endChartIndex;
 }
 
 // begin is the earlier tank entry. So, the begin index must be bigger then the end index
@@ -530,8 +530,8 @@ void Car::setChartBorders(unsigned int begin, unsigned int end)
     if (begin > nbtank() - 2)
         begin = nbtank() - 2;
 
-    beginChartIndex_ = begin;
-    endChartIndex_ = end;
+    _beginChartIndex = begin;
+    _endChartIndex = end;
 }
 
 QJsonObject Car::getChartData()
@@ -542,7 +542,7 @@ QJsonObject Car::getChartData()
     QJsonArray dataSetArray;
     QJsonObject jsonO;
 
-    for (unsigned int i = beginChartIndex_; i > endChartIndex_ ; i--) // -2 cos consumption is 0 on very first (oldest) entry
+    for (unsigned int i = _beginChartIndex; i >= _endChartIndex ; i--)
     {
         labelArray.append(QString(""));
 
@@ -558,6 +558,10 @@ QJsonObject Car::getChartData()
         {
             dataArray.append(_tanklist[i]->costsOn100());
         }
+
+        // break for loop if end index will be reached
+        if (i == 0)
+            break;
     }
 
     dataSet.insert("fillColor", QString("rgba(151,187,205,0.5)"));

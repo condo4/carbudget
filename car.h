@@ -103,8 +103,8 @@ private:
     unsigned int _lifetime;
     QDate _buyingdate;
 
-    unsigned int beginChartIndex_;
-    unsigned int endChartIndex_;
+    unsigned int _beginChartIndex;
+    unsigned int _endChartIndex;
 
     void db_init();
     void db_load();
