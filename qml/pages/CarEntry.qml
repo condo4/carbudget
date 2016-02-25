@@ -28,12 +28,17 @@ Page {
     allowedOrientations: Orientation.All
     property string distanceunit
     property real distanceunitfactor: 1
+    property real consumptionfactor : 1.0
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceunity
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
+        }
+        if(manager.car.consumptionunit == 'mpg')
+        {
+            consumptionfactor  = 4.5*100/1.609
         }
     }
 
@@ -81,12 +86,24 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
+                text:
+          if ( manager.car.consumptionunit == 'l/100km' ) {
+			qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
+		  }
+          else if ( manager.car.consumptionunit == 'mpg' ) {
+			qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
+		  }
                 font.pixelSize: Theme.fontSizeSmall
             }
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
+                text:
+          if ( manager.car.consumptionunit == 'l/100km' ) {
+			qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
+		  }
+          else if ( manager.car.consumptionunit == 'mpg' ) {
+			qsTr("Last: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionlast).toFixed(2))
+		  }
                 font.pixelSize: Theme.fontSizeSmall
                 color: {
                     if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"

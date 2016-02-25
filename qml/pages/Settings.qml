@@ -25,6 +25,7 @@ import harbour.carbudget 1.0
 
 Dialog {
     property date buying_date
+    property string consumptionunit
     allowedOrientations: Orientation.All
     SilicaFlickable {
 
@@ -66,6 +67,29 @@ Dialog {
                 EnterKey.onClicked: nbtire.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
+            ComboBox {
+                id: selectconsumptionunit
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Consumption Unit")
+
+                menu: ContextMenu {
+                    id: consumptionunitmenu
+
+                MenuItem {
+                    text: qsTr('l/100km')
+                    property string value: qsTr("l/100km")
+                }
+                MenuItem {
+                    text: qsTr('mpg')
+                    property string value: qsTr("mpg")
+                }
+                }
+                onCurrentItemChanged: {
+                        consumptionunit = currentItem.value
+                }
+            }
+
             TextField {
                 id: nbtire
                 anchors { left: parent.left; right: parent.right }
@@ -143,6 +167,17 @@ Dialog {
         buyingprice.text   = manager.car.buyingprice
         sellingprice.text  = manager.car.sellingprice
         lifetime.text      = manager.car.lifetime
+        consumptionunit = manager.car.consumptionunit
+        // I'm not sure why the next section sets the drop down menu list
+        // to the current value, I stole the idea of harbour-callrecorder
+        consumptionunitmenu._foreachMenuItem(function(item, index) {
+            if (item.value == consumptionunit)
+            {
+                selectconsumptionunit.currentIndex= index
+                return true
+            }
+            return true
+        })
     }
 
     onAccepted: {
@@ -153,5 +188,16 @@ Dialog {
         manager.car.buyingprice   = buyingprice.text
         manager.car.sellingprice  = sellingprice.text
         manager.car.lifetime      = lifetime.text
+        manager.car.consumptionunit = consumptionunit
     }
+    //onCompleted: {
+        //consumptionunitmenu._foreachMenuItem(function(item, index) {
+            //if (item.value == consumptionunit)
+            //{
+                //selectconsumptionunit.currentIndex= index
+                //return false
+            //}
+            //return true
+        //})
+    //}
 }

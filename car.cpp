@@ -1476,6 +1476,47 @@ void Car::setBuyingdate(QDate date)
     emit buyingdateChanged();
 }
 
+QString Car::consumptionunit()
+{
+    if (_consumptionunit.length() < 1)
+    {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';"))
+        {
+            query.next();
+            _consumptionunit = query.value(0).toString();
+            qDebug() << "Find consumptionunit in database: " << _consumptionunit;
+        }
+        if(_consumptionunit.length() < 1)
+        {
+            qDebug() << "Default consumptionunit not set in database, set to l/100km";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('consumptionunit', 'l/100km');");
+            _consumptionunit = "l/100km";
+        }
+    }
+
+    return _consumptionunit;
+}
+
+void Car::setConsumptionunit(QString consumptionunit)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='consumptionunit';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INFO CarBudget (id, value) VALUES ('consumptionunit','%1');").arg(consumptionunit));
+        else
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='consumptionunit';").arg(consumptionunit));
+
+        qDebug() << "Change consumptionunit in database: " << _consumptionunit << " >> " << consumptionunit;
+    }
+    _consumptionunit = consumptionunit;
+    emit consumptionunitChanged();
+}
+
 void Car::simulation()
 {
     Tire *winter1, *winter2, *summer1;

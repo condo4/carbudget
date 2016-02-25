@@ -29,12 +29,17 @@ Page {
     allowedOrientations: Orientation.All
     property string distanceunit
     property real distanceunitfactor : 1.0
+    property real consumptionfactor : 1.0
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceunity
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
+        }
+        if(manager.car.consumptionunit == 'mpg')
+        {
+            consumptionfactor = 4.5*100/1.609
         }
     }
 
@@ -157,7 +162,15 @@ Page {
                             horizontalAlignment: Text.AlignRight
                         }
                         Text {
-                            text: model.modelData.consumption.toFixed(2)+ "l/100" + "km";
+                            text: if ( manager.car.consumptionunit == 'l/100km') {
+                                 model.modelData.consumption.toFixed(2)+ "l/100" + "km";
+                             }
+                            else {
+                                if ( manager.car.consumptionunit == 'mpg') {
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
+                            }
+                        }
+
                             visible: model.modelData.consumption > 0
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
