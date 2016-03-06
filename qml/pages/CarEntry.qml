@@ -38,7 +38,7 @@ Page {
         }
         if(manager.car.consumptionunit == 'mpg')
         {
-            consumptionfactor  = 4.5*100/1.609
+            consumptionfactor  = 4.546*100/1.609
         }
     }
 
