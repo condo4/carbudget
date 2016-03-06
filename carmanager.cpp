@@ -379,6 +379,8 @@ void CarManager::importFromFuelpad(QString filename, QString name)
     qDebug() << "Importing from Fuelpad";
         createCar(name);
         selectCar(name);
+        filename.remove(0,7);
+        qDebug() << "INFO: attempting to process fuelpad DB" << filename;
         QSqlDatabase db;
         db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
         db.setDatabaseName(filename);
@@ -476,6 +478,8 @@ QStringList CarManager::checkFuelpadDBforCars( QString name)
 {
     QStringList fuelpadcars;
     QSqlDatabase db;
+    name.remove(0,7);
+    qDebug() << "INFO: attempting to process fuelpad DB" << name;
     db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
     db.setDatabaseName(name);
     if(!db.open())
