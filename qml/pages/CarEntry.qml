@@ -130,10 +130,6 @@ Page {
                         text: qsTr("New Tank")
                         onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
                     }
-                    Button {
-                        text: qsTr("Statistics")
-                        onClicked: pageStack.push(Qt.resolvedUrl("Statistics.qml"))
-                    }
                 }
             }
 
@@ -226,7 +222,7 @@ Page {
                 }
 
                 Button {
-                    text: qsTr("Budget")
+                    text: qsTr("Statistics")
                     onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
                 }
             }
