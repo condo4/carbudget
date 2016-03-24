@@ -61,6 +61,7 @@ class Car : public QObject
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
     Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged())
+    Q_PROPERTY(QString consumptionunit READ consumptionunit WRITE setConsumptionunit NOTIFY consumptionunitChanged())
     Q_PROPERTY(unsigned int nbtire READ nbtire WRITE setNbtire NOTIFY nbtireChanged)
     Q_PROPERTY(double buyingprice READ buyingprice WRITE setBuyingprice NOTIFY buyingpriceChanged)
     Q_PROPERTY(double sellingprice READ sellingprice WRITE setSellingprice NOTIFY sellingpriceChanged)
@@ -96,6 +97,7 @@ private:
 
     QString _currency;
     QString _distanceunity;
+    QString _consumptionunit;
 
     unsigned int _nbtire;
     double _buyingprice;
@@ -196,6 +198,7 @@ signals:
     void tireMountedChanged();
     void currencyChanged();
     void distanceunityChanged();
+    void consumptionunitChanged();
     void nbtireChanged();
     void sellingpriceChanged();
     void buyingpriceChanged();
@@ -240,6 +243,9 @@ public slots:
 
     QString distanceunity();
     void setDistanceunity(QString distanceunity);
+
+    QString consumptionunit();
+    void setConsumptionunit(QString consumptionunit);
 
     unsigned int nbtire();
     void setNbtire(unsigned int nbtire);
