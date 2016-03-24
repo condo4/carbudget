@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>About</name>
     <message>
@@ -27,92 +27,103 @@
 <context>
     <name>BudgetView</name>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="39"/>
+        <location filename="../qml/pages/BudgetView.qml" line="82"/>
         <source>Statistics</source>
-        <translation>Statistiques</translation>
+        <translation type="unfinished">Statistiques</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="147"/>
-        <location filename="../qml/pages/BudgetView.qml" line="426"/>
-        <location filename="../qml/pages/BudgetView.qml" line="586"/>
-        <source>Tires:</source>
-        <translation>Pneus :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="163"/>
-        <location filename="../qml/pages/BudgetView.qml" line="460"/>
-        <source>Invest:</source>
-        <translation>Investissement :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="194"/>
-        <source>ODO </source>
-        <translation>Distance totale</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="214"/>
-        <source>In Budget</source>
-        <translation>Comptabilisée</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="243"/>
-        <source>Fuel</source>
-        <translation>Carburant</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="256"/>
-        <source>Total: </source>
-        <translation>Total :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="276"/>
-        <source>Average: </source>
-        <translation>Moyenne :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="296"/>
-        <source>Min:</source>
-        <translation>Min :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="316"/>
-        <source>Max:</source>
-        <translation>Max :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="343"/>
-        <source>Costs</source>
-        <translation>Coût</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="621"/>
-        <source>Buying:</source>
-        <translation>Achat :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="131"/>
-        <location filename="../qml/pages/BudgetView.qml" line="361"/>
-        <location filename="../qml/pages/BudgetView.qml" line="520"/>
-        <source>Fuel:</source>
-        <translation>Carburant :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="114"/>
-        <location filename="../qml/pages/BudgetView.qml" line="394"/>
-        <location filename="../qml/pages/BudgetView.qml" line="553"/>
+        <location filename="../qml/pages/BudgetView.qml" line="157"/>
+        <location filename="../qml/pages/BudgetView.qml" line="437"/>
+        <location filename="../qml/pages/BudgetView.qml" line="596"/>
         <source>Bills:</source>
-        <translation>Frais :</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="482"/>
-        <location filename="../qml/pages/BudgetView.qml" line="643"/>
+        <location filename="../qml/pages/BudgetView.qml" line="174"/>
+        <location filename="../qml/pages/BudgetView.qml" line="404"/>
+        <location filename="../qml/pages/BudgetView.qml" line="563"/>
+        <source>Fuel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="190"/>
+        <location filename="../qml/pages/BudgetView.qml" line="469"/>
+        <location filename="../qml/pages/BudgetView.qml" line="629"/>
+        <source>Tires:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="206"/>
+        <location filename="../qml/pages/BudgetView.qml" line="503"/>
+        <source>Invest:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="237"/>
+        <source>ODO </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="257"/>
+        <source>In Budget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="286"/>
+        <source>Fuel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="299"/>
+        <source>Total: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="319"/>
+        <source>Average: </source>
+        <translation type="unfinished">Moyenne :</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="339"/>
+        <source>Min:</source>
+        <translation type="unfinished">Min :</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="359"/>
+        <source>Max:</source>
+        <translation type="unfinished">Max :</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="56"/>
+        <location filename="../qml/pages/BudgetView.qml" line="386"/>
+        <source>Costs</source>
+        <translation type="unfinished">Coût</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="48"/>
+        <source>Consumption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="64"/>
+        <source>Oilprice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="525"/>
+        <location filename="../qml/pages/BudgetView.qml" line="686"/>
         <source>Total:</source>
-        <translation>Total :</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="501"/>
+        <location filename="../qml/pages/BudgetView.qml" line="544"/>
         <source>Costs per 100 Km</source>
-        <translation>Coût pour 100 Km</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BudgetView.qml" line="664"/>
+        <source>Buying:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -132,59 +143,59 @@
 <context>
     <name>CarEntry</name>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="37"/>
+        <location filename="../qml/pages/CarEntry.qml" line="47"/>
         <source>Select another car</source>
         <translation>Sélectionner un autre véhicule</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="42"/>
+        <location filename="../qml/pages/CarEntry.qml" line="52"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="47"/>
+        <location filename="../qml/pages/CarEntry.qml" line="57"/>
         <source>About</source>
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="68"/>
+        <location filename="../qml/pages/CarEntry.qml" line="78"/>
         <source>Distance: %L1 ~ %L2 %3</source>
         <translation>Distance : %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="74"/>
+        <location filename="../qml/pages/CarEntry.qml" line="84"/>
         <source>Consumption: %L1 l/100%2</source>
         <translation>Consommation : %L1 l/100%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="79"/>
+        <location filename="../qml/pages/CarEntry.qml" line="89"/>
         <source>Last: %L1 l/100%2</source>
         <translation>Dernière : %L1 l/100%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="182"/>
+        <location filename="../qml/pages/CarEntry.qml" line="225"/>
+        <source>Statistics</source>
+        <translation type="unfinished">Statistiques</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarEntry.qml" line="194"/>
         <source>Tires mounted: %1/%2</source>
         <translation>Pneus montés : %1/%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="182"/>
+        <location filename="../qml/pages/CarEntry.qml" line="194"/>
         <source>Tires mounted</source>
         <translation>Pneus montés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="119"/>
+        <location filename="../qml/pages/CarEntry.qml" line="130"/>
         <source>New Tank</source>
         <translation>Nouveau plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="150"/>
+        <location filename="../qml/pages/CarEntry.qml" line="162"/>
         <source>New Cost</source>
         <translation>Nouveau frais</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarEntry.qml" line="213"/>
-        <source>Budget</source>
-        <translation>Budget</translation>
     </message>
 </context>
 <context>
@@ -241,38 +252,38 @@
 <context>
     <name>CostEntry</name>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="34"/>
+        <location filename="../qml/pages/CostEntry.qml" line="36"/>
         <source>Manage cost types</source>
         <translation>Gérer les types de frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="49"/>
+        <location filename="../qml/pages/CostEntry.qml" line="51"/>
         <source>Modify Cost</source>
         <translation>Modifier un frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="50"/>
+        <location filename="../qml/pages/CostEntry.qml" line="52"/>
         <source>New Cost</source>
         <translation>Nouveau frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="68"/>
+        <location filename="../qml/pages/CostEntry.qml" line="70"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="90"/>
+        <location filename="../qml/pages/CostEntry.qml" line="92"/>
         <source>Cost Type</source>
         <translation>Type de frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="126"/>
+        <location filename="../qml/pages/CostEntry.qml" line="128"/>
         <source>description</source>
         <translation>description</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntry.qml" line="114"/>
-        <location filename="../qml/pages/CostEntry.qml" line="115"/>
+        <location filename="../qml/pages/CostEntry.qml" line="116"/>
+        <location filename="../qml/pages/CostEntry.qml" line="117"/>
         <source>Price</source>
         <translation>Prix</translation>
     </message>
@@ -280,37 +291,37 @@
 <context>
     <name>CostEntryView</name>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="34"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="45"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="49"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="60"/>
         <source>Cost</source>
         <translation>Frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="57"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="68"/>
         <source>ODO:</source>
         <translation>Distance totale :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="78"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="89"/>
         <source>Date:</source>
         <translation>Date :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="100"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="111"/>
         <source>Cost Type:</source>
         <translation>Type de frais :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="121"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="132"/>
         <source>Price:</source>
         <translation>Prix :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostEntryView.qml" line="139"/>
+        <location filename="../qml/pages/CostEntryView.qml" line="150"/>
         <source>Description:</source>
         <translation>Description :</translation>
     </message>
@@ -347,27 +358,27 @@
 <context>
     <name>CostView</name>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="48"/>
+        <location filename="../qml/pages/CostView.qml" line="59"/>
         <source>Add cost</source>
         <translation>Ajouter un frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="44"/>
+        <location filename="../qml/pages/CostView.qml" line="55"/>
         <source>Cost List</source>
         <translation>Liste des frais</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="74"/>
+        <location filename="../qml/pages/CostView.qml" line="85"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="79"/>
+        <location filename="../qml/pages/CostView.qml" line="90"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="81"/>
+        <location filename="../qml/pages/CostView.qml" line="92"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>
@@ -558,10 +569,13 @@
         <source>File to import</source>
         <translation>Fichier a importer</translation>
     </message>
+</context>
+<context>
+    <name>SelectTankDate</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="62"/>
-        <source>Import</source>
-        <translation>Importer</translation>
+        <location filename="../qml/pages/SelectTankDate.qml" line="45"/>
+        <source>Select Tank Date</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -666,71 +680,99 @@
     </message>
 </context>
 <context>
+    <name>Statistics</name>
+    <message>
+        <location filename="../qml/pages/Statistics.qml" line="48"/>
+        <source>Consumption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Statistics.qml" line="56"/>
+        <source>Costs</source>
+        <translation type="unfinished">Coût</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Statistics.qml" line="64"/>
+        <source>Oilprice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Statistics.qml" line="84"/>
+        <source>Statistics</source>
+        <translation type="unfinished">Statistiques</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Statistics.qml" line="90"/>
+        <source>Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TankEntry</name>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="35"/>
+        <location filename="../qml/pages/TankEntry.qml" line="37"/>
         <source>Manage stations</source>
         <translation>Gérer les stations</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="39"/>
+        <location filename="../qml/pages/TankEntry.qml" line="41"/>
         <source>Manage fuel types</source>
         <translation>Gérer types de carburant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="55"/>
+        <location filename="../qml/pages/TankEntry.qml" line="57"/>
         <source>Modify Tank</source>
         <translation>Modifier le plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="56"/>
+        <location filename="../qml/pages/TankEntry.qml" line="58"/>
         <source>New tank</source>
         <translation>Nouveau plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="74"/>
+        <location filename="../qml/pages/TankEntry.qml" line="76"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="85"/>
+        <location filename="../qml/pages/TankEntry.qml" line="87"/>
         <source>ODO</source>
         <translation>Distance totale</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="98"/>
-        <location filename="../qml/pages/TankEntry.qml" line="99"/>
+        <location filename="../qml/pages/TankEntry.qml" line="100"/>
+        <location filename="../qml/pages/TankEntry.qml" line="101"/>
         <source>Quantity</source>
         <translation>Quantité</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="111"/>
-        <location filename="../qml/pages/TankEntry.qml" line="112"/>
+        <location filename="../qml/pages/TankEntry.qml" line="113"/>
+        <location filename="../qml/pages/TankEntry.qml" line="114"/>
         <source>Total Price</source>
         <translation>Prix total</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="123"/>
+        <location filename="../qml/pages/TankEntry.qml" line="125"/>
         <source>Unite Price</source>
         <translation>Prix au litre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="131"/>
+        <location filename="../qml/pages/TankEntry.qml" line="133"/>
         <source>Fuel Type</source>
         <translation>Type de carburant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="154"/>
+        <location filename="../qml/pages/TankEntry.qml" line="156"/>
         <source>Station</source>
         <translation>Station</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="178"/>
+        <location filename="../qml/pages/TankEntry.qml" line="180"/>
         <source>Full tank</source>
         <translation>Plein complet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntry.qml" line="186"/>
+        <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>description</source>
         <translation>Description</translation>
     </message>
@@ -738,67 +780,67 @@
 <context>
     <name>TankEntryView</name>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="35"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="46"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="53"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="64"/>
         <source>Tank</source>
         <translation>Plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="62"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="73"/>
         <source>Date:</source>
         <translation>Date :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="86"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="97"/>
         <source>ODO:</source>
         <translation>Distance totale :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="108"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="119"/>
         <source>Quantity:</source>
         <translation>Quantité :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="130"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="141"/>
         <source>Total Price:</source>
         <translation>Prix total :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="152"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="163"/>
         <source>Unit Price:</source>
         <translation>Prix unitaire :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="174"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="185"/>
         <source>Station:</source>
         <translation>Station :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="196"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="207"/>
         <source>Fuel Type:</source>
         <translation>Type de carburant :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="218"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="229"/>
         <source>Full tank:</source>
         <translation>Plein complet :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="226"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="237"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="226"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="237"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="237"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="248"/>
         <source>Note:</source>
         <translation>Note :</translation>
     </message>
@@ -806,47 +848,47 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="44"/>
+        <location filename="../qml/pages/TankView.qml" line="55"/>
         <source>Tank List</source>
         <translation>Liste des pleins</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="48"/>
+        <location filename="../qml/pages/TankView.qml" line="59"/>
         <source>Add tank</source>
         <translation>Ajouter un plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="52"/>
+        <location filename="../qml/pages/TankView.qml" line="63"/>
         <source>Manage stations</source>
         <translation>Gérer les stations</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="56"/>
+        <location filename="../qml/pages/TankView.qml" line="67"/>
         <source>Manage fuel types</source>
         <translation>Gérer types de carburant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="82"/>
+        <location filename="../qml/pages/TankView.qml" line="93"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="86"/>
+        <location filename="../qml/pages/TankView.qml" line="97"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="99"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="133"/>
+        <location filename="../qml/pages/TankView.qml" line="144"/>
         <source>l</source>
         <translation> l</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="126"/>
+        <location filename="../qml/pages/TankView.qml" line="137"/>
         <source>/l</source>
         <translation> /l</translation>
     </message>
@@ -920,42 +962,42 @@
 <context>
     <name>TireView</name>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="31"/>
+        <location filename="../qml/pages/TireView.qml" line="42"/>
         <source>Create new tire</source>
         <translation>Nouveaux pneus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="35"/>
+        <location filename="../qml/pages/TireView.qml" line="46"/>
         <source>Show history</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="43"/>
+        <location filename="../qml/pages/TireView.qml" line="54"/>
         <source>Tire List</source>
         <translation>Liste des pneus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="59"/>
+        <location filename="../qml/pages/TireView.qml" line="70"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="64"/>
+        <location filename="../qml/pages/TireView.qml" line="75"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="67"/>
+        <location filename="../qml/pages/TireView.qml" line="78"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="73"/>
+        <location filename="../qml/pages/TireView.qml" line="84"/>
         <source>Umount</source>
         <translation>Démonter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="73"/>
+        <location filename="../qml/pages/TireView.qml" line="84"/>
         <source>Mount</source>
         <translation>Monter</translation>
     </message>
@@ -981,12 +1023,12 @@
 <context>
     <name>TiremountView</name>
     <message>
-        <location filename="../qml/pages/TiremountView.qml" line="41"/>
+        <location filename="../qml/pages/TiremountView.qml" line="52"/>
         <source>Tire Mounts</source>
         <translation>Pneu monté</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TiremountView.qml" line="63"/>
+        <location filename="../qml/pages/TiremountView.qml" line="74"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
