@@ -330,6 +330,12 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 {
     this->db_init();
     db_loading=false;
+    if(this->db_get_version() < 1)
+    {
+        qDebug() << "Database is uninitialised or corrupted. Creating database...";
+        this->_manager->createTables(this->db);
+    }
+
     while(this->db_get_version() < DB_VERSION)
     {
         qDebug() << "Database version is" << this->db_get_version() << "and needs to be updated to" << DB_VERSION;

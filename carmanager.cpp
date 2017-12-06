@@ -105,7 +105,6 @@ void CarManager::delCar(QString name)
 
 void CarManager::createCar(QString name)
 {
-    bool error = false;
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + name + ".cbg";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(db_name);
@@ -115,7 +114,14 @@ void CarManager::createCar(QString name)
         qDebug() << "ERROR: fail to open file";
     }
     qDebug() << "DB:" << db_name;
+    createTables(db);
+    db.close();
+    refresh();
+}
 
+void CarManager::createTables(QSqlDatabase db)
+{
+    bool error = false;
     QSqlQuery query(db);
     if(!query.exec("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"))
     {
@@ -177,9 +183,9 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!error) db.commit();
-    db.close();
-    refresh();
+    if(!error)
+        db.commit();
+    return;
 }
 
 void CarManager::importFromMyCar(QString filename, QString name)
