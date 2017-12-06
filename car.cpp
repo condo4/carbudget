@@ -68,15 +68,13 @@ void Car::db_init()
     this->db = QSqlDatabase::addDatabase("QSQLITE");
     this->db.setDatabaseName(db_name);
 
-    if(!this->db.open())
-    {
-        qDebug() << "ERROR: fail to open file";
-    }
-    qDebug() << "DB:" << db_name;
+    bool databaseOK = this->db.open();
+    qDebug() << "Opening database file" << db_name << (databaseOK ? "succeeded" : "failed");
 }
 
 void Car::db_load()
 {
+    qDebug() << "Loading database...";
     db_loading=true;
     QSqlQuery query(this->db);
 
@@ -88,7 +86,7 @@ void Car::db_load()
     _costtypelist.clear();
     _tirelist.clear();
     _tiremountlist.clear();
-    if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
+    if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -107,11 +105,11 @@ void Car::db_load()
         }
 
     }
-    else
+    else if(query.size() > 0)
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT id,name FROM FueltypeList;"))
+    if(query.exec("SELECT id,name FROM FueltypeList;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -121,7 +119,11 @@ void Car::db_load()
             _fueltypelist.append(fueltype);
         }
     }
-    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;"))
+    else if(query.size() > 0)
+    {
+        qDebug() << query.lastError();
+    }
+    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -132,11 +134,11 @@ void Car::db_load()
             _stationlist.append(station);
         }
     }
-    else
+    else if(query.size() > 0)
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT id,name FROM CosttypeList;"))
+    if(query.exec("SELECT id,name FROM CosttypeList;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -146,11 +148,11 @@ void Car::db_load()
             _costtypelist.append(costtype);
         }
     }
-    else
+    else if(query.size() > 0)
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
+    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -164,12 +166,12 @@ void Car::db_load()
             _costlist.append(cost);
         }
     }
-    else
+    else if(query.size() > 0)
     {
         qDebug() << query.lastError();
     }
 
-    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;"))
+    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -185,13 +187,13 @@ void Car::db_load()
             _tirelist.append(tire);
         }
     }
-    else
+    else if(query.size() > 0)
     {
         qDebug() << query.lastError();
     }
     // Now load tire mountings
     // First load all unmount events (event_umount exists in events table)
-    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
+    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -206,12 +208,12 @@ void Car::db_load()
             _tiremountlist.append(tiremount);
         }
     }
-    else
+    else if(query.size() > 0)
     {
-        qDebug() << "Failed to load tiremounts: " << query.lastError();
+        qDebug() << "Failed to load tire unmounts:" << query.lastError();
     }
     // Now load mounted tires
-    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
+    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;") && query.size() > 0)
     {
         while(query.next())
         {
@@ -224,9 +226,9 @@ void Car::db_load()
             _tiremountlist.append(tiremount);
         }
     }
-    else
+    else if(query.size() > 0)
     {
-        qDebug() << "Failed to load tiremounts: " << query.lastError();
+        qDebug() << "Failed to load tire mounts: " << query.lastError();
     }
     if (!_tanklist.empty()) qSort(_tanklist.begin(),    _tanklist.end(),    sortTankByDistance);
     if (!_costlist.empty()) qSort(_costlist.begin(),    _costlist.end(),    sortCostByDate);
@@ -330,17 +332,20 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     db_loading=false;
     while(this->db_get_version() < DB_VERSION)
     {
-        qDebug() << "Update configuation database " << this->db_get_version() << " >> " << DB_VERSION;
+        qDebug() << "Database version is" << this->db_get_version() << "and needs to be updated to" << DB_VERSION;
         if(this->db_get_version() < 2)
         {
+            qDebug() << "Updating to version 2...";
             db_upgrade_to_2();
         }
         if(this->db_get_version() < 3)
         {
+            qDebug() << "Updating to version 3...";
             db_upgrade_to_3();
         }
         if(this->db_get_version() < 4)
         {
+            qDebug() << "Updating to version 4...";
             db_upgrade_to_4();
         }
     }
@@ -475,21 +480,18 @@ void Car::setChartType(enum chartTypeTankStatistics type)
 void Car::setChartTypeOilPrice()
 {
     this->setChartType(chartTypeOilPrice);
-
     emit statisticTypeChanged();
 }
 
 void Car::setChartTypeConsumption()
 {
     this->setChartType(chartTypeConsumptionOf100);
-
     emit statisticTypeChanged();
 }
 
 void Car::setChartTypeCosts()
 {
     this->setChartType(chartTypeCostsOf100);
-
     emit statisticTypeChanged();
 }
 
@@ -842,10 +844,7 @@ double Car::budget_invest()
 
     if (_buyingdate.toString()=="")
     {
-        qDebug() << "Invalid buying date ";
-        double tmp = (_buyingprice-_sellingprice)/(maxdistance()-mindistance())*100.0;
-        qDebug() << tmp;
-        return tmp;
+        return (_buyingprice-_sellingprice)/(maxdistance()-mindistance())*100.0;
     }
     while (_buyingdate.addMonths(monthsused) < today)
     {
@@ -1376,7 +1375,7 @@ QString Car::currency()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';") && query.size() > 0)
         {
             query.next();
             _currency = query.value(0).toString();
@@ -1417,7 +1416,7 @@ QString Car::distanceunity()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';") && query.size() > 0)
         {
             query.next();
             _distanceunity = query.value(0).toString();
@@ -1458,7 +1457,7 @@ unsigned int Car::nbtire()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';") && query.size() > 0)
         {
             query.next();
             _nbtire = query.value(0).toInt();
@@ -1499,7 +1498,7 @@ double Car::buyingprice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';") && query.size() > 0)
         {
             query.next();
             _buyingprice = query.value(0).toDouble();
@@ -1539,7 +1538,7 @@ double Car::sellingprice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';") && query.size() > 0)
         {
             query.next();
             _sellingprice = query.value(0).toDouble();
@@ -1579,7 +1578,7 @@ unsigned int Car::lifetime()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';") && query.size() > 0)
         {
             query.next();
             _lifetime = query.value(0).toInt();
@@ -1617,7 +1616,7 @@ QDate Car::buyingdate()
 {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';") && query.size() > 0)
         {
             query.next();
             _buyingdate = QDate::fromString(query.value(0).toString());
@@ -1677,7 +1676,7 @@ QString Car::consumptionunit()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';") && query.size() > 0)
         {
             query.next();
             _consumptionunit = query.value(0).toString();
