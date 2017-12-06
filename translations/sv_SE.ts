@@ -20,7 +20,12 @@
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="74"/>
-        <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Åke Engelbrektson (Swedish translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
+        <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/About.qml" line="81"/>
+        <source>&lt;a href=&quot;https://github.com/condo4/carbudget&quot;&gt;Sourcecode on Github&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -94,6 +99,11 @@
         <translation type="unfinished">Max:</translation>
     </message>
     <message>
+        <location filename="../qml/pages/BudgetView.qml" line="544"/>
+        <source>Costs per 100 km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/BudgetView.qml" line="56"/>
         <location filename="../qml/pages/BudgetView.qml" line="386"/>
         <source>Costs</source>
@@ -113,11 +123,6 @@
         <location filename="../qml/pages/BudgetView.qml" line="525"/>
         <location filename="../qml/pages/BudgetView.qml" line="686"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="544"/>
-        <source>Costs per 100 Km</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -163,12 +168,12 @@
         <translation>Körsträcka: %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="242"/>
+        <location filename="../qml/pages/CarEntry.qml" line="246"/>
         <source>Statistics</source>
         <translation type="unfinished">Statistik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="211"/>
+        <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted: %1/%2</source>
         <translation>Däck monterade: %1/%2</translation>
     </message>
@@ -193,17 +198,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="211"/>
+        <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted</source>
         <translation>Däck monterade</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="147"/>
+        <location filename="../qml/pages/CarEntry.qml" line="148"/>
         <source>New Tank</source>
         <translation>Ny tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="179"/>
+        <location filename="../qml/pages/CarEntry.qml" line="181"/>
         <source>New Cost</source>
         <translation>Ny kostnad</translation>
     </message>
@@ -608,8 +613,8 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
-        <source>Km or Mile</source>
-        <translation>Km eller Mile</translation>
+        <source>km or mile</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="74"/>

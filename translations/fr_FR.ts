@@ -20,8 +20,13 @@
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="74"/>
-        <source>Credits to:&lt;br&gt;- Lorenzo Facca (Italian translation)&lt;br&gt;- Alois Spitzbart (German translation)&lt;br&gt;- Michal Hrusecky (Many improvments)&lt;br&gt;- Denis Fedoseev (Russion translation)&lt;br &gt;- Åke Engelbrektson (Swedish translation)&lt;br &gt;- Thomas Michel (Many improvments)</source>
-        <translation>Remerciments :&lt;br&gt;- Lorenzo Facca (Italien)&lt;br&gt;- Alois Spitzbart (Allemand)&lt;br&gt;- Denis Fedoseev (Russe)&lt;br &gt;- Åke Engelbrektson (Suédois)&lt;br &gt;- Michal Hrusecky (Divers améliorations)&lt;br&gt;- Thomas Michel (Divers améliorations)</translation>
+        <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/About.qml" line="81"/>
+        <source>&lt;a href=&quot;https://github.com/condo4/carbudget&quot;&gt;Sourcecode on Github&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -94,6 +99,11 @@
         <translation>Max :</translation>
     </message>
     <message>
+        <location filename="../qml/pages/BudgetView.qml" line="544"/>
+        <source>Costs per 100 km</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/BudgetView.qml" line="56"/>
         <location filename="../qml/pages/BudgetView.qml" line="386"/>
         <source>Costs</source>
@@ -114,11 +124,6 @@
         <location filename="../qml/pages/BudgetView.qml" line="686"/>
         <source>Total:</source>
         <translation>Total :</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BudgetView.qml" line="544"/>
-        <source>Costs per 100 Km</source>
-        <translation>Prix pour 100 Km</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="664"/>
@@ -163,12 +168,12 @@
         <translation>Distance : %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="242"/>
+        <location filename="../qml/pages/CarEntry.qml" line="246"/>
         <source>Statistics</source>
         <translation>Statistiques</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="211"/>
+        <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted: %1/%2</source>
         <translation>Pneus montés : %1/%2</translation>
     </message>
@@ -193,17 +198,17 @@
         <translation>Dernière consommation : %L1 mpg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="211"/>
+        <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted</source>
         <translation>Pneus montés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="147"/>
+        <location filename="../qml/pages/CarEntry.qml" line="148"/>
         <source>New Tank</source>
         <translation>Nouveau plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="179"/>
+        <location filename="../qml/pages/CarEntry.qml" line="181"/>
         <source>New Cost</source>
         <translation>Nouveau frais</translation>
     </message>
@@ -608,8 +613,8 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
-        <source>Km or Mile</source>
-        <translation>Km ou Mile</translation>
+        <source>km or mile</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="74"/>

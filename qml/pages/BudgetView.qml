@@ -541,7 +541,7 @@ Page {
                     id: per100Row
                     width: parent.width
                     Text {
-                        text : qsTr("Costs per 100 Km")
+                        text : qsTr("Costs per 100 km")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         font.bold: true

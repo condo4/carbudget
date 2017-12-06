@@ -120,20 +120,20 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                width: 500 * Screen.widthRatio
 
                 Rectangle {
                     border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                    border.width : 5 * Screen.widthRatio
+                    width: 110 * Screen.widthRatio
+                    height: 110 * Screen.widthRatio
+                    radius: 10 * Screen.widthRatio
 
                     Image {
                         anchors.centerIn: parent
                         source: "qrc:/Pump.png"
-                        width: 100
-                        height: 100
+                        width: 100 * Screen.widthRatio
+                        height: 100 * Screen.widthRatio
                     }
 
                     MouseArea {
@@ -143,6 +143,7 @@ Page {
                 }
                 Column {
                     spacing: Theme.paddingSmall
+                    anchors.verticalCenter: parent.verticalCenter
                     Button {
                         text: qsTr("New Tank")
                         onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
@@ -153,20 +154,20 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                width: 500 * Screen.widthRatio
 
                 Rectangle {
                     border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                    border.width : 5 * Screen.widthRatio
+                    width: 110 * Screen.widthRatio
+                    height: 110 * Screen.widthRatio
+                    radius: 10 * Screen.widthRatio
 
                     Image {
                         anchors.centerIn: parent
                         source: "qrc:/Wrench.png"
-                        width: 100
-                        height: 100
+                        width: 100 * Screen.widthRatio
+                        height: 100 * Screen.widthRatio
                     }
 
                     MouseArea {
@@ -176,6 +177,7 @@ Page {
                 }
 
                 Button {
+                    anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("New Cost")
                     onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
                 }
@@ -184,21 +186,21 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                width: 500 * Screen.widthRatio
 
                 Rectangle {
                     border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                    border.width : 5 * Screen.widthRatio
+                    width: 110 * Screen.widthRatio
+                    height: 110 * Screen.widthRatio
+                    radius: 10 * Screen.widthRatio
 
                     Image {
                         anchors.centerIn: parent
                         id: icon
                         source: "qrc:/Wheel.png"
-                        width: 90
-                        height: 90
+                        width: 90 * Screen.widthRatio
+                        height: 90 * Screen.widthRatio
                     }
 
                     MouseArea {
@@ -208,6 +210,7 @@ Page {
                 }
 
                 Button {
+                    anchors.verticalCenter: parent.verticalCenter
                     text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
                     color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
                     onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
@@ -216,20 +219,20 @@ Page {
             Row {
                 spacing: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                width: 500 * Screen.widthRatio
 
                 Rectangle {
                     border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                    border.width : 5 * Screen.widthRatio
+                    width: 110 * Screen.widthRatio
+                    height: 110 * Screen.widthRatio
+                    radius: 10 * Screen.widthRatio
 
                     Image {
                         anchors.centerIn: parent
                         source: "qrc:/Dollar.png"
-                        width: 90
-                        height: 90
+                        width: 90 * Screen.widthRatio
+                        height: 90 * Screen.widthRatio
                     }
 
                     MouseArea {
@@ -239,6 +242,7 @@ Page {
                 }
 
                 Button {
+                    anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("Statistics")
                     onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
                 }

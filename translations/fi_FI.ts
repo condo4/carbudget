@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="fi_FI">
 <context>
     <name>About</name>
     <message>
         <location filename="../qml/pages/About.qml" line="39"/>
         <source>Simulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Simulaatio</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="63"/>
         <source>License: GPLv3</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisenssi: GPLv4</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="68"/>
         <source>Created by condo4 (Fabien Proriol)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kehittänyt condo4 (Fabien Proriol)</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="74"/>
@@ -34,69 +34,69 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="82"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistiikka</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="157"/>
         <location filename="../qml/pages/BudgetView.qml" line="437"/>
         <location filename="../qml/pages/BudgetView.qml" line="596"/>
         <source>Bills:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuitit:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="174"/>
         <location filename="../qml/pages/BudgetView.qml" line="404"/>
         <location filename="../qml/pages/BudgetView.qml" line="563"/>
         <source>Fuel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoaine:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="190"/>
         <location filename="../qml/pages/BudgetView.qml" line="469"/>
         <location filename="../qml/pages/BudgetView.qml" line="629"/>
         <source>Tires:</source>
-        <translation type="unfinished"></translation>
+        <translation>Renkaat:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="206"/>
         <location filename="../qml/pages/BudgetView.qml" line="503"/>
         <source>Invest:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hankinta:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="237"/>
         <source>ODO </source>
-        <translation type="unfinished"></translation>
+        <translation>Matkamittari </translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="257"/>
         <source>In Budget</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirjattu</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="286"/>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoaine</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="299"/>
         <source>Total: </source>
-        <translation type="unfinished"></translation>
+        <translation>Yhteensä: </translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="319"/>
         <source>Average: </source>
-        <translation type="unfinished"></translation>
+        <translation>Keskimäärin: </translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="339"/>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pienin:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="359"/>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suurin:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="544"/>
@@ -107,28 +107,28 @@
         <location filename="../qml/pages/BudgetView.qml" line="56"/>
         <location filename="../qml/pages/BudgetView.qml" line="386"/>
         <source>Costs</source>
-        <translation type="unfinished"></translation>
+        <translation>Kustannukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="48"/>
         <source>Consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutus</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="64"/>
         <source>Oilprice</source>
-        <translation type="unfinished"></translation>
+        <translation>Öljyn hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="525"/>
         <location filename="../qml/pages/BudgetView.qml" line="686"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yhteensä:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="664"/>
         <source>Buying:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostohinta:</translation>
     </message>
 </context>
 <context>
@@ -136,13 +136,13 @@
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="40"/>
         <source>Create new car</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uusi auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="47"/>
         <location filename="../qml/pages/CarCreate.qml" line="48"/>
         <source>Short Car name</source>
-        <translation type="unfinished"></translation>
+        <translation>Auton lyhyt nimi</translation>
     </message>
 </context>
 <context>
@@ -150,67 +150,67 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="52"/>
         <source>Select another car</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse toinen auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="57"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="62"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="83"/>
         <source>Distance: %L1 ~ %L2 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Matkamittari: %L1 ~ %L2 %3</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="148"/>
         <source>New Tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi tankkaus</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="246"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistiikka</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="181"/>
         <source>New Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi kulu</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="91"/>
         <source>Consumption: %L1 l/100km</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutus: %L1 / 100km</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="94"/>
         <source>Consumption: %L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutus: %L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="102"/>
         <source>Last: %L1 l/100km</source>
-        <translation type="unfinished"></translation>
+        <translation>Viimeisin: %L1l / 100km</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="105"/>
         <source>Last: %L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>Viimeisin: %L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted: %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Renkaita %1/%2</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="214"/>
         <source>Tires mounted</source>
-        <translation type="unfinished"></translation>
+        <translation>Renkaat</translation>
     </message>
 </context>
 <context>
@@ -218,27 +218,27 @@
     <message>
         <location filename="../qml/pages/CarView.qml" line="32"/>
         <source>Import Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="36"/>
         <source>Create new car</source>
-        <translation type="unfinished"></translation>
+        <translation>Luo uusi auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="46"/>
         <source>Car List</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoluettelo</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="66"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="71"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -246,22 +246,22 @@
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="31"/>
         <source>Consumption by fuel type</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutus polttoaineen mukaan</translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="59"/>
         <source>Average: </source>
-        <translation type="unfinished"></translation>
+        <translation>Keskimäärin: </translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="78"/>
         <source>Min:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pienin:</translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="97"/>
         <source>Max:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suurin:</translation>
     </message>
 </context>
 <context>
@@ -269,38 +269,38 @@
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="36"/>
         <source>Manage cost types</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallitse kulutyyppejä</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="51"/>
         <source>Modify Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa kulua</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="52"/>
         <source>New Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi kulu</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="70"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivämäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="92"/>
         <source>Cost Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="116"/>
         <location filename="../qml/pages/CostEntry.qml" line="117"/>
         <source>Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="128"/>
         <source>description</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvaus</translation>
     </message>
 </context>
 <context>
@@ -308,37 +308,37 @@
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="45"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="60"/>
         <source>Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="68"/>
         <source>ODO:</source>
-        <translation type="unfinished"></translation>
+        <translation>Matkamittari:</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="89"/>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivämäärä:</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="111"/>
         <source>Cost Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutyyppi:</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="132"/>
         <source>Price:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta:</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="150"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvaus:</translation>
     </message>
 </context>
 <context>
@@ -346,28 +346,28 @@
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="37"/>
         <source>Bills per 100 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kuitit per 100 </translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="37"/>
         <location filename="../qml/pages/CostStatistics.qml" line="43"/>
         <source> by Type</source>
-        <translation type="unfinished"></translation>
+        <translation> tyypin mukaan</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="38"/>
         <source>Bills by Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulut tyypin mukaan</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="43"/>
         <source>Fuel per 100 </source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoainetta per 100 </translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="44"/>
         <source>Fuel by Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoaine tyypin mukaan</translation>
     </message>
 </context>
 <context>
@@ -375,27 +375,27 @@
     <message>
         <location filename="../qml/pages/CostView.qml" line="55"/>
         <source>Cost List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kululuettelo</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="59"/>
         <source>Add cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää kulu</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="85"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="90"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="92"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
 </context>
 <context>
@@ -403,18 +403,18 @@
     <message>
         <location filename="../qml/pages/CosttypeEntry.qml" line="39"/>
         <source>Modify Cost Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa kulutyyppiä</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeEntry.qml" line="40"/>
         <source>New Cost Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi kulutyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeEntry.qml" line="46"/>
         <location filename="../qml/pages/CosttypeEntry.qml" line="47"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimi</translation>
     </message>
 </context>
 <context>
@@ -422,27 +422,27 @@
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="30"/>
         <source>Add new cost type</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uusi kulutyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="38"/>
         <source>Cost Type List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutyyppiluettelo</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="53"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="59"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="61"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
 </context>
 <context>
@@ -450,12 +450,12 @@
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="50"/>
         <source> / 100</source>
-        <translation type="unfinished"></translation>
+        <translation> / 100</translation>
     </message>
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="56"/>
         <source> l / 100</source>
-        <translation type="unfinished"></translation>
+        <translation> l / 100</translation>
     </message>
 </context>
 <context>
@@ -463,22 +463,22 @@
     <message>
         <location filename="../qml/pages/DirectoryPage.qml" line="36"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/DirectoryPage.qml" line="42"/>
         <source>Import File</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo tiedosto</translation>
     </message>
     <message>
         <location filename="../qml/pages/DirectoryPage.qml" line="86"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Leikkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/DirectoryPage.qml" line="101"/>
         <source>No files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei tiedostoja</translation>
     </message>
 </context>
 <context>
@@ -486,12 +486,12 @@
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
         <source>Cars found in </source>
-        <translation type="unfinished"></translation>
+        <translation>Autot kansiossa </translation>
     </message>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="52"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo</translation>
     </message>
 </context>
 <context>
@@ -499,18 +499,18 @@
     <message>
         <location filename="../qml/pages/FueltypeEntry.qml" line="38"/>
         <source>Modify Fuel Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa polttoainetyyppiä</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeEntry.qml" line="39"/>
         <source>New Fuel Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi polttoainetyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeEntry.qml" line="45"/>
         <location filename="../qml/pages/FueltypeEntry.qml" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimi</translation>
     </message>
 </context>
 <context>
@@ -518,27 +518,27 @@
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="30"/>
         <source>Add new fuel type</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uusi polttoainetyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="38"/>
         <source>Fuel Type List</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoainetyyppilista</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="53"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="59"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="61"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
 </context>
 <context>
@@ -546,22 +546,22 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="46"/>
         <source>Import Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="55"/>
         <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoja voidaan tuoda Android-sovelluksesta My Cars tai Nokia-sovelluksesta Fuelpad.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="63"/>
         <source>My Cars import file must be XML Export from My Cars.</source>
-        <translation type="unfinished"></translation>
+        <translation>My Cars -tuontitiedosto on oltava XML-vienti sovelluksesta My Cars.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="71"/>
         <source>Fuelpad import file must be a db file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuelpad-tuontitiedoston on oltava db-tiedosto.</translation>
     </message>
 </context>
 <context>
@@ -569,12 +569,12 @@
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="46"/>
         <source>Cars found in </source>
-        <translation type="unfinished"></translation>
+        <translation>Autot kohteessa </translation>
     </message>
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo</translation>
     </message>
 </context>
 <context>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="34"/>
         <source>File to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuotava tiedosto</translation>
     </message>
 </context>
 <context>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../qml/pages/SelectTankDate.qml" line="45"/>
         <source>Select Tank Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse tankkauksen päivämäärä</translation>
     </message>
 </context>
 <context>
@@ -598,18 +598,18 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="43"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="51"/>
         <location filename="../qml/pages/Settings.qml" line="52"/>
         <source>Currency</source>
-        <translation type="unfinished"></translation>
+        <translation>Valuutta</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="63"/>
         <source>Distance Unity</source>
-        <translation type="unfinished"></translation>
+        <translation>Pituusyksikkö</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
@@ -619,49 +619,49 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="74"/>
         <source>Consumption Unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutusyksikkö</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="80"/>
         <location filename="../qml/pages/Settings.qml" line="81"/>
         <source>l/100km</source>
-        <translation type="unfinished"></translation>
+        <translation>l/100km</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="84"/>
         <location filename="../qml/pages/Settings.qml" line="85"/>
         <source>mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="97"/>
         <source>Number of wheels</source>
-        <translation type="unfinished"></translation>
+        <translation>Renkaiden lukumäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="98"/>
         <source>2, 4, 6 or 8</source>
-        <translation type="unfinished"></translation>
+        <translation>2, 4, 6 tai 8</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="119"/>
         <source>Buying date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostopäivämäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="129"/>
         <source>Buying Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostohinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="140"/>
         <source>Selling Price (est.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Myyntihinta (arvio)</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="151"/>
         <source>Lifetime (in months, est.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyttöikä (kuukautta)</translation>
     </message>
 </context>
 <context>
@@ -669,18 +669,18 @@
     <message>
         <location filename="../qml/pages/StationEntry.qml" line="38"/>
         <source>Modify Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa asemaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationEntry.qml" line="39"/>
         <source>New Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi asema</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationEntry.qml" line="45"/>
         <location filename="../qml/pages/StationEntry.qml" line="46"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimi</translation>
     </message>
 </context>
 <context>
@@ -688,27 +688,27 @@
     <message>
         <location filename="../qml/pages/StationView.qml" line="30"/>
         <source>Add new station</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uusi asema</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationView.qml" line="38"/>
         <source>Station List</source>
-        <translation type="unfinished"></translation>
+        <translation>Asemaluettelo</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationView.qml" line="53"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationView.qml" line="59"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationView.qml" line="61"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
 </context>
 <context>
@@ -716,27 +716,27 @@
     <message>
         <location filename="../qml/pages/Statistics.qml" line="48"/>
         <source>Consumption</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulutus</translation>
     </message>
     <message>
         <location filename="../qml/pages/Statistics.qml" line="56"/>
         <source>Costs</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulut</translation>
     </message>
     <message>
         <location filename="../qml/pages/Statistics.qml" line="64"/>
         <source>Oilprice</source>
-        <translation type="unfinished"></translation>
+        <translation>Öljyn hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/Statistics.qml" line="84"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilastot</translation>
     </message>
     <message>
         <location filename="../qml/pages/Statistics.qml" line="90"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Matka</translation>
     </message>
 </context>
 <context>
@@ -744,69 +744,70 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="37"/>
         <source>Manage stations</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa asemia</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="41"/>
         <source>Manage fuel types</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa polttoainetyyppejä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="57"/>
         <source>Modify Tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa tankkausta</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="58"/>
         <source>New tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi tankkaus</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="76"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivämäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="87"/>
         <source>ODO</source>
-        <translation type="unfinished"></translation>
+        <translation>Matkamittari</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="100"/>
         <location filename="../qml/pages/TankEntry.qml" line="101"/>
         <source>Quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Määrä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="113"/>
         <location filename="../qml/pages/TankEntry.qml" line="114"/>
         <source>Total Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="125"/>
         <source>Unite Price</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Using &quot;price per litre&quot; instead of &quot;price per unit of volume&quot;</translatorcomment>
+        <translation>Litrahinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="133"/>
         <source>Fuel Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoainetyyppi</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="156"/>
         <source>Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Huoltoasema</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="180"/>
         <source>Full tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Täyteen tankaaminen</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>description</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvaus</translation>
     </message>
 </context>
 <context>
@@ -814,67 +815,67 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="46"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="64"/>
         <source>Tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Tankkaus</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="73"/>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivämäärä:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="97"/>
         <source>ODO:</source>
-        <translation type="unfinished"></translation>
+        <translation>Matkamittari:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="119"/>
         <source>Quantity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Määrä:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="141"/>
         <source>Total Price:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta yhteensä:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="163"/>
         <source>Unit Price:</source>
-        <translation type="unfinished"></translation>
+        <translation>Litrahinta:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="185"/>
         <source>Station:</source>
-        <translation type="unfinished"></translation>
+        <translation>Huoltoasema:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="207"/>
         <source>Fuel Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Polttoainetyyppi:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="229"/>
         <source>Full tank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Täyteen tankkaus:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="237"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyllä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="237"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="248"/>
         <source>Note:</source>
-        <translation type="unfinished"></translation>
+        <translation>Muistiinpanot:</translation>
     </message>
 </context>
 <context>
@@ -882,52 +883,52 @@
     <message>
         <location filename="../qml/pages/TankView.qml" line="60"/>
         <source>Tank List</source>
-        <translation type="unfinished"></translation>
+        <translation>Tankkauslista</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="64"/>
         <source>Add tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää tankkaus</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="68"/>
         <source>Manage stations</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallitse asemia</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="72"/>
         <source>Manage fuel types</source>
-        <translation type="unfinished"></translation>
+        <translation>Hallitse polttoainetyyppejä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="98"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="102"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="104"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="142"/>
         <source>/l</source>
-        <translation type="unfinished"></translation>
+        <translation>/l</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="149"/>
         <source>l</source>
-        <translation type="unfinished"></translation>
+        <translation>l</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="170"/>
         <source>%L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>%L1 mpg</translation>
     </message>
 </context>
 <context>
@@ -935,47 +936,47 @@
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="45"/>
         <source>Modify Tire</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa renkaita</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="46"/>
         <source>New Tire</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää renkaat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="63"/>
         <source>Buy date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostopäivämäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="93"/>
         <location filename="../qml/pages/TireEntry.qml" line="94"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="104"/>
         <location filename="../qml/pages/TireEntry.qml" line="105"/>
         <source>Manufacturer</source>
-        <translation type="unfinished"></translation>
+        <translation>Valmistaja</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="115"/>
         <location filename="../qml/pages/TireEntry.qml" line="116"/>
         <source>Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Malli</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="127"/>
         <location filename="../qml/pages/TireEntry.qml" line="128"/>
         <source>Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinta</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="140"/>
         <location filename="../qml/pages/TireEntry.qml" line="141"/>
         <source>Quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Määrä</translation>
     </message>
 </context>
 <context>
@@ -983,17 +984,17 @@
     <message>
         <location filename="../qml/pages/TireMount.qml" line="40"/>
         <source>Umount Tire</source>
-        <translation type="unfinished"></translation>
+        <translation>Varastoi renkaat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireMount.qml" line="40"/>
         <source>Mount Tire</source>
-        <translation type="unfinished"></translation>
+        <translation>Asenna renkaat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireMount.qml" line="78"/>
         <source>To trash</source>
-        <translation type="unfinished"></translation>
+        <translation>Kierrätykseen</translation>
     </message>
 </context>
 <context>
@@ -1001,42 +1002,48 @@
     <message>
         <location filename="../qml/pages/TireView.qml" line="42"/>
         <source>Create new tire</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää uudet renkaat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="46"/>
         <source>Show history</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä historia</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="54"/>
         <source>Tire List</source>
-        <translation type="unfinished"></translation>
+        <translation>Renkassarjat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="70"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="75"/>
+        <source>Untrash</source>
+        <translatorcomment>Return tires from trash to storage, ready to be installed agian.</translatorcomment>
+        <translation>Palauta varastoon</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TireView.qml" line="80"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="78"/>
+        <location filename="../qml/pages/TireView.qml" line="83"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="84"/>
+        <location filename="../qml/pages/TireView.qml" line="89"/>
         <source>Umount</source>
-        <translation type="unfinished"></translation>
+        <translation>Varastoon</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="84"/>
+        <location filename="../qml/pages/TireView.qml" line="89"/>
         <source>Mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Asenna</translation>
     </message>
 </context>
 <context>
@@ -1044,17 +1051,17 @@
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="43"/>
         <source>Modify Tire Mount</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa rengasasennusta</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="59"/>
         <source>Mount date</source>
-        <translation type="unfinished"></translation>
+        <translation>Asennuspäivämäärä</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountEdit.qml" line="92"/>
         <source>Unmount date</source>
-        <translation type="unfinished"></translation>
+        <translation>Varastointipäivämäärä</translation>
     </message>
 </context>
 <context>
@@ -1062,12 +1069,12 @@
     <message>
         <location filename="../qml/pages/TiremountView.qml" line="52"/>
         <source>Tire Mounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Asennuskerrat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TiremountView.qml" line="74"/>
         <source>Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokkaa</translation>
     </message>
 </context>
 </TS>

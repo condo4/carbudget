@@ -1369,9 +1369,9 @@ QString Car::distanceunity()
         }
         if(_distanceunity.length() < 1)
         {
-            qDebug() << "Default distanceunity not set in database, set to Km";
-            query.exec("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','Km');");
-            _distanceunity = "Km";
+            qDebug() << "Default distanceunity not set in database, set to km";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','km');");
+            _distanceunity = "km";
         }
     }
 

@@ -71,14 +71,14 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (Many improvments)<br\>- Denis Fedoseev (Russion translation)<br \>- Åke Engelbrektson (Swedish translation)<br \>- Thomas Michel (Many improvments)")
+                text: qsTr("Credits to:<br />- Lorenzo Facca (Italian translation)<br />- Alois Spitzbart (German translation)<br />- Michal Hrusecky (Many improvments)<br />- Denis Fedoseev (Russion translation)<br />- Åke Engelbrektson (Swedish translation)<br />- Thomas Michel (Many improvments)<br />- Matti Viljanen (Finnish translation and many improvements)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Button {
                id: homepage
                anchors.horizontalCenter: parent.horizontalCenter
-               text: "<a href=\"https://github.com/condo4/carbudgetr\">Sourcecode on Github</a>"
+               text: qsTr("<a href=\"https://github.com/condo4/carbudget\">Sourcecode on Github</a>")
                onClicked: {
                    Qt.openUrlExternally("https://github.com/condo4/carbudget")
                }

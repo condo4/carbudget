@@ -11,6 +11,8 @@ TARGET = harbour-carbudget
 CONFIG += sailfishapp
 QT += sql xml
 
+QML_IMPORT_PATH += qml
+
 SOURCES += CarBudget.cpp \
     tank.cpp \
     car.cpp \
@@ -37,6 +39,7 @@ lupdate_only{
 CONFIG += sailfishapp_i18n
 
 TRANSLATIONS = translations/de_DE.ts \
+               translations/fi_FI.ts \
                translations/fr_FR.ts \
                translations/it_IT.ts \
                translations/ru_RU.ts \

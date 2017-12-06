@@ -61,7 +61,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Distance Unity")
-                placeholderText: qsTr("Km or Mile")
+                placeholderText: qsTr("km or mile")
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: nbtire.focus = true
