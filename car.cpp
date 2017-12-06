@@ -86,7 +86,7 @@ void Car::db_load()
     _costtypelist.clear();
     _tirelist.clear();
     _tiremountlist.clear();
-    if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;") && query.size() > 0)
+    if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
         while(query.next())
         {
@@ -109,7 +109,7 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT id,name FROM FueltypeList;") && query.size() > 0)
+    if(query.exec("SELECT id,name FROM FueltypeList;"))
     {
         while(query.next())
         {
@@ -123,7 +123,7 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;") && query.size() > 0)
+    if(query.exec("SELECT id,name,sum(TankList.quantity) as quantity FROM StationList LEFT JOIN TankList ON StationList.id == TankList.station GROUP BY StationList.id;"))
     {
         while(query.next())
         {
@@ -138,7 +138,7 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT id,name FROM CosttypeList;") && query.size() > 0)
+    if(query.exec("SELECT id,name FROM CosttypeList;"))
     {
         while(query.next())
         {
@@ -152,7 +152,7 @@ void Car::db_load()
     {
         qDebug() << query.lastError();
     }
-    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;") && query.size() > 0)
+    if(query.exec("SELECT event,date,distance,costtype,cost,desc FROM CostList, Event WHERE CostList.event == Event.id;"))
     {
         while(query.next())
         {
@@ -171,7 +171,7 @@ void Car::db_load()
         qDebug() << query.lastError();
     }
 
-    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;") && query.size() > 0)
+    if(query.exec("SELECT id,buydate,trashdate,price,name,manufacturer,model,quantity FROM TireList;"))
     {
         while(query.next())
         {
@@ -193,7 +193,7 @@ void Car::db_load()
     }
     // Now load tire mountings
     // First load all unmount events (event_umount exists in events table)
-    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;") && query.size() > 0)
+    if(query.exec("SELECT m.id, m.date, m.distance, u.id, u.date, u.distance, t.tire FROM TireUsage t, Event m, Event u WHERE t.event_mount == m.id AND t.event_umount==u.id;"))
     {
         while(query.next())
         {
@@ -213,7 +213,7 @@ void Car::db_load()
         qDebug() << "Failed to load tire unmounts:" << query.lastError();
     }
     // Now load mounted tires
-    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;") && query.size() > 0)
+    if(query.exec("SELECT m.id, m.date, m.distance, t.tire FROM TireUsage t, Event m WHERE t.event_mount == m.id AND t.event_umount==0;"))
     {
         while(query.next())
         {
@@ -1381,7 +1381,7 @@ QString Car::currency()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';"))
         {
             query.next();
             _currency = query.value(0).toString();
@@ -1422,7 +1422,7 @@ QString Car::distanceunity()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';"))
         {
             query.next();
             _distanceunity = query.value(0).toString();
@@ -1463,7 +1463,7 @@ unsigned int Car::nbtire()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';"))
         {
             query.next();
             _nbtire = query.value(0).toInt();
@@ -1504,7 +1504,7 @@ double Car::buyingprice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';"))
         {
             query.next();
             _buyingprice = query.value(0).toDouble();
@@ -1544,7 +1544,7 @@ double Car::sellingprice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';"))
         {
             query.next();
             _sellingprice = query.value(0).toDouble();
@@ -1584,7 +1584,7 @@ unsigned int Car::lifetime()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';"))
         {
             query.next();
             _lifetime = query.value(0).toInt();
@@ -1622,7 +1622,7 @@ QDate Car::buyingdate()
 {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';"))
         {
             query.next();
             _buyingdate = QDate::fromString(query.value(0).toString());
@@ -1682,7 +1682,7 @@ QString Car::consumptionunit()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';") && query.size() > 0)
+        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';"))
         {
             query.next();
             _consumptionunit = query.value(0).toString();
