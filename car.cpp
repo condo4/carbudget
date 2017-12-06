@@ -903,6 +903,35 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     }
 }
 
+Tank* Car::modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note)
+{
+    //Tank *tank = new Tank(date, distance, quantity, price, full, fueltype, station, CREATE_NEW_EVENT,  note, this);
+    //_tanklist.append(tank);
+
+    tank->setDate(date);
+    tank->setDistance(distance);
+    tank->setQuantity(quantity);
+    tank->setPrice(price);
+    tank->setFull(full);
+    tank->setFueltype(fueltype);
+    tank->setStation(station);
+    tank->setNote(note);
+    tank->save();
+    qSort(_tanklist.begin(), _tanklist.end(), sortTankByDistance);
+    if (!db_loading)
+    {
+        emit nbtankChanged(_tanklist.count());
+        emit consumptionChanged(this->consumption());
+        emit consumptionmaxChanged(this->consumptionmax());
+        emit consumptionlastChanged(this->consumptionlast());
+        emit consumptionminChanged(this->consumptionmin());
+        emit fueltotalChanged(this->fueltotal());
+        emit maxdistanceChanged(this->maxdistance());
+        emit tanksChanged();
+    }
+    return tank;
+}
+
 void Car::delTank(Tank *tank)
 {
     qDebug() << "Remove tank " << tank->id();

@@ -48,6 +48,27 @@ Tank::Tank(QDate date, unsigned int distance, double quantity, double price, boo
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
+void Tank::setDate(QDate date)
+{
+    this->_date = date;
+    emit dateChanged();
+}
+
+QDate Tank::getDate()
+{
+    return _date;
+}
+
+void Tank::setDistance(unsigned int distance)
+{
+    this->_distance = distance;
+    emit distanceChanged();
+}
+
+unsigned int Tank::getDistance()
+{
+    return _distance;
+}
 
 double Tank::quantity() const
 {

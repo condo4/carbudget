@@ -210,6 +210,7 @@ signals:
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
+    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
     void delTank(Tank *tank);
 
     void addNewFueltype(QString fueltype);
