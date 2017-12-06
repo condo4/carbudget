@@ -68,9 +68,14 @@ Page {
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
+                    visible: !model.modelData.trashed
                     onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData })
                 }
-
+                MenuItem {
+                    text: qsTr("Untrash")
+                    visible: model.modelData.trashed
+                    onClicked: manager.car.untrashTire(model.modelData)
+                }
                 MenuItem {
                     text: qsTr("Remove")
                     visible: !model.modelData.mounted

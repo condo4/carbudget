@@ -1165,6 +1165,20 @@ Tire *Car::addNewTire(QDate buydate, QString name, QString manufacturer, QString
     return tire;
 }
 
+Tire *Car::modifyTire(Tire* tire, QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity)
+{
+    tire->setBuydate(QDateTime(buydate));
+    tire->setTrashdate(QDateTime(trashdate));
+    tire->setName(name);
+    tire->setManufacturer(manufacturer);
+    tire->setModel(model);
+    tire->setPrice(price);
+    tire->setQuantity(quantity);
+    tire->save();
+    emit tiresChanged();
+    return tire;
+}
+
 void Car::delTire(Tire *tire)
 {
     qDebug() << "Remove Tire " << tire->id() << " : " << _tirelist.removeAll(tire);
@@ -1296,6 +1310,19 @@ void Car::umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool t
             }
         }
         emit tireMountedChanged();
+    }
+}
+
+void Car::untrashTire(Tire *tire)
+{
+    qDebug() << QString("Untrashing %1 %2 with ID %2").arg(tire->manufacturer()).arg(tire->model()).arg(tire->id());
+    QString sql = QString("UPDATE TireList SET trashdate='' WHERE id=%1").arg(tire->id());
+    QSqlQuery query(db);
+    if(query.exec(sql))
+    {
+        tire->setTrashdate(QDateTime());
+        db.commit();
+        emit tiresChanged();
     }
 }
 

@@ -174,14 +174,7 @@ Dialog {
         }
         else
         {
-            tire.buydate = buy_date
-            tire.trashdate = trash_date
-            tire.name = nameinput.text
-            tire.manufacturer = manufacturerinput.text
-            tire.modelname = modelinput.text
-            tire.price = priceinput.text.replace(",",".")
-            tire.quantity = quantityinput.text
-            tire.save()
+            manager.car.modifyTire(tire, buy_date, trash_date, nameinput.text, manufacturerinput.text, modelinput.text, priceinput.text.replace(",","."), quantityinput.text )
         }
     }
 }

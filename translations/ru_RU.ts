@@ -1020,21 +1020,26 @@
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="75"/>
+        <source>Untrash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TireView.qml" line="80"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="78"/>
+        <location filename="../qml/pages/TireView.qml" line="83"/>
         <source>Deleting</source>
         <translation>Удаляется</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="84"/>
+        <location filename="../qml/pages/TireView.qml" line="89"/>
         <source>Umount</source>
         <translation>Снять</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TireView.qml" line="84"/>
+        <location filename="../qml/pages/TireView.qml" line="89"/>
         <source>Mount</source>
         <translation>Поставить</translation>
     </message>
