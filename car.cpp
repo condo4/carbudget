@@ -1192,7 +1192,7 @@ void Car::delCost(Cost *cost)
 
 Tire *Car::addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity)
 {
-    Tire *tire = new Tire(buydate,buydate,name,manufacturer,model,price,quantity,-1,this);
+    Tire *tire = new Tire(buydate,QDate(),name,manufacturer,model,price,quantity,-1,this);
     _tirelist.append(tire);
     tire->save();
     emit tiresChanged();
