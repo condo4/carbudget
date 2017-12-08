@@ -12,9 +12,18 @@
 *.la
 *.a
 obj
-moc
+moc_*
 *.pro.user*
 CarBudget
 Makefile
 rpm/CarBudget.spec
 rpm/harbour-carbudget.spec
+
+# Compiled translation files
+*.qm
+
+# Generated RPM packages
+*.rpm
+
+# Compiled binary
+harbour-carbudget
