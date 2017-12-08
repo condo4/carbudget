@@ -78,7 +78,7 @@ Page {
                 }
                 MenuItem {
                     text: qsTr("Remove")
-                    visible: !model.modelData.mounted
+                    visible: !model.modelData.mounted && model.modelData.trashed
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
                             manager.car.delTire(model.modelData)
