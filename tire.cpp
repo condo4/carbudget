@@ -192,7 +192,7 @@ bool Tire::mounted() const
 
 bool Tire::mountable() const
 {
-    if(_buydate >= QDate::currentDate()                 // Are the tires bought yet? :)
+    if(_buydate > QDate::currentDate()                 // Are the tires bought yet? :)
     || _car->tireMounted() + _quantity > _car->nbtire() // Are there too many wheels to be mounted?
     || mounted()                                        // Are the tires already mounted?
     || trashed())                                       // Are the tires trashed?
