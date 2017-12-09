@@ -163,52 +163,52 @@
         <translation>A propos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="83"/>
+        <location filename="../qml/pages/CarEntry.qml" line="88"/>
         <source>Distance: %L1 ~ %L2 %3</source>
         <translation>Distance : %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="268"/>
+        <location filename="../qml/pages/CarEntry.qml" line="273"/>
         <source>Statistics</source>
         <translation>Statistiques</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="236"/>
+        <location filename="../qml/pages/CarEntry.qml" line="241"/>
         <source>Tires mounted: %1/%2</source>
         <translation>Pneus montés : %1/%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="90"/>
+        <location filename="../qml/pages/CarEntry.qml" line="95"/>
         <source>Consumption: %L1 l/100km</source>
         <translation>Consommation : %L1 l/100km</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="93"/>
+        <location filename="../qml/pages/CarEntry.qml" line="98"/>
         <source>Consumption: %L1 mpg</source>
         <translation>Consommation : %L1 mpg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="100"/>
+        <location filename="../qml/pages/CarEntry.qml" line="105"/>
         <source>Last: %L1 l/100km</source>
         <translation>Dernière consommation : %L1 l/100km</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="103"/>
+        <location filename="../qml/pages/CarEntry.qml" line="108"/>
         <source>Last: %L1 mpg</source>
         <translation>Dernière consommation : %L1 mpg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="236"/>
+        <location filename="../qml/pages/CarEntry.qml" line="241"/>
         <source>Tires mounted</source>
         <translation>Pneus montés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="159"/>
+        <location filename="../qml/pages/CarEntry.qml" line="164"/>
         <source>New Tank</source>
         <translation>Nouveau plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="191"/>
+        <location filename="../qml/pages/CarEntry.qml" line="196"/>
         <source>New Cost</source>
         <translation>Nouveau frais</translation>
     </message>
@@ -448,14 +448,14 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="50"/>
+        <location filename="../qml/cover/CoverPage.qml" line="57"/>
         <source> / 100</source>
         <translation> / 100</translation>
     </message>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="56"/>
-        <source> l / 100</source>
-        <translation> l / 100</translation>
+        <location filename="../qml/cover/CoverPage.qml" line="63"/>
+        <source>l / 100</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -596,70 +596,73 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="43"/>
+        <location filename="../qml/pages/Settings.qml" line="45"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="51"/>
-        <location filename="../qml/pages/Settings.qml" line="52"/>
+        <location filename="../qml/pages/Settings.qml" line="53"/>
+        <source>Car manufacturer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="64"/>
+        <source>Car model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="75"/>
+        <source>Model year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="88"/>
+        <source>License plate number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="99"/>
+        <location filename="../qml/pages/Settings.qml" line="100"/>
         <source>Currency</source>
         <translation>Monnaie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="63"/>
+        <location filename="../qml/pages/Settings.qml" line="111"/>
         <source>Distance Unity</source>
         <translation>Unité de distance</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
-        <source>km or mile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="74"/>
+        <location filename="../qml/pages/Settings.qml" line="132"/>
         <source>Consumption Unit</source>
         <translation>Unité de consommation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="80"/>
-        <location filename="../qml/pages/Settings.qml" line="81"/>
-        <source>l/100km</source>
-        <translation>l/100km</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="84"/>
-        <location filename="../qml/pages/Settings.qml" line="85"/>
-        <source>mpg</source>
-        <translation>mpg</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="97"/>
+        <location filename="../qml/pages/Settings.qml" line="154"/>
         <source>Number of wheels</source>
         <translation>Nombre de roues</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="98"/>
+        <location filename="../qml/pages/Settings.qml" line="155"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 ou 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="119"/>
+        <location filename="../qml/pages/Settings.qml" line="178"/>
         <source>Buying date</source>
         <translation>Date d&apos;achat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="129"/>
+        <location filename="../qml/pages/Settings.qml" line="188"/>
         <source>Buying Price</source>
         <translation>Prix d&apos;achat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="140"/>
+        <location filename="../qml/pages/Settings.qml" line="199"/>
         <source>Selling Price (est.)</source>
         <translation>Prix de vente estimé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="151"/>
+        <location filename="../qml/pages/Settings.qml" line="210"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Durée de vie estimé (en mois)</translation>
     </message>
