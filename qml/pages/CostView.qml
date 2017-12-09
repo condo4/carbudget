@@ -48,7 +48,6 @@ Page {
     SilicaFlickable {
         id:costview
         interactive: !costlistView.flicking
-        pressDelay: 0
         anchors.fill: parent
         PageHeader {
             id: header
@@ -67,17 +66,12 @@ Page {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: Theme.paddingSmall
-            anchors.rightMargin: Theme.paddingSmall
             clip: true
-            leftMargin: Theme.paddingMedium
-            rightMargin: Theme.paddingMedium
             onModelChanged: fillListModel()
             model: listModel
             delegate: ListItem {
-                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-                height: dataColumn.height
-                contentHeight: dataColumn.height
+                width: parent.width
+                //contentHeight: dataColumn.height
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
                 menu: ContextMenu {
@@ -98,15 +92,16 @@ Page {
                 Column {
                     id: dataColumn
                     width: parent.width
+                    spacing: Theme.paddingSmall
                     Row {
-                        width: parent.width
-                        Text {
+                        x: Theme.paddingMedium
+                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                        Label {
+                            width: parent.width / 2
                             text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity;
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
+                            font.pixelSize: Theme.fontSizeSmall
                         }
                         Text {
                             text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
@@ -118,17 +113,17 @@ Page {
                         }
                     }
                     Row {
-                        width: parent.width
-                        Text {
+                        x: Theme.paddingMedium
+                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                        Label {
+                            width: parent.width / 2
                             text: {return showDescription ? model.modelData.description : manager.car.getCosttypeName(model.modelData.costtype)}
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.secondaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
                             clip: true
                         }
-                        Text {
+                        Label {
                             text: model.modelData.cost + manager.car.currency;
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall

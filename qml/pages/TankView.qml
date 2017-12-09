@@ -30,6 +30,15 @@ Page {
     property string distanceunit
     property real distanceunitfactor : 1.0
     property real consumptionfactor : 1.0
+    property variant consumptionAvg :  [manager.car.consumption * 0.92,
+                                        manager.car.consumption * 0.94,
+                                        manager.car.consumption * 0.96,
+                                        manager.car.consumption * 0.98,
+                                        manager.car.consumption * 1.00,
+                                        manager.car.consumption * 1.02,
+                                        manager.car.consumption * 1.04,
+                                        manager.car.consumption * 1.06,
+                                        manager.car.consumption * 1.08]
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceunity
@@ -53,7 +62,6 @@ Page {
     SilicaFlickable {
         id: tankview
         interactive: !tanklistView.flicking
-        pressDelay: 0
         anchors.fill: parent
         PageHeader {
             id: header
@@ -75,22 +83,17 @@ Page {
         }
         SilicaListView {
 
-            VerticalScrollDecorator {}
             id:tanklistView
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: Theme.paddingSmall
-            anchors.rightMargin: Theme.paddingSmall
             clip: true
             onModelChanged: fillListModel()
             model: listModel
-            leftMargin: Theme.paddingMedium
-            rightMargin: Theme.paddingMedium
             VerticalScrollDecorator { flickable: tanklistView }
             delegate: ListItem {
-                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                width: parent.width
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("TankEntryView.qml"), { tank: model.modelData })
                 menu: ContextMenu {
@@ -111,9 +114,11 @@ Page {
 
                 Column {
                     width: parent.width
+                    spacing: Theme.paddingSmall
 
                     Row {
-                        width: parent.width
+                        x: Theme.paddingMedium
+                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                         Text {
                             text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceunity+")"):(manager.car.distanceunity));
@@ -136,19 +141,20 @@ Page {
                         }
                     }
                     Row {
-                        width: parent.width
+                        x: Theme.paddingMedium
+                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                         Text {
                             text: model.modelData.priceu.toFixed(3)+manager.car.currency+qsTr("/l");
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             width: parent.width / 5
                         }
                         Text {
                             text: model.modelData.quantity +qsTr("l")
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             width: parent.width / 5
                             horizontalAlignment: Text.AlignRight
@@ -156,35 +162,35 @@ Page {
                         Text {
                             text: model.modelData.price + manager.car.currency;
                             font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
+                            font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             width: parent.width / 5
                             horizontalAlignment: Text.AlignRight
                         }
                         Text {
                             text: if ( manager.car.consumptionunit == 'l/100km') {
-                                 model.modelData.consumption.toFixed(2)+ "l/100" + "km";
+                                 model.modelData.consumption.toFixed(2)+ "l/100km";
                              }
                             else {
-                                if ( manager.car.consumptionunit == 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
+                                    if ( manager.car.consumptionunit == 'mpg') {
+                                    qsTr("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
+                                }
                             }
-                        }
 
                             visible: model.modelData.consumption > 0
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             width: 2 * parent.width / 5
                             color: {
-                                if(model.modelData.consumption < manager.car.consumption * 0.92) return "#00FF00"
-                                if(model.modelData.consumption < manager.car.consumption * 0.94) return "#40FF00"
-                                if(model.modelData.consumption < manager.car.consumption * 0.96) return "#80FF00"
-                                if(model.modelData.consumption < manager.car.consumption * 0.98) return "#C0FF00"
-                                if(model.modelData.consumption < manager.car.consumption * 1.00) return "#FFFF00"
-                                if(model.modelData.consumption < manager.car.consumption * 1.02) return "#FFC000"
-                                if(model.modelData.consumption < manager.car.consumption * 1.04) return "#FF8000"
-                                if(model.modelData.consumption < manager.car.consumption * 1.06) return "#FF4000"
-                                if(model.modelData.consumption < manager.car.consumption * 1.08) return "#FF2000"
+                                if(model.modelData.consumption < consumptionAvg[0]) return "#00FF00"
+                                if(model.modelData.consumption < consumptionAvg[1]) return "#40FF00"
+                                if(model.modelData.consumption < consumptionAvg[2]) return "#80FF00"
+                                if(model.modelData.consumption < consumptionAvg[3]) return "#C0FF00"
+                                if(model.modelData.consumption < consumptionAvg[4]) return "#FFFF00"
+                                if(model.modelData.consumption < consumptionAvg[5]) return "#FFC000"
+                                if(model.modelData.consumption < consumptionAvg[6]) return "#FF8000"
+                                if(model.modelData.consumption < consumptionAvg[7]) return "#FF4000"
+                                if(model.modelData.consumption < consumptionAvg[8]) return "#FF2000"
                                 return "#FF0000"
                             }
                             horizontalAlignment: Text.AlignRight
