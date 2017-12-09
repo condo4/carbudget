@@ -110,14 +110,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         buying_date = dialog.date
                         buyingprice.focus=true
                     })
                 }
 
                 label: qsTr("Buying date")
-                value: buying_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: buying_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }

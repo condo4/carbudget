@@ -55,13 +55,13 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         buy_date = dialog.date
                     })
                 }
 
                 label: qsTr("Buy date")
-                value: buy_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: buy_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
@@ -74,14 +74,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         trash_date = dialog.date
                     })
                 }
 
                 label: "Trash date"
                 visible: tire != undefined
-                value: trash_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: trash_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }

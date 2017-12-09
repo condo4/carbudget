@@ -103,8 +103,8 @@ Page {
                             color: Theme.primaryColor
                             font.pixelSize: Theme.fontSizeSmall
                         }
-                        Text {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                        Label {
+                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor

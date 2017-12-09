@@ -67,14 +67,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         tank_date = dialog.date
                         kminput.focus=true
                     })
                 }
 
                 label: qsTr("Date")
-                value: tank_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: tank_date.toLocaleDateString(Qt.locale())
                 anchors { left: parent.left; right: parent.right }
                 onClicked: openDateDialog()
             }

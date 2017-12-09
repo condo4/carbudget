@@ -131,7 +131,7 @@ Page {
                         }
 
                         Text {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall

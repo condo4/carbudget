@@ -48,13 +48,13 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         mount_date = dialog.date
                     })
                 }
 
                 label: "Date: "
-                value: mount_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: mount_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
