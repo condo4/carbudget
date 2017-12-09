@@ -249,17 +249,17 @@
         <translation>Åtgång efter bränsletyp</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="60"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="59"/>
         <source>Average: </source>
         <translation>Genomsnitt: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="79"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="78"/>
         <source>Min:</source>
         <translation>Min:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="98"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="97"/>
         <source>Max:</source>
         <translation>Max:</translation>
     </message>
