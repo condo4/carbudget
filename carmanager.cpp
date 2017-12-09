@@ -51,7 +51,7 @@ void CarManager::refresh()
                                   dataPath + QDir::separator() + file);
         qDebug() << "Moving"  << (homePath + QDir::separator() + file)
                  << "to"      << (dataPath + QDir::separator() + file)
-                              << (fileMoved ? "" : "failed");
+                 << (fileMoved ? "" : "failed");
     }
 
     // Find and add *.cbg files to car list
@@ -135,73 +135,42 @@ void CarManager::createCar(QString name)
     refresh();
 }
 
-void CarManager::createTables(QSqlDatabase db)
+bool CarManager::createTables(QSqlDatabase db)
 {
-    bool error = false;
+    bool success = true;
     QSqlQuery query(db);
-    if(!query.exec("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('version','%1');").arg(DB_VERSION)))
-    {
-        qDebug() << query.lastError();
-        error = true;
+    QStringList sqlQueries;
+
+    sqlQueries.append(QString("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"));
+    sqlQueries.append(QString("INSERT  INTO CarBudget (id, value) VALUES ('version','%1'),('make',''),('model',''),('year',''),('licensePlate','');").arg(DB_VERSION));
+    sqlQueries.append(QString("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buydate DATE, trashdate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE Event (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, distance UNSIGNED BIG INT);"));
+    sqlQueries.append(QString("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype INTEGER, note TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE CostList (event INTEGER, costtype INTEGER, cost DOUBLE, desc TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE TireUsage (event_mount INTEGER, event_umount INTEGER, tire INTEGER);"));
+    sqlQueries.append(QString("CREATE TABLE PeriodicList (id INTEGER PRIMARY KEY AUTOINCREMENT, first DATE, last DATE, cost DOUBLE, desc TEXT, period INTEGER);"));
+
+    db.transaction();
+    foreach (const QString &q, sqlQueries) {
+        if(!query.exec(q)){
+            qDebug() << query.lastError();
+            success = false;
+        }
     }
 
-    if(!query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-
-    if(!query.exec("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buydate DATE, trashdate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-
-    if(!query.exec("CREATE TABLE Event (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, distance UNSIGNED BIG INT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype INTEGER, note TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec("CREATE TABLE CostList (event INTEGER, costtype INTEGER, cost DOUBLE, desc TEXT);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!query.exec("CREATE TABLE TireUsage (event_mount INTEGER, event_umount INTEGER, tire INTEGER);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-
-
-    if(!query.exec("CREATE TABLE PeriodicList (id INTEGER PRIMARY KEY AUTOINCREMENT, first DATE, last DATE, cost DOUBLE, desc TEXT, period INTEGER);"))
-    {
-        qDebug() << query.lastError();
-        error = true;
-    }
-    if(!error)
+    if(success) {
+        qDebug() << "Database version" << DB_VERSION << "created.";
         db.commit();
-    return;
+    }
+    else {
+        qDebug() << "There were errors during dar database creation.";
+        db.rollback();
+    }
+
+    return success;
 }
 
 void CarManager::importFromMyCar(QString filename, QString name)
@@ -223,7 +192,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
         QDomElement type = n.firstChildElement("code");
         if (type.isNull())
             continue;
-            _car->addNewFueltype(type.text());
+        _car->addNewFueltype(type.text());
     }
     // Now import tank events
 
@@ -264,9 +233,9 @@ void CarManager::importFromMyCar(QString filename, QString name)
             QString t_note;
             if (!n_date.isNull())
             {
-               QDateTime t_datetime;
-               t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
-               t_date = t_datetime.date();
+                QDateTime t_datetime;
+                t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+                t_date = t_datetime.date();
             }
             if (!n_distance.isNull()) t_distance = n_distance.text().toInt();
             if (!n_quantity.isNull()) t_quantity = n_quantity.text().toDouble();
@@ -297,7 +266,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
         QDomElement type = n.firstChildElement("name");
         if (type.isNull())
             continue;
-         _car->addNewCosttype(type.text());
+        _car->addNewCosttype(type.text());
     }
     // We don't distinguish between service and bills, therefore add service types as cost types
     qDebug() << "Now import service categories as cost types";
@@ -335,9 +304,9 @@ void CarManager::importFromMyCar(QString filename, QString name)
         }
         if (!n_date.isNull())
         {
-           QDateTime t_datetime;
-           t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
-           t_date = t_datetime.date();
+            QDateTime t_datetime;
+            t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+            t_date = t_datetime.date();
         }
         if (!n_cost.isNull())
             t_cost=n_cost.text().toDouble();
@@ -381,9 +350,9 @@ void CarManager::importFromMyCar(QString filename, QString name)
         }
         if (!n_date.isNull())
         {
-           QDateTime t_datetime;
-           t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
-           t_date = t_datetime.date();
+            QDateTime t_datetime;
+            t_datetime = QDateTime::fromString(n_date.text(),"yyyy-MM-dd hh:mm");
+            t_date = t_datetime.date();
         }
         if (!n_cost.isNull())
             t_cost=n_cost.text().toDouble();
@@ -397,88 +366,88 @@ void CarManager::importFromMyCar(QString filename, QString name)
 
 
 void CarManager::importFromFuelpad(QString filename, QString name)
-    {
+{
     qDebug() << "Importing from Fuelpad";
-        createCar(name);
-        selectCar(name);
-        filename.remove(0,7);
-        qDebug() << "INFO: attempting to process fuelpad DB" << filename;
-        QSqlDatabase db;
-        db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
-        db.setDatabaseName(filename);
-        if(!db.open())
-        {
-            qDebug() << "ERROR: fail to open Fuelpad database";
-            return;
-        }
-        // First insert Fuelpad costtypes
-        _car->addNewCosttype(QString("Service"));
-        _car->addNewCosttype(QString("Oil"));
-        _car->addNewCosttype(QString("Tires"));
-        _car->addNewCosttype(QString("Insurance"));
-        _car->addNewCosttype(QString("Other"));
-        // Get ids of costtypes for faster import
-        // We should probably think about addNewXXX to return the id, could make life easier
-        int t_serviceid=_car->findCosttype("Service")->id();
-        int t_oilid=_car->findCosttype("Oil")->id();
-        int t_tiresid=_car->findCosttype("Tires")->id();
-        int t_insuranceid=_car->findCosttype("Insurance")->id();
-        int t_otherid=_car->findCosttype("Other")->id();
-        QSqlQuery query(db);
-        QDate t_date;
-        unsigned long int t_km;
-        double t_fill;
-        double t_price;
-        double t_service;
-        double t_oil;
-        double t_tires;
-        double t_insurance;
-        double t_other;
-        QString t_notes;
-        int t_id=0;
-        if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
-        {
-            qDebug() << query.lastError();
-            db.close();
-            return;
-        }
-        if (query.next())
-            t_id = query.value(0).toInt();
-        qDebug() << "Car id:" <<  t_id;
-        if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
-        {
-            while(query.next())
-            {
-                t_date = query.value(0).toDate();
-                t_km = (int) query.value(1).toDouble();
-                t_fill = query.value(2).toDouble();
-                t_price = query.value(3).toDouble();
-                t_service = query.value(4).toDouble();
-                t_oil = query.value(5).toDouble();
-                t_tires = query.value(6).toDouble();
-                t_insurance = query.value(7).toDouble();
-                t_other = query.value(8).toDouble();
-                t_notes = query.value(9).toString();
-                if (t_fill!=0)
-                    _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
-                if (t_service!=0)
-                    _car->addNewCost(t_date,t_km,t_serviceid,t_notes,t_service);
-                if (t_oil!=0)
-                    _car->addNewCost(t_date,t_km,t_oilid,t_notes,t_oil);
-                if (t_tires!=0)
-                    _car->addNewCost(t_date,t_km,t_tiresid,t_notes,t_tires);
-                if (t_insurance!=0)
-                    _car->addNewCost(t_date,t_km,t_insuranceid,t_notes,t_insurance);
-                if (t_other!=0)
-                    _car->addNewCost(t_date,t_km,t_otherid,t_notes,t_other);
-                qDebug() << "Oil" << t_oil << "Insurance" << t_insurance;
-            }
-        }
-        else
-        {
-            qDebug() << query.lastError();
-        }
+    createCar(name);
+    selectCar(name);
+    filename.remove(0,7);
+    qDebug() << "INFO: attempting to process fuelpad DB" << filename;
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE","fuelpaddb");
+    db.setDatabaseName(filename);
+    if(!db.open())
+    {
+        qDebug() << "ERROR: fail to open Fuelpad database";
+        return;
+    }
+    // First insert Fuelpad costtypes
+    _car->addNewCosttype(QString("Service"));
+    _car->addNewCosttype(QString("Oil"));
+    _car->addNewCosttype(QString("Tires"));
+    _car->addNewCosttype(QString("Insurance"));
+    _car->addNewCosttype(QString("Other"));
+    // Get ids of costtypes for faster import
+    // We should probably think about addNewXXX to return the id, could make life easier
+    int t_serviceid=_car->findCosttype("Service")->id();
+    int t_oilid=_car->findCosttype("Oil")->id();
+    int t_tiresid=_car->findCosttype("Tires")->id();
+    int t_insuranceid=_car->findCosttype("Insurance")->id();
+    int t_otherid=_car->findCosttype("Other")->id();
+    QSqlQuery query(db);
+    QDate t_date;
+    unsigned long int t_km;
+    double t_fill;
+    double t_price;
+    double t_service;
+    double t_oil;
+    double t_tires;
+    double t_insurance;
+    double t_other;
+    QString t_notes;
+    int t_id=0;
+    if (!query.exec(QString("Select id from car WHERE register='%1';").arg(name)))
+    {
+        qDebug() << query.lastError();
         db.close();
+        return;
+    }
+    if (query.next())
+        t_id = query.value(0).toInt();
+    qDebug() << "Car id:" <<  t_id;
+    if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
+    {
+        while(query.next())
+        {
+            t_date = query.value(0).toDate();
+            t_km = (int) query.value(1).toDouble();
+            t_fill = query.value(2).toDouble();
+            t_price = query.value(3).toDouble();
+            t_service = query.value(4).toDouble();
+            t_oil = query.value(5).toDouble();
+            t_tires = query.value(6).toDouble();
+            t_insurance = query.value(7).toDouble();
+            t_other = query.value(8).toDouble();
+            t_notes = query.value(9).toString();
+            if (t_fill!=0)
+                _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
+            if (t_service!=0)
+                _car->addNewCost(t_date,t_km,t_serviceid,t_notes,t_service);
+            if (t_oil!=0)
+                _car->addNewCost(t_date,t_km,t_oilid,t_notes,t_oil);
+            if (t_tires!=0)
+                _car->addNewCost(t_date,t_km,t_tiresid,t_notes,t_tires);
+            if (t_insurance!=0)
+                _car->addNewCost(t_date,t_km,t_insuranceid,t_notes,t_insurance);
+            if (t_other!=0)
+                _car->addNewCost(t_date,t_km,t_otherid,t_notes,t_other);
+            qDebug() << "Oil" << t_oil << "Insurance" << t_insurance;
+        }
+    }
+    else
+    {
+        qDebug() << query.lastError();
+    }
+    db.close();
 }
 
 bool CarManager::is_debug() const

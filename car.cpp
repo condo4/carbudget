@@ -267,58 +267,62 @@ int Car::db_get_version()
     return 0;
 }
 
-void Car::db_upgrade_to_2()
-{
-    QString sql = "ALTER TABLE TankList ADD COLUMN note TEXT;";
-    QSqlQuery query(this->db);
+int Car::db_upgrade() {
+    QSqlQuery query(db);
+    QString sqlBump = QString("UPDATE CarBudget SET value='%1' WHERE id='version';");
+    int currVersion = this->db_get_version();
+    int nextVersion = 0;
+    bool success = true;
+    int numErrors = 0;
 
-    if(query.exec(sql))
-    {
-        if(query.exec("UPDATE CarBudget SET  value='2' WHERE id='version';"))
-        {
-            this->db.commit();
-            return;
-        }
+    QHash<int, QStringList> sqlUpdates = QHash<int, QStringList>();
+
+    // Create the SQL query container
+    // Update to version 1 not necessary ;)
+
+    for(int i = 2; i <= DB_VERSION; i++) {
+        sqlUpdates[i] = QStringList();
     }
-    this->db.rollback();
-}
 
-void Car::db_upgrade_to_3()
-{
-    QString sql = "ALTER TABLE TankList ADD COLUMN fueltype INTEGER;";
-    QSqlQuery query(this->db);
+    // Insert the SQL queries, at correct index, in execution order
+    // Note: Do NOT include version bump here, the while loop does it!
+    // Version 1 -> 2
+    sqlUpdates[2].append(QString("ALTER TABLE TankList ADD COLUMN note TEXT;"));
+    // Version 2 -> 3
+    sqlUpdates[3].append(QString("ALTER TABLE TankList ADD COLUMN fueltype INTEGER;"));
+    sqlUpdates[3].append(QString("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    // Version 3 -> 4
+    sqlUpdates[4].append(QString("ALTER TABLE CostList ADD COLUMN costtype INTEGER;"));
+    sqlUpdates[4].append(QString("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    // Version 4 -> 5
+    sqlUpdates[5].append(QString("INSERT INTO CarBudget (id, value) VALUES ('make',''),('model',''),('year',''),('licensePlate','');"));
 
-    if(query.exec(sql))
+    while(currVersion < DB_VERSION)
     {
-        if(query.exec("UPDATE CarBudget SET  value='3' WHERE id='version';"))
-        {
-            if (query.exec("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-            {
-                this->db.commit();
-                return;
+        nextVersion = currVersion + 1;
+        qDebug() << "Updating database to version" << nextVersion;
+        db.transaction();
+        foreach (const QString &sql, sqlUpdates[nextVersion]) {
+            success = query.exec(sql);
+            if(!success){
+                numErrors++;
+                qDebug() << "Error running command:" << query.lastQuery();
+                qDebug() << "Error was:" << query.lastError();
             }
         }
-    }
-    this->db.rollback();
-}
-
-void Car::db_upgrade_to_4()
-{
-    QString sql = "ALTER TABLE CostList ADD COLUMN costtype INTEGER;";
-    QSqlQuery query(this->db);
-
-    if(query.exec(sql))
-    {
-        if(query.exec("UPDATE CarBudget SET  value='4' WHERE id='version';"))
-        {
-            if (query.exec("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"))
-            {
-                this->db.commit();
-                return;
-            }
+        if(numErrors == 0) {
+            query.exec(sqlBump.arg(nextVersion));
+            db.commit();
+            qDebug() << "Update to version" << nextVersion << "succesful.";
+            currVersion = nextVersion;
+        }
+        else{
+            db.rollback();
+            qDebug() << "Update to version" << nextVersion << "failed with" << numErrors << "errors.";
+            break;
         }
     }
-    this->db.rollback();
+    return numErrors;
 }
 
 Car::Car(CarManager *parent) : QObject(parent), _manager(parent), chartType_(chartTypeConsumptionOf100)
@@ -336,25 +340,9 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
         this->_manager->createTables(this->db);
     }
 
-    while(this->db_get_version() < DB_VERSION)
-    {
-        qDebug() << "Database version is" << this->db_get_version() << "and needs to be updated to" << DB_VERSION;
-        if(this->db_get_version() < 2)
-        {
-            qDebug() << "Updating to version 2...";
-            db_upgrade_to_2();
-        }
-        if(this->db_get_version() < 3)
-        {
-            qDebug() << "Updating to version 3...";
-            db_upgrade_to_3();
-        }
-        if(this->db_get_version() < 4)
-        {
-            qDebug() << "Updating to version 4...";
-            db_upgrade_to_4();
-        }
-    }
+    if(this->db_get_version() < DB_VERSION)
+        this->db_upgrade();
+
     qDebug() << "Database version" << this->db_get_version();
 
     this->db_load();

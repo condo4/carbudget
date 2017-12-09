@@ -36,7 +36,7 @@
 #include "charttypes.h"
 
 class CarManager;
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 class Car : public QObject
 {
@@ -112,9 +112,7 @@ private:
     void db_load();
     int db_get_version();
 
-    void db_upgrade_to_2();
-    void db_upgrade_to_3();
-    void db_upgrade_to_4();
+    int db_upgrade();
     bool db_loading;
 
     enum chartTypeTankStatistics chartType_;
