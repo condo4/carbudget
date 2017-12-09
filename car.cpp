@@ -32,35 +32,12 @@
 
 #define CREATE_NEW_EVENT (0)
 
-bool sortTankByDistance(const Tank *c1, const Tank *c2)
-{
-    return c1->distance() > c2->distance();
-}
-
-bool sortCostByDate(const Cost *c1, const Cost *c2)
-{
-    return c1->date() > c2->date();
-}
-
-bool sortCosttypeById(const Costtype *c1, const Costtype *c2)
-{
-    return c1->id() < c2->id();
-}
-
-bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2)
-{
-    return c1->id() < c2->id();
-}
-
-bool sortStationByQuantity(const Station *c1, const Station *c2)
-{
-    return c1->quantity() > c2->quantity();
-}
-
-bool sortTiremountByDistance (const Tiremount *s1, const Tiremount * s2)
-{
-    return s1->mountdistance() > s2->mountdistance();
-}
+bool sortTankByDistance(const Tank *c1, const Tank *c2) { return c1->distance() > c2->distance(); }
+bool sortCostByDate(const Cost *c1, const Cost *c2) { return c1->date() > c2->date(); }
+bool sortCosttypeById(const Costtype *c1, const Costtype *c2) { return c1->id() < c2->id(); }
+bool sortFueltypeById(const Fueltype *c1, const Fueltype *c2) { return c1->id() < c2->id(); }
+bool sortStationByQuantity(const Station *c1, const Station *c2) { return c1->quantity() > c2->quantity(); }
+bool sortTiremountByDistance (const Tiremount *s1, const Tiremount * s2) { return s1->mountdistance() > s2->mountdistance(); }
 
 void Car::db_init()
 {
@@ -234,7 +211,7 @@ void Car::db_load()
     if (!_stationlist.empty()) qSort(_stationlist.begin(), _stationlist.end(), sortStationByQuantity);
     if (!_fueltypelist.empty()) qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     if (!_costtypelist.empty()) qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
-   if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
+    if (!_tiremountlist.empty())  qSort(_tiremountlist.begin(),_tiremountlist.end(),sortTiremountByDistance);
     db_loading=false;
     nbtankChanged(_tanklist.count());
     emit consumptionChanged(this->consumption());
@@ -1388,7 +1365,7 @@ void Car::setCurrency(QString currency)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('currency','%1');").arg(currency));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='currency';").arg(currency));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='currency';").arg(currency));
 
         qDebug() << "Change currency in database:" << _currency << ">>" << currency;
     }
@@ -1429,7 +1406,7 @@ void Car::setDistanceunity(QString distanceunity)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','%1');").arg(distanceunity));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='distanceunity';").arg(distanceunity));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='distanceunity';").arg(distanceunity));
 
         qDebug() << "Change distanceunity in database:" << _distanceunity << ">>" << distanceunity;
     }
@@ -1470,7 +1447,7 @@ void Car::setNbtire(unsigned int nbtire)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('nbtire','%1');").arg(nbtire));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='nbtire';").arg(nbtire));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='nbtire';").arg(nbtire));
 
         qDebug() << "Change number of tires in database:" << _nbtire;
     }
@@ -1510,7 +1487,7 @@ void Car::setBuyingprice(double price)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingprice','%1');").arg(price));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='buyingprice';").arg(price));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='buyingprice';").arg(price));
 
         qDebug() << "Car purchase price set to" << price;
     }
@@ -1550,7 +1527,7 @@ void Car::setSellingprice(double price)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('sellingprice','%1');").arg(price));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='sellingprice';").arg(price));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='sellingprice';").arg(price));
 
         qDebug() << "Change sellingprice in database:" << price;
     }
@@ -1590,7 +1567,7 @@ void Car::setLifetime(int months)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('lifetime','%1');").arg(months));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='lifetime';").arg(months));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='lifetime';").arg(months));
 
         qDebug() << "Change lifetime in database:" << months;
     }
@@ -1627,7 +1604,7 @@ void Car::setBuyingdate(QDate date)
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingdate','%1');").arg(date.toString()));
         else
-            query.exec(QString("UPDATE CarBudget SET  value='%1' WHERE id='buyingdate';").arg(date.toString()));
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='buyingdate';").arg(date.toString()));
 
         qDebug() << "Change buying date in database:" << date;
     }
