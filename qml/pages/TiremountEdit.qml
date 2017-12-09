@@ -50,14 +50,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         mountdate = dialog.date
                         mountdistance.focus=true
                     })
                 }
 
                 label: qsTr("Mount date")
-                value: mountdate.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: mountdate.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }

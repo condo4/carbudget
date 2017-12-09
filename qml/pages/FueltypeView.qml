@@ -39,23 +39,21 @@ Page {
         }
 
         anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
         model: manager.car.fueltypes
 
         delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
 
             menu: ContextMenu {
                 MenuItem {
-                    enabled: model.modelData.id > 0 ? true:false
+                    enabled: model.modelData.id > 0 ? true : false
+                    visible: model.modelData.id > 0 ? true : false
                     text: qsTr("Modify")
                     onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
                 }
-
                 MenuItem {
-                    enabled: model.modelData.id > 0 ? true:false
+                    enabled: model.modelData.id > 0 ? true : false
+                    visible: model.modelData.id > 0 ? true : false
                     text: qsTr("Remove")
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
@@ -65,20 +63,10 @@ Page {
                 }
             }
 
-            Column {
-                width: parent.width
-
-                Row {
-                    width: parent.width
-
-                    Text {
-                        text: model.modelData.id + ": " + model.modelData.name;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        width: parent.width
-                    }
-                }
+            MenuItem {
+                anchors.verticalCenter: parent.verticalCenter
+                x: Theme.horizontalPageMargin
+                text: model.modelData.name;
             }
         }
     }

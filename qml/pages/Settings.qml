@@ -61,7 +61,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Distance Unity")
-                placeholderText: qsTr("Km or Mile")
+                placeholderText: qsTr("km or mile")
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: nbtire.focus = true
@@ -110,14 +110,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         buying_date = dialog.date
                         buyingprice.focus=true
                     })
                 }
 
                 label: qsTr("Buying date")
-                value: buying_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: buying_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }

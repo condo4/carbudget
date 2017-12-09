@@ -24,7 +24,7 @@ import Sailfish.Silica 1.0
 
 
 Page {
-    id: carEntry
+    id: carEntryPage
     allowedOrientations: Orientation.All
     property string distanceunit
     property real distanceunitfactor: 1
@@ -46,6 +46,9 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
 
+        // Tell SilicaFlickable the height of its content.
+        contentHeight: textColumn.height + flowElement.height
+
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
@@ -64,47 +67,41 @@ Page {
             }
         }
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
-
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
         Column {
-            id: column
-
-            width: carEntry.width
-            spacing: Theme.paddingLarge
+            id: textColumn
+            width: parent.width
+            spacing: Theme.paddingMedium
             PageHeader {
+                id: header
                 title: manager.car.name
             }
 
             Label {
                 x: Theme.paddingLarge
                 text: qsTr("Distance: %L1 ~ %L2 %3").arg((manager.car.mindistance/distanceunitfactor).toFixed(0)).arg((manager.car.maxdistance/distanceunitfactor).toFixed(0)).arg(manager.car.distanceunity)
-                font.pixelSize: Theme.fontSizeSmall
             }
 
             Label {
                 x: Theme.paddingLarge
                 text:
-          if ( manager.car.consumptionunit == 'l/100km' ) {
-			qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
-		  }
-          else if ( manager.car.consumptionunit == 'mpg' ) {
-			qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
-		  }
-                font.pixelSize: Theme.fontSizeSmall
+                    if ( manager.car.consumptionunit == 'l/100km' ) {
+                        qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
+                    }
+                    else if ( manager.car.consumptionunit == 'mpg' ) {
+                        qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
+                    }
             }
             Label {
                 x: Theme.paddingLarge
                 text:
-          if ( manager.car.consumptionunit == 'l/100km' ) {
-			qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
-		  }
-          else if ( manager.car.consumptionunit == 'mpg' ) {
-			qsTr("Last: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionlast).toFixed(2))
-		  }
-                font.pixelSize: Theme.fontSizeSmall
+                    if ( manager.car.consumptionunit == 'l/100km' ) {
+                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
+                    }
+                    else if ( manager.car.consumptionunit == 'mpg' ) {
+                        qsTr("Last: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionlast).toFixed(2))
+                    }
                 color: {
                     if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"
                     if(manager.car.consumptionlast < manager.car.consumption * 0.94) return "#40FF00"
@@ -116,131 +113,168 @@ Page {
                     if(manager.car.consumptionlast < manager.car.consumption * 1.06) return "#FF4000"
                     if(manager.car.consumptionlast < manager.car.consumption * 1.08) return "#FF2000"
                     return "#FF0000"
-                }            }
-            Row {
-                spacing: Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
-
-                Rectangle {
-                    border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
-
-                    Image {
-                        anchors.centerIn: parent
-                        source: "qrc:/Pump.png"
-                        width: 100
-                        height: 100
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("TankView.qml"))
-                    }
                 }
+            }
+            Rectangle {
+                width: parent.width
+                height: Theme.paddingLarge
+                color: "transparent"
+            }
+        }
+        Flow {
+            id: flowElement
+            anchors.top: textColumn.bottom
+            width: parent.width
                 Column {
-                    spacing: Theme.paddingSmall
+                id: buttonColumn1
+                width: (carEntryPage.width < carEntryPage.height ? parent.width : parent.width / 2)
+                spacing: Theme.paddingLarge
+                Row {
+                    spacing: Theme.paddingLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    Rectangle {
+                        border.color : "black"
+                        border.width : 5 * Screen.widthRatio
+                        width: 110 * Screen.widthRatio
+                        height: 110 * Screen.widthRatio
+                        radius: 10 * Screen.widthRatio
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "qrc:/Pump.png"
+                            width: 100 * Screen.widthRatio
+                            height: 100 * Screen.widthRatio
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: pageStack.push(Qt.resolvedUrl("TankView.qml"))
+                        }
+                    }
+
                     Button {
+                        width: 300 * Screen.widthRatio
+                        anchors.verticalCenter: parent.verticalCenter
                         text: qsTr("New Tank")
                         onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"))
                     }
                 }
-            }
 
-            Row {
-                spacing: Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                Row {
+                    spacing: Theme.paddingLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                Rectangle {
-                    border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                    Rectangle {
+                        border.color : "black"
+                        border.width : 5 * Screen.widthRatio
+                        width: 110 * Screen.widthRatio
+                        height: 110 * Screen.widthRatio
+                        radius: 10 * Screen.widthRatio
 
-                    Image {
-                        anchors.centerIn: parent
-                        source: "qrc:/Wrench.png"
-                        width: 100
-                        height: 100
+                        Image {
+                            anchors.centerIn: parent
+                            source: "qrc:/Wrench.png"
+                            width: 100 * Screen.widthRatio
+                            height: 100 * Screen.widthRatio
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"))
+                        }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("CostView.qml"))
+                    Button {
+                        width: 300 * Screen.widthRatio
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: qsTr("New Cost")
+                        onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
                     }
                 }
-
-                Button {
-                    text: qsTr("New Cost")
-                    onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
+                Row {
+                    Rectangle {
+                        width: buttonColumn2.width
+                        height: (carEntryPage.width < carEntryPage.height ? 1 : 0)
+                        color: "transparent"
+                    }
                 }
             }
-
-            Row {
+            Column {
+                id: buttonColumn2
+                width: (carEntryPage.width < carEntryPage.height ? parent.width : parent.width / 2)
                 spacing: Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
 
-                Rectangle {
-                    border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                Row {
+                    spacing: Theme.paddingLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                    Image {
-                        anchors.centerIn: parent
-                        id: icon
-                        source: "qrc:/Wheel.png"
-                        width: 90
-                        height: 90
+                    Rectangle {
+                        border.color : "black"
+                        border.width : 5 * Screen.widthRatio
+                        width: 110 * Screen.widthRatio
+                        height: 110 * Screen.widthRatio
+                        radius: 10 * Screen.widthRatio
+
+                        Image {
+                            anchors.centerIn: parent
+                            id: icon
+                            source: "qrc:/Wheel.png"
+                            width: 90 * Screen.widthRatio
+                            height: 90 * Screen.widthRatio
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
+                        }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
+                    Button {
+                        width: 300 * Screen.widthRatio
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
+                        color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
                         onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
                     }
                 }
+                Row {
+                    spacing: Theme.paddingLarge
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                Button {
-                    text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
-                    color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
-                }
-            }
-            Row {
-                spacing: Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: 500
+                    Rectangle {
+                        border.color : "black"
+                        border.width : 5 * Screen.widthRatio
+                        width: 110 * Screen.widthRatio
+                        height: 110 * Screen.widthRatio
+                        radius: 10 * Screen.widthRatio
 
-                Rectangle {
-                    border.color : "black"
-                    border.width : 5
-                    width: 110
-                    height: 110
-                    radius: 10
+                        Image {
+                            anchors.centerIn: parent
+                            source: "qrc:/Dollar.png"
+                            width: 90 * Screen.widthRatio
+                            height: 90 * Screen.widthRatio
+                        }
 
-                    Image {
-                        anchors.centerIn: parent
-                        source: "qrc:/Dollar.png"
-                        width: 90
-                        height: 90
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
+                        }
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
+                    Button {
+                        width: 300 * Screen.widthRatio
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: qsTr("Statistics")
                         onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
                     }
                 }
-
-                Button {
-                    text: qsTr("Statistics")
-                    onClicked: pageStack.push(Qt.resolvedUrl("BudgetView.qml"))
+                Row {
+                    Rectangle {
+                        width: buttonColumn2.width
+                        height: (carEntryPage.width < carEntryPage.height ? 1 : 0)
+                        color: "transparent"
+                    }
                 }
             }
         }

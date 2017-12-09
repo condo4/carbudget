@@ -71,18 +71,30 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Credits to:<br\>- Lorenzo Facca (Italian translation)<br\>- Alois Spitzbart (German translation)<br\>- Michal Hrusecky (Many improvments)<br\>- Denis Fedoseev (Russion translation)<br \>- Åke Engelbrektson (Swedish translation)<br \>- Thomas Michel (Many improvments)")
+                truncationMode: TruncationMode.Fade
+                text: qsTr("Credits to:<br />- Lorenzo Facca (Italian translation)<br />- Alois Spitzbart (German translation)<br />- Michal Hrusecky (Many improvments)<br />- Denis Fedoseev (Russion translation)<br />- Åke Engelbrektson (Swedish translation)<br />- Thomas Michel (Many improvments)<br />- Matti Viljanen (Finnish translation and many improvements)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
-            Button {
-               id: homepage
-               anchors.horizontalCenter: parent.horizontalCenter
-               text: "<a href=\"https://github.com/condo4/carbudgetr\">Sourcecode on Github</a>"
-               onClicked: {
-                   Qt.openUrlExternally("https://github.com/condo4/carbudget")
-               }
+            Image {
+                anchors.horizontalCenter: parent.horizontalCenter
+                source: "qrc:/GitHub_Logo_White.png"
+                width: 220 * Screen.widthRatio
+                height: 100 * Screen.widthRatio
+                fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        Qt.openUrlExternally("https://github.com/condo4/carbudget")
+                    }
+                }
             }
+
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Sourcecode on Github")
+            }
+
         }
     }
 }

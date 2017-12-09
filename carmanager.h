@@ -60,6 +60,7 @@ public slots:
     void selectCar(QString name);
     void delCar(QString name);
     void createCar(QString name);
+    void createTables(QSqlDatabase db);
     void importFromMyCar( QString filename, QString name);
     void importFromFuelpad( QString filenme, QString name);
     bool is_debug() const;

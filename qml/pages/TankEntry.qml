@@ -67,14 +67,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         tank_date = dialog.date
                         kminput.focus=true
                     })
                 }
 
                 label: qsTr("Date")
-                value: tank_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: tank_date.toLocaleDateString(Qt.locale())
                 anchors { left: parent.left; right: parent.right }
                 onClicked: openDateDialog()
             }
@@ -234,15 +234,7 @@ Dialog {
         }
         else
         {
-            tank.date = tank_date
-            tank.distance = kminput.text * distanceunitfactor
-            tank.quantity = quantityinput.text.replace(",",".")
-            tank.price = priceinput.text.replace(",",".")
-            tank.full = fullinput.checked
-            tank.fueltype = fueltype
-            tank.station = station
-            tank.note = noteinput.text
-            tank.save()
+            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
         }
     }
 }

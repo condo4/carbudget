@@ -26,26 +26,42 @@
 
 void CarManager::refresh()
 {
-    _cars.clear();
-    QDir home(QDir::homePath());
-    home.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-    QDir dir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
 
-    home.setFilter(QDir::Files);
-    home.setNameFilters(QStringList()<<"*.cbg");
-    QStringList homeFileList = home.entryList();
-    foreach(QString file, homeFileList)
+    // Initialise program data directory and make sure it exists.
+    // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget
+    QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dataDir(dataPath);
+    if(!dataDir.exists())
     {
-        QFile::rename(QDir::homePath() + QDir::separator() + file,
-                      QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + file);
+        qDebug() << "Creating data directory" << dataPath;
+        dataDir.mkdir(dataPath);
     }
 
-    dir.setFilter(QDir::Files);
-    dir.setNameFilters(QStringList()<<"*.cbg");
-    QStringList fileList = dir.entryList();
-    foreach(QString file, fileList)
+    // Move (rename) *.cbg files from home directory to data directory.
+    // This does not overwrite existing database files.
+    // Home directory; /home/nemo
+    QString homePath = QDir::homePath();
+    QDir homeDir(homePath);
+    homeDir.setFilter(QDir::Files);
+    homeDir.setNameFilters(QStringList() << "*.cbg");
+    bool fileMoved;
+    foreach(QString file, homeDir.entryList())
+    {
+        fileMoved = QFile::rename(homePath + QDir::separator() + file,
+                                  dataPath + QDir::separator() + file);
+        qDebug() << "Moving"  << (homePath + QDir::separator() + file)
+                 << "to"      << (dataPath + QDir::separator() + file)
+                              << (fileMoved ? "" : "failed");
+    }
+
+    // Find and add *.cbg files to car list
+    _cars.clear();
+    dataDir.setFilter(QDir::Files);
+    dataDir.setNameFilters(QStringList() << "*.cbg");
+    foreach(QString file, dataDir.entryList())
     {
         _cars.append(file.replace(".cbg",""));
+        qDebug() << "Adding car:" << file.replace(".cbg","");
     }
     emit carsChanged();
 }
@@ -99,14 +115,13 @@ void CarManager::delCar(QString name)
         delete _car;
         _car = NULL;
     }
-    QFile::remove( QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + name + ".cbg");
+    QFile::remove( QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg");
     refresh();
 }
 
 void CarManager::createCar(QString name)
 {
-    bool error = false;
-    QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + name + ".cbg";
+    QString db_name = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(db_name);
 
@@ -115,7 +130,14 @@ void CarManager::createCar(QString name)
         qDebug() << "ERROR: fail to open file";
     }
     qDebug() << "DB:" << db_name;
+    createTables(db);
+    db.close();
+    refresh();
+}
 
+void CarManager::createTables(QSqlDatabase db)
+{
+    bool error = false;
     QSqlQuery query(db);
     if(!query.exec("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"))
     {
@@ -177,9 +199,9 @@ void CarManager::createCar(QString name)
         qDebug() << query.lastError();
         error = true;
     }
-    if(!error) db.commit();
-    db.close();
-    refresh();
+    if(!error)
+        db.commit();
+    return;
 }
 
 void CarManager::importFromMyCar(QString filename, QString name)
@@ -422,7 +444,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         }
         if (query.next())
             t_id = query.value(0).toInt();
-        qDebug() << "Car id: " <<  t_id;
+        qDebug() << "Car id:" <<  t_id;
         if(query.exec(QString("SELECT day,km,fill,price,service,oil,tires,insurance,other,notes FROM record WHERE carid=%1;").arg(t_id)))
         {
             while(query.next())
@@ -449,7 +471,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
                     _car->addNewCost(t_date,t_km,t_insuranceid,t_notes,t_insurance);
                 if (t_other!=0)
                     _car->addNewCost(t_date,t_km,t_otherid,t_notes,t_other);
-                qDebug() << "Oil " << t_oil << " Insurance " << t_insurance;
+                qDebug() << "Oil" << t_oil << "Insurance" << t_insurance;
             }
         }
         else
@@ -470,7 +492,7 @@ bool CarManager::is_debug() const
 
 QString CarManager::getEnv(QString name)
 {
-    qDebug() << "Find environment value for" << name << ": " << getenv(name.toStdString().c_str());
+    qDebug() << "Find environment value for" << name << ":" << getenv(name.toStdString().c_str());
     return getenv(name.toStdString().c_str());
 }
 

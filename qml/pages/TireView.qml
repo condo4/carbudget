@@ -55,25 +55,28 @@ Page {
         }
 
         anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
         model: manager.car.tires
 
         delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+            width: parent.width
             showMenuOnPressAndHold: true
-            contentHeight: Theme.itemSizeExtraLarge
+            contentHeight: tireColumn.height
             opacity: (model.modelData.mounted)?(1):((model.modelData.mountable)?(1):(0.4))
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
+                    visible: !model.modelData.trashed
                     onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData })
                 }
-
+                MenuItem {
+                    text: qsTr("Untrash")
+                    visible: model.modelData.trashed
+                    onClicked: manager.car.untrashTire(model.modelData)
+                }
                 MenuItem {
                     text: qsTr("Remove")
-                    visible: !model.modelData.mounted
+                    visible: !model.modelData.mounted && model.modelData.trashed
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
                             manager.car.delTire(model.modelData)
@@ -88,48 +91,52 @@ Page {
             }
 
             Column {
+                id: tireColumn
                 width: parent.width
 
                 Row {
-                    width: parent.width
+                    x: Theme.paddingMedium
+                    width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                     Text {
-                        text: model.modelData.manufacturer + " (" + (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ")";
+                        text: model.modelData.manufacturer + " " + model.modelData.modelname;
                         font.bold: model.modelData.mounted
-
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
-
                         width: parent.width / 2
+                        horizontalAlignment: Text.AlignLeft
                     }
                     Text {
-                        text: model.modelData.modelname + " x" +  model.modelData.quantity;
+                        text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity;
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
+                        color: Theme.secondaryColor
                         width: parent.width / 2
                         horizontalAlignment: Text.AlignRight
                     }
                 }
 
                 Row {
-                    width: parent.width
+                    x: Theme.paddingMedium
+                    width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+
                     Text {
-                        text: model.modelData.name;
+                        text: model.modelData.name + " (x" + model.modelData.quantity + ")"
                         font.bold: model.modelData.mounted
+
                         font.family: Theme.fontFamily
-                        font.pixelSize: 0
-                        color: Theme.secondaryColor
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+
                         width: parent.width / 2
-                        horizontalAlignment: Text.AlignLeft
                     }
                     Text {
                         text: model.modelData.price + manager.car.currency;
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
-                        font.pixelSize: 0
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                         width: parent.width / 2
                         horizontalAlignment: Text.AlignRight
@@ -137,23 +144,24 @@ Page {
                 }
 
                 Row {
-                    width: parent.width
+                    x: Theme.paddingMedium
+                    width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                     Text {
-                        text: model.modelData.buydate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                        text: model.modelData.buydate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                         width: parent.width / 2
                     }
                     Text {
-                        text: model.modelData.trashdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                        text: (model.modelData.trashed ? qsTr("Trashed") :
+                               model.modelData.mounted ? qsTr("Mounted") : " ")
                         font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeExtraSmall
+                        font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
                         width: parent.width / 2
                         horizontalAlignment: Text.AlignRight
-                        visible: model.modelData.trashed
                     }
                 }
             }

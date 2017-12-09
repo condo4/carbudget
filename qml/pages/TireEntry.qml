@@ -55,13 +55,13 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         buy_date = dialog.date
                     })
                 }
 
                 label: qsTr("Buy date")
-                value: buy_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: buy_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
@@ -74,14 +74,14 @@ Dialog {
 
                     dialog.accepted.connect(function()
                     {
-                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        value = dialog.date.toLocaleDateString(Qt.locale())
                         trash_date = dialog.date
                     })
                 }
 
                 label: "Trash date"
                 visible: tire != undefined
-                value: trash_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: trash_date.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
@@ -174,14 +174,7 @@ Dialog {
         }
         else
         {
-            tire.buydate = buy_date
-            tire.trashdate = trash_date
-            tire.name = nameinput.text
-            tire.manufacturer = manufacturerinput.text
-            tire.modelname = modelinput.text
-            tire.price = priceinput.text.replace(",",".")
-            tire.quantity = quantityinput.text
-            tire.save()
+            manager.car.modifyTire(tire, buy_date, trash_date, nameinput.text, manufacturerinput.text, modelinput.text, priceinput.text.replace(",","."), quantityinput.text )
         }
     }
 }

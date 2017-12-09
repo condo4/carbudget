@@ -96,8 +96,12 @@ QDateTime Tire::trashdate() const
 
 void Tire::setTrashdate(QDateTime date)
 {
-    _trashdate = date.date();
+    if(date.date() < _buydate)
+        _trashdate = QDate();
+    else
+        _trashdate = date.date();
     emit trashdateChanged();
+    emit trashedChanged();
 }
 
 double Tire::price() const
@@ -156,7 +160,17 @@ unsigned int Tire::distance() const
 
 bool Tire::trashed() const
 {
-    return _trashdate > _buydate;
+    if(_trashdate.isValid()
+    && _trashdate <= QDate::currentDate())
+    {
+        //qDebug() << "Trashed.";
+        return true;
+    }
+    else
+    {
+        //qDebug() << "Not trashed.";
+        return false;
+    }
 }
 
 bool Tire::mounted() const
@@ -168,23 +182,26 @@ bool Tire::mounted() const
         query.next();
         if(query.value(0).toInt() != 0)
         {
+            //qDebug() << "Mounted.";
             return true;
         }
     }
+    //qDebug() << "Not mounted.";
     return false;
 }
 
 bool Tire::mountable() const
 {
-    if(_trashdate != _buydate)
+    if(_buydate > QDate::currentDate()                 // Are the tires bought yet? :)
+    || _car->tireMounted() + _quantity > _car->nbtire() // Are there too many wheels to be mounted?
+    || mounted()                                        // Are the tires already mounted?
+    || trashed())                                       // Are the tires trashed?
+    {
+        //qDebug() << "Not mountable.";
         return false;
+    }
 
-    if(_car->tireMounted() + _quantity > _car->nbtire())
-        return false;
-
-    if(mounted())
-        return false;
-
+    //qDebug() << "Mountable.";
     return true;
 }
 
@@ -221,7 +238,6 @@ void Tire::save()
     {
         QSqlQuery query(_car->db);
         QString sql = QString("UPDATE TireList SET buydate='%1', trashdate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%8;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
-        qDebug() << sql;
         if(query.exec(sql))
         {
             qDebug() << "Update Tire in database with id " << _id;

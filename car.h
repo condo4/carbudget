@@ -210,6 +210,7 @@ signals:
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
+    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
     void delTank(Tank *tank);
 
     void addNewFueltype(QString fueltype);
@@ -228,11 +229,13 @@ public slots:
     void delCost(Cost *cost);
 
     Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
+    Tire* modifyTire(Tire* tire, QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
     void delTire(Tire *tire);
     QString getTireName(unsigned int id);
 
     void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
     void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);
+    void untrashTire(Tire *tire);
 
     int tireMounted() const;
 

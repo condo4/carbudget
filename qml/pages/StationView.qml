@@ -44,7 +44,7 @@ Page {
         model: manager.car.stations
 
         delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+            width: parent.width
             showMenuOnPressAndHold: true
 
             menu: ContextMenu {
@@ -67,24 +67,20 @@ Page {
 
             Column {
                 width: parent.width
-
                 Row {
                     width: parent.width
-
-                    Text {
+                    MenuItem {
+                        id: stationName
+                        x: Theme.paddingMedium
+                        width: parent.width * 2.0 / 3.0 - Theme.horizontalPageMargin
                         text: model.modelData.name;
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        width: (parent.width / 3) * 2
+                        horizontalAlignment: Text.AlignLeft
                     }
 
-                    Text {
-                        text: Math.round(model.modelData.quantity) + "L";
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.secondaryColor
-                        width: parent.width / 3
+                    MenuItem {
+                        id: stationLitres
+                        text: Math.round(model.modelData.quantity) + "l";
+                        width: parent.width * 1.0 / 3.0 - Theme.horizontalPageMargin
                         horizontalAlignment: Text.AlignRight
                     }
                 }

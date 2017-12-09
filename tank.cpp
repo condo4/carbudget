@@ -48,6 +48,27 @@ Tank::Tank(QDate date, unsigned int distance, double quantity, double price, boo
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
+void Tank::setDate(QDate date)
+{
+    this->_date = date;
+    emit dateChanged();
+}
+
+QDate Tank::getDate()
+{
+    return _date;
+}
+
+void Tank::setDistance(unsigned int distance)
+{
+    this->_distance = distance;
+    emit distanceChanged();
+}
+
+unsigned int Tank::getDistance()
+{
+    return _distance;
+}
 
 double Tank::quantity() const
 {
@@ -130,12 +151,12 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
         {
             if (type == chartTypeConsumptionOf100)
             {
-                qDebug() << "prevous distance is " << previous->quantity();
+                // qDebug() << "prevous distance is " << previous->quantity();
                 value += previous->quantity();
             }
             else if (type == chartTypeCostsOf100)
             {
-                qDebug() << "prevous price is " << previous->price();
+                // qDebug() << "prevous price is " << previous->price();
                 value += previous->price();
             }
             previous = _car->previousTank(previous->distance());

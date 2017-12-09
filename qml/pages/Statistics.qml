@@ -107,7 +107,7 @@ Page {
                 spacing: Theme.paddingSmall
                 Button {
                     width: page.width / 3;
-                    text: manager.car.tanks[beginIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                    text: manager.car.tanks[beginIndex].date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
                     onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 0, theIndex:beginIndex })
                 }
 
@@ -117,7 +117,7 @@ Page {
 
                 Button {
                     width: page.width / 3;
-                    text: manager.car.tanks[endIndex].date.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
+                    text: manager.car.tanks[endIndex].date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
                     onClicked: pageStack.push(Qt.resolvedUrl("SelectTankDate.qml"), { type: 1, theIndex:endIndex })
                 }
             }

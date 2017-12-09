@@ -27,6 +27,16 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     SilicaListView {
+        id: carView
+        anchors.fill: parent
+        model: manager.cars
+
+        function select_car(data) {
+            manager.selectCar(data)
+            pageStack.clear()
+            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
+        }
+
         PullDownMenu {
             MenuItem {
                 text: qsTr("Import Car")
@@ -38,27 +48,16 @@ Page {
             }
         }
 
-
-
-        VerticalScrollDecorator {}
+        //VerticalScrollDecorator {}
 
         header: PageHeader {
             title: qsTr("Car List")
         }
 
-        id: carView
-        anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
-        model: manager.cars
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-        }
+
 
         delegate: ListItem {
-            width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+            width: parent.width
             showMenuOnPressAndHold: true
             onClicked: carView.select_car(model.modelData)
             menu: ContextMenu {
@@ -76,20 +75,10 @@ Page {
                     }
                 }
             }
-
-            Column {
-                width: parent.width
-
-                Row {
-                    width: parent.width
-                    Text {
-                        text : model.modelData
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontSizeMedium
-                        color: Theme.primaryColor
-                        horizontalAlignment: Text.AlignLeft
-                    }
-                }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                x: Theme.horizontalPageMargin
+                text : model.modelData
             }
         }
     }

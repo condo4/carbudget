@@ -30,17 +30,19 @@
 class Tank : public CarEvent
 {
     Q_OBJECT
-    Q_PROPERTY(double       quantity     READ quantity   WRITE setQuantity       NOTIFY quantityChanged )
-    Q_PROPERTY(double       price        READ price      WRITE setPrice          NOTIFY priceChanged )
-    Q_PROPERTY(bool         full         READ full       WRITE setFull           NOTIFY fullChanged )
-    Q_PROPERTY(unsigned int station      READ station    WRITE setStation        NOTIFY stationChanged )
-    Q_PROPERTY(double       consumption  READ consumption                        NOTIFY consumptionChanged )
-    Q_PROPERTY(double       priceu       READ priceu                             NOTIFY priceuChanged )
-    Q_PROPERTY(unsigned int newDistance  READ newDistance                        NOTIFY consumptionChanged )
-    Q_PROPERTY(unsigned int fueltype     READ fueltype   WRITE setFueltype       NOTIFY fueltypeChanged )
-    Q_PROPERTY(QString      fueltypename READ fueltypename                       NOTIFY fueltypeChanged )
-    Q_PROPERTY(QString      stationname  READ stationname                        NOTIFY stationChanged )
-    Q_PROPERTY(QString      note         READ note       WRITE setNote           NOTIFY noteChanged )
+    Q_PROPERTY(double       quantity     READ quantity    WRITE setQuantity       NOTIFY quantityChanged )
+    Q_PROPERTY(double       price        READ price       WRITE setPrice          NOTIFY priceChanged )
+    Q_PROPERTY(bool         full         READ full        WRITE setFull           NOTIFY fullChanged )
+    Q_PROPERTY(unsigned int station      READ station     WRITE setStation        NOTIFY stationChanged )
+    Q_PROPERTY(double       consumption  READ consumption                         NOTIFY consumptionChanged )
+    Q_PROPERTY(double       priceu       READ priceu                              NOTIFY priceuChanged )
+    Q_PROPERTY(unsigned int newDistance  READ newDistance                         NOTIFY consumptionChanged )
+    Q_PROPERTY(unsigned int fueltype     READ fueltype    WRITE setFueltype       NOTIFY fueltypeChanged )
+    Q_PROPERTY(QString      fueltypename READ fueltypename                        NOTIFY fueltypeChanged )
+    Q_PROPERTY(QString      stationname  READ stationname                         NOTIFY stationChanged )
+    Q_PROPERTY(QString      note         READ note        WRITE setNote           NOTIFY noteChanged )
+    Q_PROPERTY(QDate        date         READ getDate     WRITE setDate           NOTIFY dateChanged )
+    Q_PROPERTY(unsigned int distance     READ getDistance WRITE setDistance       NOTIFY distanceChanged )
 
 
 private:
@@ -56,6 +58,12 @@ private:
 public:
     explicit Tank(Car *parent = 0);
     explicit Tank(QDate date, unsigned int distance, double quantity, double price, bool full,unsigned int fueltype,  unsigned int station, unsigned int id, QString note, Car* parent);
+
+    void setDate(QDate date);
+    QDate getDate();
+
+    void setDistance(unsigned int distance);
+    unsigned int getDistance();
 
     double quantity() const;
     void setQuantity(double quantity);
@@ -92,6 +100,8 @@ signals:
     void consumptionChanged();
     void fueltypeChanged();
     void noteChanged();
+    void dateChanged();
+    void distanceChanged();
 
 public slots:
     void save();

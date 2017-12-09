@@ -35,87 +35,64 @@ Page {
         }
     }
 
-    Drawer {
-        id: tiremountviewDrawer
-        anchors.fill: parent
-        dock: Dock.Top
-        open: false
-        backgroundSize: tiremountview.contentHeight
-    }
-    SilicaFlickable {
-        id:tiremountview
-        interactive: !tiremountlistView.flicking
-        pressDelay: 0
-        anchors.fill: parent
-        PageHeader {
-            id: header
+    SilicaListView {
+
+        VerticalScrollDecorator {}
+
+        header: PageHeader {
             title: qsTr("Tire Mounts")
         }
-        SilicaListView {
-            id: tiremountlistView
-            VerticalScrollDecorator {}
-            anchors.top: header.bottom
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            leftMargin: Theme.paddingMedium
-            rightMargin: Theme.paddingMedium
-            model: manager.car.tiremounts
 
-            delegate: ListItem {
-                id: mountitem
-                height: datacolumn.height
-                width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-                showMenuOnPressAndHold: true
-                onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tiremount: model.modelData })
+        anchors.fill: parent
+        leftMargin: Theme.paddingMedium
+        rightMargin: Theme.paddingMedium
+        model: manager.car.tiremounts
 
-                menu: ContextMenu {
-                    MenuItem {
-                        text: qsTr("Modify")
-                        onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
-                    }
+        delegate: ListItem {
+            width: parent.width
+            showMenuOnPressAndHold: true
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Modify")
+                    onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
                 }
+            }
 
-                Column {
-                    id: datacolumn
+            Column {
+                width: parent.width
+                Row {
                     width: parent.width
-                    Row {
-                        width: parent.width
 
-                        Text {
-                            text:  model.modelData.tirename;
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width
-                            horizontalAlignment: Text.AlignLeft                   }
+                    Text {
+                        text:  model.modelData.tirename;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        width: parent.width
+                        horizontalAlignment: Text.AlignLeft                   }
+                }
+                 Row {
+                    width: parent.width
+                    Text {
+                        text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.primaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignLeft
                     }
-                     Row {
-                        width: parent.width
-                        Text {
-                            text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
-                        }
 
-                        Text {
-                            text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy") + ((model.modelData.unmountdistance==0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy"))
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
-                        }
+                    Text {
+                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd") + ((model.modelData.unmountdistance==0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd"))
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.primaryColor
+                        width: parent.width / 2
+                        horizontalAlignment: Text.AlignRight
                     }
                 }
             }
         }
-
     }
-
 }
-
-

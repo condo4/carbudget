@@ -79,7 +79,7 @@ Page {
                 }
 
                 Text {
-                    text: tank.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                    text: tank.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd")
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
