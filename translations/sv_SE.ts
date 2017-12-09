@@ -180,7 +180,7 @@
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="191"/>
         <source>New Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny kostnad</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarEntry.qml" line="90"/>
@@ -207,18 +207,13 @@
         <source>Tires mounted</source>
         <translation>Däck monterade</translation>
     </message>
-    <message>
-        <location filename="../qml/pages/CarEntry.qml" line="236"/>
-        <source>Tires mounted</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CarView</name>
     <message>
         <location filename="../qml/pages/CarView.qml" line="42"/>
         <source>Import Car</source>
-        <translation type="unfinished"></translation>
+        <translation>Importera bil</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="46"/>
