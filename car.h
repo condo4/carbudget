@@ -59,6 +59,10 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged)
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged)
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
+    Q_PROPERTY(QString make READ getMake WRITE setMake NOTIFY makeChanged)
+    Q_PROPERTY(QString model READ getModel WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
+    Q_PROPERTY(QString licensePlate READ getLicensePlate WRITE setLicensePlate NOTIFY licensePlateChanged)
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged)
     Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged)
     Q_PROPERTY(QString consumptionunit READ consumptionunit WRITE setConsumptionunit NOTIFY consumptionunitChanged)
@@ -86,6 +90,10 @@ class Car : public QObject
 private:
     CarManager *_manager;
     QString _name;
+    QString _make;
+    QString _model;
+    int _year;
+    QString _licensePlate;
 
     QList<Tank*>    _tanklist;
     QList<Fueltype*> _fueltypelist;
@@ -146,6 +154,10 @@ public:
 
     void setCar(QString name);
     QString getName() const { return _name; }
+    QString getMake() const { return _make; }
+    QString getModel() const { return _model; }
+    int getYear() const { return _year; }
+    QString getLicensePlate() const { return _licensePlate; }
 
     QJsonObject getChartData();
 
@@ -205,6 +217,10 @@ signals:
     void budgetChanged();
     void statisticTypeChanged();
     void chartDataChanged();
+    void makeChanged();
+    void modelChanged();
+    void yearChanged();
+    void licensePlateChanged();
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
@@ -238,6 +254,18 @@ public slots:
     int tireMounted() const;
 
     void simulation();
+
+    QString make();
+    void setMake(QString make);
+
+    QString model();
+    void setModel(QString model);
+
+    int year();
+    void setYear(int year);
+
+    QString licensePlate();
+    void setLicensePlate(QString licensePlate);
 
     QString currency();
     void setCurrency(QString currency);

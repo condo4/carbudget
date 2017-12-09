@@ -336,6 +336,10 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     qSort(_fueltypelist.begin(), _fueltypelist.end(), sortFueltypeById);
     this->_costtypelist.append(new Costtype);
     qSort(_costtypelist.begin(), _costtypelist.end(), sortCosttypeById);
+    make();
+    model();
+    year();
+    licensePlate();
     nbtire();
     buyingprice();
     sellingprice();
@@ -1330,6 +1334,159 @@ int Car::tireMounted() const
     }
     qDebug() << "ERROR";
     return 0;
+}
+
+QString Car::make()
+{
+    if(_make.length() < 1) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='make';")) {
+            query.next();
+            _make = query.value(0).toString();
+            qDebug() << "Found car manufacturer in database:" << _make;
+        }
+        if(_make.length() < 1)
+        {
+            qDebug() << "Default car manufacturer not set in database, defaulting to 'Car'";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('make','Car');");
+            _make = "Car";
+        }
+    }
+
+    return _make;
+}
+
+void Car::setMake(QString make)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='make';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('make','%1');").arg(make));
+        else
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='make';").arg(make));
+
+        qDebug() << "Change car manufacturer in database:" << _make << ">>" << make;
+    }
+    _make = make;
+    emit makeChanged();
+}
+
+QString Car::model()
+{
+    if(_model.length() < 1) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='model';")) {
+            query.next();
+            _model = query.value(0).toString();
+            qDebug() << "Found car manufacturer in database:" << _model;
+        }
+        if(_model.length() < 1)
+        {
+            qDebug() << "Default car model not set in database, defaulting to 'Model'";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('model','Model');");
+            _model = "Model";
+        }
+    }
+
+    return _model;
+}
+
+void Car::setModel(QString model)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='model';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('model','%1');").arg(model));
+        else
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='model';").arg(model));
+
+        qDebug() << "Change car model in database:" << _model << ">>" << model;
+    }
+    _model = model;
+    emit modelChanged();
+}
+
+int Car::year()
+{
+    if(_year < 1000 || _year > 9999) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='year';")) {
+            query.next();
+            _year = query.value(0).toInt();
+            qDebug() << "Found car manufacture year in database:" << _year;
+        }
+        if(_year < 1000)
+        {
+            qDebug() << "Car manufacture year not in database, defaulting to" << QDate::currentDate().year();
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('year','%1');").arg(QDate::currentDate().year()));
+            _year = (int) QDate::currentDate().year();
+        }
+    }
+
+    return _year;
+}
+
+void Car::setYear(int year)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='year';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('year',%1);").arg(year));
+        else
+            query.exec(QString("UPDATE CarBudget SET value=%1 WHERE id='year';").arg(year));
+
+        qDebug() << "Change car manufacture year in database:" << _year << ">>" << year;
+    }
+    _year = year;
+    emit yearChanged();
+}
+
+QString Car::licensePlate()
+{
+    if(_licensePlate.length() < 1) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='licensePlate';")) {
+            query.next();
+            _licensePlate = query.value(0).toString();
+            qDebug() << "Found car license plate in database:" << _licensePlate;
+        }
+        if(_licensePlate.length() < 1)
+        {
+            _licensePlate = "";
+        }
+    }
+    return _licensePlate;
+}
+
+void Car::setLicensePlate(QString licensePlate)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='licensePlate';"))
+    {
+        query.next();
+        if(query.value(0).toString().toInt() < 1)
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('licensePlate','%1');").arg(licensePlate));
+        else
+            query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='licensePlate';").arg(licensePlate));
+
+        qDebug() << "Change license plate in database:" << _licensePlate << ">>" << licensePlate;
+    }
+    _licensePlate = licensePlate;
+    emit licensePlateChanged();
 }
 
 QString Car::currency()

@@ -24,8 +24,10 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    property date buying_date
-    property string consumptionunit
+    property date buyingDate
+    property string consumptionUnit
+    property string distanceUnit
+
     allowedOrientations: Orientation.All
     SilicaFlickable {
 
@@ -45,107 +47,164 @@ Dialog {
 
 
             TextField {
-                id: currencyinput
+                id: makeInput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
+                label: qsTr("Car manufacturer")
+                placeholderText: label
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: modelInput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+
+            TextField {
+                id: modelInput
+                anchors { left: parent.left; right: parent.right }
+                label: qsTr("Car model")
+                placeholderText: label
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: yearInput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+
+            TextField {
+                id: yearInput
+                anchors { left: parent.left; right: parent.right }
+                label: qsTr("Model year")
+                placeholderText: label
+                validator: IntValidator { bottom: 1000; top: 9999 }
+                inputMethodHints: Qt.ImhDigitsOnly
+
+                EnterKey.enabled: text.length > 4 && acceptableInput == true
+                EnterKey.onClicked: licensePlateInput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+
+            TextField {
+                id: licensePlateInput
+                anchors { left: parent.left; right: parent.right }
+                label: qsTr("License plate number")
+                placeholderText: label
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: currencyInput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+
+            TextField {
+                id: currencyInput
+                anchors { left: parent.left; right: parent.right }
                 label: qsTr("Currency")
                 placeholderText: qsTr("Currency")
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                //EnterKey.onClicked: descinput.focus = true
-                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+                EnterKey.onClicked: distanceUnitInput.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
-            TextField {
-                id: distanceunity
+            ComboBox {
+                id: distanceUnitInput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Distance Unity")
-                placeholderText: qsTr("km or mile")
-
-                EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: nbtire.focus = true
-                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+                menu: ContextMenu {
+                    MenuItem {
+                        text: "km"
+                        property string value: "km"
+                    }
+                    MenuItem {
+                        text: "mile"
+                        property string value: "mile"
+                    }
+                }
+                onCurrentItemChanged: {
+                    consumptionUnitInput.focus = true
+                    distanceUnit = currentItem.value
+                }
             }
+
             ComboBox {
-                id: selectconsumptionunit
+                id: consumptionUnitInput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Consumption Unit")
 
                 menu: ContextMenu {
-                    id: consumptionunitmenu
+                    MenuItem {
+                        text: "l/100km"
+                        property string value: "l/100km"
+                    }
+                    MenuItem {
+                        text: "mpg"
+                        property string value: "mpg"
+                    }
 
-                MenuItem {
-                    text: qsTr('l/100km')
-                    property string value: qsTr("l/100km")
-                }
-                MenuItem {
-                    text: qsTr('mpg')
-                    property string value: qsTr("mpg")
-                }
                 }
                 onCurrentItemChanged: {
-                        consumptionunit = currentItem.value
+                    consumptionUnit = currentItem.value
+                    numTiresInput.focus = true
                 }
             }
 
             TextField {
-                id: nbtire
+                id: numTiresInput
                 anchors { left: parent.left; right: parent.right }
-                focus: true
                 label: qsTr("Number of wheels")
                 placeholderText: qsTr("2, 4, 6 or 8")
                 validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: buyingdate.focus = true
+                EnterKey.onClicked: buyingDateInput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
+
             ValueButton {
+                id: buyingDateInput
                 function openDateDialog()
                 {
-                    var date = buying_date
+                    var date = buyingDate
                     var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: date })
 
                     dialog.accepted.connect(function()
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale())
-                        buying_date = dialog.date
-                        buyingprice.focus=true
+                        buyingDate = dialog.date
+                        buyingPrice.focus=true
                     })
                 }
 
                 label: qsTr("Buying date")
-                value: buying_date.toLocaleDateString(Qt.locale())
+                value: buyingDate.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
 
             TextField {
-                id: buyingprice
+                id: buyingPrice
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Buying Price")
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: sellingprice.focus = true
+                EnterKey.onClicked: sellingPrice.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             TextField {
-                id: sellingprice
+                id: sellingPrice
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Selling Price (est.)")
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: lifetime.focus = true
+                EnterKey.onClicked: lifeTime.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             TextField {
-                id: lifetime
+                id: lifeTime
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Lifetime (in months, est.)")
@@ -157,47 +216,41 @@ Dialog {
             }
         }
     }
-    canAccept: currencyinput.acceptableInput
+    canAccept: currencyInput.acceptableInput
 
     onOpened: {
-        currencyinput.text = manager.car.currency
-        distanceunity.text = manager.car.distanceunity
-        nbtire.text        = manager.car.nbtire
-        buying_date        = manager.car.buyingdate
-        buyingprice.text   = manager.car.buyingprice
-        sellingprice.text  = manager.car.sellingprice
-        lifetime.text      = manager.car.lifetime
-        consumptionunit = manager.car.consumptionunit
-        // I'm not sure why the next section sets the drop down menu list
-        // to the current value, I stole the idea of harbour-callrecorder
-        consumptionunitmenu._foreachMenuItem(function(item, index) {
-            if (item.value == consumptionunit)
-            {
-                selectconsumptionunit.currentIndex= index
-                return true
-            }
-            return true
-        })
+        makeInput.text         = manager.car.make
+        modelInput.text        = manager.car.model
+        yearInput.text         = manager.car.year
+        licensePlateInput.text = manager.car.licensePlate
+        currencyInput.text     = manager.car.currency
+        numTiresInput.text     = manager.car.nbtire
+        buyingDate             = manager.car.buyingdate
+        buyingPrice.text       = manager.car.buyingprice
+        sellingPrice.text      = manager.car.sellingprice
+        lifeTime.text          = manager.car.lifetime
+        consumptionUnit        = manager.car.consumptionunit
+        distanceUnit           = manager.car.distanceunity
+
+        // I don't know why, but there is no easy way to set these...
+        if(distanceUnit == "km")   { distanceUnitInput.currentIndex = 0 }
+        if(distanceUnit == "mile") { distanceUnitInput.currentIndex = 1 }
+        if(consumptionUnit == "l/100km") { consumptionUnitInput.currentIndex = 0 }
+        if(consumptionUnit == "mpg")     { consumptionUnitInput.currentIndex = 1 }
     }
 
     onAccepted: {
-        manager.car.currency      = currencyinput.text
-        manager.car.distanceunity = distanceunity.text
-        manager.car.nbtire        = nbtire.text
-        manager.car.buyingdate    = buying_date
-        manager.car.buyingprice   = buyingprice.text
-        manager.car.sellingprice  = sellingprice.text
-        manager.car.lifetime      = lifetime.text
-        manager.car.consumptionunit = consumptionunit
+        manager.car.make            = makeInput.text
+        manager.car.model           = modelInput.text
+        manager.car.year            = yearInput.text
+        manager.car.licensePlate    = licensePlateInput.text
+        manager.car.currency        = currencyInput.text
+        manager.car.nbtire          = numTiresInput.text
+        manager.car.buyingdate      = buyingDate
+        manager.car.buyingprice     = buyingPrice.text
+        manager.car.sellingprice    = sellingPrice.text
+        manager.car.lifetime        = lifeTime.text
+        manager.car.consumptionunit = consumptionUnit
+        manager.car.distanceunity   = distanceUnit
     }
-    //onCompleted: {
-        //consumptionunitmenu._foreachMenuItem(function(item, index) {
-            //if (item.value == consumptionunit)
-            //{
-                //selectconsumptionunit.currentIndex= index
-                //return false
-            //}
-            //return true
-        //})
-    //}
 }

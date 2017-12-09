@@ -75,7 +75,12 @@ Page {
             spacing: Theme.paddingMedium
             PageHeader {
                 id: header
-                title: manager.car.name
+                title: {
+                    if(manager.car.make.length > 1)
+                        return (manager.car.make + " " + manager.car.model)
+                    else
+                        return manager.car.name
+                }
             }
 
             Label {

@@ -28,17 +28,24 @@ CoverBackground {
         width: parent.width - 2*x
         spacing: Theme.paddingMedium
         Label {
-            height: 3*carName.height/2
             width: parent.width
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
             font.bold: true
-            text: "CarBudget"
+            horizontalAlignment: Text.AlignHCenter
+            text: {
+                if(manager.car.make.length > 0)
+                    return (manager.car.make + "<br />" + manager.car.model)
+                else
+                    return manager.car.name
+            }
         }
-        Label {
-            id: carName
-            text: manager.car.name+":"
+
+        Rectangle {
+            // The easiest way to insert a spacer in a column...
+            width: parent.width
+            height: Theme.paddingSmall
+            color: "transparent"
         }
+
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
@@ -47,13 +54,13 @@ CoverBackground {
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.budget.toFixed(2)+" "+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
+            text: manager.car.budget.toFixed(2)+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
             font.pixelSize: Theme.fontSizeSmall
         }
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.consumption.toFixed(2)+qsTr(" l / 100")+manager.car.distanceunity
+            text: manager.car.consumption.toFixed(2)+qsTr("l / 100")+manager.car.distanceunity
             font.pixelSize: Theme.fontSizeSmall
         }
     }
