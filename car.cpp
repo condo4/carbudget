@@ -720,7 +720,7 @@ double Car::budget_consumption_byType(unsigned int id)
         prevTank=previousTank(curTank->distance());
         if (!(prevTank==NULL))
         {
-            //prevous tank must have correct fueltype
+            //previous tank must have correct fueltype
             if (prevTank->fueltype()==id)
                 if (prevTank->full())
                 {
@@ -1349,7 +1349,6 @@ void Car::umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool t
 
 void Car::untrashTire(Tire *tire)
 {
-    qDebug() << QString("Untrashing %1 %2 with ID %2").arg(tire->manufacturer()).arg(tire->model()).arg(tire->id());
     QString sql = QString("UPDATE TireList SET trashdate='' WHERE id=%1").arg(tire->id());
     QSqlQuery query(db);
     if(query.exec(sql))

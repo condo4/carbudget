@@ -151,12 +151,12 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
         {
             if (type == chartTypeConsumptionOf100)
             {
-                qDebug() << "prevous distance is " << previous->quantity();
+                // qDebug() << "prevous distance is " << previous->quantity();
                 value += previous->quantity();
             }
             else if (type == chartTypeCostsOf100)
             {
-                qDebug() << "prevous price is " << previous->price();
+                // qDebug() << "prevous price is " << previous->price();
                 value += previous->price();
             }
             previous = _car->previousTank(previous->distance());
