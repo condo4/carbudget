@@ -122,7 +122,7 @@ Dialog {
 
             TextField {
                 id: unitpriceinput
-                label: qsTr("Unite Price")
+                label: qsTr("Unit Price")
                 anchors { left: parent.left; right: parent.right }
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 readOnly: true

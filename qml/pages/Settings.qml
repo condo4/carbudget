@@ -108,7 +108,7 @@ Dialog {
                 id: distanceUnitInput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: qsTr("Distance Unity")
+                label: qsTr("Distance Unit")
                 menu: ContextMenu {
                     MenuItem {
                         text: "km"
