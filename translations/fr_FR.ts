@@ -251,7 +251,7 @@
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="59"/>
         <source>Average: </source>
-        <translation>Moyenne :</translation>
+        <translation>Moyenne : </translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="78"/>
@@ -480,24 +480,24 @@
     <message>
         <location filename="../filemodel.cpp" line="66"/>
         <source>dir-link</source>
-        <translation type="unfinished"></translation>
+        <translation>dir-link</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="67"/>
         <source>dir</source>
-        <translation type="unfinished"></translation>
+        <translation>dir</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="295"/>
         <location filename="../filemodel.cpp" line="329"/>
         <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier inexistant</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="299"/>
         <location filename="../filemodel.cpp" line="335"/>
         <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Problème de permissions</translation>
     </message>
 </context>
 <context>
@@ -601,22 +601,22 @@
     <message>
         <location filename="../globals.cpp" line="48"/>
         <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 octets</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="51"/>
         <source>%1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ko</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="54"/>
         <source>%1 MB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Mo</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="56"/>
         <source>%1 GB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Go</translation>
     </message>
 </context>
 <context>
@@ -645,17 +645,17 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="53"/>
         <source>Car manufacturer</source>
-        <translation type="unfinished"></translation>
+        <translation>Fabricant</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Car model</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="75"/>
         <source>Model year</source>
-        <translation type="unfinished"></translation>
+        <translation>Année</translation>
     </message>
     <message>
         <source>km or mile</source>
@@ -664,7 +664,7 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="88"/>
         <source>License plate number</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaque d&apos;immatriculation</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="99"/>
