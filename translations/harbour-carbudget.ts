@@ -249,17 +249,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="60"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="59"/>
         <source>Average: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="79"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="78"/>
         <source>Min:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ConsumptionStatistics.qml" line="98"/>
+        <location filename="../qml/pages/ConsumptionStatistics.qml" line="97"/>
         <source>Max:</source>
         <translation type="unfinished"></translation>
     </message>
