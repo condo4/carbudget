@@ -448,14 +448,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="57"/>
         <source> / 100</source>
-        <translation> / 100</translation>
-    </message>
-    <message>
-        <location filename="../qml/cover/CoverPage.qml" line="63"/>
-        <source>l / 100</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished"> / 100</translation>
     </message>
 </context>
 <context>
@@ -478,6 +472,31 @@
     <message>
         <location filename="../qml/pages/DirectoryPage.qml" line="101"/>
         <source>No files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileModel</name>
+    <message>
+        <location filename="../filemodel.cpp" line="66"/>
+        <source>dir-link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="67"/>
+        <source>dir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="295"/>
+        <location filename="../filemodel.cpp" line="329"/>
+        <source>Folder does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="299"/>
+        <location filename="../filemodel.cpp" line="335"/>
+        <source>No permission to read the folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -575,6 +594,29 @@
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
         <source>Import</source>
         <translation>Import</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../globals.cpp" line="48"/>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="51"/>
+        <source>%1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="54"/>
+        <source>%1 MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="56"/>
+        <source>%1 GB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

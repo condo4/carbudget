@@ -168,12 +168,12 @@
         <translation>Körsträcka: %L1 ~ %L2 %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="159"/>
+        <location filename="../qml/pages/CarEntry.qml" line="164"/>
         <source>New Tank</source>
         <translation>Ny tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="268"/>
+        <location filename="../qml/pages/CarEntry.qml" line="273"/>
         <source>Statistics</source>
         <translation>Statistik</translation>
     </message>
@@ -183,7 +183,7 @@
         <translation>Däck monterade: %1/%2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarEntry.qml" line="191"/>
+        <location filename="../qml/pages/CarEntry.qml" line="196"/>
         <source>New Cost</source>
         <translation>Ny kostnad</translation>
     </message>
@@ -211,16 +211,6 @@
         <location filename="../qml/pages/CarEntry.qml" line="241"/>
         <source>Tires mounted</source>
         <translation>Däck monterade</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarEntry.qml" line="164"/>
-        <source>New Tank</source>
-        <translation>Ny tankning</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarEntry.qml" line="196"/>
-        <source>New Cost</source>
-        <translation>Ny kostnad</translation>
     </message>
 </context>
 <context>
@@ -458,14 +448,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="57"/>
         <source> / 100</source>
-        <translation> / 100</translation>
-    </message>
-    <message>
-        <location filename="../qml/cover/CoverPage.qml" line="63"/>
-        <source>l / 100</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished"> / 100</translation>
     </message>
 </context>
 <context>
@@ -489,6 +473,31 @@
         <location filename="../qml/pages/DirectoryPage.qml" line="101"/>
         <source>No files</source>
         <translation>Inga filer</translation>
+    </message>
+</context>
+<context>
+    <name>FileModel</name>
+    <message>
+        <location filename="../filemodel.cpp" line="66"/>
+        <source>dir-link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="67"/>
+        <source>dir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="295"/>
+        <location filename="../filemodel.cpp" line="329"/>
+        <source>Folder does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="299"/>
+        <location filename="../filemodel.cpp" line="335"/>
+        <source>No permission to read the folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -588,6 +597,29 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../globals.cpp" line="48"/>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="51"/>
+        <source>%1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="54"/>
+        <source>%1 MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="56"/>
+        <source>%1 GB</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SelectImportFile</name>
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="34"/>
@@ -616,9 +648,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>km or mile</source>
-        <translation>km eller mile</translation>
+        <translation type="vanished">km eller mile</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="75"/>
@@ -642,25 +673,22 @@
         <translation>Avståndsenhet</translation>
     </message>
     <message>
+        <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Car model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="74"/>
+        <location filename="../qml/pages/Settings.qml" line="132"/>
         <source>Consumption Unit</source>
         <translation>Förbrukningsenhet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="80"/>
-        <location filename="../qml/pages/Settings.qml" line="81"/>
         <source>l/100km</source>
-        <translation>l/100km</translation>
+        <translation type="vanished">l/100km</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="84"/>
-        <location filename="../qml/pages/Settings.qml" line="85"/>
         <source>mpg</source>
-        <translation>mpg</translation>
+        <translation type="vanished">mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="154"/>
