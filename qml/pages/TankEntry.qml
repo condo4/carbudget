@@ -185,7 +185,7 @@ Dialog {
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: noteinput
-                placeholderText: qsTr("description")
+                placeholderText: qsTr("note")
             }
         }
     }
