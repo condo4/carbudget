@@ -300,7 +300,7 @@
     <message>
         <location filename="../qml/pages/CostEntry.qml" line="128"/>
         <source>description</source>
-        <translation>Beskrivning</translation>
+        <translation>beskrivning</translation>
     </message>
 </context>
 <context>
@@ -480,24 +480,24 @@
     <message>
         <location filename="../filemodel.cpp" line="66"/>
         <source>dir-link</source>
-        <translation type="unfinished"></translation>
+        <translation>mapplänk</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="67"/>
         <source>dir</source>
-        <translation type="unfinished"></translation>
+        <translation>mapp</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="295"/>
         <location filename="../filemodel.cpp" line="329"/>
         <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappen finns inte</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="299"/>
         <location filename="../filemodel.cpp" line="335"/>
         <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Läsrättighet saknas för mappen</translation>
     </message>
 </context>
 <context>
@@ -601,22 +601,22 @@
     <message>
         <location filename="../globals.cpp" line="48"/>
         <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 byte</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="51"/>
         <source>%1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kB</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="54"/>
         <source>%1 MB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="56"/>
         <source>%1 GB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 GB</translation>
     </message>
 </context>
 <context>
@@ -645,21 +645,21 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="53"/>
         <source>Car manufacturer</source>
-        <translation type="unfinished"></translation>
+        <translation>Biltillverkare</translation>
     </message>
     <message>
         <source>km or mile</source>
-        <translation type="vanished">km eller mile</translation>
+        <translation>km eller mile</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="75"/>
         <source>Model year</source>
-        <translation type="unfinished"></translation>
+        <translation>Årsmodell</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="88"/>
         <source>License plate number</source>
-        <translation type="unfinished"></translation>
+        <translation>Registreringsnummer</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="99"/>
@@ -670,12 +670,12 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="111"/>
         <source>Distance Unity</source>
-        <translation>Avståndsenhet</translation>
+        <translation>Distansenhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Car model</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilmodell</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="132"/>
@@ -684,11 +684,11 @@
     </message>
     <message>
         <source>l/100km</source>
-        <translation type="vanished">l/100km</translation>
+        <translation>l/100km</translation>
     </message>
     <message>
         <source>mpg</source>
-        <translation type="vanished">mpg</translation>
+        <translation>mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="154"/>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>description</source>
-        <translation>Beskrivning</translation>
+        <translation>anteckning</translation>
     </message>
 </context>
 <context>
@@ -931,7 +931,7 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="248"/>
         <source>Note:</source>
-        <translation>Notis:</translation>
+        <translation>Anteckning:</translation>
     </message>
 </context>
 <context>
