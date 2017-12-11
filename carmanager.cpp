@@ -34,7 +34,7 @@ void CarManager::refresh()
     if(!dataDir.exists())
     {
         qDebug() << "Creating data directory" << dataPath;
-        dataDir.mkdir(dataPath);
+        dataDir.mkpath(dataPath);
     }
 
     // Move (rename) *.cbg files from home directory to data directory.
