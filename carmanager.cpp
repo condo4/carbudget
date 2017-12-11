@@ -72,19 +72,17 @@ CarManager::CarManager(QObject *parent) :
     QSettings settings;
     refresh();
 
-    if(settings.contains("SelectedCar"))
-    {
-        if(settings.value("SelectedCar").toString() != "NOT_SET")
-            _car = new Car(settings.value("SelectedCar").toString());
-        else
-            _car = NULL;
+    if(_cars.contains(settings.value("SelectedCar","").toString())) {
+        _car = new Car(settings.value("SelectedCar").toString());
     }
-    else
-    {
+    else if(_cars.count() == 1) {
+        _car = new Car(QString(_cars.first()));
+    }
+    else {
         _car = NULL;
     }
     emit carsChanged();
-    emit carChanged();;
+    emit carChanged();
 }
 
 QStringList CarManager::cars()
