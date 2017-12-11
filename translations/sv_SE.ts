@@ -449,7 +449,7 @@
     <name>CoverPage</name>
     <message>
         <source> / 100</source>
-        <translation> / 100</translation>
+        <translation type="vanished"> / 100</translation>
     </message>
 </context>
 <context>
