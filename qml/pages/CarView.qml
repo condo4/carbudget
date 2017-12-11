@@ -26,8 +26,57 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+
+    property int numCars: manager.cars.length
+
+    SilicaFlickable {
+        id: welcomeFlickable
+        enabled: numCars == 0
+        visible: numCars == 0
+        anchors.fill: parent
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Import Car")
+                onClicked: pageStack.push(Qt.resolvedUrl("ImportHelp.qml"))
+            }
+            MenuItem {
+                text: qsTr("Create new car")
+                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
+            }
+        }
+        Label {
+            id: welcomeTextA
+            anchors.top: welcomeFlickable.top
+            width: parent.width
+            height: parent.height / 2
+            font.pixelSize: Theme.fontSizeHuge
+            color: Theme.highlightColor
+            text: qsTr("Welcome to CarBudget!")
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Label {
+            id: welcomeTextB
+            anchors.top: welcomeTextA.bottom
+            anchors.bottom: parent.bottom
+            width: parent.width
+            height: parent.height / 2
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            text: qsTr("Please create a new car or import data from another application using the pulley menu.")
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+        }
+    }
+
     SilicaListView {
         id: carView
+        enabled: numCars > 0
+        visible: numCars > 0
         anchors.fill: parent
         model: manager.cars
 
