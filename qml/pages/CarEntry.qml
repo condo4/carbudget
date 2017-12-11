@@ -36,7 +36,7 @@ Page {
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionunit == 'mpg')
+        if(manager.car.consumptionunit === "mpg")
         {
             consumptionfactor  = 4.546*100/1.609
         }
@@ -91,21 +91,21 @@ Page {
             Label {
                 x: Theme.paddingLarge
                 text:
-                    if ( manager.car.consumptionunit == 'l/100km' ) {
+                    if ( manager.car.consumptionunit === "l/100km" ) {
                         qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
                     }
-                    else if ( manager.car.consumptionunit == 'mpg' ) {
+                    else if ( manager.car.consumptionunit === "mpg" ) {
                         qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
                     }
             }
             Label {
                 x: Theme.paddingLarge
                 text:
-                    if ( manager.car.consumptionunit == 'l/100km' ) {
+                    if ( manager.car.consumptionunit === "l/100km" ) {
                         qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
                     }
-                    else if ( manager.car.consumptionunit == 'mpg' ) {
-                        qsTr("Last: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionlast).toFixed(2))
+                    else if ( manager.car.consumptionunit === "mpg" ) {
+                        qsTr("Last: %L1 mpg").arg(((consumptionfactor * 1/manager.car.consumptionlast)).toFixed(2))
                     }
                 color: {
                     if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"

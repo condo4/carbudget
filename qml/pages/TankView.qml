@@ -46,7 +46,7 @@ Page {
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionunit == 'mpg')
+        if(manager.car.consumptionunit === "mpg")
         {
             consumptionfactor = 4.546*100/1.609
         }
@@ -168,11 +168,11 @@ Page {
                             horizontalAlignment: Text.AlignRight
                         }
                         Text {
-                            text: if ( manager.car.consumptionunit == 'l/100km') {
+                            text: if ( manager.car.consumptionunit === "l/100km") {
                                  model.modelData.consumption.toFixed(2)+ "l/100km";
                              }
                             else {
-                                    if ( manager.car.consumptionunit == 'mpg') {
+                                    if ( manager.car.consumptionunit === "mpg") {
                                     qsTr("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
                                 }
                             }
@@ -210,7 +210,7 @@ Page {
         var tanklist = manager.car.tanks;
         for (var i = 0;i < tanklist.length ;i++)
         {
-            if ((filter=="")||(manager.car.getFueltypeName(tanklist[i].fueltype)==filter))
+            if (filter === "" || filter === manager.car.getFueltypeName(tanklist[i].fueltype))
                 listModel.append({"fuel" : tanklist[i]})
         }
     }

@@ -147,7 +147,7 @@ Page {
         var costlist = manager.car.costs;
         for (var i = 0;i < costlist.length ;i++)
         {
-            if ((filter=="")||(manager.car.getCosttypeName(costlist[i].costtype)==filter))
+            if(filter === "" || filter === manager.car.getCosttypeName(costlist[i].costtype))
                 listModel.append({"cost" : costlist[i]})
         }
         console.log("List Model filled")

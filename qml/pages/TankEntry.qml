@@ -215,11 +215,11 @@ Dialog {
                     break
                 }
             }
-            for(var i=0; i<stationslistrepeater.count; i++)
+            for(var j=0; j<stationslistrepeater.count; j++)
             {
-                if(stationslistrepeater.itemAt(i).dbid === tank.station)
+                if(stationslistrepeater.itemAt(j).dbid === tank.station)
                 {
-                    cbstation.currentIndex = i
+                    cbstation.currentIndex = j
                     break
                 }
             }

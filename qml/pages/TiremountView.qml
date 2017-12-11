@@ -75,7 +75,7 @@ Page {
                  Row {
                     width: parent.width
                     Text {
-                        text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance==0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
+                        text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance === 0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.primaryColor
@@ -84,7 +84,7 @@ Page {
                     }
 
                     Text {
-                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd") + ((model.modelData.unmountdistance==0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd"))
+                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd") + ((model.modelData.unmountdistance === 0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd"))
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.primaryColor
