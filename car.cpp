@@ -1348,9 +1348,9 @@ QString Car::make()
         }
         if(_make.length() < 1)
         {
-            qDebug() << "Default car manufacturer not set in database, defaulting to 'Car'";
-            query.exec("INSERT INTO CarBudget (id, value) VALUES ('make','Car');");
-            _make = "Car";
+            qDebug() << "Default car manufacturer not set in database, defaulting to empty";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('make','');");
+            _make = "";
         }
     }
 
@@ -1387,9 +1387,9 @@ QString Car::model()
         }
         if(_model.length() < 1)
         {
-            qDebug() << "Default car model not set in database, defaulting to 'Model'";
-            query.exec("INSERT INTO CarBudget (id, value) VALUES ('model','Model');");
-            _model = "Model";
+            qDebug() << "Default car model not set in database, defaulting to empty";
+            query.exec("INSERT INTO CarBudget (id, value) VALUES ('model','');");
+            _model = "";
         }
     }
 
