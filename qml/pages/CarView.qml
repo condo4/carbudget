@@ -111,11 +111,7 @@ Page {
             onClicked: carView.select_car(model.modelData)
             menu: ContextMenu {
                 MenuItem {
-                    text: qsTr("Select")
-                    onClicked: carView.select_car(model.modelData)
-                }
 
-                MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
                         remorseAction("Deleting", function() {
