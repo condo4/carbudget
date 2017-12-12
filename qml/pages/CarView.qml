@@ -112,7 +112,12 @@ Page {
             }
             menu: ContextMenu {
                 MenuItem {
+                    text: qsTr("Backup")
+                    onClicked: function() {
+                        successful = manager.backupCar(model.modelData)
 
+                    }
+                } MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
                         Remorse.itemAction(carItem, "Deleting", function() {

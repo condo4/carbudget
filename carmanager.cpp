@@ -120,6 +120,21 @@ void CarManager::delCar(QString name)
     emit carsChanged();
 }
 
+bool CarManager::backupCar(QString name)
+{
+    // Initialise program data directory and make sure it exists.
+    // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget
+    QString source = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
+    QString destination = QDir::homePath() + QDir::separator() + name + "_" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") + ".cbg.";
+    qDebug() << source;
+    qDebug() << destination;
+    if(!QFile::exists(source))
+        return false;
+    if(QFile::exists(destination))
+        return false;
+    return QFile::copy(source, destination);
+}
+
 void CarManager::createCar(QString name)
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
