@@ -120,7 +120,6 @@ Dialog {
                     }
                 }
                 onCurrentItemChanged: {
-                    consumptionUnitInput.focus = true
                     distanceUnit = currentItem.value
                 }
             }
@@ -132,6 +131,7 @@ Dialog {
                 label: qsTr("Consumption Unit")
 
                 menu: ContextMenu {
+                    id: consumptionUnitInputMenu
                     MenuItem {
                         text: "l/100km"
                         property string value: "l/100km"
@@ -144,7 +144,6 @@ Dialog {
                 }
                 onCurrentItemChanged: {
                     consumptionUnit = currentItem.value
-                    numTiresInput.focus = true
                 }
             }
 
