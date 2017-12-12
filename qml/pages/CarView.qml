@@ -47,7 +47,7 @@ Page {
         }
         Label {
             id: welcomeTextA
-            anchors.top: welcomeFlickable.top
+            anchors.top: parent.top
             width: parent.width
             height: parent.height / 2
             font.pixelSize: Theme.fontSizeHuge
@@ -80,12 +80,6 @@ Page {
         anchors.fill: parent
         model: manager.cars
 
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-        }
-
         PullDownMenu {
             MenuItem {
                 text: qsTr("Import Car")
@@ -106,15 +100,22 @@ Page {
 
 
         delegate: ListItem {
+            id: carItem
             width: parent.width
             showMenuOnPressAndHold: true
-            onClicked: carView.select_car(model.modelData)
+            onClicked: function() {
+                manager.selectCar(model.modelData)
+                if(pageStack.depth > 1)
+                    pageStack.navigateBack()
+                else
+                    pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
+            }
             menu: ContextMenu {
                 MenuItem {
 
                     text: qsTr("Remove")
                     onClicked: {
-                        remorseAction("Deleting", function() {
+                        Remorse.itemAction(carItem, "Deleting", function() {
                             manager.delCar(model.modelData)
                         })
                     }
