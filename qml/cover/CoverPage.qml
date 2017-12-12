@@ -22,7 +22,14 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
+    // Show main content only if the car exists
+    property bool nullCar: (manager.car == null ||
+                            (   manager.car.name  === ""
+                             && manager.car.make  === ""
+                             && manager.car.model === ""))
     Column {
+        enabled: !nullCar
+        visible: !nullCar
         x: Theme.paddingMedium
         y: Theme.paddingMedium
         width: parent.width - 2*x
@@ -32,7 +39,9 @@ CoverBackground {
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             text: {
-                if(manager.car.make.length > 0)
+                if(nullCar)
+                    return ""
+                else if(manager.car.make.length > 0)
                     return (manager.car.make + "<br />" + manager.car.model)
                 else
                     return manager.car.name
@@ -46,25 +55,51 @@ CoverBackground {
             color: "transparent"
         }
 
+        // Show the car details only if the car exists.
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: ("%L1 %2").arg(manager.car.maxdistance - manager.car.mindistance).arg(manager.car.distanceunity)
+            text: {
+                if(nullCar)
+                    return ""
+                else
+                    return ("%L1 %2").arg((manager.car.maxdistance - manager.car.mindistance).toFixed(0)).arg(manager.car.distanceunity)
+            }
         }
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.budget.toFixed(2)+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
+            text: {
+                if(nullCar)
+                    return ""
+                else
+                    manager.car.budget.toFixed(2)+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
+            }
             font.pixelSize: Theme.fontSizeSmall
         }
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            text: manager.car.consumption.toFixed(2)+qsTr("l / 100")+manager.car.distanceunity
+            text: {
+                if(nullCar)
+                    return ""
+                else
+                    manager.car.consumption.toFixed(2)+qsTr("l / 100") + manager.car.distanceunity
+            }
             font.pixelSize: Theme.fontSizeSmall
         }
     }
+
+    CoverPlaceholder {
+        enabled: nullCar
+        visible: nullCar
+        text: "CarBudget"
+        icon.source: "qrc:/harbour-carbudget.png"
+    }
+
+    // Show only proper cover actions
     CoverActionList {
+        enabled: !nullCar
         CoverAction {
             iconSource: "image://theme/icon-cover-new"
             onTriggered: {
@@ -77,6 +112,16 @@ CoverBackground {
             onTriggered: {
                 app.activate()
                 pageStack.push(Qt.resolvedUrl("../pages/CarView.qml"))
+            }
+        }
+    }
+    CoverActionList {
+        enabled: nullCar
+        CoverAction {
+            iconSource: "image://theme/icon-cover-new"
+            onTriggered: {
+                app.activate()
+                pageStack.push(Qt.resolvedUrl("../pages/CarCreate.qml"))
             }
         }
     }

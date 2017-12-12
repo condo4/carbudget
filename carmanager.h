@@ -45,7 +45,7 @@ public:
     explicit CarManager(QObject *parent = 0);
 
     Q_INVOKABLE QStringList cars();
-    Car *car();
+    Q_INVOKABLE Car *car();
 
     Q_INVOKABLE QString getEnv( QString name);
     Q_INVOKABLE QStringList checkFuelpadDBforCars( QString name);
@@ -57,9 +57,9 @@ signals:
 
 public slots:
 
-    void selectCar(QString name);
-    void delCar(QString name);
-    void createCar(QString name);
+    Q_INVOKABLE void selectCar(QString name);
+    Q_INVOKABLE void delCar(QString name);
+    Q_INVOKABLE void createCar(QString name);
     bool createTables(QSqlDatabase db);
     void importFromMyCar( QString filename, QString name);
     void importFromFuelpad( QString filenme, QString name);

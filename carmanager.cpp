@@ -112,9 +112,12 @@ void CarManager::delCar(QString name)
         settings.setValue("SelectedCar","NOT_SET");
         delete _car;
         _car = NULL;
+        emit carChanged();
     }
     QFile::remove( QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg");
-    refresh();
+    //refresh();
+    _cars.removeOne(name);
+    emit carsChanged();
 }
 
 void CarManager::createCar(QString name)
