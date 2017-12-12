@@ -421,6 +421,9 @@ double Car::fueltotal() const
 
 unsigned int Car::maxdistance() const
 {
+    if(_costlist.isEmpty() && _tanklist.isEmpty())
+        return 0;
+
     unsigned long int maxDistance = 0;
 
     foreach(Cost *cost, _costlist)
@@ -438,6 +441,9 @@ unsigned int Car::maxdistance() const
 
 unsigned int Car::mindistance() const
 {
+    if(_costlist.isEmpty() && _tanklist.isEmpty())
+        return 0;
+
     unsigned long int minDistance = 1000000;
 
     foreach(Cost *cost, _costlist)
@@ -1442,6 +1448,8 @@ void Car::setYear(int year)
     if(query.exec("SELECT count(*) FROM CarBudget WHERE id='year';"))
     {
         query.next();
+        if(year < 1000) year = 1000;
+        if(year > 9999) year = 9999;
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('year',%1);").arg(year));
         else
