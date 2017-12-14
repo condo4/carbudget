@@ -18,14 +18,14 @@ protected:
     Car *_car;
     QDate _date;
     unsigned int _distance;
-    unsigned int _eventid;
+    unsigned int _eventId;
 
 public:
     explicit CarEvent(Car *parent = 0);
-    explicit CarEvent(QDate date, unsigned int distance, unsigned int eventid, Car *parent = 0);
+    explicit CarEvent(QDate date, unsigned int distance, unsigned int eventId, Car *parent = 0);
 
-    unsigned int saveevent();
-    bool delevent();
+    unsigned int saveEvent();
+    bool deleteEvent();
 
     int id() const;
 

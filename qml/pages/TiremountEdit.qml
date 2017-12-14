@@ -24,9 +24,9 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    property Tiremount tiremount
-    property date mountdate
-    property date unmountdate
+    property TireMount tireMount
+    property date mountDate
+    property date unmountDate
     allowedOrientations: Orientation.All
     SilicaFlickable {
         VerticalScrollDecorator {}
@@ -45,27 +45,27 @@ Dialog {
             ValueButton {
                 function openDateDialog()
                 {
-                    var date = mountdate
+                    var date = mountDate
                     var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: date })
 
                     dialog.accepted.connect(function()
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale())
-                        mountdate = dialog.date
-                        mountdistance.focus=true
+                        mountDate = dialog.date
+                        mountDistance.focus=true
                     })
                 }
 
                 label: qsTr("Mount date")
-                value: mountdate.toLocaleDateString(Qt.locale())
+                value: mountDate.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
             TextField {
-                id: mountdistance
+                id: mountDistance
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: manager.car.distanceunity
+                label: manager.car.distanceUnit
                 placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
@@ -75,30 +75,30 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             ValueButton {
-                id: unmountdatebutton
+                id: unmountDatebutton
                 function openDateDialog()
                 {
-                    var date = unmountdate
+                    var date = unmountDate
                     var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: date })
 
                     dialog.accepted.connect(function()
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
-                        unmountdate = dialog.date
-                        unmountdistance.focus=true
+                        unmountDate = dialog.date
+                        unmountDistance.focus=true
                     })
                 }
 
                 label: qsTr("Unmount date")
-                value: unmountdate.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                value: unmountDate.toLocaleDateString(Qt.locale(),"d MMM yyyy")
                 width: parent.width
                 onClicked: openDateDialog()
             }
             TextField {
-                id: unmountdistance
+                id: unmountDistance
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: manager.car.distanceunity
+                label: manager.car.distanceUnit
                 placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
@@ -107,42 +107,42 @@ Dialog {
             }
          }
     }
-    canAccept: mountdistance.acceptableInput && unmountdistance.acceptableInput
+    canAccept: mountDistance.acceptableInput && unmountDistance.acceptableInput
 
     onOpened: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi" )
         {
             distanceunitfactor = 1.609
         }
-        if(tiremount != undefined)
+        if(tireMount != undefined)
         {
-            mountdate = tiremount.mountdate
-            mountdistance.text = (tiremount.mountdistance / distanceunitfactor).toFixed(0)
-            unmountdate = tiremount.unmountdate
-            unmountdistance.text = (tiremount.unmountdistance / distanceunitfactor).toFixed(0)
-            if (tiremount.unmountdistance==0)
+            mountDate = tireMount.mountDate
+            mountDistance.text = (tireMount.mountDistance / distanceunitfactor).toFixed(0)
+            unmountDate = tireMount.unmountDate
+            unmountDistance.text = (tireMount.unmountDistance / distanceunitfactor).toFixed(0)
+            if (tireMount.unmountDistance==0)
             {
-                unmountdistance.visible=false;
-                unmountdatebutton.visible=false;
+                unmountDistance.visible=false;
+                unmountDatebutton.visible=false;
             }
         }
         else
         {
             //This should never happen
-            mountdate = new Date()
-            unmountdate = new Date()
+            mountDate = new Date()
+            unmountDate = new Date()
         }
     }
     onAccepted: {
-        tiremount.mountdate = mountdate
-        tiremount.mountdistance = mountdistance.text * distanceunitfactor
-        if (tiremount.unmountdistance > 0)
+        tireMount.mountDate = mountDate
+        tireMount.mountDistance = mountDistance.text * distanceunitfactor
+        if (tireMount.unmountDistance > 0)
         {
-            tiremount.unmountdate = unmountdate
-            tiremount.unmountdistance = unmountdistance.text * distanceunitfactor
+            tireMount.unmountDate = unmountDate
+            tireMount.unmountDistance = unmountDistance.text * distanceunitfactor
         }
-        tiremount.save()
+        tireMount.save()
     }
 }
 

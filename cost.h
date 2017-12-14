@@ -31,21 +31,21 @@ class Cost : public CarEvent
     Q_OBJECT
     Q_PROPERTY(QString      description READ description WRITE setDescription    NOTIFY descriptionChanged )
     Q_PROPERTY(double       cost        READ cost        WRITE setCost           NOTIFY costChanged )
-    Q_PROPERTY(unsigned int costtype    READ costtype    WRITE setCosttype       NOTIFY costtypeChanged )
+    Q_PROPERTY(unsigned int costType    READ costType    WRITE setCostType       NOTIFY costTypeChanged )
 
 private:
     QString _description;
     double _cost;
-    unsigned int _costtype;
+    unsigned int _costType;
 
 public:
     explicit Cost(Car *parent = 0);
-    explicit Cost(QDate date,unsigned int distance,  unsigned int costtype, QString desc, double cost, unsigned int id = 0, Car *parent = 0);
+    explicit Cost(QDate date,unsigned int distance,  unsigned int costType, QString desc, double cost, unsigned int id = 0, Car *parent = 0);
 
 signals:
     void descriptionChanged();
     void costChanged();
-    void costtypeChanged();
+    void costTypeChanged();
 
 public slots:
     QString description() const;
@@ -54,8 +54,8 @@ public slots:
     double cost() const;
     void setCost(double cost);
 
-    unsigned int costtype() const;
-    void setCosttype(unsigned int costtype);
+    unsigned int costType() const;
+    void setCostType(unsigned int costType);
 
     void save();
     void remove();

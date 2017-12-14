@@ -24,8 +24,8 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    id: addFueltype
-    property Fueltype fueltype
+    id: addFuelType
+    property FuelType fuelType
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
@@ -35,7 +35,7 @@ Dialog {
             width: parent.width
 
             DialogHeader { title: {
-                    if(fueltype != undefined) return qsTr("Modify Fuel Type")
+                    if(fuelType != undefined) return qsTr("Modify Fuel Type")
                     else return qsTr("New Fuel Type")
                 }
             }
@@ -52,21 +52,21 @@ Dialog {
     canAccept: nameinput.acceptableInput
 
     onOpened: {
-        if(fueltype != undefined)
+        if(fuelType != undefined)
         {
-            nameinput.text = fueltype.name
+            nameinput.text = fuelType.name
         }
     }
 
     onAccepted: {
-        if(fueltype == undefined)
+        if(fuelType == undefined)
         {
-            manager.car.addNewFueltype(nameinput.text)
+            manager.car.addNewFuelType(nameinput.text)
         }
         else
         {
-            fueltype.name = nameinput.text
-            fueltype.save()
+            fuelType.name = nameinput.text
+            fuelType.save()
         }
     }
 }

@@ -39,7 +39,7 @@ Page {
         }
 
         anchors.fill: parent
-        model: manager.car.fueltypes
+        model: manager.car.fuelTypes
 
         delegate: ListItem {
             showMenuOnPressAndHold: true
@@ -49,15 +49,15 @@ Page {
                     enabled: model.modelData.id > 0 ? true : false
                     visible: model.modelData.id > 0 ? true : false
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fuelType: model.modelData })
                 }
                 MenuItem {
                     enabled: model.modelData.id > 0 ? true : false
                     visible: model.modelData.id > 0 ? true : false
-                    text: qsTr("Remove")
+                    text: qsTr("Delete")
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delFueltype(model.modelData)
+                            manager.car.delFuelType(model.modelData)
                         })
                     }
                 }

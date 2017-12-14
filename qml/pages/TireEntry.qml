@@ -152,8 +152,8 @@ Dialog {
     onOpened: {
         if(tire != undefined)
         {
-            buy_date = tire.buydate
-            trash_date = tire.trashdate
+            buy_date = tire.buyDate
+            trash_date = tire.trashDate
             priceinput.text = tire.price
             quantityinput.text = tire.quantity
             modelinput.text = tire.modelname

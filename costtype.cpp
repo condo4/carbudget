@@ -22,14 +22,14 @@
 #include "costtype.h"
 #include "car.h"
 
-Costtype::Costtype(QObject *parent) :
+CostType::CostType(QObject *parent) :
     QObject(parent),
     _id(0),
     _name("Not Set")
 {
 }
 
-Costtype::Costtype(unsigned int id, QString name, Car *parent):
+CostType::CostType(unsigned int id, QString name, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
@@ -37,60 +37,60 @@ Costtype::Costtype(unsigned int id, QString name, Car *parent):
 {
 }
 
-unsigned int Costtype::id() const
+unsigned int CostType::id() const
 {
     return _id;
 }
 
-void Costtype::setId(unsigned int id)
+void CostType::setId(unsigned int id)
 {
     _id = id;
     emit idChanged();
 }
 
-QString Costtype::name() const
+QString CostType::name() const
 {
     return _name;
 }
 
-void Costtype::setName(QString name)
+void CostType::setName(QString name)
 {
     _name = name;
     emit nameChanged();
 }
 
-void Costtype::save()
+void CostType::save()
 {
     if(_id < 0)
     {
 
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO CosttypeList (id,name) VALUES(NULL,'%1')").arg(_name);
+        QString sql = QString("INSERT INTO CostTypeList (id,name) VALUES(NULL,'%1')").arg(_name);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
-            qDebug() << "Create Costtype in database with id " << _id << "and value " << _name;
+            qDebug() << "Create CostType in database with id " << _id << "and value " << _name;
             _car->db.commit();
         }
         else
         {
-            qDebug() << "Error during Create Costtype in database";
+            qDebug() << "Error during Create CostType in database";
             qDebug() << query.lastError();
         }
     }
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE CosttypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
+        QString sql = QString("UPDATE CostTypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {
-            qDebug() << "Update Costtype in database with id " << _id;
+            qDebug() << "Update CostType in database with id " << _id;
             _car->db.commit();
         }
         else
         {
-            qDebug() << "Error during Update Costtype in database";
+            qDebug() << "Error during Update CostType in database";
             qDebug() << query.lastError();
         }
     }

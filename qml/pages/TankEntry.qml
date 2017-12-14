@@ -27,7 +27,7 @@ Dialog {
     property Tank tank
     property date tank_date
     property int station
-    property int fueltype
+    property int fuelType
     property string distanceunit
     property real distanceunitfactor: 1
     allowedOrientations: Orientation.All
@@ -83,7 +83,7 @@ Dialog {
                 id: kminput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: manager.car.distanceunity
+                label: manager.car.distanceUnit
                 placeholderText: qsTr("Odometer")
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
@@ -116,33 +116,33 @@ Dialog {
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: cbfueltype.focus = true
+                EnterKey.onClicked: cbfuelType.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
 
             TextField {
                 id: unitpriceinput
-                label: qsTr("Unite Price")
+                label: qsTr("Unit Price")
                 anchors { left: parent.left; right: parent.right }
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 readOnly: true
                 text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
             }
             ComboBox {
-                id: cbfueltype
+                id: cbfuelType
                 label: qsTr("Fuel Type")
                 anchors { left: parent.left; right: parent.right }
                 menu: ContextMenu {
                     Repeater {
-                        id: fueltypeslistrepeater
-                        model: manager.car.fueltypes
+                        id: fuelTypeslistrepeater
+                        model: manager.car.fuelTypes
                         MenuItem {
                             property int dbid
-                            id: fueltypelistItem
+                            id: fuelTypeListItem
                             text: modelData.name
                             dbid: modelData.id
                             onClicked:{
-                                fueltype = modelData.id
+                                fuelType = modelData.id
                                 cbstation.focus = true
                             }
                         }
@@ -162,7 +162,7 @@ Dialog {
                         model: manager.car.stations
                         MenuItem {
                             property int dbid
-                            id: stationlistItem
+                            id: stationListItem
                             text: modelData.name
                             dbid: modelData.id
                             onClicked:{
@@ -192,7 +192,7 @@ Dialog {
     canAccept: kminput.acceptableInput && quantityinput.acceptableInput && priceinput.acceptableInput
 
     onOpened: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi" )
         {
             distanceunitfactor = 1.609
@@ -204,14 +204,14 @@ Dialog {
             quantityinput.text = tank.quantity
             priceinput.text = tank.price
             fullinput.checked = tank.full
-            fueltype = tank.fueltype
+            fuelType = tank.fuelType
             station = tank.station
             noteinput.text = tank.note
-            for(var i=0; i<fueltypeslistrepeater.count; i++)
+            for(var i=0; i<fuelTypeslistrepeater.count; i++)
             {
-                if(fueltypeslistrepeater.itemAt(i).dbid === tank.fueltype)
+                if(fuelTypeslistrepeater.itemAt(i).dbid === tank.fuelType)
                 {
-                    cbfueltype.currentIndex = i
+                    cbfuelType.currentIndex = i
                     break
                 }
             }
@@ -230,11 +230,11 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
         }
         else
         {
-            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fueltype, station, noteinput.text)
+            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
         }
     }
 }

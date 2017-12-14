@@ -35,8 +35,8 @@ class Tire : public QObject
     Q_PROPERTY(QString manufacturer READ manufacturer   WRITE setManufacturer   NOTIFY manufacturerChanged )
     Q_PROPERTY(QString modelname    READ model          WRITE setModel          NOTIFY modelChanged )
 
-    Q_PROPERTY(QDateTime buydate    READ buydate        WRITE setBuydate        NOTIFY buydateChanged)
-    Q_PROPERTY(QDateTime trashdate  READ trashdate      WRITE setTrashdate      NOTIFY trashdateChanged)
+    Q_PROPERTY(QDateTime buyDate    READ buyDate        WRITE setBuyDate        NOTIFY buyDateChanged)
+    Q_PROPERTY(QDateTime trashDate  READ trashDate      WRITE setTrashDate      NOTIFY trashDateChanged)
 
     Q_PROPERTY(double    price      READ price          WRITE setPrice          NOTIFY priceChanged )
     Q_PROPERTY(unsigned int quantity          READ quantity WRITE setQuantity   NOTIFY quantityChanged )
@@ -55,8 +55,8 @@ private:
     QString _manufacturer;
     QString _model;
 
-    QDate _buydate;
-    QDate _trashdate;
+    QDate _buyDate;
+    QDate _trashDate;
 
     double _price;
 
@@ -64,7 +64,7 @@ private:
 
 public:
     explicit Tire(Car *parent = 0);
-    explicit Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = 0);
+    explicit Tire(QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = 0);
 
     QString name() const;
     void setName(QString name);
@@ -75,11 +75,11 @@ public:
     QString model() const;
     void setModel(QString model);
 
-    QDateTime buydate() const;
-    void setBuydate(QDateTime date);
+    QDateTime buyDate() const;
+    void setBuyDate(QDateTime date);
 
-    QDateTime trashdate() const;
-    void setTrashdate(QDateTime date);
+    QDateTime trashDate() const;
+    void setTrashDate(QDateTime date);
 
     double price() const;
     void setPrice(double price);
@@ -101,8 +101,8 @@ signals:
     void nameChanged();
     void manufacturerChanged();
     void modelChanged();
-    void buydateChanged();
-    void trashdateChanged();
+    void buyDateChanged();
+    void trashDateChanged();
     void priceChanged();
     void quantityChanged();
     void trashedChanged();

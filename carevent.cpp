@@ -6,41 +6,41 @@ CarEvent::CarEvent(Car *parent):
     _car(parent),
     _date(QDate::currentDate()),
     _distance(0),
-    _eventid(0)
+    _eventId(0)
 {
 
 }
 
-CarEvent::CarEvent(QDate date, unsigned int distance, unsigned int eventid, Car *parent):
+CarEvent::CarEvent(QDate date, unsigned int distance, unsigned int eventId, Car *parent):
     QObject(parent),
     _car(parent),
     _date(date),
     _distance(distance),
-    _eventid(eventid)
+    _eventId(eventId)
 {
 
 }
 
-unsigned int CarEvent::saveevent()
+unsigned int CarEvent::saveEvent()
 {
     QSqlQuery query(_car->db);
 
-    if(_eventid == 0)
+    if(_eventId == 0)
     {
         QString sql = QString("INSERT INTO Event (id,date,distance) VALUES(NULL,'%1',%2)").arg(_date.toString("yyyy-MM-dd 00:00:00.00")).arg(_distance);
         if(query.exec(sql))
         {
-            _eventid = query.lastInsertId().toInt();
-            qDebug() << "Create Event in database with id " << _eventid;
+            _eventId = query.lastInsertId().toInt();
+            qDebug() << "Create Event in database with id " << _eventId;
         }
-        else _eventid = 0;
+        else _eventId = 0;
     }
     else
     {
-        QString sql = QString("UPDATE Event SET date='%1', distance=%2 WHERE id=%3;").arg(_date.toString("yyyy-MM-dd 00:00:00.00")).arg(_distance).arg(_eventid);
+        QString sql = QString("UPDATE Event SET date='%1', distance=%2 WHERE id=%3;").arg(_date.toString("yyyy-MM-dd 00:00:00.00")).arg(_distance).arg(_eventId);
         if(query.exec(sql))
         {
-            qDebug() << "Update Event in database with id " << _eventid;
+            qDebug() << "Update Event in database with id " << _eventId;
         }
         else
         {
@@ -49,16 +49,16 @@ unsigned int CarEvent::saveevent()
             return 0;
         }
     }
-    return _eventid;
+    return _eventId;
 }
 
-bool CarEvent::delevent()
+bool CarEvent::deleteEvent()
 {
     QSqlQuery query(_car->db);
-    QString sql = QString("DELETE FROM Event WHERE id=%1;").arg(_eventid);
+    QString sql = QString("DELETE FROM Event WHERE id=%1;").arg(_eventId);
     if(query.exec(sql))
     {
-        qDebug() << "DELETE Event in database with id " << _eventid;
+        qDebug() << "DELETE Event in database with id " << _eventId;
         return true;
     }
     return false;
@@ -66,7 +66,7 @@ bool CarEvent::delevent()
 
 int CarEvent::id() const
 {
-    return _eventid;
+    return _eventId;
 }
 
 QDateTime CarEvent::date() const

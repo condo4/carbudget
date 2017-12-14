@@ -25,7 +25,7 @@ import harbour.carbudget 1.0
 Page {
     allowedOrientations: Orientation.All
     SilicaListView{
-        id:fueltypelist
+        id:fuelTypeList
         VerticalScrollDecorator {}
         header:  PageHeader {
                  title: qsTr("Consumption by fuel type")
@@ -33,7 +33,7 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model:manager.car.fueltypes
+        model:manager.car.fuelTypes
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             height: dataColumn.height

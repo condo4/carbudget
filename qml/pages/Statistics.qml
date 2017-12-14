@@ -89,7 +89,7 @@ Page {
                 x: Theme.paddingLarge
                 text: manager.car.statisticType + " (" + qsTr("Distance") + ": " +
                        + (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance)
-                       + manager.car.distanceunity + ")"
+                       + manager.car.distanceUnit + ")"
                 font.pixelSize: Theme.fontSizeMedium
             }
 

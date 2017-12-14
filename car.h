@@ -42,21 +42,21 @@ class Car : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(unsigned int nbtank READ nbtank NOTIFY nbtankChanged)
+    Q_PROPERTY(unsigned int numTanks READ numTanks NOTIFY numTanksChanged)
     Q_PROPERTY(double consumption READ consumption NOTIFY consumptionChanged)
-    Q_PROPERTY(double consumptionmax READ consumptionmax NOTIFY consumptionmaxChanged)
-    Q_PROPERTY(double consumptionmin READ consumptionmin NOTIFY consumptionminChanged)
-    Q_PROPERTY(double consumptionlast READ consumptionlast NOTIFY consumptionlastChanged)
-    Q_PROPERTY(double fueltotal READ fueltotal NOTIFY fueltotalChanged)
-    Q_PROPERTY(unsigned int maxdistance READ maxdistance NOTIFY maxdistanceChanged)
-    Q_PROPERTY(unsigned int mindistance READ mindistance NOTIFY mindistanceChanged)
+    Q_PROPERTY(double consumptionMax READ consumptionMax NOTIFY consumptionMaxChanged)
+    Q_PROPERTY(double consumptionMin READ consumptionMin NOTIFY consumptionMinChanged)
+    Q_PROPERTY(double consumptionLast READ consumptionLast NOTIFY consumptionLastChanged)
+    Q_PROPERTY(double fuelTotal READ fuelTotal NOTIFY fuelTotalChanged)
+    Q_PROPERTY(unsigned int maxDistance READ maxDistance NOTIFY maxDistanceChanged)
+    Q_PROPERTY(unsigned int minDistance READ minDistance NOTIFY minDistanceChanged)
     Q_PROPERTY(QQmlListProperty<Tank> tanks READ tanks NOTIFY tanksChanged)
-    Q_PROPERTY(QQmlListProperty<Fueltype> fueltypes READ fueltypes NOTIFY fueltypesChanged)
+    Q_PROPERTY(QQmlListProperty<FuelType> fuelTypes READ fuelTypes NOTIFY fuelTypesChanged)
     Q_PROPERTY(QQmlListProperty<Station> stations READ stations NOTIFY stationsChanged)
-    Q_PROPERTY(QQmlListProperty<Costtype> costtypes READ costtypes NOTIFY costtypesChanged)
+    Q_PROPERTY(QQmlListProperty<CostType> costTypes READ costTypes NOTIFY costTypesChanged)
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged)
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged)
-    Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged)
+    Q_PROPERTY(QQmlListProperty<TireMount> tireMounts READ tireMounts NOTIFY tiresChanged)
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged)
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
     Q_PROPERTY(QString make READ getMake WRITE setMake NOTIFY makeChanged)
@@ -64,22 +64,22 @@ class Car : public QObject
     Q_PROPERTY(int year READ getYear WRITE setYear NOTIFY yearChanged)
     Q_PROPERTY(QString licensePlate READ getLicensePlate WRITE setLicensePlate NOTIFY licensePlateChanged)
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged)
-    Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged)
-    Q_PROPERTY(QString consumptionunit READ consumptionunit WRITE setConsumptionunit NOTIFY consumptionunitChanged)
-    Q_PROPERTY(unsigned int nbtire READ nbtire WRITE setNbtire NOTIFY nbtireChanged)
-    Q_PROPERTY(double buyingprice READ buyingprice WRITE setBuyingprice NOTIFY buyingpriceChanged)
-    Q_PROPERTY(double sellingprice READ sellingprice WRITE setSellingprice NOTIFY sellingpriceChanged)
+    Q_PROPERTY(QString distanceUnit READ distanceUnit WRITE setDistanceUnit NOTIFY distanceUnitChanged)
+    Q_PROPERTY(QString consumptionUnit READ consumptionUnit WRITE setConsumptionUnit NOTIFY consumptionUnitChanged)
+    Q_PROPERTY(unsigned int numTires READ numTires WRITE setNbtire NOTIFY numTiresChanged)
+    Q_PROPERTY(double buyingPrice READ buyingPrice WRITE setBuyingprice NOTIFY buyingPriceChanged)
+    Q_PROPERTY(double sellingPrice READ sellingPrice WRITE setSellingprice NOTIFY sellingPriceChanged)
     Q_PROPERTY(unsigned int lifetime READ lifetime WRITE setLifetime NOTIFY lifetimeChanged)
-    Q_PROPERTY(QDate buyingdate READ buyingdate WRITE setBuyingdate NOTIFY buyingdateChanged)
-    Q_PROPERTY(double budget_fuel_total READ budget_fuel_total NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_cost_total READ budget_cost_total NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_tire_total READ budget_tire_total NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_tire READ budget_tire NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_invest_total READ budget_invest_total NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_invest READ budget_invest NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
+    Q_PROPERTY(QDate buyingDate READ buyingDate WRITE setBuyingdate NOTIFY buyingDateChanged)
+    Q_PROPERTY(double budgetFuelTotal READ budgetFuelTotal NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetFuel READ budgetFuel NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetCostTotal READ budgetCostTotal NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetCost READ budgetCost NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetTireTotal READ budgetTireTotal NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetTire READ budgetTire NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetInvestTotal READ budgetInvestTotal NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetInvest READ budgetInvest NOTIFY budgetChanged)
+    Q_PROPERTY(double budgetTotal      READ budgetTotal      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
     Q_PROPERTY(QJsonObject chartData READ getChartData NOTIFY chartDataChanged)
@@ -95,23 +95,23 @@ private:
     int _year;
     QString _licensePlate;
 
-    QList<Tank*>    _tanklist;
-    QList<Fueltype*> _fueltypelist;
-    QList<Station*> _stationlist;
-    QList<Costtype*>    _costtypelist;
-    QList<Cost*>    _costlist;
-    QList<Tire*>    _tirelist;
-    QList<Tiremount*>    _tiremountlist;
+    QList<Tank*>    _tankList;
+    QList<FuelType*> _fuelTypeList;
+    QList<Station*> _stationList;
+    QList<CostType*>    _costTypeList;
+    QList<Cost*>    _costList;
+    QList<Tire*>    _tireList;
+    QList<TireMount*>    _tireMountList;
 
     QString _currency;
-    QString _distanceunity;
-    QString _consumptionunit;
+    QString _distanceUnit;
+    QString _consumptionUnit;
 
-    unsigned int _nbtire;
-    double _buyingprice;
-    double _sellingprice;
+    unsigned int _numTires;
+    double _buyingPrice;
+    double _sellingPrice;
     unsigned int _lifetime;
-    QDate _buyingdate;
+    QDate _buyingDate;
 
     unsigned int _beginChartIndex;
     unsigned int _endChartIndex;
@@ -133,22 +133,22 @@ public:
     //explicit Car(const Car &car);
     explicit Car(QString name, CarManager *parent = 0);
 
-    unsigned int nbtank() const;
-    double fueltotal() const;
+    unsigned int numTanks() const;
+    double fuelTotal() const;
     double consumption() const;
-    double consumptionmax() const;
-    double consumptionmin() const;
-    double consumptionlast() const;
-    unsigned int maxdistance() const;
-    unsigned int mindistance() const;
+    double consumptionMax() const;
+    double consumptionMin() const;
+    double consumptionLast() const;
+    unsigned int maxDistance() const;
+    unsigned int minDistance() const;
 
     QQmlListProperty<Tank> tanks();
-    QQmlListProperty<Fueltype> fueltypes();
+    QQmlListProperty<FuelType> fuelTypes();
     QQmlListProperty<Station> stations();
-    QQmlListProperty<Costtype> costtypes();
+    QQmlListProperty<CostType> costTypes();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
-    QQmlListProperty<Tiremount> tiremounts();
+    QQmlListProperty<TireMount> tireMounts();
 
     const Tank *previousTank(unsigned int distance) const;
 
@@ -163,57 +163,57 @@ public:
 
     unsigned long int getDistance(QDate Date);
 
-    Q_INVOKABLE double budget_fuel_byType(unsigned int id);
-    Q_INVOKABLE double budget_fuel_total_byType(unsigned int id);
+    Q_INVOKABLE double budgetFuel_byType(unsigned int id);
+    Q_INVOKABLE double budgetFuelTotal_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_max_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_min_byType(unsigned int id);
-    Q_INVOKABLE double budget_cost_total_byType(unsigned int id);
-    Q_INVOKABLE double budget_cost_byType(unsigned int id);
+    Q_INVOKABLE double budgetCostTotal_byType(unsigned int id);
+    Q_INVOKABLE double budgetCost_byType(unsigned int id);
     Q_INVOKABLE void setChartTypeOilPrice();
     Q_INVOKABLE void setChartTypeConsumption();
     Q_INVOKABLE void setChartTypeCosts();
     Q_INVOKABLE void setChartBeginIndex(unsigned int index);
     Q_INVOKABLE void setChartEndIndex(unsigned int index);
 
-    double budget_fuel_total();
-    double budget_fuel();
-    double budget_cost_total();
-    double budget_cost();
-    double budget_tire_total();
-    double budget_tire();
-    double budget_invest_total();
-    double budget_invest();
+    double budgetFuelTotal();
+    double budgetFuel();
+    double budgetCostTotal();
+    double budgetCost();
+    double budgetTireTotal();
+    double budgetTire();
+    double budgetInvestTotal();
+    double budgetInvest();
     double budget();
-    double budget_total();
+    double budgetTotal();
     unsigned int getChartBeginIndex();
     unsigned int getChartEndIndex();
 
 signals:
-    void nbtankChanged(unsigned int nbtank);
+    void numTanksChanged(unsigned int numTanks);
     void consumptionChanged(double consumption);
-    void consumptionmaxChanged(double consumptionmax);
-    void consumptionlastChanged(double consumptionlast);
-    void consumptionminChanged(double consumptionmin);
-    void fueltotalChanged(double fueltotal);
-    void maxdistanceChanged(double consumption);
-    void mindistanceChanged(double consumption);
+    void consumptionMaxChanged(double consumptionMax);
+    void consumptionLastChanged(double consumptionLast);
+    void consumptionMinChanged(double consumptionMin);
+    void fuelTotalChanged(double fuelTotal);
+    void maxDistanceChanged(double consumption);
+    void minDistanceChanged(double consumption);
     void tanksChanged();
-    void fueltypesChanged();
+    void fuelTypesChanged();
     void stationsChanged();
     void nameChanged();
-    void costtypesChanged();
+    void costTypesChanged();
     void costsChanged();
     void tiresChanged();
     void tireMountedChanged();
     void currencyChanged();
-    void distanceunityChanged();
-    void consumptionunitChanged();
-    void nbtireChanged();
-    void sellingpriceChanged();
-    void buyingpriceChanged();
+    void distanceUnitChanged();
+    void consumptionUnitChanged();
+    void numTiresChanged();
+    void sellingPriceChanged();
+    void buyingPriceChanged();
     void lifetimeChanged();
-    void buyingdateChanged();
+    void buyingDateChanged();
     void budgetChanged();
     void statisticTypeChanged();
     void chartDataChanged();
@@ -223,32 +223,32 @@ signals:
     void licensePlateChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
-    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fueltype, unsigned int station, QString note);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
+    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
     void delTank(Tank *tank);
 
-    void addNewFueltype(QString fueltype);
-    void delFueltype(Fueltype *fueltype);
-    Fueltype* findFueltype(QString name);
-    QString getFueltypeName(unsigned int id);
+    void addNewFuelType(QString fuelType);
+    void delFuelType(FuelType *fuelType);
+    FuelType* findFuelType(QString name);
+    QString getFuelTypeName(unsigned int id);
     void addNewStation(QString station);
     void delStation(Station *station);
     Station* findStation(QString name);
     QString getStationName(unsigned int id);
-    void addNewCosttype(QString costtype);
-    void delCosttype(Costtype *costtype);
-    Costtype* findCosttype(QString name);
-    QString getCosttypeName(unsigned int id);
-    void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
+    void addNewCostType(QString costType);
+    void delCostType(CostType *costType);
+    CostType* findCostType(QString name);
+    QString getCostTypeName(unsigned int id);
+    void addNewCost(QDate date, unsigned int distance, unsigned int costType,QString description, double price);
     void delCost(Cost *cost);
 
-    Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
-    Tire* modifyTire(Tire* tire, QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
+    Tire* addNewTire(QDate buyDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
+    Tire* modifyTire(Tire* tire, QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
     void delTire(Tire *tire);
     QString getTireName(unsigned int id);
 
-    void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
-    void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);
+    void mountTire(QDate mountDate, unsigned int distance, Tire *tire);
+    void umountTire(QDate umountDate, unsigned int distance, Tire *tire, bool trashit=false);
     void untrashTire(Tire *tire);
 
     int tireMounted() const;
@@ -270,25 +270,25 @@ public slots:
     QString currency();
     void setCurrency(QString currency);
 
-    QString distanceunity();
-    void setDistanceunity(QString distanceunity);
+    QString distanceUnit();
+    void setDistanceUnit(QString distanceUnit);
 
-    QString consumptionunit();
-    void setConsumptionunit(QString consumptionunit);
+    QString consumptionUnit();
+    void setConsumptionUnit(QString consumptionUnit);
 
-    unsigned int nbtire();
-    void setNbtire(unsigned int nbtire);
+    unsigned int numTires();
+    void setNbtire(unsigned int numTires);
 
-    double buyingprice();
+    double buyingPrice();
     void setBuyingprice(double price);
 
-    double sellingprice();
+    double sellingPrice();
     void setSellingprice(double price);
 
     unsigned int lifetime();
     void setLifetime(int months);
 
-    QDate buyingdate();
+    QDate buyingDate();
     void setBuyingdate(QDate date);
 
     QString getStatisticType();

@@ -29,7 +29,7 @@ Page {
     property real distanceunitfactor: 1
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
@@ -75,7 +75,7 @@ Page {
                     onClicked: manager.car.untrashTire(model.modelData)
                 }
                 MenuItem {
-                    text: qsTr("Remove")
+                    text: qsTr("Delete")
                     visible: !model.modelData.mounted && model.modelData.trashed
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
@@ -108,7 +108,7 @@ Page {
                         horizontalAlignment: Text.AlignLeft
                     }
                     Text {
-                        text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity;
+                        text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit;
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
@@ -147,7 +147,7 @@ Page {
                     x: Theme.paddingMedium
                     width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                     Text {
-                        text: model.modelData.buydate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
+                        text: model.modelData.buyDate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall

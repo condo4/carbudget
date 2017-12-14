@@ -41,12 +41,12 @@ Page {
                                         manager.car.consumption * 1.08]
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionunit === "mpg")
+        if(manager.car.consumptionUnit === "mpg")
         {
             consumptionfactor = 4.546*100/1.609
         }
@@ -102,7 +102,7 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
                     }
                     MenuItem {
-                        text: qsTr("Remove")
+                        text: qsTr("Delete")
                         onClicked: {
                             remorseAction(qsTr("Deleting"), function() {
                                 manager.car.delTank(model.modelData)
@@ -121,7 +121,7 @@ Page {
                         width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                         Text {
-                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceunity + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceunity+")"):(manager.car.distanceunity));
+                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceUnit + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceUnit+")"):(manager.car.distanceUnit));
 
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
@@ -145,7 +145,7 @@ Page {
                         width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                         Text {
-                            text: model.modelData.priceu.toFixed(3)+manager.car.currency + "/l";
+                            text: model.modelData.pricePerUnit.toFixed(3)+manager.car.currency + "/l";
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
@@ -168,12 +168,12 @@ Page {
                             horizontalAlignment: Text.AlignRight
                         }
                         Text {
-                            text: if ( manager.car.consumptionunit === "l/100km") {
+                            text: if ( manager.car.consumptionUnit === "l/100km") {
                                  model.modelData.consumption.toFixed(2)+ "l/100km";
                              }
                             else {
-                                    if ( manager.car.consumptionunit === "mpg") {
-                                    qsTr("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
+                                    if ( manager.car.consumptionUnit === "mpg") {
+                                    ("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
                                 }
                             }
 
@@ -210,7 +210,7 @@ Page {
         var tanklist = manager.car.tanks;
         for (var i = 0;i < tanklist.length ;i++)
         {
-            if (filter === "" || filter === manager.car.getFueltypeName(tanklist[i].fueltype))
+            if (filter === "" || filter === manager.car.getFuelTypeName(tanklist[i].fuelType))
                 listModel.append({"fuel" : tanklist[i]})
         }
     }

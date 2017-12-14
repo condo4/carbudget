@@ -63,7 +63,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    return ("%L1 %2").arg((manager.car.maxdistance - manager.car.mindistance).toFixed(0)).arg(manager.car.distanceunity)
+                    return ("%L1 %2").arg((manager.car.maxDistance - manager.car.minDistance).toFixed(0)).arg(manager.car.distanceUnit)
             }
         }
         Label {
@@ -73,7 +73,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                   qsTr("%1 %2 / 100 %3").arg(manager.car.budget.toFixed(2)).arg(manager.car.currency).arg(manager.car.distanceunity)
+                   ("%1 %2 / 100 %3").arg(manager.car.budget.toFixed(2)).arg(manager.car.currency).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
@@ -84,7 +84,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    qsTr("%1l / 100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceunity)
+                    ("%1l / 100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }

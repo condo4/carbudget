@@ -26,7 +26,7 @@
 
 class Car;
 
-class Costtype : public QObject
+class CostType : public QObject
 {
     Q_OBJECT
 
@@ -39,8 +39,8 @@ private:
     QString _name;
 
 public:
-    explicit Costtype(QObject *parent = 0);
-    Costtype(unsigned int id, QString name, Car *parent = 0);
+    explicit CostType(QObject *parent = 0);
+    CostType(unsigned int id, QString name, Car *parent = 0);
 
 signals:
     void idChanged();

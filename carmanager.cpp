@@ -159,13 +159,13 @@ bool CarManager::createTables(QSqlDatabase db)
 
     sqlQueries.append(QString("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"));
     sqlQueries.append(QString("INSERT  INTO CarBudget (id, value) VALUES ('version','%1'),('make',''),('model',''),('year',''),('licensePlate','');").arg(DB_VERSION));
-    sqlQueries.append(QString("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
-    sqlQueries.append(QString("CREATE TABLE FueltypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE CostTypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE FuelTypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     sqlQueries.append(QString("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
-    sqlQueries.append(QString("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buydate DATE, trashdate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buyDate DATE, trashDate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"));
     sqlQueries.append(QString("CREATE TABLE Event (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, distance UNSIGNED BIG INT);"));
-    sqlQueries.append(QString("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fueltype INTEGER, note TEXT);"));
-    sqlQueries.append(QString("CREATE TABLE CostList (event INTEGER, costtype INTEGER, cost DOUBLE, desc TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fuelType INTEGER, note TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE CostList (event INTEGER, costType INTEGER, cost DOUBLE, desc TEXT);"));
     sqlQueries.append(QString("CREATE TABLE TireUsage (event_mount INTEGER, event_umount INTEGER, tire INTEGER);"));
     sqlQueries.append(QString("CREATE TABLE PeriodicList (id INTEGER PRIMARY KEY AUTOINCREMENT, first DATE, last DATE, cost DOUBLE, desc TEXT, period INTEGER);"));
 
@@ -202,13 +202,13 @@ void CarManager::importFromMyCar(QString filename, QString name)
     }
     // First load all fuel types
     qDebug() << "Start importing fuel types";
-    QDomNodeList fueltypes= doc.elementsByTagName("FuelSubtype");
-    for (int i = 0; i < fueltypes.size(); i++) {
-        QDomNode n = fueltypes.item(i);
+    QDomNodeList fuelTypes= doc.elementsByTagName("FuelSubtype");
+    for (int i = 0; i < fuelTypes.size(); i++) {
+        QDomNode n = fuelTypes.item(i);
         QDomElement type = n.firstChildElement("code");
         if (type.isNull())
             continue;
-        _car->addNewFueltype(type.text());
+        _car->addNewFuelType(type.text());
     }
     // Now import tank events
 
@@ -245,7 +245,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
             double t_price=0;
             bool t_refuel_type=true;
             unsigned int t_station=0;
-            unsigned int t_fueltype=0;
+            unsigned int t_fuelType=0;
             QString t_note;
             if (!n_date.isNull())
             {
@@ -260,9 +260,9 @@ void CarManager::importFromMyCar(QString filename, QString name)
                 if (n_refuel_type.text().toInt()!=0) t_refuel_type=false;
             if (!n_fuel_subtype.isNull())
             {
-                Fueltype *fueltype = _car->findFueltype(n_fuel_subtype.text());
-                if (fueltype)
-                    t_fueltype=fueltype->id();
+                FuelType *fuelType = _car->findFuelType(n_fuel_subtype.text());
+                if (fuelType)
+                    t_fuelType=fuelType->id();
             }
             if (!n_station.isNull())
             {
@@ -271,28 +271,28 @@ void CarManager::importFromMyCar(QString filename, QString name)
                     t_station=station->id();
             }
             if (!n_note.isNull()) t_note = n_note.text();
-            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fueltype,t_station,t_note);
+            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fuelType,t_station,t_note);
         }
     }
     // Now import cost types from bill types;
     qDebug() << "Now import bill types as cost types";
-    QDomNodeList costtypes = doc.elementsByTagName("bill_type");
-    for (int i = 0; i < costtypes.size(); i++) {
-        QDomNode n = costtypes.item(i);
+    QDomNodeList costTypes = doc.elementsByTagName("bill_type");
+    for (int i = 0; i < costTypes.size(); i++) {
+        QDomNode n = costTypes.item(i);
         QDomElement type = n.firstChildElement("name");
         if (type.isNull())
             continue;
-        _car->addNewCosttype(type.text());
+        _car->addNewCostType(type.text());
     }
     // We don't distinguish between service and bills, therefore add service types as cost types
     qDebug() << "Now import service categories as cost types";
-    costtypes = doc.elementsByTagName("service_category");
-    for (int i = 0; i < costtypes.size(); i++) {
-        QDomNode n = costtypes.item(i);
+    costTypes = doc.elementsByTagName("service_category");
+    for (int i = 0; i < costTypes.size(); i++) {
+        QDomNode n = costTypes.item(i);
         QDomElement type = n.firstChildElement("name");
         if (type.isNull())
             continue;
-        _car->addNewCosttype(type.text());
+        _car->addNewCostType(type.text());
     }
     //Now it's time to import the bills
     qDebug() << "Now import bills as costs";
@@ -315,8 +315,8 @@ void CarManager::importFromMyCar(QString filename, QString name)
         QString t_note;
         if (!n_billtype.isNull())
         {
-            Costtype *costtype = _car->findCosttype(n_billtype.text());
-            if (costtype) t_billtype = costtype->id();
+            CostType *costType = _car->findCostType(n_billtype.text());
+            if (costType) t_billtype = costType->id();
         }
         if (!n_date.isNull())
         {
@@ -357,8 +357,8 @@ void CarManager::importFromMyCar(QString filename, QString name)
         QString t_note;
         if (!n_billtype.isNull())
         {
-            Costtype *costtype = _car->findCosttype(n_billtype.text());
-            if (costtype) t_billtype = costtype->id();
+            CostType *costType = _car->findCostType(n_billtype.text());
+            if (costType) t_billtype = costType->id();
         }
         if (!n_odo.isNull())
         {
@@ -396,19 +396,19 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         qDebug() << "ERROR: fail to open Fuelpad database";
         return;
     }
-    // First insert Fuelpad costtypes
-    _car->addNewCosttype(QString("Service"));
-    _car->addNewCosttype(QString("Oil"));
-    _car->addNewCosttype(QString("Tires"));
-    _car->addNewCosttype(QString("Insurance"));
-    _car->addNewCosttype(QString("Other"));
-    // Get ids of costtypes for faster import
+    // First insert Fuelpad costTypes
+    _car->addNewCostType(QString("Service"));
+    _car->addNewCostType(QString("Oil"));
+    _car->addNewCostType(QString("Tires"));
+    _car->addNewCostType(QString("Insurance"));
+    _car->addNewCostType(QString("Other"));
+    // Get ids of costTypes for faster import
     // We should probably think about addNewXXX to return the id, could make life easier
-    int t_serviceid=_car->findCosttype("Service")->id();
-    int t_oilid=_car->findCosttype("Oil")->id();
-    int t_tiresid=_car->findCosttype("Tires")->id();
-    int t_insuranceid=_car->findCosttype("Insurance")->id();
-    int t_otherid=_car->findCosttype("Other")->id();
+    int t_serviceid=_car->findCostType("Service")->id();
+    int t_oilid=_car->findCostType("Oil")->id();
+    int t_tiresid=_car->findCostType("Tires")->id();
+    int t_insuranceid=_car->findCostType("Insurance")->id();
+    int t_otherid=_car->findCostType("Other")->id();
     QSqlQuery query(db);
     QDate t_date;
     unsigned long int t_km;

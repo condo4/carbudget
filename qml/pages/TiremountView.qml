@@ -28,7 +28,7 @@ Page {
     property real distanceunitfactor: 1
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
@@ -46,7 +46,7 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.car.tiremounts
+        model: manager.car.tireMounts
 
         delegate: ListItem {
             width: parent.width
@@ -65,7 +65,7 @@ Page {
                     width: parent.width
 
                     Text {
-                        text:  model.modelData.tirename;
+                        text:  model.modelData.tireName;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
@@ -75,7 +75,7 @@ Page {
                  Row {
                     width: parent.width
                     Text {
-                        text: (model.modelData.mountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity + ((model.modelData.unmountdistance === 0) ? "" :  " - " + (model.modelData.unmountdistance/distanceunitfactor).toFixed(0) + manager.car.distanceunity)
+                        text: (model.modelData.mountDistance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit + ((model.modelData.unmountDistance === 0) ? "" :  " - " + (model.modelData.unmountDistance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit)
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.primaryColor
@@ -84,7 +84,7 @@ Page {
                     }
 
                     Text {
-                        text: model.modelData.mountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd") + ((model.modelData.unmountdistance === 0) ? "" : " - " + model.modelData.unmountdate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd"))
+                        text: model.modelData.mountDate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd") + ((model.modelData.unmountDistance === 0) ? "" : " - " + model.modelData.unmountDate.toLocaleDateString(Qt.locale(),"yyyy/MM/dd"))
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.primaryColor

@@ -30,11 +30,11 @@ Cost::Cost(Car *parent) :
 {
 }
 
-Cost::Cost(QDate date, unsigned int distance, unsigned int costtype, QString desc, double cost, unsigned int id, Car *parent):
+Cost::Cost(QDate date, unsigned int distance, unsigned int costType, QString desc, double cost, unsigned int id, Car *parent):
     CarEvent(date, distance, id, parent),
     _description(desc),
     _cost(cost),
-    _costtype(costtype)
+    _costType(costType)
 {
 }
 
@@ -60,35 +60,35 @@ void Cost::setCost(double cost)
     emit costChanged();
 }
 
-unsigned int Cost::costtype() const
+unsigned int Cost::costType() const
 {
-    return _costtype;
+    return _costType;
 }
 
-void Cost::setCosttype(unsigned int costtype)
+void Cost::setCostType(unsigned int costType)
 {
-    _costtype = costtype;
-    emit costtypeChanged();
+    _costType = costType;
+    emit costTypeChanged();
 }
 
 void Cost::save()
 {
-    if(_eventid == 0)
+    if(_eventId == 0)
     {
-        _eventid = saveevent();
-        if(_eventid)
+        _eventId = saveEvent();
+        if(_eventId)
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("INSERT INTO CostList (event,costtype,cost,desc) VALUES(%1,%2,%3,'%4')").arg(_eventid).arg(_costtype).arg(_cost).arg(_description);
+            QString sql = QString("INSERT INTO CostList (event,costType,cost,desc) VALUES(%1,%2,%3,'%4')").arg(_eventId).arg(_costType).arg(_cost).arg(_description);
             if(query.exec(sql))
             {
-                qDebug() << "Create Cost in database with id " << _eventid;
+                qDebug() << "Create Cost in database with id " << _eventId;
                 _car->db.commit();
             }
-            else _eventid = 0;
+            else _eventId = 0;
         }
 
-        if(_eventid == 0)
+        if(_eventId == 0)
         {
             qDebug() << "Error during Create Cost in database";
             _car->db.rollback();
@@ -96,13 +96,13 @@ void Cost::save()
     }
     else
     {
-        if(saveevent())
+        if(saveEvent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE CostList SET cost=%1, costtype='%2', desc='%3' WHERE event=%4;").arg(_cost).arg(_costtype).arg(_description).arg(_eventid);
+            QString sql = QString("UPDATE CostList SET cost=%1, costType='%2', desc='%3' WHERE event=%4;").arg(_cost).arg(_costType).arg(_description).arg(_eventId);
             if(query.exec(sql))
             {
-                qDebug() << "Update Cost in database with id " << _eventid;
+                qDebug() << "Update Cost in database with id " << _eventId;
                 _car->db.commit();
             }
             else
@@ -121,12 +121,12 @@ void Cost::save()
 void Cost::remove()
 {
     QSqlQuery query(_car->db);
-    QString sql = QString("DELETE FROM CostList WHERE event=%1;").arg(_eventid);
+    QString sql = QString("DELETE FROM CostList WHERE event=%1;").arg(_eventId);
     if(query.exec(sql))
     {
-        if(delevent())
+        if(deleteEvent())
         {
-            qDebug() << "DELETE Cost in database with id " << _eventid;
+            qDebug() << "DELETE Cost in database with id " << _eventId;
             _car->db.commit();
             return;
         }

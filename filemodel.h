@@ -20,11 +20,11 @@
 class FileModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(QString dir READ dir() WRITE setDir(QString) NOTIFY dirChanged())
-    Q_PROPERTY(int fileCount READ fileCount() NOTIFY fileCountChanged())
-    Q_PROPERTY(QString errorMessage READ errorMessage() NOTIFY errorMessageChanged())
-    Q_PROPERTY(bool active READ active() WRITE setActive(bool) NOTIFY activeChanged())
-    Q_PROPERTY(int selectedFileCount READ selectedFileCount() NOTIFY selectedFileCountChanged())
+    Q_PROPERTY(QString dir READ dir WRITE setDir NOTIFY dirChanged)
+    Q_PROPERTY(int fileCount READ fileCount NOTIFY fileCountChanged)
+    Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY errorMessageChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
+    Q_PROPERTY(int selectedFileCount READ selectedFileCount NOTIFY selectedFileCountChanged)
 
 public:
     explicit FileModel(QObject *parent = 0);
