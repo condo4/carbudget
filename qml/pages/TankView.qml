@@ -145,14 +145,14 @@ Page {
                         width: parent.width - Theme.paddingMedium - Theme.paddingMedium
 
                         Text {
-                            text: model.modelData.priceu.toFixed(3)+manager.car.currency+qsTr("/l");
+                            text: model.modelData.priceu.toFixed(3)+manager.car.currency + "/l";
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
                             width: parent.width / 5
                         }
                         Text {
-                            text: model.modelData.quantity +qsTr("l")
+                            text: model.modelData.quantity + "l"
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.secondaryColor
