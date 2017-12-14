@@ -34,13 +34,13 @@ Page {
                  if (type=="costs")
                  {
                      if (per100)
-                         return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                         return  qsTr("Bills per 100 %1 by type").arg(manager.car.distanceunity)
                      return qsTr("Bills by Type")
                  }
                  else
                  {
                      if (per100)
-                         return  qsTr("Fuel per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                         return  qsTr("Fuel per 100 %1 by type").arg(manager.car.distanceunity)
                      return qsTr("Fuel by Type")
                  }
              }
