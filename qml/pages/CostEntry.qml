@@ -125,7 +125,7 @@ Dialog {
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: descinput
-                placeholderText: qsTr("description")
+                placeholderText: qsTr("Description")
             }
         }
     }
