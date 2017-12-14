@@ -101,15 +101,15 @@ Page {
                     horizontalAlignment: Text.AlignLeft
                     width:(parent.width-parent.spacing)/2
                 }
-				Text {
+                Text {
                     text: (tank.distance/distanceunitfactor).toFixed(0)
-					font.family: Theme.fontFamily
-					font.pixelSize: Theme.fontSizeMedium
-					color: Theme.primaryColor
-					horizontalAlignment: Text.AlignRight
-					width:(parent.width-parent.spacing)/2
-				}
-			}
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
 
             Row {
                 id: quantityrow
