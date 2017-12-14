@@ -346,7 +346,7 @@ Page {
                                     width: parent.width
                                     Text {
                                         width:parent.width/2
-                                        text : qsTr("Total: ")
+                                        text : qsTr("Total:")
                                         font.family: Theme.fontFamily
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
@@ -365,7 +365,7 @@ Page {
                                     width: parent.width
                                     Text {
                                         width:parent.width/2
-                                        text : qsTr("Average: ")
+                                        text : qsTr("Average:")
                                         font.family: Theme.fontFamily
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor

@@ -56,7 +56,7 @@ Page {
                     width: parent.width
                     Text {
                         width:parent.width/2
-                        text : qsTr("Average: ")
+                        text : qsTr("Average:")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
