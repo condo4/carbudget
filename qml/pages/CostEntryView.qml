@@ -65,7 +65,7 @@ Page {
                     spacing: parent.spacing
                     width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     Text {
-                        text: qsTr("ODO:")
+                        text: qsTr("Odometer:")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

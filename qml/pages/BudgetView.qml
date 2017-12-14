@@ -278,7 +278,7 @@ Page {
                         width: parent.width
                         Text {
                             width:parent.width/2
-                            text : qsTr("ODO ")
+                            text : qsTr("Odometer")
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold: true

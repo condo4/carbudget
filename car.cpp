@@ -683,7 +683,7 @@ double Car::budget_fuel_total_byType(unsigned int id)
 }
 double Car::budget_consumption_byType(unsigned int id)
 {
-    /* Return sum(fuel price) / ODO * 100 for fueltype */
+    /* Return sum(fuel price) / odometer * 100 for fueltype */
     // We will calculate only full refills as partial refills cannat be calculated correctly
     double totalDistance=0;
     double totalQuantity=0;
@@ -748,7 +748,7 @@ double Car::budget_cost_total_byType(unsigned int id)
 }
 double Car::budget_cost_byType(unsigned int id)
 {
-    /* Return sum(cost) / ODO * 100 */
+    /* Return sum(cost) / odometer * 100 */
     double totalPrice = 0;
 
     foreach(Cost *cost, _costlist)
@@ -770,7 +770,7 @@ double Car::budget_fuel_total()
 }
 double Car::budget_fuel()
 {
-    /* Return sum(fuel price) / ODO * 100 */
+    /* Return sum(fuel price) / odometer * 100 */
     unsigned long int maxDistance = 0;
     unsigned long int minDistance = 999999999;
     double totalPrice = 0;
@@ -860,7 +860,7 @@ double Car::budget_total()
 }
 double Car::budget()
 {
-    // Return total costs  / ODO * 100
+    // Return total costs  / odometer * 100
     return budget_cost()+budget_fuel()+budget_invest()+budget_tire();
 }
 

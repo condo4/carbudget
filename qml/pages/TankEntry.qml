@@ -84,7 +84,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: manager.car.distanceunity
-                placeholderText: qsTr("ODO")
+                placeholderText: qsTr("Odometer")
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

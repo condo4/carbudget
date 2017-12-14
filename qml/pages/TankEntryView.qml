@@ -88,19 +88,19 @@ Page {
                 }
             }
 
-			Row
-			{
-				id: odorow
-				spacing: parent.spacing
-				width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-				Text {
-					text: qsTr("ODO:")
-					font.family: Theme.fontFamily
-					font.pixelSize: Theme.fontSizeMedium
-					color: Theme.primaryColor
-					horizontalAlignment: Text.AlignLeft
-					width:(parent.width-parent.spacing)/2
-				}
+            Row
+            {
+                id: odorow
+                spacing: parent.spacing
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                Text {
+                    text: qsTr("Odometer:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
 				Text {
                     text: (tank.distance/distanceunitfactor).toFixed(0)
 					font.family: Theme.fontFamily
