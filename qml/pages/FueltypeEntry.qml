@@ -43,7 +43,7 @@ Dialog {
             TextField {
                 id: nameinput
                 label: qsTr("Name")
-                placeholderText: qsTr("Name")
+                placeholderText: label
                 focus: true
                 width: parent.width
             }

@@ -62,7 +62,7 @@ Dialog {
             TextField {
                 id: kminput
                 label: manager.car.distanceunity
-                placeholderText: manager.car.distanceunity
+                placeholderText: label
                 focus: true
                 width: parent.width
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }

@@ -46,7 +46,7 @@ Dialog {
                 width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
                 focus: true
                 label: qsTr("Short car name")
-                placeholderText: qsTr("Short car name")
+                placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{4,16}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhNoPredictiveText
@@ -58,7 +58,7 @@ Dialog {
                 id: make
                 width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
                 label: qsTr("Car manufacturer")
-                placeholderText: qsTr("Car manufacturer")
+                placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -69,7 +69,7 @@ Dialog {
                 id: model
                 width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
                 label: qsTr("Car model")
-                placeholderText: qsTr("Car model")
+                placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -80,7 +80,7 @@ Dialog {
                 id: year
                 width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
                 label: qsTr("Car manufacture year")
-                placeholderText: qsTr("Car manufacture year")
+                placeholderText: label
                 validator: IntValidator { bottom: 1000; top: 9999 }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -92,7 +92,7 @@ Dialog {
                 id: licencePlate
                 width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
                 label: qsTr("Licence plate")
-                placeholderText: qsTr("Licence plate")
+                placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhNoPredictiveText

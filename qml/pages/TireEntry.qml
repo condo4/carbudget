@@ -91,7 +91,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: qsTr("Name")
-                placeholderText: qsTr("Name")
+                placeholderText: label
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: manufacturerinput.focus = true
@@ -102,7 +102,7 @@ Dialog {
                 id: manufacturerinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Manufacturer")
-                placeholderText: qsTr("Manufacturer")
+                placeholderText: label
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: modelinput.focus = true
@@ -113,7 +113,7 @@ Dialog {
                 id: modelinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Model")
-                placeholderText: qsTr("Model")
+                placeholderText: label
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: priceinput.focus = true
@@ -125,7 +125,7 @@ Dialog {
                 id: priceinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Price")
-                placeholderText: qsTr("Price")
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
@@ -138,7 +138,7 @@ Dialog {
                 id: quantityinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
-                placeholderText: qsTr("Quantity")
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

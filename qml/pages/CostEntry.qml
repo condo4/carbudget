@@ -78,7 +78,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 focus: true
                 label: manager.car.distanceunity
-                placeholderText: manager.car.distanceunity
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
@@ -114,7 +114,7 @@ Dialog {
                 id: costinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Price")
-                placeholderText: qsTr("Price")
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

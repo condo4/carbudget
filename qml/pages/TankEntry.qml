@@ -98,7 +98,7 @@ Dialog {
                 id: quantityinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Quantity")
-                placeholderText: qsTr("Quantity")
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
@@ -111,7 +111,7 @@ Dialog {
             TextField {
                 id: priceinput
                 label: qsTr("Total Price")
-                placeholderText: qsTr("Total Price")
+                placeholderText: label
                 anchors { left: parent.left; right: parent.right }
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction

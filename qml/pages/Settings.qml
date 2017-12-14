@@ -97,7 +97,7 @@ Dialog {
                 id: currencyInput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Currency")
-                placeholderText: qsTr("Currency")
+                placeholderText: label
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: distanceUnitInput.focus = true
