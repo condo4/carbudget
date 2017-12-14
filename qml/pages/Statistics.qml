@@ -61,7 +61,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Oilprice")
+                text: qsTr("Fuel price")
                 onClicked: {
                     manager.car.setChartTypeOilPrice()
                     updatechart()

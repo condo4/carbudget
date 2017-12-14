@@ -73,7 +73,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    manager.car.budget.toFixed(2)+manager.car.currency+qsTr(" / 100")+manager.car.distanceunity
+                   qsTr("%1 %2 / 100 %3").arg(manager.car.budget.toFixed(2)).arg(manager.car.currency).arg(manager.car.distanceunity)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
@@ -84,7 +84,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    manager.car.consumption.toFixed(2)+qsTr("l / 100") + manager.car.distanceunity
+                    qsTr("%1l / 100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceunity)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
