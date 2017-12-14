@@ -36,6 +36,7 @@ Dialog {
             id: flow
             spacing: Theme.paddingLarge
             width: parent.width
+            property int textWidth: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
 
             DialogHeader {
                 title: qsTr("Create new car")
@@ -43,7 +44,7 @@ Dialog {
 
             TextField {
                 id: name
-                width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
+                width: parent.textWidth
                 focus: true
                 label: qsTr("Short car name")
                 placeholderText: label
@@ -56,7 +57,7 @@ Dialog {
             }
             TextField {
                 id: make
-                width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
+                width: parent.textWidth
                 label: qsTr("Car manufacturer")
                 placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
@@ -67,7 +68,7 @@ Dialog {
             }
             TextField {
                 id: model
-                width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
+                width: parent.textWidth
                 label: qsTr("Car model")
                 placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
@@ -78,7 +79,7 @@ Dialog {
             }
             TextField {
                 id: year
-                width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
+                width: parent.textWidth
                 label: qsTr("Car manufacture year")
                 placeholderText: label
                 validator: IntValidator { bottom: 1000; top: 9999 }
@@ -90,7 +91,7 @@ Dialog {
             }
             TextField {
                 id: licencePlate
-                width: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
+                width: parent.textWidth
                 label: qsTr("Licence plate")
                 placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
