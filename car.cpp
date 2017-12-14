@@ -1375,7 +1375,7 @@ void Car::setMake(QString make)
         else
             query.exec(QString("UPDATE CarBudget SET value='%1' WHERE id='make';").arg(make));
 
-        qDebug() << "Change car manufacturer in database:" << _make << ">>" << make;
+        qDebug() << "Change car model in database:" << _make << ">>" << make;
     }
     _make = make;
     emit makeChanged();
@@ -1389,7 +1389,7 @@ QString Car::model()
         if(query.exec("SELECT value FROM CarBudget WHERE id='model';")) {
             query.next();
             _model = query.value(0).toString();
-            qDebug() << "Found car manufacturer in database:" << _model;
+            qDebug() << "Found car model in database:" << _model;
         }
         if(_model.length() < 1)
         {
