@@ -116,7 +116,7 @@ Dialog {
                     }
                     MenuItem {
                         text: "mile"
-                        property string value: "mile"
+                        property string value: "mi"
                     }
                 }
                 onCurrentItemChanged: {
@@ -234,7 +234,7 @@ Dialog {
 
         // I don't know why, but there is no easy way to set these...
         if(distanceUnit == "km")   { distanceUnitInput.currentIndex = 0 }
-        if(distanceUnit == "mile") { distanceUnitInput.currentIndex = 1 }
+        if(distanceUnit == "mi") { distanceUnitInput.currentIndex = 1 }
         if(consumptionUnit == "l/100km") { consumptionUnitInput.currentIndex = 0 }
         if(consumptionUnit == "mpg")     { consumptionUnitInput.currentIndex = 1 }
     }
