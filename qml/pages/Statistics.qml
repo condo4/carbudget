@@ -34,6 +34,15 @@ Page {
 
     property int beginIndex: manager.car.beginIndex
     property int endIndex: manager.car.endIndex
+    property real distanceunitfactor: 1
+
+    Component.onCompleted: {
+        distanceunit = manager.car.distanceunity
+        if(distanceunit == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -88,7 +97,7 @@ Page {
             Label {
                 x: Theme.paddingLarge
                 text: manager.car.statisticType + " (" + qsTr("Distance") + ": " +
-                       + (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance)
+                       + (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance)/distanceunitfactor
                        + manager.car.distanceunity + ")"
                 font.pixelSize: Theme.fontSizeMedium
             }
