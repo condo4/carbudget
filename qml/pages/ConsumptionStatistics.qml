@@ -24,6 +24,18 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+    property real distanceunitfactor: 1
+    property real consumptionfactor : 1.0
+    Component.onCompleted: {
+        if(manager.car.distanceunity == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+        if(manager.car.consumptionunit == 'mpg')
+        {
+            consumptionfactor = 4.546*100/1.609
+        }
+    }
     SilicaListView{
         id:fueltypelist
         VerticalScrollDecorator {}
@@ -64,7 +76,14 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text :  manager.car.budget_consumption_byType(model.modelData.id).toFixed(2) + " l";
+                        text : if ( manager.car.consumptionunit == 'l/100km') {
+                            manager.car.budget_consumption_byType(model.modelData.id).toFixed(2) + " l";
+                        }
+                        else {
+                            if ( manager.car.consumptionunit == 'mpg') {
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_byType(model.modelData.id)).toFixed(2));
+                            }
+                        }
                         font.family: "monospaced"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
@@ -83,7 +102,14 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text :  manager.car.budget_consumption_min_byType(model.modelData.id).toFixed(2) + " l";
+                        text : if ( manager.car.consumptionunit == 'l/100km') {
+                            manager.car.budget_consumption_min_byType(model.modelData.id).toFixed(2) + " l";
+                        }
+                        else {
+                            if ( manager.car.consumptionunit == 'mpg') {
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_min_byType(model.modelData.id)).toFixed(2));
+                            }
+                        }
                         font.family: "monospaced"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
@@ -102,7 +128,14 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text :  manager.car.budget_consumption_max_byType(model.modelData.id).toFixed(2) + " l";
+                        text : if ( manager.car.consumptionunit == 'l/100km') {
+                            manager.car.budget_consumption_max_byType(model.modelData.id).toFixed(2) + " l";
+                        }
+                        else {
+                            if ( manager.car.consumptionunit == 'mpg') {
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_max_byType(model.modelData.id)).toFixed(2));
+                            }
+                        }
                         font.family: "monospaced"
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
