@@ -621,7 +621,7 @@ Page {
                             color: "transparent"
                         }
                         Text {
-                            text : qsTr("Costs per 100 Km")
+                            text : qsTr("Costs per 100 %1").arg(distanceunit)
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold: true
@@ -650,7 +650,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_fuel*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -682,7 +682,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_cost*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -714,7 +714,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_tire.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_tire*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -748,7 +748,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_invest.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_invest*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -768,7 +768,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text : manager.car.budget.toFixed(2) + " " + manager.car.currency
+                            text : (manager.car.budget*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
