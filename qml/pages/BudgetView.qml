@@ -418,11 +418,11 @@ Page {
                                     }
                                 }
                             }
-                            MouseArea {
-                                id:consumptionMouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("ConsumptionStatistics.qml"))
-                            }
+                            //MouseArea {
+                            //    id:consumptionMouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("ConsumptionStatistics.qml"))
+                            //}
                         }
                     }
                     Row { width: parent.height; height: Theme.paddingMedium; }
@@ -468,11 +468,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id:fuelcostsMouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:false, type:"fuel"})
-                            }
+                            //MouseArea {
+                            //    id:fuelcostsMouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:false, type:"fuel"})
+                            //}
                         }
                     }
                     Row {
@@ -500,11 +500,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id: billcostsMouse
-                                anchors.fill: parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false, type:"costs"})
-                            }
+                            //MouseArea {
+                            //    id: billcostsMouse
+                            //    anchors.fill: parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false, type:"costs"})
+                            //}
                         }
                     }
                     Row {
@@ -531,13 +531,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            /*
-                                MouseArea {
-                                    id:tirecostsMouse
-                                    anchors.fill:parent
-                                    onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
-                                }
-        */
+                            //    MouseArea {
+                            //        id:tirecostsMouse
+                            //        anchors.fill:parent
+                            //        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                            //    }
                         }
                     }
                     Row {
@@ -629,11 +627,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id:fuelper100Mouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:true, type:"fuel"})
-                            }
+                            //MouseArea {
+                            //    id:fuelper100Mouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:true, type:"fuel"})
+                            //}
                         }
                     }
                     Row {
@@ -661,11 +659,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id: billsper100Mouse
-                                anchors.fill: parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
-                            }
+                            //MouseArea {
+                            //    id: billsper100Mouse
+                            //    anchors.fill: parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
+                            //}
                         }
                     }
                     Row {
@@ -693,13 +691,11 @@ Page {
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            /*
-                                MouseArea {
-                                    id: tiresper100Mouse
-                                    anchors.fill: parent
-                                    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
-                                }
-        */
+                            //    MouseArea {
+                            //        id: tiresper100Mouse
+                            //        anchors.fill: parent
+                            //        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
+                            //    }
                         }
                     }
                     Row {

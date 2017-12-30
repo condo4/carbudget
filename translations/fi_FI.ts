@@ -274,12 +274,7 @@
         <translation>Autoluettelo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="115"/>
-        <source>Backup</source>
-        <translation>Varmuuskopioi</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarView.qml" line="121"/>
+        <location filename="../qml/pages/CarView.qml" line="124"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
