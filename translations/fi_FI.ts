@@ -146,32 +146,32 @@
 <context>
     <name>CarCreate</name>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="41"/>
+        <location filename="../qml/pages/CarCreate.qml" line="42"/>
         <source>Create new car</source>
         <translation>Lisää uusi auto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="48"/>
+        <location filename="../qml/pages/CarCreate.qml" line="49"/>
         <source>Short car name</source>
         <translation>Auton lyhyt nimi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="60"/>
+        <location filename="../qml/pages/CarCreate.qml" line="61"/>
         <source>Car manufacturer</source>
         <translation>Auton merkki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="71"/>
+        <location filename="../qml/pages/CarCreate.qml" line="72"/>
         <source>Car model</source>
         <translation>Auton malli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="82"/>
+        <location filename="../qml/pages/CarCreate.qml" line="83"/>
         <source>Car manufacture year</source>
         <translation>Auton vuosimalli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="94"/>
+        <location filename="../qml/pages/CarCreate.qml" line="95"/>
         <source>Licence plate</source>
         <translation>Rekisterinumero</translation>
     </message>

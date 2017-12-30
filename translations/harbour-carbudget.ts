@@ -146,32 +146,32 @@
 <context>
     <name>CarCreate</name>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="41"/>
+        <location filename="../qml/pages/CarCreate.qml" line="42"/>
         <source>Create new car</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="48"/>
+        <location filename="../qml/pages/CarCreate.qml" line="49"/>
         <source>Short car name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="60"/>
+        <location filename="../qml/pages/CarCreate.qml" line="61"/>
         <source>Car manufacturer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="71"/>
+        <location filename="../qml/pages/CarCreate.qml" line="72"/>
         <source>Car model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="82"/>
+        <location filename="../qml/pages/CarCreate.qml" line="83"/>
         <source>Car manufacture year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarCreate.qml" line="94"/>
+        <location filename="../qml/pages/CarCreate.qml" line="95"/>
         <source>Licence plate</source>
         <translation type="unfinished"></translation>
     </message>
