@@ -27,6 +27,14 @@ Page {
     id:coststatisticsPage
     property bool  per100: false
     property string type: "costs"
+    property real distanceunitfactor: 1
+    Component.onCompleted: {
+        if(manager.car.distanceunity == "mi")
+        {
+            distanceunitfactor = 1.609
+        }
+    }
+
     PageHeader {
             id: header
 
@@ -165,7 +173,7 @@ Page {
                 name = costlist[i].name
                 id = costlist[i].id
                 if (per100)
-                    price = manager.car.budget_cost_byType(costlist[i].id)
+                    price = manager.car.budget_cost_byType(costlist[i].id)*distanceunitfactor
                 else price = manager.car.budget_cost_total_byType(costlist[i].id)
             }
             else
@@ -173,7 +181,7 @@ Page {
                 name = fueltypelist[i].name
                 id = fueltypelist[i].id
                 if (per100)
-                    price = manager.car.budget_fuel_byType(fueltypelist[i].id)
+                    price = manager.car.budget_fuel_byType(fueltypelist[i].id)*distanceunitfactor
                 else price = manager.car.budget_fuel_total_byType(fueltypelist[i].id)
             }
             listModel.append({id: id, name: name, total: price, color: finalcolor})

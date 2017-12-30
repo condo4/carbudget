@@ -28,6 +28,7 @@ Page {
     id: budgetPage
     property string distanceunit
     property real distanceunitfactor: 1
+    property real consumptionfactor : 1.0
     property variant chartColor: [ Theme.secondaryColor,
         Theme.secondaryHighlightColor,
         Theme.highlightColor,
@@ -38,6 +39,10 @@ Page {
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
+        }
+        if(manager.car.consumptionunit == 'mpg')
+        {
+            consumptionfactor = 4.546*100/1.609
         }
     }
 
@@ -373,7 +378,14 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  manager.car.consumption.toFixed(2) + " l"
+                                        text: if ( manager.car.consumptionunit == 'l/100km') {
+                                            manager.car.consumption.toFixed(2)+ " l";
+                                        }
+                                        else {
+                                            if ( manager.car.consumptionunit == 'mpg') {
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
+                                            }
+                                        }
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
                                         horizontalAlignment: Text.AlignRight
@@ -392,7 +404,14 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  manager.car.consumptionmin.toFixed(2) + " l"
+                                        text : if (manager.car.consumptionunit == 'l/100km') {
+                                            manager.car.consumptionmin.toFixed(2) + " l"
+                                        }
+                                        else {
+                                            if ( manager.car.consumptionunit == 'mpg') {
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionmin).toFixed(2))
+                                            }
+                                        }
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
                                         horizontalAlignment: Text.AlignRight
@@ -411,7 +430,14 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  manager.car.consumptionmax.toFixed(2) + " l"
+                                        text :  if ( manager.car.consumptionunit == 'l/100km') {
+                                            manager.car.consumptionmax.toFixed(2) + " l"
+                                        }
+                                        else {
+                                            if ( manager.car.consumptionunit == 'mpg') {
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionmax).toFixed(2))
+                                            }
+                                        }
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
                                         horizontalAlignment: Text.AlignRight
@@ -595,7 +621,7 @@ Page {
                             color: "transparent"
                         }
                         Text {
-                            text : qsTr("Costs per 100 Km")
+                            text : qsTr("Costs per 100 %1").arg(distanceunit)
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold: true
@@ -624,7 +650,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_fuel.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_fuel*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -656,7 +682,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_cost.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_cost*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -688,7 +714,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_tire.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_tire*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -722,7 +748,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_invest.toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budget_invest*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -742,7 +768,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text : manager.car.budget.toFixed(2) + " " + manager.car.currency
+                            text : (manager.car.budget*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
