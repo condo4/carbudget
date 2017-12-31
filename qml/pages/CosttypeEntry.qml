@@ -24,8 +24,8 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    id: addCosttype
-    property Costtype costtype
+    id: addCostType
+    property CostType costType
     allowedOrientations: Orientation.All
 
     SilicaFlickable {
@@ -36,7 +36,7 @@ Dialog {
             width: parent.width
 
             DialogHeader { title: {
-                    if(costtype != undefined) return qsTr("Modify Cost Type")
+                    if(costType != undefined) return qsTr("Modify Cost Type")
                     else return qsTr("New Cost Type")
                 }
             }
@@ -44,7 +44,7 @@ Dialog {
             TextField {
                 id: nameinput
                 label: qsTr("Name")
-                placeholderText: qsTr("Name")
+                placeholderText: label
                 focus: true
                 width: parent.width
             }
@@ -53,21 +53,21 @@ Dialog {
     canAccept: nameinput.acceptableInput
 
     onOpened: {
-        if(costtype != undefined)
+        if(costType != undefined)
         {
-            nameinput.text = costtype.name
+            nameinput.text = costType.name
         }
     }
 
     onAccepted: {
-        if(costtype == undefined)
+        if(costType == undefined)
         {
-            manager.car.addNewCosttype(nameinput.text)
+            manager.car.addNewCostType(nameinput.text)
         }
         else
         {
-            costtype.name = nameinput.text
-            costtype.save()
+            costType.name = nameinput.text
+            costType.save()
         }
     }
 }

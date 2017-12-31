@@ -39,7 +39,7 @@ Page {
         }
 
         anchors.fill: parent
-        model: manager.car.costtypes
+        model: manager.car.costTypes
 
         delegate: ListItem {
             width: parent.width
@@ -50,16 +50,16 @@ Page {
                     enabled: model.modelData.id > 0 ? true : false
                     visible: model.modelData.id > 0 ? true : false
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("CosttypeEntry.qml"), { costtype: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("CosttypeEntry.qml"), { costType: model.modelData })
                 }
 
                 MenuItem {
                     enabled: model.modelData.id > 0 ? true : false
                     visible: model.modelData.id > 0 ? true : false
-                    text: qsTr("Remove")
+                    text: qsTr("Delete")
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delCosttype(model.modelData)
+                            manager.car.delCostType(model.modelData)
                         })
                     }
                 }

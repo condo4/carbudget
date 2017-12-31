@@ -30,7 +30,7 @@ Page {
     property real distanceunitfactor: 1
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
@@ -65,7 +65,7 @@ Page {
                     spacing: parent.spacing
                     width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     Text {
-                        text: qsTr("ODO:")
+                        text: qsTr("Odometer:")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
@@ -104,7 +104,7 @@ Page {
                     }
                 }
                 Row {
-                    id: costtyperow
+                    id: costTyperow
                     width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                     spacing:Theme.paddingLarge
                     Text {
@@ -116,7 +116,7 @@ Page {
                         width:(parent.width-parent.spacing)/2
                     }
                     Text {
-                        text: manager.car.getCosttypeName(cost.costtype)
+                        text: manager.car.getCostTypeName(cost.costType)
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

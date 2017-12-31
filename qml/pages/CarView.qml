@@ -26,16 +26,59 @@ import harbour.carbudget 1.0
 
 Page {
     allowedOrientations: Orientation.All
+
+    property int numCars: manager.cars.length
+
+    SilicaFlickable {
+        id: welcomeFlickable
+        enabled: numCars == 0
+        visible: numCars == 0
+        anchors.fill: parent
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Import Car")
+                onClicked: pageStack.push(Qt.resolvedUrl("ImportHelp.qml"))
+            }
+            MenuItem {
+                text: qsTr("Create new car")
+                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
+            }
+        }
+        Label {
+            id: welcomeTextA
+            anchors.top: parent.top
+            width: parent.width
+            height: parent.height / 2
+            font.pixelSize: Theme.fontSizeHuge
+            color: Theme.highlightColor
+            text: qsTr("Welcome to CarBudget!")
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Label {
+            id: welcomeTextB
+            anchors.top: welcomeTextA.bottom
+            anchors.bottom: parent.bottom
+            width: parent.width
+            height: parent.height / 2
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            text: qsTr("Please create a new car or import data from another application using the pulley menu.")
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+        }
+    }
+
     SilicaListView {
         id: carView
+        enabled: numCars > 0
+        visible: numCars > 0
         anchors.fill: parent
         model: manager.cars
-
-        function select_car(data) {
-            manager.selectCar(data)
-            pageStack.clear()
-            pageStack.push(Qt.resolvedUrl("CarEntry.qml"));
-        }
 
         PullDownMenu {
             MenuItem {
@@ -57,19 +100,30 @@ Page {
 
 
         delegate: ListItem {
+            id: carItem
             width: parent.width
             showMenuOnPressAndHold: true
-            onClicked: carView.select_car(model.modelData)
+            onClicked: function() {
+                manager.selectCar(model.modelData)
+                if(pageStack.depth > 1)
+                    pageStack.navigateBack()
+                else
+                    pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
+            }
             menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Select")
-                    onClicked: carView.select_car(model.modelData)
-                }
-
+                // Backup functionality works, but I didn't yet
+                // find a way to show a confirmation message,
+                // so I'll comment this out and finish it later.
+                //MenuItem {
+                //    text: qsTr("Backup")
+                //    onClicked: function() {
+                //        successful = manager.backupCar(model.modelData)
+                //    }
+                //}
                 MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
-                        remorseAction("Deleting", function() {
+                        Remorse.itemAction(carItem, "Deleting", function() {
                             manager.delCar(model.modelData)
                         })
                     }

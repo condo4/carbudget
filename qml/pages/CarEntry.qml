@@ -31,12 +31,12 @@ Page {
     property real consumptionfactor : 1.0
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionunit == 'mpg')
+        if(manager.car.consumptionUnit === "mpg")
         {
             consumptionfactor  = 4.546*100/1.609
         }
@@ -85,38 +85,42 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Distance: %L1 ~ %L2 %3").arg((manager.car.mindistance/distanceunitfactor).toFixed(0)).arg((manager.car.maxdistance/distanceunitfactor).toFixed(0)).arg(manager.car.distanceunity)
+                text: qsTr("Distance: %L1 ~ %L2 %3").arg((manager.car.minDistance/distanceunitfactor).toFixed(0)).arg((manager.car.maxDistance/distanceunitfactor).toFixed(0)).arg(manager.car.distanceUnit)
             }
 
             Label {
                 x: Theme.paddingLarge
                 text:
-                    if ( manager.car.consumptionunit == 'l/100km' ) {
+                    if ( manager.car.consumptionUnit === "l/100km" ) {
                         qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
                     }
-                    else if ( manager.car.consumptionunit == 'mpg' ) {
+                    else if ( manager.car.consumptionUnit === "mpg" ) {
                         qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
                     }
             }
             Label {
                 x: Theme.paddingLarge
                 text:
-                    if ( manager.car.consumptionunit == 'l/100km' ) {
-                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionlast.toFixed(2))
+                    if ( manager.car.consumptionUnit === "l/100km" ) {
+                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionLast.toFixed(2))
                     }
-                    else if ( manager.car.consumptionunit == 'mpg' ) {
-                        qsTr("Last: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionlast).toFixed(2))
+                    else if ( manager.car.consumptionUnit === "mpg" ) {
+                        qsTr("Last: %L1 mpg").arg(((consumptionfactor * 1/manager.car.consumptionLast)).toFixed(2))
                     }
                 color: {
-                    if(manager.car.consumptionlast < manager.car.consumption * 0.92) return "#00FF00"
-                    if(manager.car.consumptionlast < manager.car.consumption * 0.94) return "#40FF00"
-                    if(manager.car.consumptionlast < manager.car.consumption * 0.96) return "#80FF00"
-                    if(manager.car.consumptionlast < manager.car.consumption * 0.98) return "#C0FF00"
-                    if(manager.car.consumptionlast < manager.car.consumption * 1.00) return "#FFFF00"
-                    if(manager.car.consumptionlast < manager.car.consumption * 1.02) return "#FFC000"
-                    if(manager.car.consumptionlast < manager.car.consumption * 1.04) return "#FF8000"
-                    if(manager.car.consumptionlast < manager.car.consumption * 1.06) return "#FF4000"
-                    if(manager.car.consumptionlast < manager.car.consumption * 1.08) return "#FF2000"
+                    if(manager.car.consumptionLast === 0) return Theme.primaryColor
+
+                    var cLast = manager.car.consumptionLast
+                    var cAvg  = manager.car.consumption
+                    if(cLast < cAvg * 0.92) return "#00FF00"
+                    if(cLast < cAvg * 0.94) return "#40FF00"
+                    if(cLast < cAvg * 0.96) return "#80FF00"
+                    if(cLast < cAvg * 0.98) return "#C0FF00"
+                    if(cLast < cAvg * 1.00) return "#FFFF00"
+                    if(cLast < cAvg * 1.02) return "#FFC000"
+                    if(cLast < cAvg * 1.04) return "#FF8000"
+                    if(cLast < cAvg * 1.06) return "#FF4000"
+                    if(cLast < cAvg * 1.08) return "#FF2000"
                     return "#FF0000"
                 }
             }
@@ -238,8 +242,8 @@ Page {
                     Button {
                         width: 300 * Screen.widthRatio
                         anchors.verticalCenter: parent.verticalCenter
-                        text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
-                        color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
+                        text: (manager.car.tireMounted < manager.car.numTires)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.numTires)):(qsTr("Tires mounted"))
+                        color: (manager.car.tireMounted < manager.car.numTires)?(Theme.highlightColor):(Theme.primaryColor)
                         onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
                     }
                 }

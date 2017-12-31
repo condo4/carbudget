@@ -26,7 +26,7 @@ import harbour.carbudget 1.0
 Dialog {
     property Cost cost
     property date cost_date
-    property int costtype
+    property int costType
     property string distanceunit
     property real distanceunitfactor: 1
     allowedOrientations: Orientation.All
@@ -77,32 +77,32 @@ Dialog {
                 id: kminput
                 anchors { left: parent.left; right: parent.right }
                 focus: true
-                label: manager.car.distanceunity
-                placeholderText: manager.car.distanceunity
+                label: manager.car.distanceUnit
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                EnterKey.onClicked: cbcosttype.clicked(0)
+                EnterKey.onClicked: cbcostType.clicked(0)
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             ComboBox {
-                id: cbcosttype
+                id: cbcostType
                 label: qsTr("Cost Type")
                 anchors { left: parent.left; right: parent.right }
 
                 menu: ContextMenu {
                     Repeater {
-                        id: costtypeslistrepeater
-                        model: manager.car.costtypes
+                        id: costTypeslistrepeater
+                        model: manager.car.costTypes
                         MenuItem {
                             property int dbid
-                            id: costtypelistItem
+                            id: costTypeListItem
                             text: modelData.name
                             dbid: modelData.id
                             onClicked:{
-                                costtype = modelData.id
+                                costType = modelData.id
                                 costinput.focus = true
                             }
                         }
@@ -114,7 +114,7 @@ Dialog {
                 id: costinput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Price")
-                placeholderText: qsTr("Price")
+                placeholderText: label
 
                 validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
@@ -125,14 +125,14 @@ Dialog {
             TextArea {
                 anchors { left: parent.left; right: parent.right }
                 id: descinput
-                placeholderText: qsTr("description")
+                placeholderText: qsTr("Description")
             }
         }
     }
     canAccept: kminput.acceptableInput && costinput.acceptableInput
 
     onOpened: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi" )
         {
             distanceunitfactor = 1.609
@@ -141,14 +141,14 @@ Dialog {
         {
             cost_date = cost.date
             kminput.text = (cost.distance / distanceunitfactor)
-            costtype = cost.costtype
+            costType = cost.costType
             descinput.text = cost.description
             costinput.text = cost.cost
-            for(var i=0; i<costtypeslistrepeater.count; i++)
+            for(var i=0; i<costTypeslistrepeater.count; i++)
             {
-                if(costtypeslistrepeater.itemAt(i).dbid === cost.costtype)
+                if(costTypeslistrepeater.itemAt(i).dbid === cost.costType)
                 {
-                    cbcosttype.currentIndex = i
+                    cbcostType.currentIndex = i
                     break
                 }
             }
@@ -159,13 +159,13 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            manager.car.addNewCost(cost_date,kminput.text * distanceunitfactor,costtype,descinput.text,costinput.text.replace(",","."))
+            manager.car.addNewCost(cost_date,kminput.text * distanceunitfactor,costType,descinput.text,costinput.text.replace(",","."))
         }
         else
         {
             cost.date = cost_date
             cost.distance = kminput.text * distanceunitfactor
-            cost.costtype = costtype
+            cost.costType = costType
             cost.description = descinput.text
             cost.cost = costinput.text.replace(",",".")
             cost.save()

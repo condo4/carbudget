@@ -24,39 +24,99 @@ import Sailfish.Silica 1.0
 
 
 Dialog {
+    id: dialog
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
-        contentHeight: column.height + Theme.paddingLarge
+        contentHeight: flow.height + Theme.paddingLarge
 
         // Place our content in a Column.  The PageHeader is always placed at the top
         // of the page, followed by our content.
-        Column {
-            id: column
-            width: parent.width
+        Flow {
+            id: flow
             spacing: Theme.paddingLarge
+            width: parent.width
+            property int textWidth: (isPortrait ? parent.width : (parent.width / 2 - Theme.paddingLarge))
 
             DialogHeader {
                 title: qsTr("Create new car")
             }
 
             TextField {
-                id: inputname
-                anchors { left: parent.left; right: parent.right }
+                id: name
+                width: parent.textWidth
                 focus: true
-                label: qsTr("Short Car name")
-                placeholderText: qsTr("Short Car name")
+                label: qsTr("Short car name")
+                placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{4,16}$/ }
-                color: errorHighlight? "red" : Theme.primaryColor
+                color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhNoPredictiveText
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: make.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
-
+            TextField {
+                id: make
+                width: parent.textWidth
+                label: qsTr("Car manufacturer")
+                placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: model.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            TextField {
+                id: model
+                width: parent.textWidth
+                label: qsTr("Car model")
+                placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: year.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            TextField {
+                id: year
+                width: parent.textWidth
+                label: qsTr("Car manufacture year")
+                placeholderText: label
+                validator: IntValidator { bottom: 1000; top: 9999 }
+                color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
+                inputMethodHints: Qt.ImhDigitsOnly
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: licencePlate.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            TextField {
+                id: licencePlate
+                width: parent.textWidth
+                label: qsTr("Licence plate")
+                placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
+                inputMethodHints: Qt.ImhNoPredictiveText
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: dialog.canAccept ? dialog.accept() : function() {}
+            }
         }
     }
 
-    canAccept: inputname.acceptableInput
+    canAccept: {
+        return name.acceptableInput
+                && make.acceptableInput
+                && model.acceptableInput
+                && year.acceptableInput
+                && licencePlate.acceptableInput
+    }
 
     onAccepted: {
-        manager.createCar(inputname.text)
+        manager.createCar(name.text)
+        manager.selectCar(name.text)
+        manager.car.make = make.text
+        manager.car.model = model.text
+        manager.car.year = year.text
+        manager.car.licensePlate = licencePlate.text
     }
 }

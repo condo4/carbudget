@@ -25,18 +25,18 @@
 #include <QDate>
 #include "carevent.h"
 
-class Tiremount : public QObject
+class TireMount : public QObject
 {
     // not derived from CarEvent as we need to events per Mount (Mount / Umnount)
     Q_OBJECT
-    Q_PROPERTY(unsigned int tire      READ tire    WRITE setTire   NOTIFY tiremountChanged)
-    Q_PROPERTY(QString tirename      READ tirename  NOTIFY tiremountChanged)
-    Q_PROPERTY(unsigned int mountid      READ mountid  NOTIFY tiremountChanged)
-    Q_PROPERTY(QDateTime mountdate      READ mountdate    WRITE setMountdate  NOTIFY tiremountChanged)
-    Q_PROPERTY(unsigned int mountdistance      READ mountdistance    WRITE setMountdistance  NOTIFY tiremountChanged)
-    Q_PROPERTY(unsigned int unmountid      READ unmountid NOTIFY tiremountChanged)
-    Q_PROPERTY(QDateTime unmountdate      READ unmountdate    WRITE setUnmountdate  NOTIFY tiremountChanged)
-    Q_PROPERTY(unsigned int unmountdistance      READ unmountdistance    WRITE setUnmountdistance NOTIFY tiremountChanged)
+    Q_PROPERTY(unsigned int tire      READ tire    WRITE setTire   NOTIFY tireMountChanged)
+    Q_PROPERTY(QString tireName      READ tireName  NOTIFY tireMountChanged)
+    Q_PROPERTY(unsigned int mountid      READ mountid  NOTIFY tireMountChanged)
+    Q_PROPERTY(QDateTime mountDate      READ mountDate    WRITE setMountdate  NOTIFY tireMountChanged)
+    Q_PROPERTY(unsigned int mountDistance      READ mountDistance    WRITE setMountDistance  NOTIFY tireMountChanged)
+    Q_PROPERTY(unsigned int unmountid      READ unmountid NOTIFY tireMountChanged)
+    Q_PROPERTY(QDateTime unmountDate      READ unmountDate    WRITE setUnmountDate  NOTIFY tireMountChanged)
+    Q_PROPERTY(unsigned int unmountDistance      READ unmountDistance    WRITE setUnmountDistance NOTIFY tireMountChanged)
 
 
 private:
@@ -47,27 +47,27 @@ private:
     const QDate _notUnmounted;
 
 public:
-    explicit Tiremount(Car *parent = 0);
-    explicit Tiremount(unsigned int mountid, QDate mountdate, unsigned int mountdistance,unsigned int unmountid, QDate unmountdate, unsigned int unmountdistance,unsigned int tire, Car* parent);
+    explicit TireMount(Car *parent = 0);
+    explicit TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance,unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance,unsigned int tire, Car* parent);
     unsigned int tire() const;
-    unsigned int mountdistance() const;
-    QDateTime mountdate() const;
+    unsigned int mountDistance() const;
+    QDateTime mountDate() const;
     unsigned int mountid() const;
-    unsigned int unmountdistance() const;
-    QDateTime unmountdate() const;
+    unsigned int unmountDistance() const;
+    QDateTime unmountDate() const;
     unsigned int unmountid() const;
-    void setMountdistance(unsigned int distance);
+    void setMountDistance(unsigned int distance);
     void setMountdate(QDateTime date);
-    void setUnmountdistance(unsigned int distance);
-    void setUnmountdate(QDateTime date);
+    void setUnmountDistance(unsigned int distance);
+    void setUnmountDate(QDateTime date);
     void setUnmountEvent(CarEvent *ev);
 
-    QString tirename() const;
+    QString tireName() const;
     void setTire(unsigned int tire);
 
 
 signals:
-    void tiremountChanged();
+    void tireMountChanged();
 
 public slots:
     void save();

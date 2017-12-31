@@ -42,13 +42,13 @@ Page {
                  if (type=="costs")
                  {
                      if (per100)
-                         return  qsTr("Bills per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                         return  qsTr("Bills per 100 %1 by type").arg(manager.car.distanceUnit)
                      return qsTr("Bills by Type")
                  }
                  else
                  {
                      if (per100)
-                         return  qsTr("Fuel per 100 ")  + manager.car.distanceunity + qsTr(" by Type")
+                         return  qsTr("Fuel per 100 %1 by type").arg(manager.car.distanceUnit)
                      return qsTr("Fuel by Type")
                  }
              }
@@ -90,7 +90,7 @@ Page {
         }
     }
     SilicaListView{
-        id:costlistView
+        id:costListView
         anchors.top:pieChart.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -146,11 +146,11 @@ Page {
     // Fill list model
     function fillListModel()
     {
-        var costlist = manager.car.costtypes
-        var fueltypelist = manager.car.fueltypes
+        var costList = manager.car.costTypes
+        var fuelTypeList = manager.car.fuelTypes
         var color
         listModel.clear()
-        var count = (type=="costs" ? costlist.length : fueltypelist.length)
+        var count = (type=="costs" ? costList.length : fuelTypeList.length)
         for (var i = 0;i < count ;i++)
         {
             color=(i+1)/(count+2)
@@ -170,19 +170,19 @@ Page {
             var id
             if (type=="costs")
             {
-                name = costlist[i].name
-                id = costlist[i].id
+                name = costList[i].name
+                id = costList[i].id
                 if (per100)
-                    price = manager.car.budget_cost_byType(costlist[i].id)*distanceunitfactor
-                else price = manager.car.budget_cost_total_byType(costlist[i].id)
+                    price = manager.car.budgetCost_byType(costList[i].id)*distanceunitfactor
+                else price = manager.car.budgetCostTotal_byType(costList[i].id)
             }
             else
             {
-                name = fueltypelist[i].name
-                id = fueltypelist[i].id
+                name = fuelTypeList[i].name
+                id = fuelTypeList[i].id
                 if (per100)
-                    price = manager.car.budget_fuel_byType(fueltypelist[i].id)*distanceunitfactor
-                else price = manager.car.budget_fuel_total_byType(fueltypelist[i].id)
+                    price = manager.car.budgetFuel_byType(fuelTypeList[i].id)*distanceunitfactor
+                else price = manager.car.budgetFuelTotal_byType(fuelTypeList[i].id)
             }
             listModel.append({id: id, name: name, total: price, color: finalcolor})
         }

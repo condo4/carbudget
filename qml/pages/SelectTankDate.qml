@@ -26,7 +26,7 @@ Page {
 
     property int type       // 0 means beginDate. Else endDate
     property int theIndex
-    property int nrOfEntrys: manager.car.nbtank
+    property int nrOfEntrys: manager.car.numTanks
 
     Drawer {
         id: selectTankDateViewer

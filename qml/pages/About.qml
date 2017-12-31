@@ -32,8 +32,8 @@ Page {
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
-            enabled: manager.is_debug
-            visible: manager.is_debug
+            //enabled: manager.is_debug
+            //visible: manager.is_debug
 
             MenuItem {
                 text: qsTr("Simulation")
@@ -71,7 +71,8 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                truncationMode: TruncationMode.Fade
+                width: parent.width
+                wrapMode: Text.Wrap
                 text: qsTr("Credits to:<br />- Lorenzo Facca (Italian translation)<br />- Alois Spitzbart (German translation)<br />- Michal Hrusecky (Many improvments)<br />- Denis Fedoseev (Russion translation)<br />- Åke Engelbrektson (Swedish translation)<br />- Thomas Michel (Many improvments)<br />- Matti Viljanen (Finnish translation and many improvements)")
                 font.pixelSize: Theme.fontSizeSmall
             }

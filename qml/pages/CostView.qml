@@ -31,7 +31,7 @@ Page {
     property real distanceunitfactor: 1
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
@@ -47,7 +47,7 @@ Page {
     }
     SilicaFlickable {
         id:costview
-        interactive: !costlistView.flicking
+        interactive: !costListView.flicking
         anchors.fill: parent
         PageHeader {
             id: header
@@ -55,13 +55,13 @@ Page {
         }
         PullDownMenu {
             MenuItem {
-                text: qsTr("Add cost")
+                text: qsTr("Add Cost")
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntry.qml"))
             }
         }
         SilicaListView {
             VerticalScrollDecorator {}
-            id:costlistView
+            id:costListView
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
             anchors.left: parent.left
@@ -98,7 +98,7 @@ Page {
                         width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                         Label {
                             width: parent.width / 2
-                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceunity;
+                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit;
                             font.family: Theme.fontFamily
                             color: Theme.primaryColor
                             font.pixelSize: Theme.fontSizeSmall
@@ -117,7 +117,7 @@ Page {
                         width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                         Label {
                             width: parent.width / 2
-                            text: {return showDescription ? model.modelData.description : manager.car.getCosttypeName(model.modelData.costtype)}
+                            text: {return showDescription ? model.modelData.description : manager.car.getCostTypeName(model.modelData.costType)}
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeExtraSmall
                             color: Theme.secondaryColor
@@ -144,11 +144,11 @@ Page {
     // Fill list model
     function fillListModel()
     {
-        var costlist = manager.car.costs;
-        for (var i = 0;i < costlist.length ;i++)
+        var costList = manager.car.costs;
+        for (var i = 0;i < costList.length ;i++)
         {
-            if ((filter=="")||(manager.car.getCosttypeName(costlist[i].costtype)==filter))
-                listModel.append({"cost" : costlist[i]})
+            if(filter === "" || filter === manager.car.getCostTypeName(costList[i].costType))
+                listModel.append({"cost" : costList[i]})
         }
         console.log("List Model filled")
     }

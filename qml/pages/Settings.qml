@@ -97,7 +97,7 @@ Dialog {
                 id: currencyInput
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Currency")
-                placeholderText: qsTr("Currency")
+                placeholderText: label
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: distanceUnitInput.focus = true
@@ -120,7 +120,6 @@ Dialog {
                     }
                 }
                 onCurrentItemChanged: {
-                    consumptionUnitInput.focus = true
                     distanceUnit = currentItem.value
                 }
             }
@@ -132,6 +131,7 @@ Dialog {
                 label: qsTr("Consumption Unit")
 
                 menu: ContextMenu {
+                    id: consumptionUnitInputMenu
                     MenuItem {
                         text: "l/100km"
                         property string value: "l/100km"
@@ -144,7 +144,6 @@ Dialog {
                 }
                 onCurrentItemChanged: {
                     consumptionUnit = currentItem.value
-                    numTiresInput.focus = true
                 }
             }
 
@@ -224,13 +223,13 @@ Dialog {
         yearInput.text         = manager.car.year
         licensePlateInput.text = manager.car.licensePlate
         currencyInput.text     = manager.car.currency
-        numTiresInput.text     = manager.car.nbtire
-        buyingDate             = manager.car.buyingdate
-        buyingPrice.text       = manager.car.buyingprice
-        sellingPrice.text      = manager.car.sellingprice
+        numTiresInput.text     = manager.car.numTires
+        buyingDate             = manager.car.buyingDate
+        buyingPrice.text       = manager.car.buyingPrice
+        sellingPrice.text      = manager.car.sellingPrice
         lifeTime.text          = manager.car.lifetime
-        consumptionUnit        = manager.car.consumptionunit
-        distanceUnit           = manager.car.distanceunity
+        consumptionUnit        = manager.car.consumptionUnit
+        distanceUnit           = manager.car.distanceUnit
 
         // I don't know why, but there is no easy way to set these...
         if(distanceUnit == "km")   { distanceUnitInput.currentIndex = 0 }
@@ -245,12 +244,12 @@ Dialog {
         manager.car.year            = yearInput.text
         manager.car.licensePlate    = licensePlateInput.text
         manager.car.currency        = currencyInput.text
-        manager.car.nbtire          = numTiresInput.text
-        manager.car.buyingdate      = buyingDate
-        manager.car.buyingprice     = buyingPrice.text
-        manager.car.sellingprice    = sellingPrice.text
+        manager.car.numTires          = numTiresInput.text
+        manager.car.buyingDate      = buyingDate
+        manager.car.buyingPrice     = buyingPrice.text
+        manager.car.sellingPrice    = sellingPrice.text
         manager.car.lifetime        = lifeTime.text
-        manager.car.consumptionunit = consumptionUnit
-        manager.car.distanceunity   = distanceUnit
+        manager.car.consumptionUnit = consumptionUnit
+        manager.car.distanceUnit   = distanceUnit
     }
 }

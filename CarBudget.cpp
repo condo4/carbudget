@@ -61,12 +61,12 @@ int main(int argc, char *argv[])
     app->setApplicationVersion(QString(APP_VERSION));
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
-    qmlRegisterType<Fueltype>(  "harbour.carbudget",1,0,"Fueltype");
+    qmlRegisterType<FuelType>(  "harbour.carbudget",1,0,"FuelType");
     qmlRegisterType<Station>(   "harbour.carbudget",1,0,"Station");
-    qmlRegisterType<Costtype>(  "harbour.carbudget",1,0,"Costtype");
+    qmlRegisterType<CostType>(  "harbour.carbudget",1,0,"CostType");
     qmlRegisterType<Cost>(      "harbour.carbudget",1,0,"Cost");
     qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");
-    qmlRegisterType<Tiremount>( "harbour.carbudget",1,0,"Tiremount");
+    qmlRegisterType<TireMount>( "harbour.carbudget",1,0,"TireMount");
     qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
     qmlRegisterType<FileModel>( "harbour.carbudget",1,0,"FileModel");
 

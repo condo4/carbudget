@@ -25,7 +25,7 @@
 #include <car.h>
 #include <carmanager.h>
 
-Tiremount::Tiremount(Car *parent) :
+TireMount::TireMount(Car *parent) :
     _notUnmounted (QDate(1900,1,1))
 
 {
@@ -36,13 +36,13 @@ Tiremount::Tiremount(Car *parent) :
 }
 
 
-Tiremount::Tiremount(unsigned int mountid, QDate mountdate, unsigned int mountdistance,unsigned int unmountid, QDate unmountdate, unsigned int unmountdistance,unsigned int tire, Car* parent) :
+TireMount::TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance,unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance,unsigned int tire, Car* parent) :
 _notUnmounted (QDate(1900,1,1))
 {
     _car=parent;
-    _mountEvent = new CarEvent(mountdate,mountdistance,mountid,parent);
+    _mountEvent = new CarEvent(mountDate,mountDistance,mountid,parent);
     if (unmountid!=0)
-        _unmountEvent = new CarEvent(unmountdate,unmountdistance,unmountid,parent);
+        _unmountEvent = new CarEvent(unmountDate,unmountDistance,unmountid,parent);
     else _unmountEvent = NULL;
     _tire = tire;
 }
@@ -50,83 +50,83 @@ _notUnmounted (QDate(1900,1,1))
 
 
 
-QString Tiremount::tirename() const
+QString TireMount::tireName() const
 {
     return _car->getTireName(_tire);
 }
 
-unsigned int Tiremount::tire() const
+unsigned int TireMount::tire() const
 {
     return _tire;
 }
 
-void Tiremount::setTire(unsigned int tire)
+void TireMount::setTire(unsigned int tire)
 {
     _tire = tire;
-    emit tiremountChanged();
+    emit tireMountChanged();
 }
-unsigned int Tiremount::mountdistance() const
+unsigned int TireMount::mountDistance() const
 {
     if (_mountEvent)
         return _mountEvent->distance();
     else return 0;
 }
 
-void Tiremount::setMountdistance(unsigned int distance)
+void TireMount::setMountDistance(unsigned int distance)
 {
     if (_mountEvent)
     _mountEvent->setDistance(distance);
-    emit tiremountChanged();
+    emit tireMountChanged();
 }
 
-QDateTime Tiremount::mountdate() const
+QDateTime TireMount::mountDate() const
 {
     if (_mountEvent)
         return _mountEvent->date();
     else return QDateTime (_notUnmounted);
 }
 
-void Tiremount::setMountdate(QDateTime date)
+void TireMount::setMountdate(QDateTime date)
 {
     if (_mountEvent)
     _mountEvent->setDate(date);
-    emit tiremountChanged();
+    emit tireMountChanged();
 }
-unsigned int Tiremount::mountid() const
+unsigned int TireMount::mountid() const
 {
     if (_mountEvent)
         return _mountEvent->id();
     else return 0;
 
 }
-unsigned int Tiremount::unmountdistance() const
+unsigned int TireMount::unmountDistance() const
 {
     if (_unmountEvent)
         return _unmountEvent->distance();
     else return 0;
 }
 
-void Tiremount::setUnmountdistance(unsigned int distance)
+void TireMount::setUnmountDistance(unsigned int distance)
 {
     if (_unmountEvent)
     _unmountEvent->setDistance(distance);
-    emit tiremountChanged();
+    emit tireMountChanged();
 }
 
-QDateTime Tiremount::unmountdate() const
+QDateTime TireMount::unmountDate() const
 {
     if (_unmountEvent)
         return _unmountEvent->date();
     else return QDateTime(_notUnmounted);
 }
 
-void Tiremount::setUnmountdate(QDateTime date)
+void TireMount::setUnmountDate(QDateTime date)
 {
     if (_unmountEvent)
     _unmountEvent->setDate(date);
-    emit tiremountChanged();
+    emit tireMountChanged();
 }
-unsigned int Tiremount::unmountid() const
+unsigned int TireMount::unmountid() const
 {
     if (_unmountEvent)
         return _unmountEvent->id();
@@ -134,20 +134,20 @@ unsigned int Tiremount::unmountid() const
 
 }
 
-void Tiremount::setUnmountEvent(CarEvent *ev)
+void TireMount::setUnmountEvent(CarEvent *ev)
 {
     _unmountEvent=ev;
 }
 
-void Tiremount::save()
+void TireMount::save()
 {
     if (_mountEvent)
-        _mountEvent->saveevent();
+        _mountEvent->saveEvent();
     if (_unmountEvent)
-        _unmountEvent->saveevent();
+        _unmountEvent->saveEvent();
   }
 
-void Tiremount::remove()
+void TireMount::remove()
 {
     if (!_mountEvent) return;
     QSqlQuery query(_car->db);

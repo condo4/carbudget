@@ -26,8 +26,8 @@ import harbour.carbudget 1.0
 Dialog {
     id: mountTire
     property Tire tire
-    property date mount_date
-    property date umount_date
+    property date mountDate
+    property date umountDate
     allowedOrientations: Orientation.All
     SilicaFlickable {
         anchors.fill: parent
@@ -43,26 +43,26 @@ Dialog {
             ValueButton {
                 function openDateDialog()
                 {
-                    var date = mount_date
+                    var date = mountDate
                     var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: date })
 
                     dialog.accepted.connect(function()
                     {
                         value = dialog.date.toLocaleDateString(Qt.locale())
-                        mount_date = dialog.date
+                        mountDate = dialog.date
                     })
                 }
 
                 label: "Date: "
-                value: mount_date.toLocaleDateString(Qt.locale())
+                value: mountDate.toLocaleDateString(Qt.locale())
                 width: parent.width
                 onClicked: openDateDialog()
             }
 
             TextField {
                 id: kminput
-                label: manager.car.distanceunity
-                placeholderText: manager.car.distanceunity
+                label: manager.car.distanceUnit
+                placeholderText: label
                 focus: true
                 width: parent.width
                 validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
@@ -84,13 +84,13 @@ Dialog {
     canAccept: kminput.acceptableInput
 
     onOpened: {
-        mount_date = new Date()
+        mountDate = new Date()
     }
 
     onAccepted: {
         if(tire.mounted)
-            manager.car.umountTire(mount_date, kminput.text * (manager.car.distanceunity == "mi" ? 1.609 : 1.0), tire, totrashinput.checked)
+            manager.car.umountTire(mountDate, kminput.text * (manager.car.distanceUnit === "mi" ? 1.609 : 1.0), tire, totrashinput.checked)
         else
-            manager.car.mountTire(mount_date, kminput.text * (manager.car.distanceunity == "mi" ? 1.609 : 1.0), tire)
+            manager.car.mountTire(mountDate, kminput.text * (manager.car.distanceUnit === "mi" ? 1.609 : 1.0), tire)
     }
 }

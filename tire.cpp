@@ -30,15 +30,15 @@ Tire::Tire(Car *parent) :
 
 }
 
-Tire::Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int id, Car *parent):
+Tire::Tire(QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int id, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
     _name(name),
     _manufacturer(manufacturer),
     _model(model),
-    _buydate(buydate),
-    _trashdate(trashdate),
+    _buyDate(buyDate),
+    _trashDate(trashDate),
     _price(price),
     _quantity(quantity)
 {
@@ -78,29 +78,29 @@ void Tire::setModel(QString model)
     emit modelChanged();
 }
 
-QDateTime Tire::buydate() const
+QDateTime Tire::buyDate() const
 {
-    return QDateTime(_buydate);
+    return QDateTime(_buyDate);
 }
 
-void Tire::setBuydate(QDateTime date)
+void Tire::setBuyDate(QDateTime date)
 {
-    _buydate = date.date();
-    emit buydateChanged();
+    _buyDate = date.date();
+    emit buyDateChanged();
 }
 
-QDateTime Tire::trashdate() const
+QDateTime Tire::trashDate() const
 {
-    return QDateTime(_trashdate);
+    return QDateTime(_trashDate);
 }
 
-void Tire::setTrashdate(QDateTime date)
+void Tire::setTrashDate(QDateTime date)
 {
-    if(date.date() < _buydate)
-        _trashdate = QDate();
+    if(date.date() < _buyDate)
+        _trashDate = QDate();
     else
-        _trashdate = date.date();
-    emit trashdateChanged();
+        _trashDate = date.date();
+    emit trashDateChanged();
     emit trashedChanged();
 }
 
@@ -146,8 +146,8 @@ unsigned int Tire::distance() const
     {
         if(query.next())
         {
-            if(_car->maxdistance() > query.value(0).toUInt())
-                distance += _car->maxdistance() - query.value(0).toUInt();
+            if(_car->maxDistance() > query.value(0).toUInt())
+                distance += _car->maxDistance() - query.value(0).toUInt();
         }
     }
     else
@@ -160,8 +160,8 @@ unsigned int Tire::distance() const
 
 bool Tire::trashed() const
 {
-    if(_trashdate.isValid()
-    && _trashdate <= QDate::currentDate())
+    if(_trashDate.isValid()
+    && _trashDate <= QDate::currentDate())
     {
         //qDebug() << "Trashed.";
         return true;
@@ -192,8 +192,8 @@ bool Tire::mounted() const
 
 bool Tire::mountable() const
 {
-    if(_buydate > QDate::currentDate()                 // Are the tires bought yet? :)
-    || _car->tireMounted() + _quantity > _car->nbtire() // Are there too many wheels to be mounted?
+    if(_buyDate > QDate::currentDate()                 // Are the tires bought yet? :)
+    || _car->tireMounted() + _quantity > _car->numTires() // Are there too many wheels to be mounted?
     || mounted()                                        // Are the tires already mounted?
     || trashed())                                       // Are the tires trashed?
     {
@@ -221,7 +221,7 @@ void Tire::save()
     if(_id < 0)
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO TireList (id,buydate,trashdate,name,manufacturer,model,price,quantity) VALUES(NULL,'%1','%2','%3','%4','%5',%6,%7)").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity);
+        QString sql = QString("INSERT INTO TireList (id,buyDate,trashDate,name,manufacturer,model,price,quantity) VALUES(NULL,'%1','%2','%3','%4','%5',%6,%7)").arg(_buyDate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashDate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
@@ -237,7 +237,7 @@ void Tire::save()
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE TireList SET buydate='%1', trashdate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%8;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
+        QString sql = QString("UPDATE TireList SET buyDate='%1', trashDate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%8;").arg(_buyDate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashDate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
         if(query.exec(sql))
         {
             qDebug() << "Update Tire in database with id " << _id;

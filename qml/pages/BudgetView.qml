@@ -35,7 +35,7 @@ Page {
         Theme.highlightDimmerColor ]
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
+        distanceunit = manager.car.distanceUnit
         if(distanceunit == "mi")
         {
             distanceunitfactor = 1.609
@@ -70,7 +70,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Oilprice")
+                text: qsTr("Fuel price")
                 onClicked: {
                     manager.car.setChartTypeOilPrice()
                     pageStack.push(Qt.resolvedUrl("Statistics.qml"))
@@ -108,14 +108,14 @@ Page {
                             var radius = (0.95*width/2).toFixed(0)
                             var startangle=0.0
                             var endangle=0.0
-                            var total = manager.car.budget_total
+                            var total = manager.car.budgetTotal
                             var angle = Math.PI * 2 / total
 
                             ctx.clearRect(0,0,width,height)
                             ctx.lineWidth = 2.0 * Screen.widthRatio
 
                             startangle=endangle
-                            endangle = manager.car.budget_cost_total * angle
+                            endangle = manager.car.budgetCostTotal * angle
                             ctx.fillStyle = chartColor[3]
                             ctx.beginPath()
                             ctx.moveTo(centerX,centerY)
@@ -123,7 +123,7 @@ Page {
                             ctx.fill()
 
                             startangle=endangle
-                            endangle = startangle+manager.car.budget_fuel_total*angle
+                            endangle = startangle+manager.car.budgetFuelTotal*angle
                             ctx.fillStyle = chartColor[2]
                             ctx.beginPath()
                             ctx.moveTo(centerX,centerY)
@@ -131,7 +131,7 @@ Page {
                             ctx.fill()
 
                             startangle=endangle
-                            endangle = startangle+manager.car.budget_tire_total*angle
+                            endangle = startangle+manager.car.budgetTireTotal*angle
                             ctx.fillStyle = chartColor[1]
                             ctx.beginPath()
                             ctx.moveTo(centerX,centerY)
@@ -139,7 +139,7 @@ Page {
                             ctx.fill()
 
                             startangle=endangle
-                            endangle = startangle+manager.car.budget_invest_total*angle
+                            endangle = startangle+manager.car.budgetInvestTotal*angle
                             ctx.fillStyle = chartColor[0]
                             ctx.beginPath()
                             ctx.moveTo(centerX,centerY)
@@ -177,7 +177,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Bills:") + " " + (manager.car.budget_cost_total*100/manager.car.budget_total ).toFixed(2) + "%"
+                        text : qsTr("Bills: %1%").arg((manager.car.budgetCostTotal*100/manager.car.budgetTotal).toFixed(2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -205,7 +205,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Fuel:") + " " + (manager.car.budget_fuel_total*100/manager.car.budget_total).toFixed(2) + "%"
+                        text : qsTr("Fuel: %1%").arg((manager.car.budgetFuelTotal*100/manager.car.budgetTotal).toFixed(2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -233,7 +233,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Tires:") + " " + (manager.car.budget_tire_total*100/manager.car.budget_total).toFixed(2) + "%"
+                        text : qsTr("Tires: %1%").arg((manager.car.budgetTireTotal*100/manager.car.budgetTotal).toFixed(2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -261,7 +261,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Invest:") + " " + (manager.car.budget_invest_total*100/manager.car.budget_total).toFixed(2) + "%"
+                        text : qsTr("Invest: %1%").arg((manager.car.budgetInvestTotal*100/manager.car.budgetTotal).toFixed(2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -283,7 +283,7 @@ Page {
                         width: parent.width
                         Text {
                             width:parent.width/2
-                            text : qsTr("ODO ")
+                            text : qsTr("Odometer")
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold: true
@@ -292,7 +292,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text :  (manager.car.maxdistance/distanceunitfactor).toFixed(0)
+                            text :  (manager.car.maxDistance/distanceunitfactor).toFixed(0)
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -311,7 +311,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text :  ((manager.car.maxdistance - manager.car.mindistance)/distanceunitfactor).toFixed(0)
+                            text :  ((manager.car.maxDistance - manager.car.minDistance)/distanceunitfactor).toFixed(0)
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -351,7 +351,7 @@ Page {
                                     width: parent.width
                                     Text {
                                         width:parent.width/2
-                                        text : qsTr("Total: ")
+                                        text : qsTr("Total:")
                                         font.family: Theme.fontFamily
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
@@ -359,7 +359,7 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  manager.car.fueltotal.toFixed(2) + " l"
+                                        text :  manager.car.fuelTotal.toFixed(2) + " l"
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
                                         horizontalAlignment: Text.AlignRight
@@ -370,7 +370,7 @@ Page {
                                     width: parent.width
                                     Text {
                                         width:parent.width/2
-                                        text : qsTr("Average: ")
+                                        text : qsTr("Average:")
                                         font.family: Theme.fontFamily
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
@@ -405,11 +405,11 @@ Page {
                                     Text {
                                         width:parent.width/2
                                         text : if (manager.car.consumptionunit == 'l/100km') {
-                                            manager.car.consumptionmin.toFixed(2) + " l"
+                                            manager.car.consumptionMin.toFixed(2) + " l"
                                         }
                                         else {
                                             if ( manager.car.consumptionunit == 'mpg') {
-                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionmin).toFixed(2))
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMin).toFixed(2))
                                             }
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -431,11 +431,11 @@ Page {
                                     Text {
                                         width:parent.width/2
                                         text :  if ( manager.car.consumptionunit == 'l/100km') {
-                                            manager.car.consumptionmax.toFixed(2) + " l"
+                                            manager.car.consumptionMax.toFixed(2) + " l"
                                         }
                                         else {
                                             if ( manager.car.consumptionunit == 'mpg') {
-                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionmax).toFixed(2))
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMax).toFixed(2))
                                             }
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -444,11 +444,11 @@ Page {
                                     }
                                 }
                             }
-                            MouseArea {
-                                id:consumptionMouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("ConsumptionStatistics.qml"))
-                            }
+                            //MouseArea {
+                            //    id:consumptionMouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("ConsumptionStatistics.qml"))
+                            //}
                         }
                     }
                     Row { width: parent.height; height: Theme.paddingMedium; }
@@ -489,16 +489,16 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budget_fuel_total.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetFuelTotal.toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id:fuelcostsMouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:false, type:"fuel"})
-                            }
+                            //MouseArea {
+                            //    id:fuelcostsMouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:false, type:"fuel"})
+                            //}
                         }
                     }
                     Row {
@@ -521,16 +521,16 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budget_cost_total.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetCostTotal.toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id: billcostsMouse
-                                anchors.fill: parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false, type:"costs"})
-                            }
+                            //MouseArea {
+                            //    id: billcostsMouse
+                            //    anchors.fill: parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: false, type:"costs"})
+                            //}
                         }
                     }
                     Row {
@@ -552,18 +552,16 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budget_tire_total.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetTireTotal.toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            /*
-                                MouseArea {
-                                    id:tirecostsMouse
-                                    anchors.fill:parent
-                                    onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
-                                }
-        */
+                            //    MouseArea {
+                            //        id:tirecostsMouse
+                            //        anchors.fill:parent
+                            //        onClicked: pageStack.push(Qt.resolvedUrl("FuelStatistics.qml"))
+                            //    }
                         }
                     }
                     Row {
@@ -585,7 +583,7 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budget_invest_total.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetInvestTotal.toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -605,7 +603,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text : manager.car.budget_total.toFixed(2) + " " + manager.car.currency
+                            text : manager.car.budgetTotal.toFixed(2) + " " + manager.car.currency
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -650,16 +648,16 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budget_fuel*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetFuel*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id:fuelper100Mouse
-                                anchors.fill:parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:true, type:"fuel"})
-                            }
+                            //MouseArea {
+                            //    id:fuelper100Mouse
+                            //    anchors.fill:parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"),{per100:true, type:"fuel"})
+                            //}
                         }
                     }
                     Row {
@@ -682,16 +680,16 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budget_cost*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetCost*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            MouseArea {
-                                id: billsper100Mouse
-                                anchors.fill: parent
-                                onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
-                            }
+                            //MouseArea {
+                            //    id: billsper100Mouse
+                            //    anchors.fill: parent
+                            //    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
+                            //}
                         }
                     }
                     Row {
@@ -714,18 +712,16 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budget_tire*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetTire*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
                             }
-                            /*
-                                MouseArea {
-                                    id: tiresper100Mouse
-                                    anchors.fill: parent
-                                    onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
-                                }
-        */
+                            //    MouseArea {
+                            //        id: tiresper100Mouse
+                            //        anchors.fill: parent
+                            //        onClicked: pageStack.push(Qt.resolvedUrl("CostStatistics.qml"), {per100: true})
+                            //    }
                         }
                     }
                     Row {
@@ -748,7 +744,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budget_invest*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetInvest*distanceunitfactor).toFixed(2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight

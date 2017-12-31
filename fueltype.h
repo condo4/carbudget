@@ -20,14 +20,14 @@
  */
 
 
-#ifndef Fueltype_H
-#define Fueltype_H
+#ifndef FuelType_H
+#define FuelType_H
 
 #include <QObject>
 
 class Car;
 
-class Fueltype : public QObject
+class FuelType : public QObject
 {
     Q_OBJECT
 
@@ -40,8 +40,8 @@ private:
     QString _name;
 
 public:
-    explicit Fueltype(QObject *parent = 0);
-    Fueltype(unsigned int id, QString name, Car *parent = 0);
+    explicit FuelType(QObject *parent = 0);
+    FuelType(unsigned int id, QString name, Car *parent = 0);
 
 signals:
     void idChanged();
@@ -58,4 +58,4 @@ public slots:
 
 };
 
-#endif // Fueltype_H
+#endif // FuelType_H

@@ -37,7 +37,7 @@ Page {
         }
     }
     SilicaListView{
-        id:fueltypelist
+        id:fuelTypeList
         VerticalScrollDecorator {}
         header:  PageHeader {
                  title: qsTr("Consumption by fuel type")
@@ -45,7 +45,7 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model:manager.car.fueltypes
+        model:manager.car.fuelTypes
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             height: dataColumn.height
@@ -68,7 +68,7 @@ Page {
                     width: parent.width
                     Text {
                         width:parent.width/2
-                        text : qsTr("Average: ")
+                        text : qsTr("Average:")
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor

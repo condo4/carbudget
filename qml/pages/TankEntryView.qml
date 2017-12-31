@@ -30,7 +30,7 @@ Page {
         property real distanceunitfactor: 1
 
         Component.onCompleted: {
-            distanceunit = manager.car.distanceunity
+            distanceunit = manager.car.distanceUnit
             if(distanceunit == "mi")
             {
                 distanceunitfactor = 1.609
@@ -88,28 +88,28 @@ Page {
                 }
             }
 
-			Row
-			{
-				id: odorow
-				spacing: parent.spacing
-				width: parent.width- Theme.paddingMedium - Theme.paddingMedium
-				Text {
-					text: qsTr("ODO:")
-					font.family: Theme.fontFamily
-					font.pixelSize: Theme.fontSizeMedium
-					color: Theme.primaryColor
-					horizontalAlignment: Text.AlignLeft
-					width:(parent.width-parent.spacing)/2
-				}
-				Text {
+            Row
+            {
+                id: odorow
+                spacing: parent.spacing
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                Text {
+                    text: qsTr("Odometer:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
                     text: (tank.distance/distanceunitfactor).toFixed(0)
-					font.family: Theme.fontFamily
-					font.pixelSize: Theme.fontSizeMedium
-					color: Theme.primaryColor
-					horizontalAlignment: Text.AlignRight
-					width:(parent.width-parent.spacing)/2
-				}
-			}
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
 
             Row {
                 id: quantityrow
@@ -200,7 +200,7 @@ Page {
             }
 
             Row {
-                id: fueltyperow
+                id: fuelTyperow
                 width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                 spacing:Theme.paddingLarge
                 Text {
@@ -212,7 +212,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: manager.car.getFueltypeName(tank.fueltype)
+                    text: manager.car.getFuelTypeName(tank.fuelType)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

@@ -70,7 +70,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Oilprice")
+                text: qsTr("Fuel price")
                 onClicked: {
                     manager.car.setChartTypeOilPrice()
                     updatechart()
@@ -98,7 +98,7 @@ Page {
                 x: Theme.paddingLarge
                 text: manager.car.statisticType + " (" + qsTr("Distance") + ": " +
                        + (manager.car.tanks[endIndex].distance - manager.car.tanks[beginIndex].distance)/distanceunitfactor
-                       + manager.car.distanceunity + ")"
+                       + manager.car.distanceUnit + ")"
                 font.pixelSize: Theme.fontSizeMedium
             }
 

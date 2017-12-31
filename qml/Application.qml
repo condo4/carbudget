@@ -27,7 +27,14 @@ ApplicationWindow
 {
     id: app
     initialPage: {
-        return (manager.car == null)?Qt.resolvedUrl("pages/CarView.qml"):Qt.resolvedUrl("pages/CarEntry.qml");
+        var pageName;
+
+        if(manager.cars.length == 0)
+            pageName = "pages/CarView.qml"
+        else
+            pageName = "pages/CarEntry.qml"
+
+        return Qt.resolvedUrl(pageName)
     }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 

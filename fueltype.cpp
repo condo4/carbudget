@@ -22,14 +22,14 @@
 #include "fueltype.h"
 #include "car.h"
 
-Fueltype::Fueltype(QObject *parent) :
+FuelType::FuelType(QObject *parent) :
     QObject(parent),
     _id(0),
     _name("Not Set")
 {
 }
 
-Fueltype::Fueltype(unsigned int id, QString name, Car *parent):
+FuelType::FuelType(unsigned int id, QString name, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
@@ -37,60 +37,60 @@ Fueltype::Fueltype(unsigned int id, QString name, Car *parent):
 {
 }
 
-unsigned int Fueltype::id() const
+unsigned int FuelType::id() const
 {
     return _id;
 }
 
-void Fueltype::setId(unsigned int id)
+void FuelType::setId(unsigned int id)
 {
     _id = id;
     emit idChanged();
 }
 
-QString Fueltype::name() const
+QString FuelType::name() const
 {
     return _name;
 }
 
-void Fueltype::setName(QString name)
+void FuelType::setName(QString name)
 {
     _name = name;
     emit nameChanged();
 }
 
-void Fueltype::save()
+void FuelType::save()
 {
     if(_id < 0)
     {
 
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO FueltypeList (id,name) VALUES(NULL,'%1')").arg(_name);
+        QString sql = QString("INSERT INTO FuelTypeList (id,name) VALUES(NULL,'%1')").arg(_name);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
-            qDebug() << "Create Fueltype in database with id " << _id << "and value " << _name;
+            qDebug() << "Create FuelType in database with id " << _id << "and value " << _name;
             _car->db.commit();
         }
         else
         {
-            qDebug() << "Error during Create Fueltype in database";
+            qDebug() << "Error during Create FuelType in database";
             qDebug() << query.lastError();
         }
     }
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE FueltypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
+        QString sql = QString("UPDATE FuelTypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {
-            qDebug() << "Update Fueltype in database with id " << _id;
+            qDebug() << "Update FuelType in database with id " << _id;
             _car->db.commit();
         }
         else
         {
-            qDebug() << "Error during Update Fueltype in database";
+            qDebug() << "Error during Update FuelType in database";
             qDebug() << query.lastError();
         }
     }

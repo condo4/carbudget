@@ -56,7 +56,7 @@ Page {
 
                 MenuItem {
                     enabled: model.modelData.id > 0 ? true:false
-                    text: qsTr("Remove")
+                    text: qsTr("Delete")
                     onClicked: {
                         remorseAction(qsTr("Deleting"), function() {
                             manager.car.delStation(model.modelData)

@@ -43,7 +43,7 @@ Page {
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Cars found in ") + filename;
+            title: qsTr("Cars found in %1").arg(filename);
         }
 
         anchors.fill: parent
