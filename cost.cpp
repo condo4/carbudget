@@ -79,7 +79,7 @@ void Cost::save()
         if(_eventId)
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("INSERT INTO CostList (event,costType,cost,desc) VALUES(%1,%2,%3,'%4')").arg(_eventId).arg(_costType).arg(_cost).arg(_description);
+            QString sql = QString("INSERT INTO CostList (event,costtype,cost,desc) VALUES(%1,%2,%3,'%4')").arg(_eventId).arg(_costType).arg(_cost).arg(_description);
             if(query.exec(sql))
             {
                 qDebug() << "Create Cost in database with id " << _eventId;
@@ -99,7 +99,7 @@ void Cost::save()
         if(saveEvent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE CostList SET cost=%1, costType='%2', desc='%3' WHERE event=%4;").arg(_cost).arg(_costType).arg(_description).arg(_eventId);
+            QString sql = QString("UPDATE CostList SET cost=%1, costtype='%2', desc='%3' WHERE event=%4;").arg(_cost).arg(_costType).arg(_description).arg(_eventId);
             if(query.exec(sql))
             {
                 qDebug() << "Update Cost in database with id " << _eventId;

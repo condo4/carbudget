@@ -65,7 +65,7 @@ void CostType::save()
     {
 
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO CostTypeList (id,name) VALUES(NULL,'%1')").arg(_name);
+        QString sql = QString("INSERT INTO CosttypeList (id,name) VALUES(NULL,'%1')").arg(_name);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
@@ -81,7 +81,7 @@ void CostType::save()
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE CostTypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
+        QString sql = QString("UPDATE CosttypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {

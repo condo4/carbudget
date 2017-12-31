@@ -65,7 +65,7 @@ void FuelType::save()
     {
 
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO FuelTypeList (id,name) VALUES(NULL,'%1')").arg(_name);
+        QString sql = QString("INSERT INTO FueltypeList (id,name) VALUES(NULL,'%1')").arg(_name);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
@@ -81,7 +81,7 @@ void FuelType::save()
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE FuelTypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
+        QString sql = QString("UPDATE FueltypeList SET name='%1' WHERE id=%2;").arg(_name).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {
