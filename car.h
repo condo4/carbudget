@@ -116,16 +116,15 @@ private:
     unsigned int _beginChartIndex;
     unsigned int _endChartIndex;
 
-    void db_init();
-    void db_load();
-    int db_get_version();
+    bool _dbLoading;
 
-    int db_upgrade();
-    bool db_loading;
+    void _dbInit();
+    void _dbLoad();
+    int _dbGetVersion();
+    int _dbUpgrade();
 
-    enum chartTypeTankStatistics chartType_;
-    void setChartType(enum chartTypeTankStatistics type);
-    void setChartBorders(unsigned int begin, unsigned int end);
+
+    enum chartTypeTankStatistics _chartType;
 
 public:
     QSqlDatabase db;
@@ -290,6 +289,9 @@ public slots:
 
     QDate buyingDate();
     void setBuyingdate(QDate date);
+
+    void setChartType(enum chartTypeTankStatistics type);
+    void setChartBorders(unsigned int begin, unsigned int end);
 
     QString getStatisticType();
 

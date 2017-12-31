@@ -378,11 +378,11 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text: if ( manager.car.consumptionunit == 'l/100km') {
+                                        text: if ( manager.car.consumptionUnit == 'l/100km') {
                                             manager.car.consumption.toFixed(2)+ " l";
                                         }
                                         else {
-                                            if ( manager.car.consumptionunit == 'mpg') {
+                                            if ( manager.car.consumptionUnit == 'mpg') {
                                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
                                             }
                                         }
@@ -404,11 +404,11 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text : if (manager.car.consumptionunit == 'l/100km') {
+                                        text : if (manager.car.consumptionUnit == 'l/100km') {
                                             manager.car.consumptionMin.toFixed(2) + " l"
                                         }
                                         else {
-                                            if ( manager.car.consumptionunit == 'mpg') {
+                                            if ( manager.car.consumptionUnit == 'mpg') {
                                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMin).toFixed(2))
                                             }
                                         }
@@ -430,11 +430,11 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  if ( manager.car.consumptionunit == 'l/100km') {
+                                        text :  if ( manager.car.consumptionUnit == 'l/100km') {
                                             manager.car.consumptionMax.toFixed(2) + " l"
                                         }
                                         else {
-                                            if ( manager.car.consumptionunit == 'mpg') {
+                                            if ( manager.car.consumptionUnit == 'mpg') {
                                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMax).toFixed(2))
                                             }
                                         }

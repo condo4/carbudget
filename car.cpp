@@ -39,7 +39,7 @@ bool sortFuelTypeById(const FuelType *c1, const FuelType *c2) { return c1->id() 
 bool sortStationByQuantity(const Station *c1, const Station *c2) { return c1->quantity() > c2->quantity(); }
 bool sortTireMountByDistance (const TireMount *s1, const TireMount * s2) { return s1->mountDistance() > s2->mountDistance(); }
 
-void Car::db_init()
+void Car::_dbInit()
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
     this->db = QSqlDatabase::addDatabase("QSQLITE");
@@ -49,10 +49,10 @@ void Car::db_init()
     qDebug() << "Opening database file" << db_name << (databaseOK ? "succeeded" : "failed");
 }
 
-void Car::db_load()
+void Car::_dbLoad()
 {
     qDebug() << "Loading database...";
-    db_loading=true;
+    _dbLoading=true;
     QSqlQuery query(this->db);
 
     _tankList.clear();
@@ -212,7 +212,7 @@ void Car::db_load()
     if (!_fuelTypeList.empty()) qSort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     if (!_costTypeList.empty()) qSort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     if (!_tireMountList.empty())  qSort(_tireMountList.begin(),_tireMountList.end(),sortTireMountByDistance);
-    db_loading=false;
+    _dbLoading=false;
     numTanksChanged(_tankList.count());
     emit consumptionChanged(this->consumption());
     emit consumptionMaxChanged(this->consumptionMax());
@@ -230,7 +230,7 @@ void Car::db_load()
     qDebug() << "Loaded" << _tireMountList.count() << "tire mounts";
 }
 
-int Car::db_get_version()
+int Car::_dbGetVersion()
 {
     QSqlQuery query(this->db);
 
@@ -250,10 +250,10 @@ int Car::db_get_version()
     return 0;
 }
 
-int Car::db_upgrade() {
+int Car::_dbUpgrade() {
     QSqlQuery query(db);
     QString sqlBump = QString("UPDATE CarBudget SET value='%1' WHERE id='version';");
-    int currVersion = this->db_get_version();
+    int currVersion = this->_dbGetVersion();
     int nextVersion = 0;
     bool success = true;
     int numErrors = 0;
@@ -308,27 +308,27 @@ int Car::db_upgrade() {
     return numErrors;
 }
 
-Car::Car(CarManager *parent) : QObject(parent), _manager(parent), chartType_(chartTypeConsumptionOf100)
+Car::Car(CarManager *parent) : QObject(parent), _manager(parent), _chartType(chartTypeConsumptionOf100)
 {
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _numTires(0),_buyingPrice(0),_sellingPrice(0),_lifetime(0), chartType_(chartTypeConsumptionOf100)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _numTires(0),_buyingPrice(0),_sellingPrice(0),_lifetime(0), _chartType(chartTypeConsumptionOf100)
 {
-    this->db_init();
-    db_loading=false;
-    if(this->db_get_version() < 1)
+    this->_dbInit();
+    _dbLoading=false;
+    if(this->_dbGetVersion() < 1)
     {
         qDebug() << "Database is uninitialised or corrupted. Creating database...";
         this->_manager->createTables(this->db);
     }
 
-    if(this->db_get_version() < DB_VERSION)
-        this->db_upgrade();
+    if(this->_dbGetVersion() < DB_VERSION)
+        this->_dbUpgrade();
 
-    qDebug() << "Database version" << this->db_get_version();
+    qDebug() << "Database version" << this->_dbGetVersion();
 
-    this->db_load();
+    this->_dbLoad();
 
     this->_stationList.append(new Station);
     qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
@@ -461,7 +461,7 @@ unsigned int Car::minDistance() const
 
 void Car::setChartType(enum chartTypeTankStatistics type)
 {
-    chartType_ = type;
+    _chartType = type;
 }
 
 void Car::setChartTypeOilPrice()
@@ -535,11 +535,11 @@ QJsonObject Car::getChartData()
     {
         labelArray.append(QString(""));
 
-        if (chartType_ == chartTypeConsumptionOf100)
+        if (_chartType == chartTypeConsumptionOf100)
         {
             dataArray.append(_tankList[i]->consumption());
         }
-        else if (chartType_ == chartTypeOilPrice)
+        else if (_chartType == chartTypeOilPrice)
         {
             dataArray.append(_tankList[i]->pricePerUnit());
         }
@@ -624,12 +624,12 @@ void Car::setCar(QString name)
     _stationList.clear();
     _tireList.clear();
     _costList.clear();
-    this->db_init();
+    this->_dbInit();
 
-    if(this->db_get_version() < DB_VERSION)
-        this->db_upgrade();
+    if(this->_dbGetVersion() < DB_VERSION)
+        this->_dbUpgrade();
 
-    this->db_load();
+    this->_dbLoad();
 
     this->_stationList.append(new Station);
     qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
@@ -807,7 +807,7 @@ double Car::budgetCostTotal()
 double Car::budgetCost()
 {
     //returns costs for bills per 100KM
-    if (maxDistance() ==minDistance()) return 0;
+    if (maxDistance() == minDistance()) return 0;
     return budgetCostTotal() / ((maxDistance() - minDistance())/ 100.0);
 }
 double Car::budgetInvestTotal()
@@ -870,7 +870,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
     _tankList.append(tank);
     qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
     tank->save();
-    if (!db_loading)
+    if (!_dbLoading)
     {
         emit numTanksChanged(_tankList.count());
         emit consumptionChanged(this->consumption());
@@ -898,7 +898,7 @@ Tank* Car::modifyTank(Tank *tank, QDate date, unsigned int distance, double quan
     tank->setNote(note);
     tank->save();
     qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
-    if (!db_loading)
+    if (!_dbLoading)
     {
         emit numTanksChanged(_tankList.count());
         emit consumptionChanged(this->consumption());
@@ -918,7 +918,7 @@ void Car::delTank(Tank *tank)
     _tankList.removeAll(tank);
     if (!_tankList.empty()) qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
     tank->remove();
-    if (!db_loading)
+    if (!_dbLoading)
     {
         emit numTanksChanged(_tankList.count());
         emit consumptionChanged(this->consumption());
@@ -1742,6 +1742,8 @@ void Car::setLifetime(int months)
 
 QDate Car::buyingDate()
 {
+    if(!_buyingDate.isValid())
+    {
         QSqlQuery query(this->db);
 
         if(query.exec("SELECT value FROM CarBudget WHERE id='buyingDate';"))
@@ -1756,6 +1758,7 @@ QDate Car::buyingDate()
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingDate','%1');").arg(QDate::currentDate().toString()));
             _buyingDate = QDate::currentDate();
         }
+    }
     return _buyingDate;
 }
 
@@ -1781,7 +1784,7 @@ QString Car::getStatisticType()
 {
     QString statisticType = "";
 
-    switch (chartType_) {
+    switch (_chartType) {
     case chartTypeConsumptionOf100:
         statisticType = "Consumption";
         break;
