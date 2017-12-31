@@ -121,6 +121,7 @@ private:
     void _dbInit();
     void _dbLoad();
     int _dbGetVersion();
+    double _amortisation();
     int _dbUpgrade();
 
 

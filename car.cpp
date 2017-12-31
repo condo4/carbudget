@@ -813,27 +813,14 @@ double Car::budgetCost()
 double Car::budgetInvestTotal()
 {
     //returns buying costs
-    return _buyingPrice - _sellingPrice;
+    return (_buyingPrice - _sellingPrice) * _amortisation();
 }
 double Car::budgetInvest()
 {
     //returns bying costs per 100 KM
-    if (maxDistance()== minDistance()) return 0.0;
-    QDate today = QDate::currentDate();
-    unsigned int monthsused = 1;
+    if (maxDistance() == minDistance()) return 0.0;
     double valuecosts;
-
-    if (_buyingDate.toString()=="")
-    {
-        return (_buyingPrice-_sellingPrice)/(maxDistance()-minDistance())*100.0;
-    }
-    while (_buyingDate.addMonths(monthsused) < today)
-    {
-        monthsused++;
-    }
-    if ((monthsused < _lifetime) && (_lifetime !=0) )
-        valuecosts = (_buyingPrice - _sellingPrice)*monthsused/_lifetime;
-    else valuecosts = (_buyingPrice - _sellingPrice);
+    valuecosts = (_buyingPrice - _sellingPrice) * _amortisation();
     return valuecosts / ((maxDistance() - minDistance())/ 100.0);
 }
 double Car::budgetTire()
@@ -858,6 +845,31 @@ double Car::budgetTotal()
     //returns all costs
     return budgetCostTotal() + budgetFuelTotal() + budgetTireTotal() + budgetInvestTotal();
 }
+
+double Car::_amortisation()
+{
+    if (maxDistance() == minDistance()) return 1;
+    QDate today = QDate::currentDate();
+    double monthsused = 1;
+
+    if (buyingDate().toString()=="")
+    {
+        return 1;
+    }
+    while (buyingDate().addMonths(monthsused) < today)
+    {
+        monthsused++;
+    }
+    if ((monthsused < _lifetime) && (_lifetime !=0) )
+    {
+        return monthsused / _lifetime;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
 double Car::budget()
 {
     // Return total costs  / odometer * 100
