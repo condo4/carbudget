@@ -7,6 +7,10 @@ This project use git submodule.
 In order to checkout it, you need to do:
 
 ```
+git clone --recurse-submodules https://github.com/condo4/carbudget.git
+```
+or
+```
 git clone https://github.com/condo4/carbudget.git
 cd carbudget
 git submodule init
