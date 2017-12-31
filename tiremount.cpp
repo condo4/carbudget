@@ -31,12 +31,13 @@ Tiremount::Tiremount(Car *parent) :
 {
     _car = parent;
     _tire=0;
+    _tireset=0;
     _mountEvent = NULL;
     _unmountEvent = NULL;
 }
 
 
-Tiremount::Tiremount(unsigned int mountid, QDate mountdate, unsigned int mountdistance,unsigned int unmountid, QDate unmountdate, unsigned int unmountdistance,unsigned int tire, Car* parent) :
+Tiremount::Tiremount(unsigned int mountid, QDate mountdate, unsigned int mountdistance,unsigned int unmountid, QDate unmountdate, unsigned int unmountdistance,unsigned int tire, unsigned int tireset, Car* parent) :
 _notUnmounted (QDate(1900,1,1))
 {
     _car=parent;
@@ -45,9 +46,8 @@ _notUnmounted (QDate(1900,1,1))
         _unmountEvent = new CarEvent(unmountdate,unmountdistance,unmountid,parent);
     else _unmountEvent = NULL;
     _tire = tire;
+    _tireset = tireset;
 }
-
-
 
 
 QString Tiremount::tirename() const
@@ -55,11 +55,20 @@ QString Tiremount::tirename() const
     return _car->getTireName(_tire);
 }
 
+QString Tiremount::tiresetname() const
+{
+    return _car->getTiresetName(_tireset);
+}
+
 unsigned int Tiremount::tire() const
 {
     return _tire;
 }
 
+unsigned int Tiremount::tireset() const
+{
+    return _tireset;
+}
 void Tiremount::setTire(unsigned int tire)
 {
     _tire = tire;

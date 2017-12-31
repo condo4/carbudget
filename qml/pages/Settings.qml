@@ -24,9 +24,8 @@ import harbour.carbudget 1.0
 
 
 Dialog {
-    property Cost cost
-    property date cost_date
-
+    property date buying_date
+    allowedOrientations: Orientation.All
     SilicaFlickable {
 
         VerticalScrollDecorator {}
@@ -64,10 +63,9 @@ Dialog {
                 placeholderText: qsTr("Km or Mile")
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
-                //EnterKey.onClicked: descinput.focus = true
-                //EnterKey.iconSource: "image://theme/icon-m-enter-next"
+                EnterKey.onClicked: nbtire.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
-
             TextField {
                 id: nbtire
                 anchors { left: parent.left; right: parent.right }
@@ -75,6 +73,59 @@ Dialog {
                 label: qsTr("Number of wheels")
                 placeholderText: qsTr("2, 4, 6 or 8")
                 validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: buyingdate.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            ValueButton {
+                function openDateDialog()
+                {
+                    var date = buying_date
+                    var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: date })
+
+                    dialog.accepted.connect(function()
+                    {
+                        value = dialog.date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                        buying_date = dialog.date
+                        buyingprice.focus=true
+                    })
+                }
+
+                label: qsTr("Buying date")
+                value: buying_date.toLocaleDateString(Qt.locale(),"d MMM yyyy")
+                width: parent.width
+                onClicked: openDateDialog()
+            }
+
+            TextField {
+                id: buyingprice
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Buying Price")
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: sellingprice.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            TextField {
+                id: sellingprice
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Selling Price (est.)")
+                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
+
+                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.onClicked: lifetime.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            }
+            TextField {
+                id: lifetime
+                anchors { left: parent.left; right: parent.right }
+                focus: true
+                label: qsTr("Lifetime (in months, est.)")
+                validator: RegExpValidator { regExp: /^[0-9]{1,4}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 //EnterKey.onClicked: descinput.focus = true
@@ -88,11 +139,19 @@ Dialog {
         currencyinput.text = manager.car.currency
         distanceunity.text = manager.car.distanceunity
         nbtire.text        = manager.car.nbtire
+        buying_date        = manager.car.buyingdate
+        buyingprice.text   = manager.car.buyingprice
+        sellingprice.text  = manager.car.sellingprice
+        lifetime.text      = manager.car.lifetime
     }
 
     onAccepted: {
         manager.car.currency      = currencyinput.text
         manager.car.distanceunity = distanceunity.text
         manager.car.nbtire        = nbtire.text
+        manager.car.buyingdate    = buying_date
+        manager.car.buyingprice   = buyingprice.text
+        manager.car.sellingprice  = sellingprice.text
+        manager.car.lifetime      = lifetime.text
     }
 }

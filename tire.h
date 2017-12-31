@@ -35,8 +35,8 @@ class Tire : public QObject
     Q_PROPERTY(QString manufacturer READ manufacturer   WRITE setManufacturer   NOTIFY manufacturerChanged )
     Q_PROPERTY(QString modelname    READ model          WRITE setModel          NOTIFY modelChanged )
 
-    Q_PROPERTY(QDateTime buydate    READ buydate        WRITE setBuydate        NOTIFY buydateChanged)
-    Q_PROPERTY(QDateTime trashdate  READ trashdate      WRITE setTrashdate      NOTIFY trashdateChanged)
+    Q_PROPERTY(QDate buydate    READ buydate        WRITE setBuydate        NOTIFY buydateChanged)
+    Q_PROPERTY(QDate trashdate  READ trashdate      WRITE setTrashdate      NOTIFY trashdateChanged)
 
     Q_PROPERTY(double    price      READ price          WRITE setPrice          NOTIFY priceChanged )
     Q_PROPERTY(unsigned int quantity          READ quantity WRITE setQuantity   NOTIFY quantityChanged )
@@ -47,9 +47,12 @@ class Tire : public QObject
     Q_PROPERTY(unsigned int  distance READ distance                             NOTIFY mountChanged)
 
     Q_PROPERTY(unsigned int id          READ id          WRITE setId            NOTIFY idChanged )
+    Q_PROPERTY(unsigned int tireset          READ tireset          WRITE setTireset )
+
 private:
     Car *_car;
     int _id;
+    int _tireset;
 
     QString _name;
     QString _manufacturer;
@@ -64,7 +67,7 @@ private:
 
 public:
     explicit Tire(Car *parent = 0);
-    explicit Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = 0);
+    explicit Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, int tireset = -1, Car *parent = 0);
 
     QString name() const;
     void setName(QString name);
@@ -74,12 +77,11 @@ public:
 
     QString model() const;
     void setModel(QString model);
+    QDate buydate() const;
+    void setBuydate(QDate date);
 
-    QDateTime buydate() const;
-    void setBuydate(QDateTime date);
-
-    QDateTime trashdate() const;
-    void setTrashdate(QDateTime date);
+    QDate trashdate() const;
+    Q_INVOKABLE void setTrashdate(QDate date=QDate::currentDate());
 
     double price() const;
     void setPrice(double price);
@@ -96,6 +98,8 @@ public:
 
     unsigned int id() const;
     void setId(unsigned int id);
+    unsigned int tireset() const;
+    void setTireset(unsigned int id);
 
 signals:
     void nameChanged();

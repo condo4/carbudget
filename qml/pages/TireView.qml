@@ -23,20 +23,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
-Page {
+Dialog {
     allowedOrientations: Orientation.All
-    SilicaListView {
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Create new tire")
-                onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"))
-            }
-            MenuItem {
-                text: qsTr("Show history")
-                onClicked: pageStack.push(Qt.resolvedUrl("TiremountView.qml"))
-            }
-        }
+    property Tireset tireset
 
+    SilicaListView {
         VerticalScrollDecorator {}
 
         header: PageHeader {
@@ -46,33 +37,49 @@ Page {
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.car.tires
+        model: listModel
 
         delegate: ListItem {
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
             contentHeight: Theme.itemSizeExtraLarge
-            opacity: (model.modelData.mounted)?(1):((model.modelData.mountable)?(1):(0.4))
+            opacity: (model.modelData.trashed)?(0.6):(1)
 
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tire: model.modelData, tireset: tireset})
                 }
 
                 MenuItem {
-                    text: qsTr("Remove")
-                    visible: !model.modelData.mounted
+                    text: qsTr("Trash")
+                    visible: !model.modelData.mounted && !model.modelData.trashed
                     onClicked: {
-                        remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delTire(model.modelData)
+                        remorseAction(qsTr("Trashing"), function() {
+                            model.modelData.setTrashdate()
+                            model.modelData.save()
+                            tireset.tires_associated = tireset.tires_associated - model.modelData.quantity
+                            fillListModel()
                         })
                     }
                 }
                 MenuItem {
-                    text: (model.modelData.mounted)?(qsTr("Umount")):(qsTr("Mount"))
-                    visible: model.modelData.mounted || model.modelData.mountable
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireMount.qml"), { tire: model.modelData })
+                    text: qsTr("Trash & Replace")
+                    onClicked: {
+                        tireset.tires_associated = tireset.tires_associated - model.modelData.quantity
+                        var p = pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset:tireset })
+                        p.accepted.connect(function()
+                        {
+                            model.modelData.setTrashdate()
+                            model.modelData.save()
+                            fillListModel()
+                        })
+                        p.rejected.connect(function()
+                        {
+                            tireset.tires_associated = tireset.tires_associated + model.modelData.quantity
+                            fillListModel()
+                        })
+                    }
                 }
             }
 
@@ -84,8 +91,6 @@ Page {
 
                     Text {
                         text: model.modelData.manufacturer + " (" + model.modelData.distance + manager.car.distanceunity + ")";
-                        font.bold: model.modelData.mounted
-
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
@@ -94,7 +99,6 @@ Page {
                     }
                     Text {
                         text: model.modelData.modelname + " x" +  model.modelData.quantity;
-                        font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
@@ -107,7 +111,6 @@ Page {
                     width: parent.width
                     Text {
                         text: model.modelData.name;
-                        font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: 0
                         color: Theme.secondaryColor
@@ -116,7 +119,6 @@ Page {
                     }
                     Text {
                         text: model.modelData.price + manager.car.currency;
-                        font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: 0
                         color: Theme.secondaryColor
@@ -129,7 +131,6 @@ Page {
                     width: parent.width
                     Text {
                         text: model.modelData.buydate.toLocaleDateString(Qt.locale(),"dd/MM/yyyy");
-                        font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
@@ -147,5 +148,22 @@ Page {
                 }
             }
         }
+    }
+    ListModel {
+        id:listModel
+    }
+
+    function fillListModel()
+    {
+        listModel.clear()
+        var tires = manager.car.tires
+        for (var i = 0;i < tires.length ;i++)
+        {
+            if (tires[i].tireset==tireset.id)
+                listModel.append({"tire" : tires[i]})
+        }
+    }
+    onOpened: {
+        fillListModel()
     }
 }

@@ -30,9 +30,10 @@ Tire::Tire(Car *parent) :
 
 }
 
-Tire::Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int id, Car *parent):
+Tire::Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int id, int tireset, Car *parent):
     QObject(parent),
     _car(parent),
+    _tireset(tireset),
     _id(id),
     _name(name),
     _manufacturer(manufacturer),
@@ -43,6 +44,7 @@ Tire::Tire(QDate buydate, QDate trashdate, QString name, QString manufacturer, Q
     _quantity(quantity)
 {
     connect(_car, SIGNAL(tireMountedChanged()), this, SLOT(updateMountState()));
+    connect(this, SIGNAL(trashdateChanged()), _car, SLOT(updateTiresets()));
 }
 
 QString Tire::name() const
@@ -78,25 +80,26 @@ void Tire::setModel(QString model)
     emit modelChanged();
 }
 
-QDateTime Tire::buydate() const
+QDate Tire::buydate() const
 {
-    return QDateTime(_buydate);
+    return _buydate;
 }
 
-void Tire::setBuydate(QDateTime date)
+void Tire::setBuydate(QDate date)
 {
-    _buydate = date.date();
+    _buydate = date;
     emit buydateChanged();
 }
 
-QDateTime Tire::trashdate() const
+QDate Tire::trashdate() const
 {
-    return QDateTime(_trashdate);
+    return _trashdate;
 }
 
-void Tire::setTrashdate(QDateTime date)
+void Tire::setTrashdate(QDate date)
+
 {
-    _trashdate = date.date();
+    _trashdate=date;
     emit trashdateChanged();
 }
 
@@ -199,12 +202,22 @@ void Tire::setId(unsigned int id)
     emit idChanged();
 }
 
+unsigned int Tire::tireset() const
+{
+    return _tireset;
+}
+
+void Tire::setTireset (unsigned int id)
+{
+    _tireset = id;
+}
+
 void Tire::save()
 {
     if(_id < 0)
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("INSERT INTO TireList (id,buydate,trashdate,name,manufacturer,model,price,quantity) VALUES(NULL,'%1','%2','%3','%4','%5',%6,%7)").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity);
+        QString sql = QString("INSERT INTO TireList (id,buydate,trashdate,name,manufacturer,model,price,quantity,tireset) VALUES(NULL,'%1','%2','%3','%4','%5',%6,%7,%8)").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_tireset);
         if(query.exec(sql))
         {
             _id = query.lastInsertId().toInt();
@@ -220,7 +233,7 @@ void Tire::save()
     else
     {
         QSqlQuery query(_car->db);
-        QString sql = QString("UPDATE TireList SET buydate='%1', trashdate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7 WHERE id=%8;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_id);
+        QString sql = QString("UPDATE TireList SET buydate='%1', trashdate='%2', name='%3', manufacturer='%4', model='%5', price=%6, quantity=%7, tireset=%8 WHERE id=%9;").arg(_buydate.toString("yyyy-MM-dd 00:00:00.00")).arg(_trashdate.toString("yyyy-MM-dd 00:00:00.00")).arg(_name).arg(_manufacturer).arg(_model).arg(_price).arg(_quantity).arg(_tireset).arg(_id);
         qDebug() << sql;
         if(query.exec(sql))
         {

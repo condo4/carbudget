@@ -56,15 +56,15 @@ Page {
                 height: datacolumn.height
                 width: parent.width - Theme.paddingMedium - Theme.paddingMedium
                 showMenuOnPressAndHold: true
-                onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tiremount: model.modelData })
-
+                //onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tiremount: model.modelData })
+                /*
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
                         onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
                     }
                 }
-
+                */
                 Column {
                     id: datacolumn
                     width: parent.width
@@ -72,7 +72,7 @@ Page {
                         width: parent.width
 
                         Text {
-                            text:  model.modelData.tirename;
+                            text:  model.modelData.tiresetname + " - " + model.modelData.tirename;
                             font.family: Theme.fontFamily
                             font.pixelSize: Theme.fontSizeSmall
                             color: Theme.primaryColor

@@ -1,7 +1,7 @@
 /**
  * CarBudget, Sailfish application to manage car cost
  *
- * Copyright (C) 2014 Fabien Proriol
+ * Copyright (C) 2014 Fabien Proriol, 2015 Thomaas Michel
  *
  * This file is part of CarBudget.
  *
@@ -22,48 +22,76 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
 
-Page {
+Dialog {
     allowedOrientations: Orientation.All
     SilicaListView {
+        id: tiresetlist
         PullDownMenu {
             MenuItem {
-                text: qsTr("Add new fuel type")
-                onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"))
+                text: qsTr("Add new tire set")
+                onClicked: pageStack.push(Qt.resolvedUrl("TiresetEntry.qml"))
+                }
+            MenuItem {
+                text: qsTr("Show history")
+                onClicked: pageStack.push(Qt.resolvedUrl("TiremountView.qml"))
             }
         }
 
         VerticalScrollDecorator {}
 
         header: PageHeader {
-            title: qsTr("Fuel Type List")
+            title: qsTr("Tire Set List")
         }
 
         anchors.fill: parent
         leftMargin: Theme.paddingMedium
         rightMargin: Theme.paddingMedium
-        model: manager.car.fueltypes
+        onModelChanged: fillListModel()
+        model: listModel
 
         delegate: ListItem {
+            id: listDelegate
             width: parent.width - Theme.paddingMedium - Theme.paddingMedium
             showMenuOnPressAndHold: true
-
             menu: ContextMenu {
                 MenuItem {
-                    enabled: model.modelData.id > 0 ? true:false
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("FueltypeEntry.qml"), { fueltype: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("TiresetEntry.qml"), { tireset: model.modelData })
                 }
-
-                MenuItem {
-                    enabled: model.modelData.id > 0 ? true:false
-                    text: qsTr("Remove")
-                    onClicked: {
-                        remorseAction(qsTr("Deleting"), function() {
-                            manager.car.delFueltype(model.modelData)
+                MenuItem{
+                    text: qsTr("Add tires")
+                    enabled: model.modelData.tires_associated < manager.car.nbtire? true:false
+                    onClicked:
+                    {
+                        var p = pageStack.push(Qt.resolvedUrl("TireEntry.qml"), { tireset: model.modelData })
+                        p.accepted.connect(function() {
+                            fillListModel()
                         })
                     }
                 }
-            }
+                MenuItem{
+                    text: qsTr("Mount")
+                    enabled: model.modelData.mountable? true:false
+                    onClicked:
+                    {
+                        var p = pageStack.push(Qt.resolvedUrl("TireMount.qml"), { tireset: model.modelData })
+                        p.accepted.connect(function() {
+                            fillListModel()
+                        })
+                    }
+                }            }
+
+/*
+                MenuItem {
+                    text: qsTr("Remove")
+                    onClicked: {
+                        remorseAction(qsTr("Deleting"), function() {
+                            mListItemanager.car.delCosttype(model.modelData)
+                        })
+                    }
+                }
+                */
+            onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"), { tireset: model.modelData })
 
             Column {
                 width: parent.width
@@ -80,6 +108,18 @@ Page {
                     }
                 }
             }
+        }
+    }
+    ListModel {
+        id:listModel
+    }
+    function fillListModel()
+    {
+        var tiresetlist = manager.car.tiresets;
+        listModel.clear()
+        for (var i = 0;i < tiresetlist.length ;i++)
+        {
+            listModel.append({"tireset" : tiresetlist[i]})
         }
     }
 }

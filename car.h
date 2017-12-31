@@ -27,6 +27,7 @@
 #include <tank.h>
 #include <cost.h>
 #include <tire.h>
+#include <tireset.h>
 #include <tiremount.h>
 #include <fueltype.h>
 #include <station.h>
@@ -36,7 +37,7 @@
 
 
 class CarManager;
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 class Car : public QObject
 {
@@ -56,20 +57,27 @@ class Car : public QObject
     Q_PROPERTY(QQmlListProperty<Costtype> costtypes READ costtypes NOTIFY costtypesChanged())
     Q_PROPERTY(QQmlListProperty<Cost> costs READ costs NOTIFY costsChanged())
     Q_PROPERTY(QQmlListProperty<Tire> tires READ tires NOTIFY tiresChanged())
+    Q_PROPERTY(QQmlListProperty<Tireset> tiresets READ tiresets NOTIFY tiresetsChanged())
     Q_PROPERTY(QQmlListProperty<Tiremount> tiremounts READ tiremounts NOTIFY tiresChanged())
     Q_PROPERTY(int tireMounted READ tireMounted NOTIFY tireMountedChanged())
+    Q_PROPERTY(QString tiresetMounted READ tiresetMounted NOTIFY tiresetMountedChanged())
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged())
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged())
     Q_PROPERTY(QString distanceunity READ distanceunity WRITE setDistanceunity NOTIFY distanceunityChanged())
     Q_PROPERTY(unsigned int nbtire READ nbtire WRITE setNbtire NOTIFY nbtireChanged)
-
+    Q_PROPERTY(double buyingprice READ buyingprice WRITE setBuyingprice NOTIFY buyingpriceChanged)
+    Q_PROPERTY(double sellingprice READ sellingprice WRITE setSellingprice NOTIFY sellingpriceChanged)
+    Q_PROPERTY(unsigned int lifetime READ lifetime WRITE setLifetime NOTIFY lifetimeChanged)
+    Q_PROPERTY(QDate buyingdate READ buyingdate WRITE setBuyingdate NOTIFY buyingdateChanged)
     Q_PROPERTY(double budget_fuel_total READ budget_fuel_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_fuel READ budget_fuel NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost_total READ budget_cost_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_cost READ budget_cost NOTIFY budgetChanged)
-    Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget_tire_total READ budget_tire_total NOTIFY budgetChanged)
     Q_PROPERTY(double budget_tire READ budget_tire NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_invest_total READ budget_invest_total NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_invest READ budget_invest NOTIFY budgetChanged)
+    Q_PROPERTY(double budget_total      READ budget_total      NOTIFY budgetChanged)
     Q_PROPERTY(double budget      READ budget      NOTIFY budgetChanged)
 
 
@@ -83,20 +91,28 @@ private:
     QList<Costtype*>    _costtypelist;
     QList<Cost*>    _costlist;
     QList<Tire*>    _tirelist;
+    QList<Tireset*>    _tiresetlist;
     QList<Tiremount*>    _tiremountlist;
 
     QString _currency;
     QString _distanceunity;
 
     unsigned int _nbtire;
+    double _buyingprice;
+    double _sellingprice;
+    unsigned int _lifetime;
+    QDate _buyingdate;
 
     void db_init();
+    void migrateTiresToTiresets();
     void db_load();
     int db_get_version();
 
     void db_upgrade_to_2();
     void db_upgrade_to_3();
     void db_upgrade_to_4();
+    void db_upgrade_to_5();
+    bool db_loading;
 
 public:
     QSqlDatabase db;
@@ -119,6 +135,7 @@ public:
     QQmlListProperty<Costtype> costtypes();
     QQmlListProperty<Cost> costs();
     QQmlListProperty<Tire> tires();
+    QQmlListProperty<Tireset> tiresets();
     QQmlListProperty<Tiremount> tiremounts();
 
     const Tank *previousTank(unsigned int distance) const;
@@ -128,21 +145,23 @@ public:
 
     unsigned long int getDistance(QDate Date);
 
-    double budget_fuel_total();
     Q_INVOKABLE double budget_fuel_byType(unsigned int id);
     Q_INVOKABLE double budget_fuel_total_byType(unsigned int id);
-    double budget_fuel();
     Q_INVOKABLE double budget_consumption_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_max_byType(unsigned int id);
     Q_INVOKABLE double budget_consumption_min_byType(unsigned int id);
-    double budget_cost_total();
     Q_INVOKABLE double budget_cost_total_byType(unsigned int id);
-    double budget_cost();
     Q_INVOKABLE double budget_cost_byType(unsigned int id);
-    double budget_total();
-    double budget();
+    double budget_fuel_total();
+    double budget_fuel();
+    double budget_cost_total();
+    double budget_cost();
     double budget_tire_total();
     double budget_tire();
+    double budget_invest_total();
+    double budget_invest();
+    double budget();
+    double budget_total();
 
 signals:
     void nbtankChanged(unsigned int nbtank);
@@ -160,11 +179,16 @@ signals:
     void costtypesChanged();
     void costsChanged();
     void tiresChanged();
+    void tiresetsChanged();
     void tireMountedChanged();
+    void tiresetMountedChanged();
     void currencyChanged();
     void distanceunityChanged();
     void nbtireChanged();
-
+    void sellingpriceChanged();
+    void buyingpriceChanged();
+    void lifetimeChanged();
+    void buyingdateChanged();
     void budgetChanged();
 
 public slots:
@@ -186,14 +210,23 @@ public slots:
     void addNewCost(QDate date, unsigned int distance, unsigned int costtype,QString description, double price);
     void delCost(Cost *cost);
 
-    Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
+    Tire* addNewTire(QDate buydate, QString name, QString manufacturer, QString model, double price, unsigned int quantity, int tireset);
     void delTire(Tire *tire);
+    void addNewTireset(QString name);
+    void updateTiresets();
+    Tireset* findTireset(QString name);
+    Tireset* findTiresetById(unsigned int id);
+    QString getTiresetName(unsigned int id);
     QString getTireName(unsigned int id);
+    Tire* findTireById(unsigned int id);
 
+    void mountTireset(QDate mountdate, unsigned int distance, Tireset *tireset);
     void mountTire(QDate mountdate, unsigned int distance, Tire *tire);
     void umountTire(QDate umountdate, unsigned int distance, Tire *tire, bool trashit=false);
 
     int tireMounted() const;
+    QString tiresetMounted() const;
+
 
     void simulation();
 
@@ -205,6 +238,18 @@ public slots:
 
     unsigned int nbtire();
     void setNbtire(unsigned int nbtire);
+
+    double buyingprice();
+    void setBuyingprice(double price);
+
+    double sellingprice();
+    void setSellingprice(double price);
+
+    unsigned int lifetime();
+    void setLifetime(int months);
+
+    QDate buyingdate();
+    void setBuyingdate(QDate date);
 
 
 };

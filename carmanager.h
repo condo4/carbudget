@@ -33,6 +33,7 @@ class CarManager : public QObject
 
     Q_PROPERTY(QStringList cars READ cars NOTIFY carsChanged())
     Q_PROPERTY(Car *car READ car NOTIFY carChanged())
+    Q_PROPERTY(bool is_debug READ is_debug CONSTANT)
 
 private:
     QStringList _cars;
@@ -61,5 +62,6 @@ public slots:
     void createCar(QString name);
     void importFromMyCar( QString filename, QString name);
     void importFromFuelpad( QString filenme, QString name);
+    bool is_debug() const;
 };
 #endif // CARMANAGER_H

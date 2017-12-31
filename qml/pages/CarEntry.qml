@@ -25,6 +25,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: carEntry
+    allowedOrientations: Orientation.All
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
@@ -173,14 +174,14 @@ Page {
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
+                        onClicked: pageStack.push(Qt.resolvedUrl("TiresetView.qml"))
                     }
                 }
 
                 Button {
-                    text: (manager.car.tireMounted < manager.car.nbtire)?(qsTr("Tires mounted: %1/%2").arg(manager.car.tireMounted).arg(manager.car.nbtire)):(qsTr("Tires mounted"))
+                    text: manager.car.tiresetMounted == "" ? (qsTr("No tires mounted")):(manager.car.tiresetMounted)
                     color: (manager.car.tireMounted < manager.car.nbtire)?(Theme.highlightColor):(Theme.primaryColor)
-                    onClicked: pageStack.push(Qt.resolvedUrl("TireView.qml"))
+                    onClicked: pageStack.push(Qt.resolvedUrl("TiresetView.qml"))
                 }
             }
             Row {

@@ -31,6 +31,7 @@
 #include "station.h"
 #include "car.h"
 #include "carmanager.h"
+#include "filemodel.h"
 
 #include <QtCore/QTranslator>
 #include <QQmlApplicationEngine>
@@ -52,10 +53,12 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView();
 
     QTranslator translator;
-    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), ":/i18n"))
+    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), "/usr/share/harbour-carbudget/translations/"))
     {
         QGuiApplication::installTranslator(&translator);
     }
+
+    app->setApplicationVersion(QString(APP_VERSION));
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
     qmlRegisterType<Fueltype>(  "harbour.carbudget",1,0,"Fueltype");
@@ -63,8 +66,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<Costtype>(  "harbour.carbudget",1,0,"Costtype");
     qmlRegisterType<Cost>(      "harbour.carbudget",1,0,"Cost");
     qmlRegisterType<Tire>(      "harbour.carbudget",1,0,"Tire");
+    qmlRegisterType<Tireset>(      "harbour.carbudget",1,0,"Tireset");
     qmlRegisterType<Tiremount>( "harbour.carbudget",1,0,"Tiremount");
     qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
+    qmlRegisterType<FileModel>( "harbour.carbudget",1,0,"FileModel");
 
 
     CarManager manager;

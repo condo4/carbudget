@@ -30,7 +30,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Import Car")
-                onClicked: pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("ImportHelp.qml"))
             }
             MenuItem {
                 text: qsTr("Create new car")
