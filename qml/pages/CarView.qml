@@ -105,10 +105,7 @@ Page {
             showMenuOnPressAndHold: true
             onClicked: function() {
                 manager.selectCar(model.modelData)
-                if(pageStack.depth > 1)
-                    pageStack.navigateBack()
-                else
-                    pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
+                pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
             }
             menu: ContextMenu {
                 // Backup functionality works, but I didn't yet

@@ -281,7 +281,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="124"/>
+        <location filename="../qml/pages/CarView.qml" line="121"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
