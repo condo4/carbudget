@@ -128,7 +128,7 @@ bool CarManager::backupCar(QString name)
     // Initialise program data directory and make sure it exists.
     // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget
     QString source = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
-    QString destination = QDir::homePath() + QDir::separator() + name + "_" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") + ".cbg.";
+    QString destination = QDir::homePath() + QDir::separator() + name + "_" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") + ".cbg";
     qDebug() << source;
     qDebug() << destination;
     if(!QFile::exists(source))
