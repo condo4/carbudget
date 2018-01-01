@@ -108,15 +108,12 @@ Page {
                 pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
             }
             menu: ContextMenu {
-                // Backup functionality works, but I didn't yet
-                // find a way to show a confirmation message,
-                // so I'll comment this out and finish it later.
-                //MenuItem {
-                //    text: qsTr("Backup")
-                //    onClicked: function() {
-                //        successful = manager.backupCar(model.modelData)
-                //    }
-                //}
+                MenuItem {
+                    text: qsTr("Backup")
+                    onClicked: function() {
+                        successful = manager.backupCar(model.modelData)
+                    }
+                }
                 MenuItem {
                     text: qsTr("Remove")
                     onClicked: {
