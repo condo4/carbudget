@@ -80,7 +80,7 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="373"/>
         <source>Average:</source>
-        <translation type="unfinished"></translation>
+        <translation>Medel:</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="738"/>
@@ -95,32 +95,32 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="73"/>
         <source>Fuel price</source>
-        <translation type="unfinished"></translation>
+        <translation>Bränslepris</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="180"/>
         <source>Bills: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Räkningar: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="208"/>
         <source>Fuel: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Bränsle: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="236"/>
         <source>Tires: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Däck: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="264"/>
         <source>Invest: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Investering: %1%</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="286"/>
         <source>Odometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mätarställning</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="340"/>
@@ -132,7 +132,7 @@
         <location filename="../qml/pages/BudgetView.qml" line="412"/>
         <location filename="../qml/pages/BudgetView.qml" line="438"/>
         <source>%L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>%L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="399"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="622"/>
         <source>Costs per 100 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kostnader per 100 %1</translation>
     </message>
 </context>
 <context>
@@ -160,27 +160,27 @@
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="49"/>
         <source>Short car name</source>
-        <translation type="unfinished"></translation>
+        <translation>Kort bilnamn</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="61"/>
         <source>Car manufacturer</source>
-        <translation type="unfinished">Biltillverkare</translation>
+        <translation>Biltillverkare</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="72"/>
         <source>Car model</source>
-        <translation type="unfinished">Distansenhet</translation>
+        <translation>Bilmodell</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="83"/>
         <source>Car manufacture year</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillverkningsår</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="95"/>
         <source>Licence plate</source>
-        <translation type="unfinished"></translation>
+        <translation>Registreringsplåt</translation>
     </message>
 </context>
 <context>
@@ -257,33 +257,33 @@
         <location filename="../qml/pages/CarView.qml" line="40"/>
         <location filename="../qml/pages/CarView.qml" line="85"/>
         <source>Import Car</source>
-        <translation type="unfinished">Importera bil</translation>
+        <translation>Importera bil</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="44"/>
         <location filename="../qml/pages/CarView.qml" line="89"/>
         <source>Create new car</source>
-        <translation type="unfinished">Skapa ny bil</translation>
+        <translation>Skapa ny bil</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="55"/>
         <source>Welcome to CarBudget!</source>
-        <translation type="unfinished"></translation>
+        <translation>Välkommen till CarBudget!</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="69"/>
         <source>Please create a new car or import data from another application using the pulley menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa en ny bil eller importera data från en annan app, via toppmenyn.</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="97"/>
         <source>Car List</source>
-        <translation type="unfinished"></translation>
+        <translation>Billista</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="124"/>
         <source>Remove</source>
-        <translation type="unfinished">Ta bort</translation>
+        <translation>Ta bort</translation>
     </message>
 </context>
 <context>
@@ -296,14 +296,14 @@
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="71"/>
         <source>Average:</source>
-        <translation type="unfinished"></translation>
+        <translation>Medel:</translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="84"/>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="110"/>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="136"/>
         <source>%L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>%L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="97"/>
@@ -369,7 +369,7 @@
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="68"/>
         <source>Odometer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mätarställning:</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostEntryView.qml" line="89"/>
@@ -397,7 +397,7 @@
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="45"/>
         <source>Bills per 100 %1 by type</source>
-        <translation type="unfinished"></translation>
+        <translation>Räkningar per 100 %1 efter typ</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="46"/>
@@ -407,7 +407,7 @@
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="51"/>
         <source>Fuel per 100 %1 by type</source>
-        <translation type="unfinished"></translation>
+        <translation>Bränsle per 100 %1 efter typ</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostStatistics.qml" line="52"/>
@@ -425,7 +425,7 @@
     <message>
         <location filename="../qml/pages/CostView.qml" line="58"/>
         <source>Add Cost</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till kostnad</translation>
     </message>
     <message>
         <location filename="../qml/pages/CostView.qml" line="79"/>
@@ -481,7 +481,7 @@
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="59"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/CosttypeView.qml" line="61"/>
@@ -517,24 +517,24 @@
     <message>
         <location filename="../filemodel.cpp" line="66"/>
         <source>dir-link</source>
-        <translation type="unfinished"></translation>
+        <translation>mapplänk</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="67"/>
         <source>dir</source>
-        <translation type="unfinished"></translation>
+        <translation>mapp</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="295"/>
         <location filename="../filemodel.cpp" line="329"/>
         <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappen finns inte</translation>
     </message>
     <message>
         <location filename="../filemodel.cpp" line="299"/>
         <location filename="../filemodel.cpp" line="335"/>
         <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Läsrättigheter saknas till mappen</translation>
     </message>
 </context>
 <context>
@@ -542,7 +542,7 @@
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
         <source>Cars found in %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilar hittade i %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="52"/>
@@ -588,7 +588,7 @@
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="57"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/FueltypeView.qml" line="59"/>
@@ -624,7 +624,7 @@
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="46"/>
         <source>Cars found in %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilar hittade i %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
@@ -637,22 +637,22 @@
     <message>
         <location filename="../globals.cpp" line="48"/>
         <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 byte</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="51"/>
         <source>%1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kB</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="54"/>
         <source>%1 MB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB</translation>
     </message>
     <message>
         <location filename="../globals.cpp" line="56"/>
         <source>%1 GB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 GB</translation>
     </message>
 </context>
 <context>
@@ -782,7 +782,7 @@
     <message>
         <location filename="../qml/pages/StationView.qml" line="59"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/StationView.qml" line="61"/>
@@ -805,7 +805,7 @@
     <message>
         <location filename="../qml/pages/Statistics.qml" line="73"/>
         <source>Fuel price</source>
-        <translation type="unfinished"></translation>
+        <translation>Bränslepris</translation>
     </message>
     <message>
         <location filename="../qml/pages/Statistics.qml" line="93"/>
@@ -848,7 +848,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="87"/>
         <source>Odometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mätarställning</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="100"/>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="125"/>
         <source>Unit Price</source>
-        <translation type="unfinished"></translation>
+        <translation>Enhetspris</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="133"/>
@@ -883,7 +883,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteckning</translation>
     </message>
 </context>
 <context>
@@ -906,7 +906,7 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="97"/>
         <source>Odometer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mätarställning:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="119"/>
@@ -984,7 +984,7 @@
     <message>
         <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankView.qml" line="107"/>
@@ -997,7 +997,7 @@
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="45"/>
         <source>Modify Tire</source>
-        <translation>Ändra däck</translation>
+        <translation>Ändra däckpost</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireEntry.qml" line="46"/>
@@ -1083,7 +1083,7 @@
     <message>
         <location filename="../qml/pages/TireView.qml" line="78"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="81"/>
