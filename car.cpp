@@ -41,8 +41,14 @@ bool sortTireMountByDistance (const TireMount *s1, const TireMount * s2) { retur
 
 void Car::_dbInit()
 {
+    if(this->db.contains("CarManagerDatabase")) {
+        this->db.close();
+        QSqlDatabase::removeDatabase("CarManagerDatabase");
+    }
+
+    this->db = QSqlDatabase::addDatabase("QSQLITE", "CarManagerDatabase");
+
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
-    this->db = QSqlDatabase::addDatabase("QSQLITE");
     this->db.setDatabaseName(db_name);
 
     bool databaseOK = this->db.open();

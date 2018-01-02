@@ -122,7 +122,7 @@ bool CarManager::backupCar(QString name)
 void CarManager::createCar(QString name)
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "createCar");
     db.setDatabaseName(db_name);
 
     if(!db.open())
@@ -132,6 +132,7 @@ void CarManager::createCar(QString name)
     qDebug() << "DB:" << db_name;
     createTables(db);
     db.close();
+    QSqlDatabase::removeDatabase("createCar");
     refresh();
 }
 
@@ -181,8 +182,7 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
     // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget/
     bool fileMoved;
     qDebug() << "Trying to open backup file" << filename;
-    QSqlDatabase tempDB;
-    tempDB.addDatabase("QSQLITE", "tempDB");
+    QSqlDatabase tempDB = QSqlDatabase::addDatabase("QSQLITE", "tempDB");
     tempDB.setDatabaseName(filename);
     int dbVersion = -1;
     if(tempDB.open()) {
@@ -201,6 +201,9 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
                 }
             }
         }
+    }
+    else {
+        qDebug() << tempDB.lastError();
     }
     tempDB.removeDatabase("tempDB");
 
@@ -497,6 +500,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         qDebug() << query.lastError();
     }
     db.close();
+    QSqlDatabase::removeDatabase("fuelpaddb");
 }
 
 bool CarManager::is_debug() const
@@ -525,22 +529,23 @@ QStringList CarManager::checkFuelpadDBforCars( QString name)
     if(!db.open())
     {
         qDebug() << "ERROR: fail to open Fuelpad database";
-        db.close();
-        return fuelpadcars;
     }
-    QSqlQuery query(db);
-    if(query.exec("SELECT register FROM car;"))
-    {
-        while(query.next())
+    else {
+        QSqlQuery query(db);
+        if(query.exec("SELECT register FROM car;"))
         {
-            QString name = query.value(0).toString();
-            fuelpadcars.append(name);
+            while(query.next())
+            {
+                QString name = query.value(0).toString();
+                fuelpadcars.append(name);
+            }
+        }
+        else
+        {
+            qDebug() << query.lastError();
         }
     }
-    else
-    {
-        qDebug() << query.lastError();
-    }
     db.close();
+    QSqlDatabase::removeDatabase("fuelpaddb");
     return fuelpadcars;
 }
