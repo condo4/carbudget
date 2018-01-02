@@ -30,6 +30,24 @@
     </message>
 </context>
 <context>
+    <name>BackupNotification</name>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="35"/>
+        <source>Backup</source>
+        <translation>Varmuuskopio</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="44"/>
+        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <translation>Varmuuskopion luominen onnistui. Valittu auto on kopioitu kotikansioosi.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="46"/>
+        <source>There was an error during the backup operation.</source>
+        <translation>Varmuuskopion luomisessa tapahtui virhe.</translation>
+    </message>
+</context>
+<context>
     <name>BudgetView</name>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="57"/>
@@ -153,7 +171,7 @@
 <context>
     <name>CarBudgetImport</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="55"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
         <source>Enter car name</source>
         <translation>Syötä auton nimi</translation>
     </message>
@@ -317,7 +335,7 @@
         <translation>Varmuuskopioi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="118"/>
+        <location filename="../qml/pages/CarView.qml" line="119"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
@@ -875,7 +893,7 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
-        <source>note</source>
+        <source>Note</source>
         <translation>Muistiinpanot</translation>
     </message>
 </context>
