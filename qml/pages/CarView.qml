@@ -111,7 +111,8 @@ Page {
                 MenuItem {
                     text: qsTr("Backup")
                     onClicked: function() {
-                        successful = manager.backupCar(model.modelData)
+                        var successful = manager.backupCar(model.modelData)
+                        pageStack.push(Qt.resolvedUrl("BackupNotification.qml"), {backupOK: successful})
                     }
                 }
                 MenuItem {
