@@ -9,22 +9,22 @@
         <translation>Simulaatio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="63"/>
+        <location filename="../qml/pages/About.qml" line="62"/>
         <source>License: GPLv3</source>
         <translation>Lisenssi: GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="68"/>
+        <location filename="../qml/pages/About.qml" line="67"/>
         <source>Created by condo4 (Fabien Proriol)</source>
         <translation>Tehnyt condo4 (Fabien Proriol)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="76"/>
+        <location filename="../qml/pages/About.qml" line="75"/>
         <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
         <translation>Kiitokset seuraaville:&lt;br /&gt;- Lorenzo Facca (italiankielinen käännös)&lt;br /&gt;- Alois Spitzbart (saksankielinen käännös)&lt;br /&gt;- Michal Hrusecky (monia parannuksia)&lt;br /&gt;- Denis Fedoseev (venäjänkielinen käännös)&lt;br /&gt;- Åke Engelbrektson (ruotsinkielinen käännös)&lt;br /&gt;- Thomas Michel (monia parannuksia)&lt;br /&gt;- Matti Viljanen (suomenkielinen käännös ja monia parannuksia)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="96"/>
+        <location filename="../qml/pages/About.qml" line="95"/>
         <source>Sourcecode on Github</source>
         <translation>Lähdekoodi GitHub-sivustolla</translation>
     </message>
@@ -330,12 +330,12 @@
         <translation>Autoluettelo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="112"/>
+        <location filename="../qml/pages/CarView.qml" line="113"/>
         <source>Backup</source>
         <translation>Varmuuskopioi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="119"/>
+        <location filename="../qml/pages/CarView.qml" line="120"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
