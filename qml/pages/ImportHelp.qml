@@ -83,7 +83,7 @@ Page {
             Button {
                id: btnImport
                anchors.horizontalCenter: parent.horizontalCenter
-               text: "Select Import File"
+               text: qsTr("Browse...")
                onClicked: pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"))
             }
         }

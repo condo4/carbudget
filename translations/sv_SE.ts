@@ -652,6 +652,11 @@
         <source>Fuelpad import file must be a db file.</source>
         <translation>Fuelpad importfil måste vara en db-fil.</translation>
     </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="86"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MycarImport</name>
