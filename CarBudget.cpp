@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
+    qDebug() << "Starting CarBudget" << APP_VERSION;
+
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQuickView *view = SailfishApp::createView();
 
@@ -78,6 +80,8 @@ int main(int argc, char *argv[])
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();
 
-    return app->exec();
+    int errorlevel = app->exec();
+    qDebug() << "CarBudget exited normally.";
+    return errorlevel;
 }
 
