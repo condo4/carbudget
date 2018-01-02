@@ -30,6 +30,24 @@
     </message>
 </context>
 <context>
+    <name>BackupNotification</name>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="35"/>
+        <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="44"/>
+        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="46"/>
+        <source>There was an error during the backup operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BudgetView</name>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="57"/>
@@ -147,6 +165,37 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="622"/>
         <source>Costs per 100 %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImport</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
+        <source>Enter car name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImportError</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
+        <source>Could not import selected file, because the car name chosen already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
+        <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
+        <source>Could not import selected file. Unknown error.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -281,7 +330,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="121"/>
+        <location filename="../qml/pages/CarView.qml" line="112"/>
+        <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarView.qml" line="119"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -579,17 +633,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="55"/>
-        <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
+        <location filename="../qml/pages/ImportHelp.qml" line="54"/>
+        <source>You can restore a previously made CarBudget backup file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="63"/>
-        <source>My Cars import file must be XML Export from My Cars.</source>
+        <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="71"/>
+        <source>My Cars import file must be XML Export from My Cars.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="79"/>
         <source>Fuelpad import file must be a db file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -610,7 +669,7 @@
 <context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="34"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
         <source>File to import</source>
         <translation type="unfinished"></translation>
     </message>
@@ -834,7 +893,7 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
-        <source>note</source>
+        <source>Note</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

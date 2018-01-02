@@ -46,6 +46,14 @@ Page {
                 title: qsTr("Import Car")
             }
 
+            Text {
+                x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge - Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                color: Theme.primaryColor
+                text: qsTr("You can restore a previously made CarBudget backup file.")
+                font.pixelSize: Theme.fontSizeSmall
+            }
 
             Text {
                 x: Theme.paddingLarge

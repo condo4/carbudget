@@ -24,9 +24,12 @@ import harbour.carbudget 1.0
 import Qt.labs.folderlistmodel 2.1
 
 Page {
-    id:page
+    id: page
+    property string folderName
+    property bool showFolderUp: false
     allowedOrientations: Orientation.All
     SilicaListView {
+        anchors.fill: parent
 
         VerticalScrollDecorator {}
 
@@ -34,55 +37,90 @@ Page {
             title: qsTr("File to import")
         }
 
-        anchors.fill: parent
-        leftMargin: Theme.paddingMedium
-        rightMargin: Theme.paddingMedium
         model: folderModel
 
         FolderListModel {
             id: folderModel
-            folder: "file:///home/nemo"
-            nameFilters: ["*.xml", "*.db"]
+            folder: folderName.length > 0 ? folderName : "file:///home/nemo"
+            nameFilters: ["*.xml", "*.db", "*.cbg"]
+            showDirsFirst: true
+            showDotAndDotDot: showFolderUp
         }
 
-        delegate: BackgroundItem {
+        delegate: ListItem {
             id: fileDelegate
-            Label {
-                x: Theme.paddingMedium
-                text: fileName
-                //showMenuOnPressAndHold: true
+            enabled: fileName == "." ? false : true
+            visible: fileName == "." ? false : true
+            height: fileName == "." ? 0 : Theme.itemSizeMedium
+
+            Row {
+                anchors.fill: parent
+                spacing: Theme.paddingMedium
+                Rectangle {
+                    height: parent.height
+                    width: height
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: Theme.rgba(Theme.primaryColor, 0.1) }
+                        GradientStop { position: 1.0; color: "transparent" }
+                    }
+                    Image {
+                        anchors.centerIn: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: {
+                            var iconName
+                            if(folderModel.isFolder(index)) {
+                                iconName = "image://theme/icon-m-folder"
+                            }
+                            else {
+                                iconName = "image://theme/icon-m-document"
+                            }
+                            return iconName
+                        }
+                    }
+                }
+
+                Label {
+                    id: fileLabel
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: fileName
+                }
             }
             onClicked: {
-                if (folderModel.isFolder(index)) {
+                if(fileName == ".") {
+                    // Just to be sure...
+                }
+                else if(fileName == "..") {
+                    pageStack.navigateBack()
+                }
+                else if (folderModel.isFolder(index)) {
                     console.log("Clicked dir: " + fileName + " index: " + index)
-                    folderModel.folder = folderModel.folder + "/" + fileName
+                    //folderModel.folder = folderModel.folder + "/" + fileName
+                    pageStack.push(Qt.resolvedUrl("SelectImportFile.qml"), {folderName: folderModel.folder + "/" + fileName, showFolderUp: true})
                 }
                 else {
-                    console.log("Clicked file: " + fileName + " index: " + index)
-                    pageStack.push(Qt.resolvedUrl(checkFileType(fileName)),
-                                  { filename: folderModel.folder+"/"+fileName });
+                    console.log("Selectedted file: " + fileName + " index: " + index)
+                    pageStack.push(Qt.resolvedUrl(importQMLPageName(fileName)),
+                                   { filename: folderModel.folder+"/"+fileName });
 
                 }
-
             }
-            //menu: ContextMenu {
-                //MenuItem {
-                    //text: qsTr("Import")
-                    //onClicked: pageStack.push(Qt.resolvedUrl(checkFileType(fileName)),
-                                                             //{ filename: folderModel.folder+"/"+fileName })
-                    //}
-                //}
-            }
+        }
     }
-    function checkFileType(name)
-        {
-        // Checks if a DB file or an XML file has been chosen and returns appropriate qml target
-        if (name.indexOf(".db",name.length-3)!== -1)
-            return "FuelpadImport.qml";
-        if (name.indexOf(".xml",name.length-4)!== -1)
-            return "MycarImport.qml";
+
+    function importQMLPageName(name)
+    {
+        // Checks if a DB, an XML or a CBG file has been chosen and returns appropriate QML page
+        if (name.indexOf(".db",name.length-3)!== -1) {
+            return "FuelpadImport.qml"
+        }
+        if (name.indexOf(".xml",name.length-4)!== -1) {
+            return "MycarImport.qml"
+        }
+        if (name.indexOf(".cbg",name.length-4)!== -1) {
+            return "CarBudgetImport.qml"
+        }
         // We really should implement some error handling here...
-        return "";
+        return ""
     }
 }
 
