@@ -32,8 +32,8 @@ Page {
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
-            //enabled: manager.is_debug
-            //visible: manager.is_debug
+            enabled: manager.is_debug
+            visible: manager.is_debug
 
             MenuItem {
                 text: qsTr("Simulation")
