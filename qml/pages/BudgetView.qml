@@ -40,7 +40,7 @@ Page {
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionunit == 'mpg')
+        if(manager.car.consumptionUnit == 'mpg')
         {
             consumptionfactor = 4.546*100/1.609
         }
