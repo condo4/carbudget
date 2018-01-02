@@ -20,6 +20,13 @@ TRANSLATIONS = translations/de_DE.ts \
                translations/ru_RU.ts \
                translations/sv_SE.ts
 
+lupdate_only{
+    SOURCES += qml/*.qml \
+    SOURCES += qml/pages/*.qml \
+    SOURCES += qml/jbQuick/Charts/*.qml \
+    SOURCES += qml/jbQuick/Charts/*.js
+}
+
 HEADERS += \
     tank.h \
     car.h \
