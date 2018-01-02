@@ -51,8 +51,7 @@ Page {
         // of the page, followed by our content.
         Column {
             id: column
-
-            width: page.width
+            anchors.fill: parent
             spacing: Theme.paddingLarge
             PageHeader {
                 title: "CarBudget " + Qt.application.version
