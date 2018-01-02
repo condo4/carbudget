@@ -8,35 +8,10 @@
 #         - icon definition filename in desktop file must be changed
 TARGET = harbour-carbudget
 
-CONFIG += sailfishapp
+CONFIG += sailfishapp sailfishapp_i18n
 QT += sql xml
-
+DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 QML_IMPORT_PATH += qml
-
-SOURCES += CarBudget.cpp \
-    tank.cpp \
-    car.cpp \
-    station.cpp \
-    cost.cpp \
-    tire.cpp \
-    carmanager.cpp \
-    fueltype.cpp \
-    costtype.cpp \
-    carevent.cpp \
-    tiremount.cpp \
-    filemodel.cpp \
-    statfileinfo.cpp \
-    globals.cpp
-
-lupdate_only{
-    SOURCES += qml/*.qml \
-    SOURCES += qml/pages/*.qml \
-    SOURCES += qml/jbQuick/Charts/*.qml \
-    SOURCES += qml/jbQuick/Charts/*.js
-}
-
-
-CONFIG += sailfishapp_i18n
 
 TRANSLATIONS = translations/de_DE.ts \
                translations/fi_FI.ts \
@@ -44,16 +19,6 @@ TRANSLATIONS = translations/de_DE.ts \
                translations/it_IT.ts \
                translations/ru_RU.ts \
                translations/sv_SE.ts
-
-
-DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
-
-OTHER_FILES += qml/cover/CoverPage.qml \
-    rpm/CarBudget.yaml \
-    harbour-carbudget.desktop \
-    qml/*.qml \
-    qml/jbQuick/Charts/*
-
 
 HEADERS += \
     tank.h \
@@ -71,6 +36,23 @@ HEADERS += \
     globals.h \
     charttypes.h
 
+SOURCES += CarBudget.cpp \
+    tank.cpp \
+    car.cpp \
+    station.cpp \
+    cost.cpp \
+    tire.cpp \
+    carmanager.cpp \
+    fueltype.cpp \
+    costtype.cpp \
+    carevent.cpp \
+    tiremount.cpp \
+    filemodel.cpp \
+    statfileinfo.cpp \
+    globals.cpp
+
+OTHER_FILES += rpm/CarBudget.yaml \
+    harbour-carbudget.desktop
 
 RESOURCES += \
     Resources.qrc
