@@ -39,25 +39,6 @@ void CarManager::refresh()
             qDebug() << "ERROR: failed to create data directory" << dataPath;
         }
     }
-
-    // Move (rename) *.cbg files from home directory to data directory.
-    // This does not overwrite existing database files.
-    // Home directory; /home/nemo
-    QString homePath = QDir::homePath();
-    QDir homeDir(homePath);
-    homeDir.setFilter(QDir::Files);
-    homeDir.setNameFilters(QStringList() << "*.cbg");
-    bool fileMoved;
-    foreach(QString file, homeDir.entryList())
-    {
-        fileMoved = QFile::rename(homePath + QDir::separator() + file,
-                                  dataPath + QDir::separator() + file);
-        qDebug() << "Moving"  << (homePath + QDir::separator() + file)
-                 << "to"      << (dataPath + QDir::separator() + file)
-                 << (fileMoved ? "" : "failed");
-    }
-
-    // Find and add *.cbg files to car list
     _cars.clear();
     dataDir.setFilter(QDir::Files);
     dataDir.setNameFilters(QStringList() << "*.cbg");
@@ -128,7 +109,7 @@ bool CarManager::backupCar(QString name)
     // Initialise program data directory and make sure it exists.
     // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget
     QString source = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
-    QString destination = QDir::homePath() + QDir::separator() + name + "_" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") + ".cbg.";
+    QString destination = QDir::homePath() + QDir::separator() + name + "_" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") + ".cbg";
     qDebug() << source;
     qDebug() << destination;
     if(!QFile::exists(source))
@@ -141,7 +122,7 @@ bool CarManager::backupCar(QString name)
 void CarManager::createCar(QString name)
 {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "createCar");
     db.setDatabaseName(db_name);
 
     if(!db.open())
@@ -151,6 +132,7 @@ void CarManager::createCar(QString name)
     qDebug() << "DB:" << db_name;
     createTables(db);
     db.close();
+    QSqlDatabase::removeDatabase("createCar");
     refresh();
 }
 
@@ -190,6 +172,58 @@ bool CarManager::createTables(QSqlDatabase db)
     }
 
     return success;
+}
+
+QString CarManager::importFromCarBudget(QString filename, QString carName)
+{
+    // Move (rename) the cbg file from home directory to data directory.
+    // This does not overwrite existing database file.
+    // Home directory: /home/nemo
+    // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget/
+    bool fileMoved;
+    qDebug() << "Trying to open backup file" << filename;
+    QSqlDatabase tempDB = QSqlDatabase::addDatabase("QSQLITE", "tempDB");
+    tempDB.setDatabaseName(filename);
+    int dbVersion = -1;
+    if(tempDB.open()) {
+        QSqlQuery query(tempDB);
+        qDebug() << "Trying to read backup file database version...";
+        if(query.exec("SELECT count(*) FROM sqlite_master where type='table' and name='CarBudget';"))
+        {
+            query.next();
+            if(query.value(0).toInt() != 0)
+            {
+                if(query.exec("SELECT value FROM CarBudget WHERE id='version';"))
+                {
+                    query.next();
+                    dbVersion = query.value(0).toString().toInt();
+                    qDebug() << "Version is" << dbVersion;
+                }
+            }
+        }
+    }
+    else {
+        qDebug() << tempDB.lastError();
+    }
+    tempDB.removeDatabase("tempDB");
+
+    if(dbVersion == -1) {
+        qDebug() << "Could not verify database version. Aborting.";
+        return QString("DB_ERROR");
+    }
+
+    QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    fileMoved = QFile::rename(filename,             dataPath + QDir::separator() + carName);
+    qDebug() << "Moving"  << (filename) << "to" << (dataPath + QDir::separator() + carName)<< (fileMoved ? "" : "failed");
+    if(fileMoved) {
+        refresh();
+        return QString("OK");
+    }
+    else if(QFile::exists(dataPath + QDir::separator() + carName)) {
+        return QString("FILE_EXISTS");
+    } else {
+        return QString("UNKNOWN");
+    }
 }
 
 void CarManager::importFromMyCar(QString filename, QString name)
@@ -383,7 +417,6 @@ void CarManager::importFromMyCar(QString filename, QString name)
     }
 }
 
-
 void CarManager::importFromFuelpad(QString filename, QString name)
 {
     qDebug() << "Importing from Fuelpad";
@@ -467,6 +500,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
         qDebug() << query.lastError();
     }
     db.close();
+    QSqlDatabase::removeDatabase("fuelpaddb");
 }
 
 bool CarManager::is_debug() const
@@ -495,22 +529,23 @@ QStringList CarManager::checkFuelpadDBforCars( QString name)
     if(!db.open())
     {
         qDebug() << "ERROR: fail to open Fuelpad database";
-        db.close();
-        return fuelpadcars;
     }
-    QSqlQuery query(db);
-    if(query.exec("SELECT register FROM car;"))
-    {
-        while(query.next())
+    else {
+        QSqlQuery query(db);
+        if(query.exec("SELECT register FROM car;"))
         {
-            QString name = query.value(0).toString();
-            fuelpadcars.append(name);
+            while(query.next())
+            {
+                QString name = query.value(0).toString();
+                fuelpadcars.append(name);
+            }
+        }
+        else
+        {
+            qDebug() << query.lastError();
         }
     }
-    else
-    {
-        qDebug() << query.lastError();
-    }
     db.close();
+    QSqlDatabase::removeDatabase("fuelpaddb");
     return fuelpadcars;
 }

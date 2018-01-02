@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fi_FI">
+<TS version="2.1" language="fi_FI">
 <context>
     <name>About</name>
     <message>
@@ -9,24 +9,42 @@
         <translation>Simulaatio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="63"/>
+        <location filename="../qml/pages/About.qml" line="62"/>
         <source>License: GPLv3</source>
         <translation>Lisenssi: GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="68"/>
+        <location filename="../qml/pages/About.qml" line="67"/>
         <source>Created by condo4 (Fabien Proriol)</source>
         <translation>Tehnyt condo4 (Fabien Proriol)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="76"/>
+        <location filename="../qml/pages/About.qml" line="75"/>
         <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
         <translation>Kiitokset seuraaville:&lt;br /&gt;- Lorenzo Facca (italiankielinen käännös)&lt;br /&gt;- Alois Spitzbart (saksankielinen käännös)&lt;br /&gt;- Michal Hrusecky (monia parannuksia)&lt;br /&gt;- Denis Fedoseev (venäjänkielinen käännös)&lt;br /&gt;- Åke Engelbrektson (ruotsinkielinen käännös)&lt;br /&gt;- Thomas Michel (monia parannuksia)&lt;br /&gt;- Matti Viljanen (suomenkielinen käännös ja monia parannuksia)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="96"/>
+        <location filename="../qml/pages/About.qml" line="95"/>
         <source>Sourcecode on Github</source>
         <translation>Lähdekoodi GitHub-sivustolla</translation>
+    </message>
+</context>
+<context>
+    <name>BackupNotification</name>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="35"/>
+        <source>Backup</source>
+        <translation>Varmuuskopio</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="44"/>
+        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <translation>Varmuuskopion luominen onnistui. Valittu auto on kopioitu kotikansioosi.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="46"/>
+        <source>There was an error during the backup operation.</source>
+        <translation>Varmuuskopion luomisessa tapahtui virhe.</translation>
     </message>
 </context>
 <context>
@@ -132,7 +150,7 @@
         <location filename="../qml/pages/BudgetView.qml" line="412"/>
         <location filename="../qml/pages/BudgetView.qml" line="438"/>
         <source>%L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>%L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="399"/>
@@ -147,7 +165,38 @@
     <message>
         <location filename="../qml/pages/BudgetView.qml" line="622"/>
         <source>Costs per 100 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulut per 100%1</translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImport</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
+        <source>Enter car name</source>
+        <translation>Syötä auton nimi</translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImportError</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
+        <source>Error</source>
+        <translation>Virhe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
+        <source>Could not import selected file, because the car name chosen already exists.</source>
+        <translation>Valittua tiedostoa ei voitu tuoda, sillä valittu auton nimi on jo käytössä.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
+        <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
+        <translation>Valittua tiedostoa ei voitu tuoda, sillä se ei ole CarBudget-ohjelman tietokantatiedosto.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
+        <source>Could not import selected file. Unknown error.</source>
+        <translation>Valittua tiedostoa ei voitu tuoda. Tuntematon virhe.</translation>
     </message>
 </context>
 <context>
@@ -281,7 +330,12 @@
         <translation>Autoluettelo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="124"/>
+        <location filename="../qml/pages/CarView.qml" line="113"/>
+        <source>Backup</source>
+        <translation>Varmuuskopioi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarView.qml" line="120"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
@@ -303,7 +357,7 @@
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="110"/>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="136"/>
         <source>%L1 mpg</source>
-        <translation type="unfinished"></translation>
+        <translation>%L1 mpg</translation>
     </message>
     <message>
         <location filename="../qml/pages/ConsumptionStatistics.qml" line="97"/>
@@ -513,31 +567,6 @@
     </message>
 </context>
 <context>
-    <name>FileModel</name>
-    <message>
-        <location filename="../filemodel.cpp" line="66"/>
-        <source>dir-link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="67"/>
-        <source>dir</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="295"/>
-        <location filename="../filemodel.cpp" line="329"/>
-        <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="299"/>
-        <location filename="../filemodel.cpp" line="335"/>
-        <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FuelpadImport</name>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
@@ -604,19 +633,29 @@
         <translation>Tuo auto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="55"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="54"/>
+        <source>You can restore a previously made CarBudget backup file.</source>
+        <translation>Voit palauttaa aiemmin luodun CarBudget-varmuuskopiotiedoston.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="63"/>
         <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
         <translation>Autoja voidaan tuoda Android-sovelluksesta My Cars tai Nokia-sovelluksesta Fuelpad.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="63"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="71"/>
         <source>My Cars import file must be XML Export from My Cars.</source>
         <translation>My Cars -tuontitiedosto on oltava XML-vienti sovelluksesta My Cars.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="71"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="79"/>
         <source>Fuelpad import file must be a db file.</source>
         <translation>Fuelpad-tuontitiedoston on oltava db-tiedosto.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="86"/>
+        <source>Browse...</source>
+        <translation>Selaa...</translation>
     </message>
 </context>
 <context>
@@ -633,34 +672,11 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../globals.cpp" line="48"/>
-        <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="51"/>
-        <source>%1 kB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="54"/>
-        <source>%1 MB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="56"/>
-        <source>%1 GB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="34"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
         <source>File to import</source>
-        <translation>Tuotava tiedosto</translation>
+        <translation>Tuo tiedosto</translation>
     </message>
 </context>
 <context>
@@ -882,8 +898,8 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
-        <source>note</source>
-        <translation type="unfinished"></translation>
+        <source>Note</source>
+        <translation>Muistiinpanot</translation>
     </message>
 </context>
 <context>

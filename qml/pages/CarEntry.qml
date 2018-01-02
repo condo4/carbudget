@@ -53,7 +53,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Select another car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarView.qml"))
+                onClicked: pageStack.replace(Qt.resolvedUrl("CarView.qml"))
             }
 
             MenuItem {

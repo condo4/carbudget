@@ -62,6 +62,7 @@ public slots:
     Q_INVOKABLE bool backupCar(QString name);
     Q_INVOKABLE void createCar(QString name);
     bool createTables(QSqlDatabase db);
+    QString importFromCarBudget( QString filename, QString name);
     void importFromMyCar( QString filename, QString name);
     void importFromFuelpad( QString filenme, QString name);
     bool is_debug() const;

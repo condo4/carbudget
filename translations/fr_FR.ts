@@ -9,24 +9,42 @@
         <translation>Simulation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="63"/>
+        <location filename="../qml/pages/About.qml" line="62"/>
         <source>License: GPLv3</source>
         <translation>License: GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="68"/>
+        <location filename="../qml/pages/About.qml" line="67"/>
         <source>Created by condo4 (Fabien Proriol)</source>
         <translation>Créé par Fabien Proriol</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="76"/>
+        <location filename="../qml/pages/About.qml" line="75"/>
         <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
         <translation>Remerciment à:&lt;br /&gt;- Lorenzo Facca (traduction italien)&lt;br /&gt;- Alois Spitzbart (traduction allemand)&lt;br /&gt;- Michal Hrusecky (améliorations divers)&lt;br /&gt;- Denis Fedoseev (traduction russe)&lt;br /&gt;- Åke Engelbrektson (traduction suédois)&lt;br /&gt;- Thomas Michel (amélioration divers)&lt;br /&gt;- Matti Viljanen (traduction finlandais et plusieurs améliorations)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="96"/>
+        <location filename="../qml/pages/About.qml" line="95"/>
         <source>Sourcecode on Github</source>
         <translation>Code source sur GitHub</translation>
+    </message>
+</context>
+<context>
+    <name>BackupNotification</name>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="35"/>
+        <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="44"/>
+        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/BackupNotification.qml" line="46"/>
+        <source>There was an error during the backup operation.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -148,6 +166,37 @@
         <location filename="../qml/pages/BudgetView.qml" line="622"/>
         <source>Costs per 100 %1</source>
         <translation>Coût au 100 %1</translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImport</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
+        <source>Enter car name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CarBudgetImportError</name>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
+        <source>Could not import selected file, because the car name chosen already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
+        <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
+        <source>Could not import selected file. Unknown error.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -281,7 +330,12 @@
         <translation>Liste des véhicules</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="124"/>
+        <location filename="../qml/pages/CarView.qml" line="113"/>
+        <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/CarView.qml" line="120"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -513,31 +567,6 @@
     </message>
 </context>
 <context>
-    <name>FileModel</name>
-    <message>
-        <location filename="../filemodel.cpp" line="66"/>
-        <source>dir-link</source>
-        <translation>dir-link</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="67"/>
-        <source>dir</source>
-        <translation>dir</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="295"/>
-        <location filename="../filemodel.cpp" line="329"/>
-        <source>Folder does not exist</source>
-        <translation>Le dossier n&apos;existe pas</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="299"/>
-        <location filename="../filemodel.cpp" line="335"/>
-        <source>No permission to read the folder</source>
-        <translation>Pas le droit de lire le dossier</translation>
-    </message>
-</context>
-<context>
     <name>FuelpadImport</name>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
@@ -604,19 +633,29 @@
         <translation>Importer une voiture</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="55"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="54"/>
+        <source>You can restore a previously made CarBudget backup file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="63"/>
         <source>Cars can be imported from Android app My Cars or from Nokia app Fuelpad.</source>
         <translation>Importation depuis l&apos;application Android My Cars ou depuis Fuelpad du Nokia N900.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="63"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="71"/>
         <source>My Cars import file must be XML Export from My Cars.</source>
         <translation>Les fichiers d&apos;importation doivent être au format XML Export depuis My Car.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ImportHelp.qml" line="71"/>
+        <location filename="../qml/pages/ImportHelp.qml" line="79"/>
         <source>Fuelpad import file must be a db file.</source>
         <translation>Les fichier d&apos;import pour Fuelpad doivent être au format db.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ImportHelp.qml" line="86"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -633,34 +672,11 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../globals.cpp" line="48"/>
-        <source>%1 bytes</source>
-        <translation>%1 octets</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="51"/>
-        <source>%1 kB</source>
-        <translation>%1 ko</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="54"/>
-        <source>%1 MB</source>
-        <translation>%1 Mo</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="56"/>
-        <source>%1 GB</source>
-        <translation>%1 Gb</translation>
-    </message>
-</context>
-<context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="34"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
         <source>File to import</source>
-        <translation>Fichier a importer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -882,8 +898,8 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
-        <source>note</source>
-        <translation>Note</translation>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
