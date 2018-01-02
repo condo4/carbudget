@@ -103,6 +103,7 @@ Page {
             id: carItem
             width: parent.width
             showMenuOnPressAndHold: true
+
             onClicked: function() {
                 manager.selectCar(model.modelData)
                 pageStack.replace(Qt.resolvedUrl("CarEntry.qml"))
@@ -124,10 +125,26 @@ Page {
                     }
                 }
             }
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                x: Theme.horizontalPageMargin
-                text : model.modelData
+            Row {
+                anchors.fill: parent
+                spacing: Theme.paddingMedium
+                Rectangle {
+                    height: parent.height
+                    width: height
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: Theme.rgba(Theme.primaryColor, 0.1) }
+                        GradientStop { position: 1.0; color: "transparent" }
+                    }
+                    Image {
+                        anchors.centerIn: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: "image://theme/icon-m-car"
+                    }
+                }
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text : model.modelData
+                }
             }
         }
     }
