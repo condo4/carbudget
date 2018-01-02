@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>About</name>
     <message>
@@ -567,6 +567,31 @@
     </message>
 </context>
 <context>
+    <name>FileModel</name>
+    <message>
+        <location filename="../filemodel.cpp" line="66"/>
+        <source>dir-link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="67"/>
+        <source>dir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="295"/>
+        <location filename="../filemodel.cpp" line="329"/>
+        <source>Folder does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../filemodel.cpp" line="299"/>
+        <location filename="../filemodel.cpp" line="335"/>
+        <source>No permission to read the folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FuelpadImport</name>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
@@ -669,6 +694,29 @@
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
         <source>Import</source>
         <translation>Importer</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../globals.cpp" line="48"/>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="51"/>
+        <source>%1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="54"/>
+        <source>%1 MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../globals.cpp" line="56"/>
+        <source>%1 GB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
