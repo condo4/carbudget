@@ -655,7 +655,7 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="86"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selaa...</translation>
     </message>
 </context>
 <context>
