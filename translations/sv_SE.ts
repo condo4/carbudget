@@ -44,7 +44,7 @@
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="46"/>
         <source>There was an error during the backup operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ett fel inträffade under säkerhetskopieringen.</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <message>
         <location filename="../qml/pages/CarView.qml" line="113"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="120"/>
