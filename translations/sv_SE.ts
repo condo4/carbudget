@@ -9,22 +9,22 @@
         <translation>Simulering</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="62"/>
+        <location filename="../qml/pages/About.qml" line="63"/>
         <source>License: GPLv3</source>
         <translation>Licens: GPLv3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="67"/>
+        <location filename="../qml/pages/About.qml" line="69"/>
         <source>Created by condo4 (Fabien Proriol)</source>
         <translation>Skapad av condo4 (Fabien Proriol)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="75"/>
-        <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvments)&lt;br /&gt;- Denis Fedoseev (Russion translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvments)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
-        <translation>Tack till:&lt;br /&gt;- Lorenzo Facca (Italiensk översättning)&lt;br /&gt;- Alois Spitzbart (Tysk översättning)&lt;br /&gt;- Michal Hrusecky (Många förbättringar)&lt;br /&gt;- Denis Fedoseev (Rysk översättning)&lt;br /&gt;- Åke Engelbrektson (Svensk översättning)&lt;br /&gt;- Thomas Michel (Många förbättringar)&lt;br /&gt;- Matti Viljanen (Finsk översättning och många förbättringar)</translation>
+        <location filename="../qml/pages/About.qml" line="77"/>
+        <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvements)&lt;br /&gt;- Denis Fedoseev (Russian translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvements)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="95"/>
+        <location filename="../qml/pages/About.qml" line="97"/>
         <source>Sourcecode on Github</source>
         <translation>Källkod på GitHub</translation>
     </message>
