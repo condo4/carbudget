@@ -21,7 +21,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="77"/>
         <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvements)&lt;br /&gt;- Denis Fedoseev (Russian translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvements)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tack till:&lt;br /&gt;- Lorenzo Facca (Italiensk översättning)&lt;br /&gt;- Alois Spitzbart (Tysk översättning)&lt;br /&gt;- Michal Hrusecky (Många förbättringar)&lt;br /&gt;- Denis Fedoseev (Rysk översättning)&lt;br /&gt;- Åke Engelbrektson (Svensk översättning)&lt;br /&gt;- Thomas Michel (Många förbättringar)&lt;br /&gt;- Matti Viljanen (Finsk översättning och många förbättringar)</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="97"/>
