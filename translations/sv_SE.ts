@@ -34,17 +34,17 @@
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="35"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
         <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopieringen lyckades. Den valda bilen har exporterats till din hemmapp.</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="46"/>
         <source>There was an error during the backup operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ett fel inträffade under säkerhetskopieringen.</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
         <source>Enter car name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange bilnamn</translation>
     </message>
 </context>
 <context>
@@ -181,22 +181,22 @@
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen, eftersom bilnamnet redan finns.</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen, eftersom den inte är en giltig CarBudget databasfil.</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
         <source>Could not import selected file. Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen. Okänt fel.</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <message>
         <location filename="../qml/pages/CarView.qml" line="113"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="120"/>
@@ -660,7 +660,7 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="54"/>
         <source>You can restore a previously made CarBudget backup file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan återställa en tidigare skapad CarBudget säkerhetskopia.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="63"/>
@@ -680,7 +680,7 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="86"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bläddra...</translation>
     </message>
 </context>
 <context>
@@ -947,7 +947,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteckning</translation>
     </message>
     <message>
         <source>note</source>
