@@ -59,20 +59,22 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge*2
                 text: qsTr("License: GPLv3")
                 font.pixelSize: Theme.fontSizeSmall
             }
             Label {
                 x: Theme.paddingLarge
+                width: parent.width - Theme.paddingLarge*2
                 text: qsTr("Created by condo4 (Fabien Proriol)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
             Label {
                 x: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge*2
                 wrapMode: Text.Wrap
-                text: qsTr("Credits to:<br />- Lorenzo Facca (Italian translation)<br />- Alois Spitzbart (German translation)<br />- Michal Hrusecky (Many improvments)<br />- Denis Fedoseev (Russion translation)<br />- Åke Engelbrektson (Swedish translation)<br />- Thomas Michel (Many improvments)<br />- Matti Viljanen (Finnish translation and many improvements)")
+                text: qsTr("Credits to:<br />- Lorenzo Facca (Italian translation)<br />- Alois Spitzbart (German translation)<br />- Michal Hrusecky (Many improvements)<br />- Denis Fedoseev (Russian translation)<br />- Åke Engelbrektson (Swedish translation)<br />- Thomas Michel (Many improvements)<br />- Matti Viljanen (Finnish translation and many improvements)")
                 font.pixelSize: Theme.fontSizeSmall
             }
 
