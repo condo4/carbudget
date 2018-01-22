@@ -87,6 +87,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("License plate number")
                 placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: currencyInput.focus = true
