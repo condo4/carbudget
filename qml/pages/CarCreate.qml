@@ -94,7 +94,7 @@ Dialog {
                 width: parent.textWidth
                 label: qsTr("Licence plate")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhNoPredictiveText
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
