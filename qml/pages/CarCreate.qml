@@ -48,7 +48,7 @@ Dialog {
                 focus: true
                 label: qsTr("Short car name")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{4,16}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{4,16}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhNoPredictiveText
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -60,7 +60,7 @@ Dialog {
                 width: parent.textWidth
                 label: qsTr("Car manufacturer")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: model.focus = true
@@ -71,7 +71,7 @@ Dialog {
                 width: parent.textWidth
                 label: qsTr("Car model")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: year.focus = true
@@ -85,14 +85,14 @@ Dialog {
                 validator: IntValidator { bottom: 1000; top: 9999 }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 inputMethodHints: Qt.ImhDigitsOnly
-                EnterKey.enabled: text.length > 0 && acceptableInput == true
+                EnterKey.enabled: text.length > 3 && acceptableInput == true
                 EnterKey.onClicked: licencePlate.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
             TextField {
                 id: licencePlate
                 width: parent.textWidth
-                label: qsTr("Licence plate")
+                label: qsTr("License plate number")
                 placeholderText: label
                 validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
