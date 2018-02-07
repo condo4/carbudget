@@ -46,6 +46,11 @@ Page {
         }
     }
 
+    onVisibleChanged: {
+        if(visible == true)
+            pieChart.requestPaint()
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: flowElement.height + header.height + Theme.paddingSmall
