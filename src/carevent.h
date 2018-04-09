@@ -14,20 +14,24 @@ class CarEvent : public QObject
     Q_PROPERTY(unsigned int distance    READ distance    WRITE setDistance       NOTIFY distanceChanged )
     Q_PROPERTY(unsigned int id          READ id                                  NOTIFY idChanged )
 
+private:
+    unsigned int _distance;
+
+
 protected:
     Car *_car;
     QDate _date;
-    unsigned int _distance;
-    unsigned int _eventId;
+    int _eventId;
 
 public:
-    explicit CarEvent(Car *parent = 0);
-    explicit CarEvent(QDate date, unsigned int distance, unsigned int eventId, Car *parent = 0);
+    explicit CarEvent(Car *parent = nullptr);
+    explicit CarEvent(QDate date, unsigned int distance, int eventId, Car *parent = nullptr);
 
-    unsigned int saveEvent();
+    int saveEvent();
     bool deleteEvent();
 
     int id() const;
+
 
 signals:
     void dateChanged();

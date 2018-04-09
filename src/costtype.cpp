@@ -29,7 +29,7 @@ CostType::CostType(QObject *parent) :
 {
 }
 
-CostType::CostType(unsigned int id, QString name, Car *parent):
+CostType::CostType(int id, QString name, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
@@ -37,12 +37,12 @@ CostType::CostType(unsigned int id, QString name, Car *parent):
 {
 }
 
-unsigned int CostType::id() const
+int CostType::id() const
 {
     return _id;
 }
 
-void CostType::setId(unsigned int id)
+void CostType::setId(int id)
 {
     _id = id;
     emit idChanged();

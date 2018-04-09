@@ -68,7 +68,7 @@ public:
     uint ownerId() const { return m_fileInfo.ownerId(); }
     qint64 size() const { return m_fileInfo.size(); }
     QDateTime lastModified() const { return m_fileInfo.lastModified(); }
-    QDateTime created() const { return m_fileInfo.created(); }
+    QDateTime created() const { return m_fileInfo.birthTime(); }
     bool exists() const;
     bool isSafeToRead() const;
 

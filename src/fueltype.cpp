@@ -29,7 +29,7 @@ FuelType::FuelType(QObject *parent) :
 {
 }
 
-FuelType::FuelType(unsigned int id, QString name, Car *parent):
+FuelType::FuelType(int id, QString name, Car *parent):
     QObject(parent),
     _car(parent),
     _id(id),
@@ -37,12 +37,12 @@ FuelType::FuelType(unsigned int id, QString name, Car *parent):
 {
 }
 
-unsigned int FuelType::id() const
+int FuelType::id() const
 {
     return _id;
 }
 
-void FuelType::setId(unsigned int id)
+void FuelType::setId(int id)
 {
     _id = id;
     emit idChanged();

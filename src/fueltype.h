@@ -31,7 +31,7 @@ class FuelType : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(unsigned int id    READ id       WRITE setId   NOTIFY idChanged )
+    Q_PROPERTY(int          id    READ id       WRITE setId   NOTIFY idChanged )
     Q_PROPERTY(QString      name  READ name     WRITE setName NOTIFY nameChanged )
 
 private:
@@ -40,8 +40,8 @@ private:
     QString _name;
 
 public:
-    explicit FuelType(QObject *parent = 0);
-    FuelType(unsigned int id, QString name, Car *parent = 0);
+    explicit FuelType(QObject *parent = nullptr);
+    FuelType(int id, QString name, Car *parent = nullptr);
 
 signals:
     void idChanged();
@@ -50,8 +50,8 @@ signals:
 public slots:
     void save();
 
-    unsigned int id() const;
-    void setId(unsigned int id);
+    int id() const;
+    void setId(int id);
 
     QString name() const;
     void setName(QString name);

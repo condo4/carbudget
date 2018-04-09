@@ -205,12 +205,12 @@ bool Tire::mountable() const
     return true;
 }
 
-unsigned int Tire::id() const
+int Tire::id() const
 {
     return _id;
 }
 
-void Tire::setId(unsigned int id)
+void Tire::setId(int id)
 {
     _id = id;
     emit idChanged();

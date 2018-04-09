@@ -39,8 +39,8 @@ private:
     QString _name;
 
 public:
-    explicit CostType(QObject *parent = 0);
-    CostType(unsigned int id, QString name, Car *parent = 0);
+    explicit CostType(QObject *parent = nullptr);
+    CostType(int id, QString name, Car *parent = nullptr);
 
 signals:
     void idChanged();
@@ -49,8 +49,8 @@ signals:
 public slots:
     void save();
 
-    unsigned int id() const;
-    void setId(unsigned int id);
+    int id() const;
+    void setId(int id);
 
     QString name() const;
     void setName(QString name);

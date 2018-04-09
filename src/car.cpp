@@ -29,7 +29,7 @@
 #include <QJsonArray>
 #include <stdlib.h>
 
-
+#define EPSILON 1e-12
 #define CREATE_NEW_EVENT (0)
 
 bool sortTankByDistance(const Tank *c1, const Tank *c2) { return c1->distance() > c2->distance(); }
@@ -73,14 +73,14 @@ void Car::_dbLoad()
         while(query.next())
         {
             //qDebug() << "Adding tank" << query.value(2).toInt();
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QDate date = query.value(1).toDate();
-            unsigned int distance = query.value(2).toInt();
+            unsigned int distance = query.value(2).toUInt();
             double quantity = query.value(3).toDouble();
             double price = query.value(4).toDouble();
             bool full = query.value(5).toBool();
-            unsigned int station = query.value(6).toInt();
-            unsigned int fuelType = query.value(7).toInt();
+            unsigned int station = query.value(6).toUInt();
+            unsigned int fuelType = query.value(7).toUInt();
             QString note = query.value(8).toString();
             Tank *tank = new Tank(date, distance, quantity, price, full, fuelType, station, id, note, this);
             _tankList.append(tank);
@@ -95,7 +95,7 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QString name = query.value(1).toString();
             FuelType *fuelType = new FuelType(id, name, this);
             _fuelTypeList.append(fuelType);
@@ -109,7 +109,7 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QString name = query.value(1).toString();
             double quantity = query.value(2).toDouble();
             Station *station = new Station(id, name, quantity, this);
@@ -124,7 +124,7 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QString name = query.value(1).toString();
             CostType *costType = new CostType(id, name, this);
             _costTypeList.append(costType);
@@ -138,10 +138,10 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QDate date = query.value(1).toDate();
-            unsigned int distance = query.value(2).toInt();
-            unsigned int costType = query.value(3).toInt();
+            unsigned int distance = query.value(2).toUInt();
+            unsigned int costType = query.value(3).toUInt();
             double price = query.value(4).toDouble();
             QString description = query.value(5).toString();
             Cost *cost = new Cost(date,distance,costType,description,price,id,this);
@@ -157,14 +157,14 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int id = query.value(0).toInt();
+            unsigned int id = query.value(0).toUInt();
             QDate buyDate = query.value(1).toDate();
             QDate trashDate = query.value(2).toDate();
             double price = query.value(3).toDouble();
             QString name = query.value(4).toString();
             QString manufacturer = query.value(5).toString();
             QString model = query.value(6).toString();
-            unsigned int quantity = query.value(7).toInt();
+            unsigned int quantity = query.value(7).toUInt();
             Tire *tire = new Tire(buyDate,trashDate,name,manufacturer,model,price,quantity,id,this);
             _tireList.append(tire);
         }
@@ -179,13 +179,13 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int mountId = query.value(0).toInt();
+            unsigned int mountId = query.value(0).toUInt();
             QDate mountDate = query.value(1).toDate();
-            unsigned int mountDistance = query.value(2).toInt();
-            int unmountId = query.value(3).toInt();
+            unsigned int mountDistance = query.value(2).toUInt();
+            unsigned int unmountId = query.value(3).toUInt();
             QDate unmountDate = query.value(4).toDate();
-            unsigned int unmountDistance = query.value(5).toInt();
-            unsigned int tire = query.value(6).toInt();
+            unsigned int unmountDistance = query.value(5).toUInt();
+            unsigned int tire = query.value(6).toUInt();
             TireMount *tireMount = new TireMount(mountId,mountDate,mountDistance,unmountId,unmountDate,unmountDistance,tire,this);
             _tireMountList.append(tireMount);
         }
@@ -199,10 +199,10 @@ void Car::_dbLoad()
     {
         while(query.next())
         {
-            int mountId = query.value(0).toInt();
+            unsigned int mountId = query.value(0).toUInt();
             QDate mountDate = query.value(1).toDate();
-            unsigned int mountDistance = query.value(2).toInt();
-            unsigned int tire = query.value(3).toInt();
+            unsigned int mountDistance = query.value(2).toUInt();
+            unsigned int tire = query.value(3).toUInt();
             QDate unmountDate = QDate(1900,1,1);
             TireMount *tireMount = new TireMount(mountId,mountDate,mountDistance,0,unmountDate,0,tire,this);
             _tireMountList.append(tireMount);
@@ -212,12 +212,12 @@ void Car::_dbLoad()
     {
         qDebug() << "Failed to load tire mounts:" << query.lastError();
     }
-    if (!_tankList.empty()) qSort(_tankList.begin(),    _tankList.end(),    sortTankByDistance);
-    if (!_costList.empty()) qSort(_costList.begin(),    _costList.end(),    sortCostByDate);
-    if (!_stationList.empty()) qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
-    if (!_fuelTypeList.empty()) qSort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
-    if (!_costTypeList.empty()) qSort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
-    if (!_tireMountList.empty())  qSort(_tireMountList.begin(),_tireMountList.end(),sortTireMountByDistance);
+    if (!_tankList.empty()) std::sort(_tankList.begin(),    _tankList.end(),    sortTankByDistance);
+    if (!_costList.empty()) std::sort(_costList.begin(),    _costList.end(),    sortCostByDate);
+    if (!_stationList.empty()) std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
+    if (!_fuelTypeList.empty()) std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
+    if (!_costTypeList.empty()) std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
+    if (!_tireMountList.empty())  std::sort(_tireMountList.begin(),_tireMountList.end(),sortTireMountByDistance);
     _dbLoading=false;
     numTanksChanged(_tankList.count());
     emit consumptionChanged(this->consumption());
@@ -342,11 +342,11 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     this->_dbLoad();
 
     this->_stationList.append(new Station);
-    qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
+    std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     this->_fuelTypeList.append(new FuelType);
-    qSort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
+    std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     this->_costTypeList.append(new CostType);
-    qSort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
+    std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     make();
     model();
     year();
@@ -362,7 +362,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
 unsigned int Car::numTanks() const
 {
-    return _tankList.count();
+    return static_cast<unsigned int>(_tankList.count());
 }
 
 double Car::consumption() const
@@ -415,7 +415,7 @@ double Car::consumptionMin() const
     double con=99999;
     foreach (Tank *tank,_tankList)
     {
-        if ((tank->consumption()<con)&&(tank->consumption()!=0))
+        if ((tank->consumption()<con)&&(fabs(tank->consumption()) < EPSILON))
             con = tank->consumption();
     }
     return con;
@@ -435,7 +435,7 @@ unsigned int Car::maxDistance() const
     if(_costList.isEmpty() && _tankList.isEmpty())
         return 0;
 
-    unsigned long int maxDistance = 0;
+    unsigned int maxDistance = 0;
 
     foreach(Cost *cost, _costList)
     {
@@ -455,7 +455,7 @@ unsigned int Car::minDistance() const
     if(_costList.isEmpty() && _tankList.isEmpty())
         return 0;
 
-    unsigned long int minDistance = 1000000;
+    unsigned int minDistance = 1000000;
 
     foreach(Cost *cost, _costList)
     {
@@ -614,7 +614,7 @@ QQmlListProperty<TireMount> Car::tireMounts()
 
 const Tank *Car::previousTank(unsigned int distance) const
 {
-    const Tank *previous = NULL;
+    const Tank *previous = nullptr;
     unsigned int currentPrevDistance=0;
     foreach(Tank *tank, _tankList)
     {
@@ -643,7 +643,7 @@ void Car::setCar(QString name)
     this->_dbLoad();
 
     this->_stationList.append(new Station);
-    qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
+    std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
 }
 
 unsigned long int Car::getDistance(QDate date)
@@ -654,14 +654,14 @@ unsigned long int Car::getDistance(QDate date)
     unsigned long int dist=0;
     foreach(Tank *tank, _tankList)
     {
-        if (tank->date() < (QDateTime) date)
+        if (tank->date() < QDateTime(date))
             break;
         dist=tank->distance();
     }
     return dist;
 }
 
-double Car::budgetFuel_byType(unsigned int id)
+double Car::budgetFuel_byType(int id)
 {
     // Returns average price of fuel type per 100km
     // Not sure if this really makes sense but it makes the statistic views consistent
@@ -676,12 +676,12 @@ double Car::budgetFuel_byType(unsigned int id)
         }
     }
     double average = 0;
-    if (quantity!=0)
+    if (fabs(quantity) < EPSILON)
         average = price/quantity;
     return average*budget_consumption_byType(id);
 }
 
-double Car::budgetFuelTotal_byType(unsigned int id)
+double Car::budgetFuelTotal_byType(int id)
 {
     // Returns total price of all tankstops by Type
     double total=0;
@@ -692,7 +692,7 @@ double Car::budgetFuelTotal_byType(unsigned int id)
     }
     return total;
 }
-double Car::budget_consumption_byType(unsigned int id)
+double Car::budget_consumption_byType(int id)
 {
     /* Return sum(fuel price) / odometer * 100 for fuelType */
     // We will calculate only full refills as partial refills cannat be calculated correctly
@@ -700,11 +700,11 @@ double Car::budget_consumption_byType(unsigned int id)
     double totalQuantity=0;
     //go to last tankstop
     Tank *curTank = _tankList.first();
-    const Tank *prevTank=NULL;
+    const Tank *prevTank=nullptr;
     while (curTank)
     {
         prevTank=previousTank(curTank->distance());
-        if (!(prevTank==NULL))
+        if (!(prevTank==nullptr))
         {
             //previous tank must have correct fuelType
             if (prevTank->fuelType()==id)
@@ -714,7 +714,7 @@ double Car::budget_consumption_byType(unsigned int id)
                     totalQuantity += curTank->quantity();
                 }
             //cannot set curTank to prevTank as it is const
-            curTank=NULL;
+            curTank=nullptr;
             foreach(Tank *tmp,_tankList)
             {
                 if (tmp->id()==prevTank->id())
@@ -722,12 +722,12 @@ double Car::budget_consumption_byType(unsigned int id)
             }
         }
         else {
-            curTank=NULL;
+            curTank=nullptr;
         }
     }
-    return (totalDistance==0) ? 0.0 : (totalQuantity / totalDistance * 100.0);
+    return (fabs(totalDistance) < EPSILON) ? 0.0 : (totalQuantity / totalDistance * 100.0);
 }
-double Car::budget_consumption_max_byType(unsigned int type)
+double Car::budget_consumption_max_byType(int type)
 {
     double con=0;
     foreach (Tank *tank,_tankList)
@@ -737,17 +737,17 @@ double Car::budget_consumption_max_byType(unsigned int type)
     }
     return con;
 }
-double Car::budget_consumption_min_byType(unsigned int type)
+double Car::budget_consumption_min_byType(int type)
 {
     double con=99999;
     foreach (Tank *tank,_tankList)
     {
-        if ((tank->consumption()<con)&&(tank->consumption()!=0)&& (tank->fuelType()==type))
+        if ((tank->consumption()<con) && (fabs(tank->consumption()) < EPSILON)&& (tank->fuelType()==type))
             con = tank->consumption();
     }
-    return (con==99999) ? 0 : con;
+    return (fabs(con - 99999) < EPSILON) ? 0 : con;
 }
-double Car::budgetCostTotal_byType(unsigned int id)
+double Car::budgetCostTotal_byType(int id)
 {
     double total=0;
     foreach(Cost *cost,_costList)
@@ -757,7 +757,7 @@ double Car::budgetCostTotal_byType(unsigned int id)
     }
     return total;
 }
-double Car::budgetCost_byType(unsigned int id)
+double Car::budgetCost_byType(int id)
 {
     /* Return sum(cost) / odometer * 100 */
     double totalPrice = 0;
@@ -867,7 +867,7 @@ double Car::_amortisation()
     {
         return 1;
     }
-    while (buyingDate().addMonths(monthsused) < today)
+    while (buyingDate().addMonths(static_cast<int>(monthsused)) < today)
     {
         monthsused++;
     }
@@ -891,7 +891,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
 {
     Tank *tank = new Tank(date, distance, quantity, price, full, fuelType, station, CREATE_NEW_EVENT,  note, this);
     _tankList.append(tank);
-    qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
+    std::sort(_tankList.begin(), _tankList.end(), sortTankByDistance);
     tank->save();
     if (!_dbLoading)
     {
@@ -921,7 +921,7 @@ Tank* Car::modifyTank(Tank *tank, QDate date, unsigned int distance, double quan
     tank->setStation(station);
     tank->setNote(note);
     tank->save();
-    qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
+    std::sort(_tankList.begin(), _tankList.end(), sortTankByDistance);
     if (!_dbLoading)
     {
         emit numTanksChanged(_tankList.count());
@@ -941,7 +941,7 @@ void Car::delTank(Tank *tank)
 {
     qDebug() << "Removing tank" << tank->id();
     _tankList.removeAll(tank);
-    if (!_tankList.empty()) qSort(_tankList.begin(), _tankList.end(), sortTankByDistance);
+    if (!_tankList.empty()) std::sort(_tankList.begin(), _tankList.end(), sortTankByDistance);
     tank->remove();
     if (!_dbLoading)
     {
@@ -964,7 +964,7 @@ void Car::addNewFuelType(QString name)
         return;
     FuelType *fuelType = new FuelType(-1, name, this);
     _fuelTypeList.append(fuelType);
-    qSort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
+    std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     fuelType->save();
     emit fuelTypesChanged();
 }
@@ -973,7 +973,7 @@ void Car::delFuelType(FuelType *fuelType)
 {
     qDebug() << "Remove Fuel Type" << fuelType->id();
     _fuelTypeList.removeAll(fuelType);
-    if (!_fuelTypeList.empty()) qSort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
+    if (!_fuelTypeList.empty()) std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fuelType->id());
 
@@ -1008,10 +1008,10 @@ FuelType* Car::findFuelType(QString name)
         if (fuelType->name()==name)
             return fuelType;
     }
-    return NULL;
+    return nullptr;
 }
 
-QString Car::getFuelTypeName(unsigned int id)
+QString Car::getFuelTypeName(int id)
 {
     foreach (FuelType *fuelType, _fuelTypeList)
     {
@@ -1028,7 +1028,7 @@ void Car::addNewStation(QString name)
         return;
     Station *station = new Station(-1, name, 0, this);
     _stationList.append(station);
-    qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
+    std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     station->save();
     emit stationsChanged();
 }
@@ -1037,7 +1037,7 @@ void Car::delStation(Station *station)
 {
     qDebug() << "Remove Station" << station->id();
     _stationList.removeAll(station);
-    if (!_stationList.empty()) qSort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
+    if (!_stationList.empty()) std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     QSqlQuery query(db);
     QString sql = QString("UPDATE TankList SET station = 0 WHERE station=%1;").arg(station->id());
 
@@ -1079,14 +1079,14 @@ Station* Car::findStation(QString name)
         if (station->name()==name)
             return station;
     }
-    return NULL;
+    return nullptr;
 }
 
-QString Car::getStationName(unsigned int id)
+QString Car::getStationName(int id)
 {
     foreach (Station *station, _stationList)
     {
-        if (station->id()==id)
+        if (station->id() == id)
             return station->name();
     }
     return "";
@@ -1099,7 +1099,7 @@ void Car::addNewCostType(QString name)
         return;
     CostType *costType = new CostType(-1, name, this);
     _costTypeList.append(costType);
-    qSort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
+    std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     costType->save();
     emit costTypesChanged();
 }
@@ -1108,7 +1108,7 @@ void Car::delCostType(CostType *costType)
 {
     qDebug() << "Remove Cost Type" << costType->id();
     _costTypeList.removeAll(costType);
-    if (!_costTypeList.empty()) qSort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
+    if (!_costTypeList.empty()) std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     QSqlQuery query(db);
     QString sql = QString("UPDATE CostList SET costtype = 0 WHERE costtype=%1;").arg(costType->id());
 
@@ -1150,10 +1150,10 @@ CostType* Car::findCostType(QString name)
         if (costType->name()==name)
             return costType;
     }
-    return NULL;
+    return nullptr;
 }
 
-QString Car::getCostTypeName(unsigned int id)
+QString Car::getCostTypeName(int id)
 {
     foreach (CostType *costType, _costTypeList)
     {
@@ -1163,11 +1163,11 @@ QString Car::getCostTypeName(unsigned int id)
     return "";
 }
 
-void Car::addNewCost(QDate date, unsigned int distance, unsigned int costType, QString description, double price)
+void Car::addNewCost(QDate date, unsigned int distance, int costType, QString description, double price)
 {
     Cost *cost = new Cost(date,distance,costType,description,price,CREATE_NEW_EVENT,this);
     _costList.append(cost);
-    qSort(_costList.begin(), _costList.end(), sortCostByDate);
+    std::sort(_costList.begin(), _costList.end(), sortCostByDate);
     cost->save();
     qDebug() << "Price for new cost:" << price;
     emit costsChanged();
@@ -1177,7 +1177,7 @@ void Car::delCost(Cost *cost)
 {
     qDebug() << "Remove Cost" << cost->id();
     _costList.removeAll(cost);
-    if (!_costList.empty()) qSort(_costList.begin(), _costList.end(), sortCostByDate);
+    if (!_costList.empty()) std::sort(_costList.begin(), _costList.end(), sortCostByDate);
     cost->remove();
     emit costsChanged();
     cost->deleteLater();
@@ -1226,7 +1226,7 @@ void Car::delTire(Tire *tire)
     tire->deleteLater();
 }
 
-QString Car::getTireName(unsigned int id)
+QString Car::getTireName(int id)
 {
     foreach (Tire *tire, _tireList)
     {
@@ -1459,7 +1459,7 @@ int Car::year()
         {
             qDebug() << "Car manufacture year not in database, defaulting to" << QDate::currentDate().year();
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('year','%1');").arg(QDate::currentDate().year()));
-            _year = (int) QDate::currentDate().year();
+            _year = static_cast<int>(QDate::currentDate().year());
         }
     }
 

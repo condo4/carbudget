@@ -1,27 +1,28 @@
 #include "carevent.h"
 #include "car.h"
 
+
 CarEvent::CarEvent(Car *parent):
     QObject(parent),
+    _distance(0),
     _car(parent),
     _date(QDate::currentDate()),
-    _distance(0),
     _eventId(0)
 {
 
 }
 
-CarEvent::CarEvent(QDate date, unsigned int distance, unsigned int eventId, Car *parent):
+CarEvent::CarEvent(QDate date, unsigned int distance, int eventId, Car *parent):
     QObject(parent),
+    _distance(distance),
     _car(parent),
     _date(date),
-    _distance(distance),
     _eventId(eventId)
 {
 
 }
 
-unsigned int CarEvent::saveEvent()
+int CarEvent::saveEvent()
 {
     QSqlQuery query(_car->db);
 

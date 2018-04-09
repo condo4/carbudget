@@ -30,7 +30,7 @@ Cost::Cost(Car *parent) :
 {
 }
 
-Cost::Cost(QDate date, unsigned int distance, unsigned int costType, QString desc, double cost, unsigned int id, Car *parent):
+Cost::Cost(QDate date, unsigned int distance, int costType, QString desc, double cost, unsigned int id, Car *parent):
     CarEvent(date, distance, id, parent),
     _description(desc),
     _cost(cost),
@@ -60,12 +60,12 @@ void Cost::setCost(double cost)
     emit costChanged();
 }
 
-unsigned int Cost::costType() const
+int Cost::costType() const
 {
     return _costType;
 }
 
-void Cost::setCostType(unsigned int costType)
+void Cost::setCostType(int costType)
 {
     _costType = costType;
     emit costTypeChanged();

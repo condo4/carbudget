@@ -26,25 +26,25 @@
 #include "carmanager.h"
 
 TireMount::TireMount(Car *parent) :
+    _car(parent),
+    _tire(0),
+    _mountEvent(nullptr),
+    _unmountEvent(nullptr),
     _notUnmounted (QDate(1900,1,1))
 
 {
-    _car = parent;
-    _tire=0;
-    _mountEvent = NULL;
-    _unmountEvent = NULL;
 }
 
 
-TireMount::TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance,unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance,unsigned int tire, Car* parent) :
-_notUnmounted (QDate(1900,1,1))
+TireMount::TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance, unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance, int tire, Car* parent) :
+    _car(parent),
+    _tire(tire),
+    _notUnmounted (QDate(1900,1,1))
 {
-    _car=parent;
     _mountEvent = new CarEvent(mountDate,mountDistance,mountid,parent);
-    if (unmountid!=0)
+    if (unmountid !=0 )
         _unmountEvent = new CarEvent(unmountDate,unmountDistance,unmountid,parent);
-    else _unmountEvent = NULL;
-    _tire = tire;
+    else _unmountEvent = nullptr;
 }
 
 
@@ -55,12 +55,12 @@ QString TireMount::tireName() const
     return _car->getTireName(_tire);
 }
 
-unsigned int TireMount::tire() const
+int TireMount::tire() const
 {
     return _tire;
 }
 
-void TireMount::setTire(unsigned int tire)
+void TireMount::setTire(int tire)
 {
     _tire = tire;
     emit tireMountChanged();
@@ -92,7 +92,8 @@ void TireMount::setMountdate(QDateTime date)
     _mountEvent->setDate(date);
     emit tireMountChanged();
 }
-unsigned int TireMount::mountid() const
+
+int TireMount::mountid() const
 {
     if (_mountEvent)
         return _mountEvent->id();
@@ -126,7 +127,8 @@ void TireMount::setUnmountDate(QDateTime date)
     _unmountEvent->setDate(date);
     emit tireMountChanged();
 }
-unsigned int TireMount::unmountid() const
+
+int TireMount::unmountid() const
 {
     if (_unmountEvent)
         return _unmountEvent->id();
