@@ -65,8 +65,10 @@ class Car : public QObject
     Q_PROPERTY(QString licensePlate READ getLicensePlate WRITE setLicensePlate NOTIFY licensePlateChanged)
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged)
     Q_PROPERTY(QString distanceUnit READ distanceUnit WRITE setDistanceUnit NOTIFY distanceUnitChanged)
+    Q_PROPERTY(double distanceunitfactor READ distanceunitfactor NOTIFY distanceUnitChanged)
     Q_PROPERTY(QString consumptionUnit READ consumptionUnit WRITE setConsumptionUnit NOTIFY consumptionUnitChanged)
     Q_PROPERTY(int defaultFuelType READ getDefaultFuelType WRITE setDefaultFuelType NOTIFY defaultFuelTypeChanged)
+    Q_PROPERTY(double consumptionfactor READ consumptionfactor NOTIFY consumptionUnitChanged)
     Q_PROPERTY(int lastFuelStation READ getLastFuelStation WRITE setLastFuelStation NOTIFY lastFuelStationChanged)
     Q_PROPERTY(unsigned int numTires READ numTires WRITE setNbtire NOTIFY numTiresChanged)
     Q_PROPERTY(double buyingPrice READ buyingPrice WRITE setBuyingprice NOTIFY buyingPriceChanged)
@@ -233,6 +235,8 @@ signals:
 
 public slots:
     void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
+    void addNewTank(Tank *tank);
+    Tank *createTank();
     Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
     void delTank(Tank *tank);
 
@@ -286,6 +290,9 @@ public slots:
 
     QString distanceUnit();
     void setDistanceUnit(QString distanceUnit);
+
+    double distanceunitfactor();
+    double consumptionfactor();
 
     QString consumptionUnit();
     void setConsumptionUnit(QString consumptionUnit);
