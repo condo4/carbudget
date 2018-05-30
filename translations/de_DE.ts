@@ -567,31 +567,6 @@
     </message>
 </context>
 <context>
-    <name>FileModel</name>
-    <message>
-        <location filename="../filemodel.cpp" line="66"/>
-        <source>dir-link</source>
-        <translation>Verzeichnislink</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="67"/>
-        <source>dir</source>
-        <translation>Verzeichnis</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="295"/>
-        <location filename="../filemodel.cpp" line="329"/>
-        <source>Folder does not exist</source>
-        <translation>Verzeichnis existiert nicht</translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="299"/>
-        <location filename="../filemodel.cpp" line="335"/>
-        <source>No permission to read the folder</source>
-        <translation>Fehlende Leserechte für das Verzeichnis</translation>
-    </message>
-</context>
-<context>
     <name>FuelpadImport</name>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
@@ -697,32 +672,9 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../globals.cpp" line="48"/>
-        <source>%1 bytes</source>
-        <translation>%1 Bytes</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="51"/>
-        <source>%1 kB</source>
-        <translation>%1 kB</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="54"/>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="56"/>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-</context>
-<context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="38"/>
         <source>File to import</source>
         <translation>Zu importierende Datei</translation>
     </message>

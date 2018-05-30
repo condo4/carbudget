@@ -52,7 +52,7 @@ Dialog {
                 focus: true
                 label: qsTr("Car manufacturer")
                 placeholderText: label
-
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: modelInput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
@@ -63,6 +63,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Car model")
                 placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: yearInput.focus = true
@@ -72,12 +73,12 @@ Dialog {
             TextField {
                 id: yearInput
                 anchors { left: parent.left; right: parent.right }
-                label: qsTr("Model year")
+                label: qsTr("Car manufacture year")
                 placeholderText: label
                 validator: IntValidator { bottom: 1000; top: 9999 }
                 inputMethodHints: Qt.ImhDigitsOnly
 
-                EnterKey.enabled: text.length > 4 && acceptableInput == true
+                EnterKey.enabled: text.length > 3 && acceptableInput == true
                 EnterKey.onClicked: licensePlateInput.focus = true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
             }
@@ -87,6 +88,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("License plate number")
                 placeholderText: label
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: currencyInput.focus = true

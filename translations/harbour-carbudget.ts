@@ -674,7 +674,7 @@
 <context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="38"/>
         <source>File to import</source>
         <translation type="unfinished"></translation>
     </message>
