@@ -50,120 +50,120 @@
 <context>
     <name>BudgetView</name>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="57"/>
+        <location filename="../qml/pages/BudgetView.qml" line="62"/>
         <source>Consumption</source>
         <translation>Kulutus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="65"/>
-        <location filename="../qml/pages/BudgetView.qml" line="464"/>
+        <location filename="../qml/pages/BudgetView.qml" line="70"/>
+        <location filename="../qml/pages/BudgetView.qml" line="469"/>
         <source>Costs</source>
         <translation>Kulut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="82"/>
+        <location filename="../qml/pages/BudgetView.qml" line="87"/>
         <source>Statistics</source>
         <translation>Statistiikka</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="515"/>
-        <location filename="../qml/pages/BudgetView.qml" line="674"/>
+        <location filename="../qml/pages/BudgetView.qml" line="520"/>
+        <location filename="../qml/pages/BudgetView.qml" line="679"/>
         <source>Bills:</source>
         <translation>Kulut:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="483"/>
-        <location filename="../qml/pages/BudgetView.qml" line="642"/>
+        <location filename="../qml/pages/BudgetView.qml" line="488"/>
+        <location filename="../qml/pages/BudgetView.qml" line="647"/>
         <source>Fuel:</source>
         <translation>Polttoaine:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="546"/>
-        <location filename="../qml/pages/BudgetView.qml" line="706"/>
+        <location filename="../qml/pages/BudgetView.qml" line="551"/>
+        <location filename="../qml/pages/BudgetView.qml" line="711"/>
         <source>Tires:</source>
         <translation>Renkaat:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="577"/>
+        <location filename="../qml/pages/BudgetView.qml" line="582"/>
         <source>Invest:</source>
         <translation>Hankinta:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="354"/>
-        <location filename="../qml/pages/BudgetView.qml" line="598"/>
-        <location filename="../qml/pages/BudgetView.qml" line="759"/>
+        <location filename="../qml/pages/BudgetView.qml" line="359"/>
+        <location filename="../qml/pages/BudgetView.qml" line="603"/>
+        <location filename="../qml/pages/BudgetView.qml" line="764"/>
         <source>Total:</source>
         <translation>Yhteensä:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="373"/>
+        <location filename="../qml/pages/BudgetView.qml" line="378"/>
         <source>Average:</source>
         <translation>Keskiarvo:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="738"/>
+        <location filename="../qml/pages/BudgetView.qml" line="743"/>
         <source>Buying:</source>
         <translation>Hankinta:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="305"/>
+        <location filename="../qml/pages/BudgetView.qml" line="310"/>
         <source>In Budget</source>
         <translation>Kirjattu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="73"/>
+        <location filename="../qml/pages/BudgetView.qml" line="78"/>
         <source>Fuel price</source>
         <translation>Polttoaineen hinta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="180"/>
+        <location filename="../qml/pages/BudgetView.qml" line="185"/>
         <source>Bills: %1%</source>
         <translation>Kulut: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="208"/>
+        <location filename="../qml/pages/BudgetView.qml" line="213"/>
         <source>Fuel: %1%</source>
         <translation>Polttoaine: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="236"/>
+        <location filename="../qml/pages/BudgetView.qml" line="241"/>
         <source>Tires: %1%</source>
         <translation>Renkaat: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="264"/>
+        <location filename="../qml/pages/BudgetView.qml" line="269"/>
         <source>Invest: %1%</source>
         <translation>Hankinta: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="286"/>
+        <location filename="../qml/pages/BudgetView.qml" line="291"/>
         <source>Odometer</source>
         <translation>Matkamittari</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="340"/>
+        <location filename="../qml/pages/BudgetView.qml" line="345"/>
         <source>Fuel</source>
         <translation>Polttoaine</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="386"/>
-        <location filename="../qml/pages/BudgetView.qml" line="412"/>
-        <location filename="../qml/pages/BudgetView.qml" line="438"/>
+        <location filename="../qml/pages/BudgetView.qml" line="391"/>
+        <location filename="../qml/pages/BudgetView.qml" line="417"/>
+        <location filename="../qml/pages/BudgetView.qml" line="443"/>
         <source>%L1 mpg</source>
         <translation>%L1 mpg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="399"/>
+        <location filename="../qml/pages/BudgetView.qml" line="404"/>
         <source>Min:</source>
         <translation>Pienin:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="425"/>
+        <location filename="../qml/pages/BudgetView.qml" line="430"/>
         <source>Max:</source>
         <translation>Suurin:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BudgetView.qml" line="622"/>
+        <location filename="../qml/pages/BudgetView.qml" line="627"/>
         <source>Costs per 100 %1</source>
         <translation>Kulut per 100%1</translation>
     </message>
@@ -228,8 +228,8 @@
     </message>
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="95"/>
-        <source>Licence plate</source>
-        <translation>Rekisterinumero</translation>
+        <source>License plate number</source>
+        <translation type="unfinished">Rekisterinumero</translation>
     </message>
 </context>
 <context>
@@ -705,57 +705,57 @@
         <translation>Auton malli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="75"/>
-        <source>Model year</source>
-        <translation>Auton vuosimalli</translation>
+        <location filename="../qml/pages/Settings.qml" line="76"/>
+        <source>Car manufacture year</source>
+        <translation type="unfinished">Auton vuosimalli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="88"/>
+        <location filename="../qml/pages/Settings.qml" line="89"/>
         <source>License plate number</source>
         <translation>Rekisterinumero</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="99"/>
+        <location filename="../qml/pages/Settings.qml" line="101"/>
         <source>Currency</source>
         <translation>Valuutta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="111"/>
+        <location filename="../qml/pages/Settings.qml" line="113"/>
         <source>Distance Unit</source>
         <translation>Matkayksikkö</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="131"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Consumption Unit</source>
         <translation>Kulutusyksikkö</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="153"/>
+        <location filename="../qml/pages/Settings.qml" line="155"/>
         <source>Number of wheels</source>
         <translation>Renkaiden lukumäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="154"/>
+        <location filename="../qml/pages/Settings.qml" line="156"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 tai 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
+        <location filename="../qml/pages/Settings.qml" line="179"/>
         <source>Buying date</source>
         <translation>Ostopäivämäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="187"/>
+        <location filename="../qml/pages/Settings.qml" line="189"/>
         <source>Buying Price</source>
         <translation>Ostohinta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="198"/>
+        <location filename="../qml/pages/Settings.qml" line="200"/>
         <source>Selling Price (est.)</source>
         <translation>Myyntihinta (arvio)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="209"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Käyttöikä (kuukautta)</translation>
     </message>
@@ -809,27 +809,27 @@
 <context>
     <name>Statistics</name>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="57"/>
+        <location filename="../qml/pages/Statistics.qml" line="58"/>
         <source>Consumption</source>
         <translation>Kulutus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="65"/>
+        <location filename="../qml/pages/Statistics.qml" line="66"/>
         <source>Costs</source>
         <translation>Kulut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="73"/>
+        <location filename="../qml/pages/Statistics.qml" line="74"/>
         <source>Fuel price</source>
         <translation>Polttoaineen hinta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="93"/>
+        <location filename="../qml/pages/Statistics.qml" line="94"/>
         <source>Statistics</source>
         <translation>Tilastot</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="99"/>
+        <location filename="../qml/pages/Statistics.qml" line="100"/>
         <source>Distance</source>
         <translation>Matka</translation>
     </message>

@@ -6,5 +6,6 @@
         <file alias="Dollar.png">picture/Dollar.png</file>
         <file alias="GitHub_Logo.png">picture/GitHub_Logo.png</file>
         <file alias="GitHub_Logo_White.png">picture/GitHub_Logo_White.png</file>
+        <file alias="harbour-carbudget.png">icons/86x86/harbour-carbudget.png</file>
     </qresource>
 </RCC>
