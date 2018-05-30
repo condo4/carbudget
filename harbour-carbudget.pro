@@ -63,3 +63,7 @@ OTHER_FILES += rpm/CarBudget.yaml \
 
 RESOURCES += \
     Resources.qrc
+
+QT += qml-private core-private
+SOURCES += qmlLibs/qquickfolderlistmodel.cpp qmlLibs/fileinfothread.cpp
+HEADERS += qmlLibs/qquickfolderlistmodel.h qmlLibs/fileproperty_p.h qmlLibs/fileinfothread_p.h
