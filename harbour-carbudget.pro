@@ -58,6 +58,8 @@ SOURCES += CarBudget.cpp \
     statfileinfo.cpp \
     globals.cpp
 
+SAILFISHAPP_ICONS = 86x86 108x108 128x128
+
 OTHER_FILES += rpm/CarBudget.yaml \
     harbour-carbudget.desktop
 
