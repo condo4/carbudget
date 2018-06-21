@@ -227,6 +227,7 @@ Dialog {
         else {
             tank_date = new Date()
             fuelType = manager.car.defaultFuelType
+            station = manager.car.lastFuelStation
             for(var k=0; k<fuelTypeslistrepeater.count; k++)
             {
                 if(fuelTypeslistrepeater.itemAt(k).dbid === fuelType)
@@ -235,6 +236,15 @@ Dialog {
                     break
                 }
             }
+            for(var l=0; l<stationslistrepeater.count; l++)
+            {
+                if(stationslistrepeater.itemAt(l).dbid === station)
+                {
+                    cbstation.currentIndex = l
+                    break
+                }
+            }
+
         }
     }
 
