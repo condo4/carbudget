@@ -404,7 +404,7 @@ double Car::consumptionLast() const
     if (_tankList.empty()) return 0.0;
     QList<Tank*>::const_iterator tank = _tankList.constBegin();
     if (*tank)  return (*tank)->consumption();
-       else return 0;
+    else return 0;
 }
 
 double Car::consumptionMin() const
@@ -570,7 +570,7 @@ QJsonObject Car::getChartData()
     jsonO.insert("labels", labelArray);
     jsonO.insert("datasets", dataSetArray);
 
-//    qDebug() << jsonO;
+    //    qDebug() << jsonO;
 
     return jsonO;
 }
@@ -1860,6 +1860,47 @@ void Car::setConsumptionUnit(QString consumptionUnit)
     }
     _consumptionUnit = consumptionUnit;
     emit consumptionUnitChanged();
+}
+
+int Car::getDefaultFuelType()
+{
+    if(_defaultFuelType < 0 || _defaultFuelType > 9999) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';")) {
+            query.next();
+            _defaultFuelType = query.value(0).toInt();
+            qDebug() << "Found default fuel type in database:" << _defaultFuelType;
+        }
+        else
+        {
+            qDebug() << "Car default fuel type not in database, defaulting to 0";
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType','0');"));
+            _defaultFuelType = 0;
+        }
+    }
+
+    return _defaultFuelType;
+}
+
+void Car::setDefaultFuelType(int defaultFuelType)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';"))
+    {
+        if(defaultFuelType < 0 || defaultFuelType > 9999) _defaultFuelType = 0;
+        if(query.next()) {
+            query.exec(QString("UPDATE CarBudget SET value=%1 WHERE id='defaultFuelType';").arg(defaultFuelType));
+        }
+        else {
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType',%1);").arg(defaultFuelType));
+        }
+
+        qDebug() << "Changed default fuel type in database:" << _defaultFuelType << ">>" << defaultFuelType;
+    }
+    _defaultFuelType = defaultFuelType;
+    emit defaultFuelTypeChanged();
 }
 
 void Car::simulation()

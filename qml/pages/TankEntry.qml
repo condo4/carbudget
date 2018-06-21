@@ -224,7 +224,18 @@ Dialog {
                 }
             }
         }
-        else tank_date = new Date()
+        else {
+            tank_date = new Date()
+            fuelType = manager.car.defaultFuelType
+            for(var k=0; k<fuelTypeslistrepeater.count; k++)
+            {
+                if(fuelTypeslistrepeater.itemAt(k).dbid === fuelType)
+                {
+                    cbfuelType.currentIndex = k
+                    break
+                }
+            }
+        }
     }
 
     onAccepted: {

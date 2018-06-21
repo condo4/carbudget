@@ -247,7 +247,9 @@ void Tank::save()
             if(query.exec(sql))
             {
                 qDebug() << "Update Tank in database with id " << _eventId;
-                _car->db.commit();
+                if(_car->db.commit()) {
+                    _car->tanksChanged();
+                }
             }
             else
             {
@@ -260,6 +262,7 @@ void Tank::save()
             qDebug() << "Error during Update Tank in database";
         }
     }
+    return;
 }
 
 void Tank::remove()
@@ -271,11 +274,16 @@ void Tank::remove()
         if(deleteEvent())
         {
             qDebug() << "DELETE Tank in database with id " << _eventId;
-            _car->db.commit();
-            return;
+            if(_car->db.commit()) {
+                _car->tanksChanged();
+            }
+
         }
     }
-    qDebug() << "Error during DELETE Tank in database";
-    qDebug() << query.lastError();
-    _car->db.rollback();
+    else {
+        qDebug() << "Error during DELETE Tank in database";
+        qDebug() << query.lastError();
+        _car->db.rollback();
+    }
+    return;
 }

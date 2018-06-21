@@ -27,6 +27,7 @@ Dialog {
     property date buyingDate
     property string consumptionUnit
     property string distanceUnit
+    property int fuelType
 
     allowedOrientations: Orientation.All
     SilicaFlickable {
@@ -149,6 +150,27 @@ Dialog {
                 }
             }
 
+            ComboBox {
+                id: defaultFuelType
+                label: qsTr("Default Fuel Type")
+                anchors { left: parent.left; right: parent.right }
+                menu: ContextMenu {
+                    Repeater {
+                        id: fuelTypeslistrepeater
+                        model: manager.car.fuelTypes
+                        MenuItem {
+                            property int dbid
+                            id: fuelTypeListItem
+                            text: modelData.name
+                            dbid: modelData.id
+                            onClicked: {
+                                fuelType = dbid
+                            }
+                        }
+                    }
+                }
+            }
+
             TextField {
                 id: numTiresInput
                 anchors { left: parent.left; right: parent.right }
@@ -232,12 +254,22 @@ Dialog {
         lifeTime.text          = manager.car.lifetime
         consumptionUnit        = manager.car.consumptionUnit
         distanceUnit           = manager.car.distanceUnit
+        fuelType               = manager.car.defaultFuelType
 
         // I don't know why, but there is no easy way to set these...
         if(distanceUnit == "km")   { distanceUnitInput.currentIndex = 0 }
         if(distanceUnit == "mi") { distanceUnitInput.currentIndex = 1 }
         if(consumptionUnit == "l/100km") { consumptionUnitInput.currentIndex = 0 }
         if(consumptionUnit == "mpg")     { consumptionUnitInput.currentIndex = 1 }
+
+        for(var i=0; i<fuelTypeslistrepeater.count; i++)
+        {
+            if(fuelTypeslistrepeater.itemAt(i).dbid === manager.car.defaultFuelType)
+            {
+                defaultFuelType.currentIndex = i
+                break
+            }
+        }
     }
 
     onAccepted: {
@@ -246,12 +278,13 @@ Dialog {
         manager.car.year            = yearInput.text
         manager.car.licensePlate    = licensePlateInput.text
         manager.car.currency        = currencyInput.text
-        manager.car.numTires          = numTiresInput.text
+        manager.car.numTires        = numTiresInput.text
         manager.car.buyingDate      = buyingDate
         manager.car.buyingPrice     = buyingPrice.text
         manager.car.sellingPrice    = sellingPrice.text
         manager.car.lifetime        = lifeTime.text
         manager.car.consumptionUnit = consumptionUnit
-        manager.car.distanceUnit   = distanceUnit
+        manager.car.distanceUnit    = distanceUnit
+        manager.car.defaultFuelType = fuelType
     }
 }
