@@ -255,6 +255,9 @@ Dialog {
         }
         else
         {
+            tank.date = tank_date
+            tank.distance = kminput.text * distanceunitfactor
+            tank.full = fullinput.checked
             manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
         }
     }
