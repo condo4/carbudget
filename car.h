@@ -67,6 +67,7 @@ class Car : public QObject
     Q_PROPERTY(QString distanceUnit READ distanceUnit WRITE setDistanceUnit NOTIFY distanceUnitChanged)
     Q_PROPERTY(QString consumptionUnit READ consumptionUnit WRITE setConsumptionUnit NOTIFY consumptionUnitChanged)
     Q_PROPERTY(int defaultFuelType READ getDefaultFuelType WRITE setDefaultFuelType NOTIFY defaultFuelTypeChanged)
+    Q_PROPERTY(int lastFuelStation READ getLastFuelStation WRITE setLastFuelStation NOTIFY lastFuelStationChanged)
     Q_PROPERTY(unsigned int numTires READ numTires WRITE setNbtire NOTIFY numTiresChanged)
     Q_PROPERTY(double buyingPrice READ buyingPrice WRITE setBuyingprice NOTIFY buyingPriceChanged)
     Q_PROPERTY(double sellingPrice READ sellingPrice WRITE setSellingprice NOTIFY sellingPriceChanged)
@@ -108,6 +109,7 @@ private:
     QString _distanceUnit;
     QString _consumptionUnit;
     int _defaultFuelType;
+    int _lastFuelStation;
 
     unsigned int _numTires;
     double _buyingPrice;
@@ -160,6 +162,7 @@ public:
     QString getModel() const { return _model; }
     int getYear() const { return _year; }
     int getDefaultFuelType() const { return _defaultFuelType; }
+    int getLastFuelStation() const { return _lastFuelStation; }
     QString getLicensePlate() const { return _licensePlate; }
 
     QJsonObject getChartData();
@@ -201,6 +204,7 @@ signals:
     void fuelTotalChanged(double fuelTotal);
     void maxDistanceChanged(double consumption);
     void minDistanceChanged(double consumption);
+    void lastFuelStationChanged(int station);
     void tanksChanged();
     void fuelTypesChanged();
     void stationsChanged();
@@ -271,6 +275,8 @@ public slots:
 
     int getDefaultFuelType();
     void setDefaultFuelType(int fuelType);
+
+    void setLastFuelStation(int station);
 
     QString licensePlate();
     void setLicensePlate(QString licensePlate);

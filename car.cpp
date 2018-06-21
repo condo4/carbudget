@@ -227,6 +227,7 @@ void Car::_dbLoad()
     emit fuelTotalChanged(this->fuelTotal());
     emit maxDistanceChanged(this->maxDistance());
     emit minDistanceChanged(this->minDistance());
+    emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
     qDebug() << "Loaded" << _tankList.count() << "fuel refills";
     qDebug() << "Loaded" << _stationList.count() << "gas stations";
     qDebug() << "Loaded" << _tireList.count() << "sets of tires";
@@ -323,6 +324,8 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent), _chartType(cha
 
 Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _numTires(0),_buyingPrice(0),_sellingPrice(0),_lifetime(0), _chartType(chartTypeConsumptionOf100)
 {
+    connect(this,SIGNAL(lastFuelStationChanged(int)), SLOT(setLastFuelStation(int)));
+
     this->_dbInit();
     _dbLoading=false;
     if(this->_dbGetVersion() < 1)
@@ -899,6 +902,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
         emit consumptionMinChanged(this->consumptionMin());
         emit fuelTotalChanged(this->fuelTotal());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
 }
@@ -927,6 +931,7 @@ Tank* Car::modifyTank(Tank *tank, QDate date, unsigned int distance, double quan
         emit consumptionMinChanged(this->consumptionMin());
         emit fuelTotalChanged(this->fuelTotal());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
     return tank;
@@ -946,11 +951,11 @@ void Car::delTank(Tank *tank)
         emit consumptionLastChanged(this->consumptionLast());
         emit consumptionMinChanged(this->consumptionMin());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
     tank->deleteLater();
 }
-
 
 void Car::addNewFuelType(QString name)
 {
@@ -1901,6 +1906,11 @@ void Car::setDefaultFuelType(int defaultFuelType)
     }
     _defaultFuelType = defaultFuelType;
     emit defaultFuelTypeChanged();
+}
+
+void Car::setLastFuelStation(int station) {
+    qDebug() << "Set last used fuel station to:" << station;
+    _lastFuelStation = station;
 }
 
 void Car::simulation()
