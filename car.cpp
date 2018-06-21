@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Matti Viljanen
  */
 
 #include "car.h"
@@ -285,6 +285,8 @@ int Car::_dbUpgrade() {
     sqlUpdates[4].append(QString("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     // Version 4 -> 5
     sqlUpdates[5].append(QString("INSERT INTO CarBudget (id, value) VALUES ('make',''),('model',''),('year',''),('licensePlate','');"));
+    // Version 5 -> 6
+    sqlUpdates[6].append(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType','');"));
 
     while(currVersion < DB_VERSION)
     {

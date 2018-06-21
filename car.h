@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Matti Viljanen
  */
 
 
@@ -36,7 +36,7 @@
 #include "charttypes.h"
 
 class CarManager;
-#define DB_VERSION 5
+#define DB_VERSION 6
 
 class Car : public QObject
 {
