@@ -672,29 +672,6 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../globals.cpp" line="48"/>
-        <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="51"/>
-        <source>%1 kB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="54"/>
-        <source>%1 MB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="56"/>
-        <source>%1 GB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SelectImportFile</name>
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="38"/>

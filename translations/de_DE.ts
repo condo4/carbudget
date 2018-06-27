@@ -705,27 +705,27 @@
         <translation>Fahrzeugmodel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="76"/>
+        <location filename="../qml/pages/Settings.qml" line="77"/>
         <source>Car manufacture year</source>
         <translation type="unfinished">Fahrzeugbaujahr</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="89"/>
+        <location filename="../qml/pages/Settings.qml" line="90"/>
         <source>License plate number</source>
         <translation>Amtliches Kennzeichen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="101"/>
+        <location filename="../qml/pages/Settings.qml" line="102"/>
         <source>Currency</source>
         <translation>Währung</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="113"/>
+        <location filename="../qml/pages/Settings.qml" line="114"/>
         <source>Distance Unit</source>
         <translation>Entfernungseinheit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="133"/>
+        <location filename="../qml/pages/Settings.qml" line="134"/>
         <source>Consumption Unit</source>
         <translation>Verbrauchseinheit</translation>
     </message>
@@ -740,27 +740,27 @@
         <translation>Anzahl Räder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="156"/>
+        <location filename="../qml/pages/Settings.qml" line="178"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 oder 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="179"/>
+        <location filename="../qml/pages/Settings.qml" line="201"/>
         <source>Buying date</source>
         <translation>Kaufdatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="189"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Buying Price</source>
         <translation>Kaufpreis</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="200"/>
+        <location filename="../qml/pages/Settings.qml" line="222"/>
         <source>Selling Price (est.)</source>
         <translation>(geschaetzter) Verkaufswert</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="233"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Laufzeit (geschätzt in Monaten)</translation>
     </message>

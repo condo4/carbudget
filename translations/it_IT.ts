@@ -567,31 +567,6 @@
     </message>
 </context>
 <context>
-    <name>FileModel</name>
-    <message>
-        <location filename="../filemodel.cpp" line="66"/>
-        <source>dir-link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="67"/>
-        <source>dir</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="295"/>
-        <location filename="../filemodel.cpp" line="329"/>
-        <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../filemodel.cpp" line="299"/>
-        <location filename="../filemodel.cpp" line="335"/>
-        <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FuelpadImport</name>
     <message>
         <location filename="../qml/pages/FuelpadImport.qml" line="40"/>
@@ -697,29 +672,6 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../globals.cpp" line="48"/>
-        <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="51"/>
-        <source>%1 kB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="54"/>
-        <source>%1 MB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../globals.cpp" line="56"/>
-        <source>%1 GB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SelectImportFile</name>
     <message>
         <location filename="../qml/pages/SelectImportFile.qml" line="38"/>
@@ -809,82 +761,6 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="233"/>
-        <source>Lifetime (in months, est.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StationEntry</name>
-    <message>
-<context>
-    <name>Settings</name>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="45"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="53"/>
-        <source>Car manufacturer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
-        <source>Car model</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="76"/>
-        <source>Car manufacture year</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="89"/>
-        <source>License plate number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="101"/>
-        <source>Currency</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="113"/>
-        <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="133"/>
-        <source>Consumption Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Number of wheels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="156"/>
-        <source>2, 4, 6 or 8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="179"/>
-        <source>Buying date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="189"/>
-        <source>Buying Price</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="200"/>
-        <source>Selling Price (est.)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Lifetime (in months, est.)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1102,37 +978,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="68"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Tank List</source>
         <translation>Elenco dei Rifornimenti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="72"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Add tank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="84"/>
         <source>Manage stations</source>
         <translation type="unfinished">Gestisci Stazioni</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="88"/>
         <source>Manage fuel types</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="101"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Modify</source>
         <translation>Modifica</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="105"/>
+        <location filename="../qml/pages/TankView.qml" line="116"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="107"/>
+        <location filename="../qml/pages/TankView.qml" line="118"/>
         <source>Deleting</source>
         <translation>Eliminazione</translation>
     </message>
