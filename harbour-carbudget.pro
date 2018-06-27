@@ -87,12 +87,7 @@ DISTFILES += \
     rpm/CarBudget.yaml \
     rpm/CarBudget.spec \
     harbour-carbudget.desktop \
-    translations/*.ts \
-    icons/86x86/harbour-carbudget.png \
-    icons/108x108/harbour-carbudget.png \
-    icons/128x128/harbour-carbudget.png \
-    icons/172x172/harbour-carbudget.png
-
+    translations/*.ts
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
