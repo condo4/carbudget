@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<<<<<<< HEAD
 <TS version="2.1" language="ru_RU">
-=======
-<TS version="2.0" language="fr_FR">
->>>>>>> 7c59564a29942a9c1db54f9844809773dc833f52
 <context>
     <name>About</name>
     <message>
