@@ -152,7 +152,7 @@ Dialog {
 
             ComboBox {
                 id: defaultFuelType
-                label: qsTr("Default Fuel Type")
+                label: qsTr("Primary Fuel Type")
                 anchors { left: parent.left; right: parent.right }
                 menu: ContextMenu {
                     Repeater {
