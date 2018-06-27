@@ -32,6 +32,7 @@
 #include "car.h"
 #include "carmanager.h"
 #include "filemodel.h"
+#include "qmlLibs/qquickfolderlistmodel.h"
 
 #include <QtCore/QTranslator>
 #include <QQmlApplicationEngine>
@@ -61,6 +62,9 @@ int main(int argc, char *argv[])
     }
 
     app->setApplicationVersion(QString(APP_VERSION));
+
+    // To circumvent Jolla Harbour limitation on QML import.
+    qmlRegisterType<QQuickFolderListModel>("harbour.carbudget",1,0,"FolderListModel");
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
     qmlRegisterType<FuelType>(  "harbour.carbudget",1,0,"FuelType");

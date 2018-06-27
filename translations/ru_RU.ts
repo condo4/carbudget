@@ -674,7 +674,7 @@
 <context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="38"/>
         <source>File to import</source>
         <translation type="unfinished"></translation>
     </message>
@@ -690,77 +690,72 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="46"/>
+        <location filename="../qml/pages/Settings.qml" line="45"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="54"/>
+        <location filename="../qml/pages/Settings.qml" line="53"/>
         <source>Car manufacturer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="65"/>
+        <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Car model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="77"/>
+        <location filename="../qml/pages/Settings.qml" line="76"/>
         <source>Car manufacture year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="90"/>
+        <location filename="../qml/pages/Settings.qml" line="89"/>
         <source>License plate number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="102"/>
+        <location filename="../qml/pages/Settings.qml" line="101"/>
         <source>Currency</source>
         <translation>Валюта</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="114"/>
+        <location filename="../qml/pages/Settings.qml" line="113"/>
         <source>Distance Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="134"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Consumption Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Primary Fuel Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
         <source>Number of wheels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="178"/>
+        <location filename="../qml/pages/Settings.qml" line="156"/>
         <source>2, 4, 6 or 8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="201"/>
+        <location filename="../qml/pages/Settings.qml" line="179"/>
         <source>Buying date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="189"/>
         <source>Buying Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="222"/>
+        <location filename="../qml/pages/Settings.qml" line="200"/>
         <source>Selling Price (est.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="233"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Lifetime (in months, est.)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -978,37 +973,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="68"/>
         <source>Tank List</source>
         <translation>Список заправок</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="72"/>
         <source>Add tank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="84"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Manage stations</source>
         <translation type="unfinished">Редактировать АЗС</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Manage fuel types</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="109"/>
+        <location filename="../qml/pages/TankView.qml" line="101"/>
         <source>Modify</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="116"/>
+        <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="118"/>
+        <location filename="../qml/pages/TankView.qml" line="107"/>
         <source>Deleting</source>
         <translation>Удаляется</translation>
     </message>

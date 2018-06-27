@@ -21,7 +21,7 @@
     <message>
         <location filename="../qml/pages/About.qml" line="77"/>
         <source>Credits to:&lt;br /&gt;- Lorenzo Facca (Italian translation)&lt;br /&gt;- Alois Spitzbart (German translation)&lt;br /&gt;- Michal Hrusecky (Many improvements)&lt;br /&gt;- Denis Fedoseev (Russian translation)&lt;br /&gt;- Åke Engelbrektson (Swedish translation)&lt;br /&gt;- Thomas Michel (Many improvements)&lt;br /&gt;- Matti Viljanen (Finnish translation and many improvements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tack till:&lt;br /&gt;- Lorenzo Facca (Italiensk översättning)&lt;br /&gt;- Alois Spitzbart (Tysk översättning)&lt;br /&gt;- Michal Hrusecky (Många förbättringar)&lt;br /&gt;- Denis Fedoseev (Rysk översättning)&lt;br /&gt;- Åke Engelbrektson (Svensk översättning)&lt;br /&gt;- Thomas Michel (Många förbättringar)&lt;br /&gt;- Matti Viljanen (Finsk översättning och många förbättringar)</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="97"/>
@@ -34,17 +34,17 @@
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="35"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
         <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopieringen lyckades. Den valda bilen har exporterats till din hemmapp.</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="46"/>
         <source>There was an error during the backup operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ett fel inträffade under säkerhetskopieringen.</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
         <source>Enter car name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange bilnamn</translation>
     </message>
 </context>
 <context>
@@ -181,22 +181,22 @@
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen, eftersom bilnamnet redan finns.</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen, eftersom den inte är en giltig CarBudget databasfil.</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
         <source>Could not import selected file. Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte importera den valda filen. Okänt fel.</translation>
     </message>
 </context>
 <context>
@@ -332,7 +332,7 @@
     <message>
         <location filename="../qml/pages/CarView.qml" line="113"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="120"/>
@@ -635,7 +635,7 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="54"/>
         <source>You can restore a previously made CarBudget backup file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan återställa en tidigare skapad CarBudget säkerhetskopia.</translation>
     </message>
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="63"/>
@@ -655,7 +655,7 @@
     <message>
         <location filename="../qml/pages/ImportHelp.qml" line="86"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bläddra...</translation>
     </message>
 </context>
 <context>
@@ -674,7 +674,7 @@
 <context>
     <name>SelectImportFile</name>
     <message>
-        <location filename="../qml/pages/SelectImportFile.qml" line="37"/>
+        <location filename="../qml/pages/SelectImportFile.qml" line="38"/>
         <source>File to import</source>
         <translation>Fil att importera</translation>
     </message>
@@ -690,77 +690,72 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="46"/>
+        <location filename="../qml/pages/Settings.qml" line="45"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="54"/>
+        <location filename="../qml/pages/Settings.qml" line="53"/>
         <source>Car manufacturer</source>
         <translation>Biltillverkare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="90"/>
+        <location filename="../qml/pages/Settings.qml" line="89"/>
         <source>License plate number</source>
         <translation>Registreringsnummer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="102"/>
+        <location filename="../qml/pages/Settings.qml" line="101"/>
         <source>Currency</source>
         <translation>Valuta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="65"/>
+        <location filename="../qml/pages/Settings.qml" line="64"/>
         <source>Car model</source>
         <translation>Distansenhet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="77"/>
+        <location filename="../qml/pages/Settings.qml" line="76"/>
         <source>Car manufacture year</source>
         <translation type="unfinished">Tillverkningsår</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="114"/>
+        <location filename="../qml/pages/Settings.qml" line="113"/>
         <source>Distance Unit</source>
         <translation>Bilmodell</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="134"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Consumption Unit</source>
         <translation>Förbrukningsenhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Primary Fuel Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
         <source>Number of wheels</source>
         <translation>Antal hjul</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="178"/>
+        <location filename="../qml/pages/Settings.qml" line="156"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 eller 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="201"/>
+        <location filename="../qml/pages/Settings.qml" line="179"/>
         <source>Buying date</source>
         <translation>Inköpsdatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="189"/>
         <source>Buying Price</source>
         <translation>Inköpspris</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="222"/>
+        <location filename="../qml/pages/Settings.qml" line="200"/>
         <source>Selling Price (est.)</source>
         <translation>Försäljningsvärde (uppsk.)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="233"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Livstid (i mån., uppsk.)</translation>
     </message>
@@ -904,7 +899,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteckning</translation>
     </message>
 </context>
 <context>
@@ -978,37 +973,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="68"/>
         <source>Tank List</source>
         <translation>Tankningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="72"/>
         <source>Add tank</source>
         <translation>Lägg till tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="84"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Manage stations</source>
         <translation>Hantera stationer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Manage fuel types</source>
         <translation>Hantera bränsletyper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="109"/>
+        <location filename="../qml/pages/TankView.qml" line="101"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="116"/>
+        <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="118"/>
+        <location filename="../qml/pages/TankView.qml" line="107"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>

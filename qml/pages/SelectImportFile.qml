@@ -21,7 +21,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-import Qt.labs.folderlistmodel 2.1
+/* Commented out, FolderListModel being in harbour.carbudget namespace. */
+/* import Qt.labs.folderlistmodel 2.1 */
 
 Page {
     id: page
