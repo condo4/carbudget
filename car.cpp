@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Matti Viljanen
  */
 
 #include "car.h"
@@ -227,6 +227,7 @@ void Car::_dbLoad()
     emit fuelTotalChanged(this->fuelTotal());
     emit maxDistanceChanged(this->maxDistance());
     emit minDistanceChanged(this->minDistance());
+    emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
     qDebug() << "Loaded" << _tankList.count() << "fuel refills";
     qDebug() << "Loaded" << _stationList.count() << "gas stations";
     qDebug() << "Loaded" << _tireList.count() << "sets of tires";
@@ -285,6 +286,8 @@ int Car::_dbUpgrade() {
     sqlUpdates[4].append(QString("CREATE TABLE CosttypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     // Version 4 -> 5
     sqlUpdates[5].append(QString("INSERT INTO CarBudget (id, value) VALUES ('make',''),('model',''),('year',''),('licensePlate','');"));
+    // Version 5 -> 6
+    sqlUpdates[6].append(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType','');"));
 
     while(currVersion < DB_VERSION)
     {
@@ -321,6 +324,8 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent), _chartType(cha
 
 Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _numTires(0),_buyingPrice(0),_sellingPrice(0),_lifetime(0), _chartType(chartTypeConsumptionOf100)
 {
+    connect(this,SIGNAL(lastFuelStationChanged(int)), SLOT(setLastFuelStation(int)));
+
     this->_dbInit();
     _dbLoading=false;
     if(this->_dbGetVersion() < 1)
@@ -402,7 +407,7 @@ double Car::consumptionLast() const
     if (_tankList.empty()) return 0.0;
     QList<Tank*>::const_iterator tank = _tankList.constBegin();
     if (*tank)  return (*tank)->consumption();
-       else return 0;
+    else return 0;
 }
 
 double Car::consumptionMin() const
@@ -568,7 +573,7 @@ QJsonObject Car::getChartData()
     jsonO.insert("labels", labelArray);
     jsonO.insert("datasets", dataSetArray);
 
-//    qDebug() << jsonO;
+    //    qDebug() << jsonO;
 
     return jsonO;
 }
@@ -897,6 +902,7 @@ void Car::addNewTank(QDate date, unsigned int distance, double quantity, double 
         emit consumptionMinChanged(this->consumptionMin());
         emit fuelTotalChanged(this->fuelTotal());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
 }
@@ -925,6 +931,7 @@ Tank* Car::modifyTank(Tank *tank, QDate date, unsigned int distance, double quan
         emit consumptionMinChanged(this->consumptionMin());
         emit fuelTotalChanged(this->fuelTotal());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
     return tank;
@@ -944,11 +951,11 @@ void Car::delTank(Tank *tank)
         emit consumptionLastChanged(this->consumptionLast());
         emit consumptionMinChanged(this->consumptionMin());
         emit maxDistanceChanged(this->maxDistance());
+        emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
         emit tanksChanged();
     }
     tank->deleteLater();
 }
-
 
 void Car::addNewFuelType(QString name)
 {
@@ -1858,6 +1865,52 @@ void Car::setConsumptionUnit(QString consumptionUnit)
     }
     _consumptionUnit = consumptionUnit;
     emit consumptionUnitChanged();
+}
+
+int Car::getDefaultFuelType()
+{
+    if(_defaultFuelType < 0 || _defaultFuelType > 9999) {
+        QSqlQuery query(this->db);
+
+        if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';")) {
+            query.next();
+            _defaultFuelType = query.value(0).toInt();
+            qDebug() << "Found default fuel type in database:" << _defaultFuelType;
+        }
+        else
+        {
+            qDebug() << "Car default fuel type not in database, defaulting to 0";
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType','0');"));
+            _defaultFuelType = 0;
+        }
+    }
+
+    return _defaultFuelType;
+}
+
+void Car::setDefaultFuelType(int defaultFuelType)
+{
+    QSqlQuery query(this->db);
+
+    if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';"))
+    {
+        if(defaultFuelType < 0 || defaultFuelType > 9999) _defaultFuelType = 0;
+        if(query.next()) {
+            query.exec(QString("UPDATE CarBudget SET value=%1 WHERE id='defaultFuelType';").arg(defaultFuelType));
+        }
+        else {
+            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType',%1);").arg(defaultFuelType));
+        }
+
+        qDebug() << "Changed default fuel type in database:" << _defaultFuelType << ">>" << defaultFuelType;
+    }
+    _defaultFuelType = defaultFuelType;
+    emit defaultFuelTypeChanged();
+}
+
+void Car::setLastFuelStation(int station) {
+    qDebug() << "Set last used fuel station to:" << station;
+    _lastFuelStation = station;
 }
 
 void Car::simulation()

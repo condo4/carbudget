@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol
+ * Authors: Fabien Proriol, Matti Viljanen
  */
 
 
@@ -36,7 +36,7 @@
 #include "charttypes.h"
 
 class CarManager;
-#define DB_VERSION 5
+#define DB_VERSION 6
 
 class Car : public QObject
 {
@@ -66,6 +66,8 @@ class Car : public QObject
     Q_PROPERTY(QString currency READ currency WRITE setCurrency NOTIFY currencyChanged)
     Q_PROPERTY(QString distanceUnit READ distanceUnit WRITE setDistanceUnit NOTIFY distanceUnitChanged)
     Q_PROPERTY(QString consumptionUnit READ consumptionUnit WRITE setConsumptionUnit NOTIFY consumptionUnitChanged)
+    Q_PROPERTY(int defaultFuelType READ getDefaultFuelType WRITE setDefaultFuelType NOTIFY defaultFuelTypeChanged)
+    Q_PROPERTY(int lastFuelStation READ getLastFuelStation WRITE setLastFuelStation NOTIFY lastFuelStationChanged)
     Q_PROPERTY(unsigned int numTires READ numTires WRITE setNbtire NOTIFY numTiresChanged)
     Q_PROPERTY(double buyingPrice READ buyingPrice WRITE setBuyingprice NOTIFY buyingPriceChanged)
     Q_PROPERTY(double sellingPrice READ sellingPrice WRITE setSellingprice NOTIFY sellingPriceChanged)
@@ -106,6 +108,8 @@ private:
     QString _currency;
     QString _distanceUnit;
     QString _consumptionUnit;
+    int _defaultFuelType;
+    int _lastFuelStation;
 
     unsigned int _numTires;
     double _buyingPrice;
@@ -157,6 +161,8 @@ public:
     QString getMake() const { return _make; }
     QString getModel() const { return _model; }
     int getYear() const { return _year; }
+    int getDefaultFuelType() const { return _defaultFuelType; }
+    int getLastFuelStation() const { return _lastFuelStation; }
     QString getLicensePlate() const { return _licensePlate; }
 
     QJsonObject getChartData();
@@ -198,6 +204,7 @@ signals:
     void fuelTotalChanged(double fuelTotal);
     void maxDistanceChanged(double consumption);
     void minDistanceChanged(double consumption);
+    void lastFuelStationChanged(int station);
     void tanksChanged();
     void fuelTypesChanged();
     void stationsChanged();
@@ -220,6 +227,8 @@ signals:
     void makeChanged();
     void modelChanged();
     void yearChanged();
+    void defaultFuelTypeChanged();
+
     void licensePlateChanged();
 
 public slots:
@@ -263,6 +272,11 @@ public slots:
 
     int year();
     void setYear(int year);
+
+    int getDefaultFuelType();
+    void setDefaultFuelType(int fuelType);
+
+    void setLastFuelStation(int station);
 
     QString licensePlate();
     void setLicensePlate(QString licensePlate);

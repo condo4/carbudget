@@ -15,7 +15,7 @@
  * See the GNU General Public License for more details. You should have received a copy of the GNU
  * General Public License along with CarBudget. If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Fabien Proriol, Thomas Michel
+ * Authors: Fabien Proriol, Thomas Michel, Matti Viljanen
  */
 
 
@@ -143,7 +143,7 @@ bool CarManager::createTables(QSqlDatabase db)
     QStringList sqlQueries;
 
     sqlQueries.append(QString("CREATE TABLE CarBudget (id VARCHAR(20) PRIMARY KEY, value VARCHAR(20));"));
-    sqlQueries.append(QString("INSERT  INTO CarBudget (id, value) VALUES ('version','%1'),('make',''),('model',''),('year',''),('licensePlate','');").arg(DB_VERSION));
+    sqlQueries.append(QString("INSERT  INTO CarBudget (id, value) VALUES ('version','%1'),('make',''),('model',''),('year',''),('licensePlate',''),('defaultFuelType','');").arg(DB_VERSION));
     sqlQueries.append(QString("CREATE TABLE CostTypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     sqlQueries.append(QString("CREATE TABLE FuelTypeList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     sqlQueries.append(QString("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));

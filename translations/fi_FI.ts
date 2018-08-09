@@ -229,7 +229,7 @@
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="95"/>
         <source>License plate number</source>
-        <translation type="unfinished">Rekisterinumero</translation>
+        <translation>Rekisterinumero</translation>
     </message>
 </context>
 <context>
@@ -690,72 +690,77 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="45"/>
+        <location filename="../qml/pages/Settings.qml" line="46"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="53"/>
+        <location filename="../qml/pages/Settings.qml" line="54"/>
         <source>Car manufacturer</source>
         <translation>Auton merkki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
+        <location filename="../qml/pages/Settings.qml" line="65"/>
         <source>Car model</source>
         <translation>Auton malli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="76"/>
+        <location filename="../qml/pages/Settings.qml" line="77"/>
         <source>Car manufacture year</source>
-        <translation type="unfinished">Auton vuosimalli</translation>
+        <translation>Auton vuosimalli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="89"/>
+        <location filename="../qml/pages/Settings.qml" line="90"/>
         <source>License plate number</source>
         <translation>Rekisterinumero</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="101"/>
+        <location filename="../qml/pages/Settings.qml" line="102"/>
         <source>Currency</source>
         <translation>Valuutta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="113"/>
+        <location filename="../qml/pages/Settings.qml" line="114"/>
         <source>Distance Unit</source>
         <translation>Matkayksikkö</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="133"/>
+        <location filename="../qml/pages/Settings.qml" line="134"/>
         <source>Consumption Unit</source>
         <translation>Kulutusyksikkö</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
+        <source>Primary Fuel Type</source>
+        <translation>Ensisijainen polttoaine</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="177"/>
         <source>Number of wheels</source>
         <translation>Renkaiden lukumäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="156"/>
+        <location filename="../qml/pages/Settings.qml" line="178"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 tai 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="179"/>
+        <location filename="../qml/pages/Settings.qml" line="201"/>
         <source>Buying date</source>
         <translation>Ostopäivämäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="189"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Buying Price</source>
         <translation>Ostohinta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="200"/>
+        <location filename="../qml/pages/Settings.qml" line="222"/>
         <source>Selling Price (est.)</source>
         <translation>Myyntihinta (arvio)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="233"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Käyttöikä (kuukautta)</translation>
     </message>
@@ -973,37 +978,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="68"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Tank List</source>
         <translation>Tankkauslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="72"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Add tank</source>
         <translation>Lisää tankkaus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="84"/>
         <source>Manage stations</source>
         <translation>Hallitse asemia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="88"/>
         <source>Manage fuel types</source>
         <translation>Hallitse polttoainetyyppejä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="101"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Modify</source>
         <translation>Muokkaa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="105"/>
+        <location filename="../qml/pages/TankView.qml" line="116"/>
         <source>Delete</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="107"/>
+        <location filename="../qml/pages/TankView.qml" line="118"/>
         <source>Deleting</source>
         <translation>Poistetaan</translation>
     </message>

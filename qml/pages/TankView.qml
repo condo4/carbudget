@@ -39,6 +39,14 @@ Page {
                                         manager.car.consumption * 1.04,
                                         manager.car.consumption * 1.06,
                                         manager.car.consumption * 1.08]
+    property bool dirtyData : true
+
+    onStatusChanged: {
+        if(status == PageStatus.Activating && dirtyData) {
+            fillListModel()
+            dirtyData = false
+        }
+    }
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceUnit
@@ -99,7 +107,10 @@ Page {
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
-                        onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
+                        onClicked: {
+                            dirtyData = true
+                            pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
+                        }
                     }
                     MenuItem {
                         text: qsTr("Delete")
@@ -207,11 +218,13 @@ Page {
     // Fill list model
     function fillListModel()
     {
+        listModel.clear();
         var tanklist = manager.car.tanks;
         for (var i = 0;i < tanklist.length ;i++)
         {
             if (filter === "" || filter === manager.car.getFuelTypeName(tanklist[i].fuelType))
                 listModel.append({"fuel" : tanklist[i]})
         }
+        dirtyData = false
     }
 }

@@ -690,72 +690,77 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="45"/>
+        <location filename="../qml/pages/Settings.qml" line="46"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="53"/>
+        <location filename="../qml/pages/Settings.qml" line="54"/>
         <source>Car manufacturer</source>
         <translation>Fabricant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
+        <location filename="../qml/pages/Settings.qml" line="65"/>
         <source>Car model</source>
         <translation>Modèle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="76"/>
+        <location filename="../qml/pages/Settings.qml" line="77"/>
         <source>Car manufacture year</source>
         <translation type="unfinished">Année de fabrication</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="89"/>
+        <location filename="../qml/pages/Settings.qml" line="90"/>
         <source>License plate number</source>
         <translation>Plaque d&apos;immatriculation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="101"/>
+        <location filename="../qml/pages/Settings.qml" line="102"/>
         <source>Currency</source>
         <translation>Monnaie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="113"/>
+        <location filename="../qml/pages/Settings.qml" line="114"/>
         <source>Distance Unit</source>
         <translation>Unité de distance</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="133"/>
+        <location filename="../qml/pages/Settings.qml" line="134"/>
         <source>Consumption Unit</source>
         <translation>Unité de consommation</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
+        <source>Primary Fuel Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="177"/>
         <source>Number of wheels</source>
         <translation>Nombre de roues</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="156"/>
+        <location filename="../qml/pages/Settings.qml" line="178"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 ou 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="179"/>
+        <location filename="../qml/pages/Settings.qml" line="201"/>
         <source>Buying date</source>
         <translation>Date d&apos;achat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="189"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Buying Price</source>
         <translation>Prix d&apos;achat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="200"/>
+        <location filename="../qml/pages/Settings.qml" line="222"/>
         <source>Selling Price (est.)</source>
         <translation>Prix de vente estimé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="233"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Durée de vie estimé (en mois)</translation>
     </message>
@@ -973,37 +978,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="68"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Tank List</source>
         <translation>Liste des pleins</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="72"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Add tank</source>
         <translation>Ajouter un plein</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="84"/>
         <source>Manage stations</source>
         <translation>Gérer les stations</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="88"/>
         <source>Manage fuel types</source>
         <translation>Gérer types de carburant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="101"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="105"/>
+        <location filename="../qml/pages/TankView.qml" line="116"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="107"/>
+        <location filename="../qml/pages/TankView.qml" line="118"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>

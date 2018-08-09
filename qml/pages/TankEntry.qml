@@ -224,7 +224,28 @@ Dialog {
                 }
             }
         }
-        else tank_date = new Date()
+        else {
+            tank_date = new Date()
+            fuelType = manager.car.defaultFuelType
+            station = manager.car.lastFuelStation
+            for(var k=0; k<fuelTypeslistrepeater.count; k++)
+            {
+                if(fuelTypeslistrepeater.itemAt(k).dbid === fuelType)
+                {
+                    cbfuelType.currentIndex = k
+                    break
+                }
+            }
+            for(var l=0; l<stationslistrepeater.count; l++)
+            {
+                if(stationslistrepeater.itemAt(l).dbid === station)
+                {
+                    cbstation.currentIndex = l
+                    break
+                }
+            }
+
+        }
     }
 
     onAccepted: {
@@ -234,6 +255,9 @@ Dialog {
         }
         else
         {
+            tank.date = tank_date
+            tank.distance = kminput.text * distanceunitfactor
+            tank.full = fullinput.checked
             manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
         }
     }

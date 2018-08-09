@@ -690,72 +690,77 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="45"/>
+        <location filename="../qml/pages/Settings.qml" line="46"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="53"/>
+        <location filename="../qml/pages/Settings.qml" line="54"/>
         <source>Car manufacturer</source>
         <translation>Biltillverkare</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="89"/>
+        <location filename="../qml/pages/Settings.qml" line="90"/>
         <source>License plate number</source>
         <translation>Registreringsnummer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="101"/>
+        <location filename="../qml/pages/Settings.qml" line="102"/>
         <source>Currency</source>
         <translation>Valuta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="64"/>
+        <location filename="../qml/pages/Settings.qml" line="65"/>
         <source>Car model</source>
         <translation>Distansenhet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="76"/>
+        <location filename="../qml/pages/Settings.qml" line="77"/>
         <source>Car manufacture year</source>
         <translation type="unfinished">Tillverkningsår</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="113"/>
+        <location filename="../qml/pages/Settings.qml" line="114"/>
         <source>Distance Unit</source>
         <translation>Bilmodell</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="133"/>
+        <location filename="../qml/pages/Settings.qml" line="134"/>
         <source>Consumption Unit</source>
         <translation>Förbrukningsenhet</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
+        <source>Primary Fuel Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="177"/>
         <source>Number of wheels</source>
         <translation>Antal hjul</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="156"/>
+        <location filename="../qml/pages/Settings.qml" line="178"/>
         <source>2, 4, 6 or 8</source>
         <translation>2, 4, 6 eller 8</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="179"/>
+        <location filename="../qml/pages/Settings.qml" line="201"/>
         <source>Buying date</source>
         <translation>Inköpsdatum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="189"/>
+        <location filename="../qml/pages/Settings.qml" line="211"/>
         <source>Buying Price</source>
         <translation>Inköpspris</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="200"/>
+        <location filename="../qml/pages/Settings.qml" line="222"/>
         <source>Selling Price (est.)</source>
         <translation>Försäljningsvärde (uppsk.)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="233"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Livstid (i mån., uppsk.)</translation>
     </message>
@@ -973,37 +978,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="68"/>
+        <location filename="../qml/pages/TankView.qml" line="76"/>
         <source>Tank List</source>
         <translation>Tankningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="72"/>
+        <location filename="../qml/pages/TankView.qml" line="80"/>
         <source>Add tank</source>
         <translation>Lägg till tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="84"/>
         <source>Manage stations</source>
         <translation>Hantera stationer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="88"/>
         <source>Manage fuel types</source>
         <translation>Hantera bränsletyper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="101"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="105"/>
+        <location filename="../qml/pages/TankView.qml" line="116"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="107"/>
+        <location filename="../qml/pages/TankView.qml" line="118"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>
