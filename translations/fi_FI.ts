@@ -998,17 +998,17 @@
         <translation>Hallitse polttoainetyyppejä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="109"/>
+        <location filename="../qml/pages/TankView.qml" line="110"/>
         <source>Modify</source>
         <translation>Muokkaa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="116"/>
+        <location filename="../qml/pages/TankView.qml" line="117"/>
         <source>Delete</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="118"/>
+        <location filename="../qml/pages/TankView.qml" line="119"/>
         <source>Deleting</source>
         <translation>Poistetaan</translation>
     </message>

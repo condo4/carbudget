@@ -998,17 +998,17 @@
         <translation>Gérer types de carburant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="109"/>
+        <location filename="../qml/pages/TankView.qml" line="110"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="116"/>
+        <location filename="../qml/pages/TankView.qml" line="117"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="118"/>
+        <location filename="../qml/pages/TankView.qml" line="119"/>
         <source>Deleting</source>
         <translation>Suppression</translation>
     </message>
