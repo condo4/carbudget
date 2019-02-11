@@ -229,7 +229,7 @@
     <message>
         <location filename="../qml/pages/CarCreate.qml" line="95"/>
         <source>License plate number</source>
-        <translation type="unfinished">Registreringsnummer</translation>
+        <translation>Registreringsnummer</translation>
     </message>
 </context>
 <context>
@@ -717,7 +717,7 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="77"/>
         <source>Car manufacture year</source>
-        <translation type="unfinished">Tillverkningsår</translation>
+        <translation>Tillverkningsår</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="114"/>
@@ -732,7 +732,7 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="155"/>
         <source>Primary Fuel Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Primär bränsletyp</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="177"/>
