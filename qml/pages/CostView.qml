@@ -71,9 +71,9 @@ Page {
             model: listModel
             delegate: ListItem {
                 width: parent.width
-                //contentHeight: dataColumn.height
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("CostEntryView.qml"), { cost: model.modelData })
+                contentHeight: itemTexts.height + Theme.paddingSmall
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
@@ -89,50 +89,61 @@ Page {
                         }
                     }
                 }
-                Column {
-                    id: dataColumn
-                    width: parent.width
-                    spacing: Theme.paddingSmall
-                    Row {
-                        x: Theme.paddingMedium
-                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-                        Label {
-                            width: parent.width / 2
-                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit;
-                            font.family: Theme.fontFamily
-                            color: Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeSmall
-                        }
-                        Label {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
-                        }
+
+                Item {
+                    id: itemTexts
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: Theme.paddingSmall
+                        bottomMargin: Theme.paddingSmall
+                        leftMargin: Theme.paddingMedium
+                        rightMargin: Theme.paddingMedium
                     }
-                    Row {
-                        x: Theme.paddingMedium
-                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-                        Label {
-                            width: parent.width / 2
-                            text: {return showDescription ? model.modelData.description : manager.car.getCostTypeName(model.modelData.costType)}
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.secondaryColor
-                            clip: true
-                        }
-                        Label {
-                            text: model.modelData.cost + manager.car.currency;
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeExtraSmall
-                            color: Theme.secondaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
-                        }
+                    height: tCostType.y + tCostType.height + Theme.paddingSmall
+                    Label {
+                        id: tDistance
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        text: (model.modelData.distance/distanceunitfactor).toFixed(0) + manager.car.distanceUnit;
+                        font.family: Theme.fontFamily
+                        color: Theme.primaryColor
+                        font.pixelSize: Theme.fontSizeSmall
+                    }
+                    Label {
+                        id: tDate
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+
+                    Label {
+                        id: tCostType
+                        anchors.top: tDistance.bottom
+                        anchors.left: tDistance.left
+                        text: {return showDescription ? model.modelData.description : manager.car.getCostTypeName(model.modelData.costType)}
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        clip: true
+                    }
+                    Label {
+                        id: tPrice
+                        anchors.top: tDate.bottom
+                        anchors.right: tDate.right
+                        text: model.modelData.cost + manager.car.currency;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        color: Theme.secondaryColor
+                        horizontalAlignment: Text.AlignRight
                     }
                 }
+
             }
         }
 
