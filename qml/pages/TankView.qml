@@ -104,6 +104,7 @@ Page {
                 width: parent.width
                 showMenuOnPressAndHold: true
                 onClicked: pageStack.push(Qt.resolvedUrl("TankEntryView.qml"), { tank: model.modelData })
+                contentHeight: itemTexts.height + Theme.paddingSmall
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
@@ -122,90 +123,118 @@ Page {
                     }
                 }
 
-
-                Column {
-                    width: parent.width
-                    spacing: Theme.paddingSmall
-
-                    Row {
-                        x: Theme.paddingMedium
-                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
-
-                        Text {
-                            text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceUnit + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceUnit+")"):(manager.car.distanceUnit));
-
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignLeft
-                        }
-
-                        Text {
-                            text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
-
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.primaryColor
-                            width: parent.width / 2
-                            horizontalAlignment: Text.AlignRight
-                        }
+                // Container for easier margins calculation
+                Item {
+                    id: itemTexts
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: Theme.paddingSmall
+                        bottomMargin: Theme.paddingSmall
+                        leftMargin: Theme.paddingMedium
+                        rightMargin: Theme.paddingMedium
                     }
-                    Row {
-                        x: Theme.paddingMedium
-                        width: parent.width - Theme.paddingMedium - Theme.paddingMedium
+                    height: tConsumption.y + tConsumption.height + Theme.paddingSmall
 
-                        Text {
-                            text: model.modelData.pricePerUnit.toFixed(3)+manager.car.currency + "/l";
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.secondaryColor
-                            width: parent.width / 5
-                        }
-                        Text {
-                            text: model.modelData.quantity + "l"
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.secondaryColor
-                            width: parent.width / 5
-                            horizontalAlignment: Text.AlignRight
-                        }
-                        Text {
-                            text: model.modelData.price + manager.car.currency;
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            color: Theme.secondaryColor
-                            width: parent.width / 5
-                            horizontalAlignment: Text.AlignRight
-                        }
-                        Text {
-                            text: if ( manager.car.consumptionUnit === "l/100km") {
-                                 model.modelData.consumption.toFixed(2)+ "l/100km";
-                             }
-                            else {
-                                    if ( manager.car.consumptionUnit === "mpg") {
-                                    ("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
-                                }
-                            }
+                    // Top row
 
-                            visible: model.modelData.consumption > 0
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontSizeSmall
-                            width: 2 * parent.width / 5
-                            color: {
-                                if(model.modelData.consumption < consumptionAvg[0]) return "#00FF00"
-                                if(model.modelData.consumption < consumptionAvg[1]) return "#40FF00"
-                                if(model.modelData.consumption < consumptionAvg[2]) return "#80FF00"
-                                if(model.modelData.consumption < consumptionAvg[3]) return "#C0FF00"
-                                if(model.modelData.consumption < consumptionAvg[4]) return "#FFFF00"
-                                if(model.modelData.consumption < consumptionAvg[5]) return "#FFC000"
-                                if(model.modelData.consumption < consumptionAvg[6]) return "#FF8000"
-                                if(model.modelData.consumption < consumptionAvg[7]) return "#FF4000"
-                                if(model.modelData.consumption < consumptionAvg[8]) return "#FF2000"
-                                return "#FF0000"
-                            }
-                            horizontalAlignment: Text.AlignRight
+                    // e.g. 450000km (+700km)
+                    Text {
+                        id: tDistance
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        text: (model.modelData.distance/distanceunitfactor).toFixed(0) + ((model.modelData.newDistance > 0)?(manager.car.distanceUnit + " (+" + (model.modelData.newDistance/distanceunitfactor).toFixed(0)+manager.car.distanceUnit+")"):(manager.car.distanceUnit));
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignLeft
+                    }
+
+                    // e.g. 2019/02/01
+                    Text {
+                        id: tDate
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        text: model.modelData.date.toLocaleDateString(Qt.locale(),"yyyy/MM/dd");
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.primaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+
+                    // Bottom row
+
+                    // e.g. 1.395€/l
+                    Text {
+                        id: tConsumption
+                        anchors.top: tDistance.bottom
+                        anchors.left: parent.left
+                        text: model.modelData.pricePerUnit.toFixed(3)+manager.car.currency + "/l";
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                        width: parent.width / 5
+                    }
+
+                    // e.g. 49.05l
+                    Text {
+                        id: tAmount
+                        anchors.top: tConsumption.top
+                        anchors.left: tConsumption.right
+                        width: parent.width / 5
+
+                        text: model.modelData.quantity.toFixed(2) + "l"
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+
+                    // e.g. 66.04€
+                    Text {
+                        id: tTotalPrice
+                        anchors.top: tAmount.top
+                        anchors.left: tAmount.right
+                        width: parent.width / 5
+
+                        text: model.modelData.price.toFixed(2) + manager.car.currency;
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: Theme.secondaryColor
+                        horizontalAlignment: Text.AlignRight
+                    }
+
+                    // e.g. 7.01l/100km (coloured)
+                    Text {
+                        id: tPricePer
+                        anchors.top: tTotalPrice.top
+                        anchors.left: tTotalPrice.right
+                        width: parent.width / 5 * 2
+
+                        text: if ( manager.car.consumptionUnit === "l/100km") {
+                                  model.modelData.consumption.toFixed(2)+ "l/100km";
+                              }
+                              else if ( manager.car.consumptionUnit === "mpg") {
+                                  ("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toFixed(2))
+                              }
+
+                        visible: model.modelData.consumption > 0
+                        font.family: Theme.fontFamily
+                        font.pixelSize: Theme.fontSizeSmall
+                        color: {
+                            if(model.modelData.consumption < consumptionAvg[0]) return "#00FF00"
+                            if(model.modelData.consumption < consumptionAvg[1]) return "#40FF00"
+                            if(model.modelData.consumption < consumptionAvg[2]) return "#80FF00"
+                            if(model.modelData.consumption < consumptionAvg[3]) return "#C0FF00"
+                            if(model.modelData.consumption < consumptionAvg[4]) return "#FFFF00"
+                            if(model.modelData.consumption < consumptionAvg[5]) return "#FFC000"
+                            if(model.modelData.consumption < consumptionAvg[6]) return "#FF8000"
+                            if(model.modelData.consumption < consumptionAvg[7]) return "#FF4000"
+                            if(model.modelData.consumption < consumptionAvg[8]) return "#FF2000"
+                            return "#FF0000"
                         }
+                        horizontalAlignment: Text.AlignRight
                     }
                 }
             }

@@ -94,7 +94,7 @@ CoverBackground {
         enabled: nullCar
         visible: nullCar
         text: "CarBudget"
-        icon.source: "qrc:/harbour-carbudget_86.png"
+        icon.source: "qrc:/harbour-carbudget.png"
     }
 
     // Show only proper cover actions
