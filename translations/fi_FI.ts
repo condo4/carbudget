@@ -571,14 +571,14 @@
     <message>
         <location filename="../src/filemodel.cpp" line="295"/>
         <location filename="../src/filemodel.cpp" line="329"/>
-        <source>Hakemisto ei ole olemassa</source>
-        <translation></translation>
+        <source>Folder does not exist</source>
+        <translation>Hakemisto ei ole olemassa</translation>
     </message>
     <message>
         <location filename="../src/filemodel.cpp" line="299"/>
         <location filename="../src/filemodel.cpp" line="335"/>
-        <source>Hakemistoa ei ole oikeutta avata</source>
-        <translation></translation>
+        <source>No permission to read the folder</source>
+        <translation>Hakemistoa ei ole oikeutta avata</translation>
     </message>
 </context>
 <context>
@@ -690,23 +690,23 @@
     <name>QObject</name>
     <message>
         <location filename="../src/globals.cpp" line="48"/>
-        <source>%1 t</source>
-        <translation></translation>
+        <source>%1 bytes</source>
+        <translation>%1 t</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="51"/>
-        <source>%1 kt</source>
-        <translation></translation>
+        <source>%1 kB</source>
+        <translation>%1 kt</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="54"/>
-        <source>%1 Mt</source>
-        <translation></translation>
+        <source>%1 MB</source>
+        <translation>%1 Mt</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="56"/>
-        <source>%1 Gt</source>
-        <translation></translation>
+        <source>%1 GB</source>
+        <translation>%1 Gt</translation>
     </message>
 </context>
 <context>
