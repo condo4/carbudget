@@ -22,8 +22,8 @@
 
 #include "tiremount.h"
 #include <QDebug>
-#include <car.h>
-#include <carmanager.h>
+#include "car.h"
+#include "carmanager.h"
 
 TireMount::TireMount(Car *parent) :
     _notUnmounted (QDate(1900,1,1))

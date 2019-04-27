@@ -21,7 +21,7 @@
 
 #include "tire.h"
 #include <QDebug>
-#include <car.h>
+#include "car.h"
 
 Tire::Tire(Car *parent) :
     QObject(parent),
