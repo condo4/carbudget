@@ -27,7 +27,7 @@ Page {
     property real distanceunitfactor: 1
     property real consumptionfactor : 1.0
     Component.onCompleted: {
-        if(manager.car.distanceunity == "mi")
+        if(manager.car.distanceUnit === "mi")
         {
             distanceunitfactor = 1.609
         }

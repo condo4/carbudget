@@ -38,8 +38,8 @@ Page {
     property real distanceunit
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
-        if(distanceunit == "mi")
+        distanceunit = manager.car.distanceUnit
+        if(distanceunit === "mi")
         {
             distanceunitfactor = 1.609
         }
