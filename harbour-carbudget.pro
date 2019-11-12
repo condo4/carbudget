@@ -102,6 +102,7 @@ TRANSLATIONS = translations/de_DE.ts \
                translations/ru_RU.ts \
                translations/sv_SE.ts
 
+QML_IMPORT_PATH += ./qml
 
 RESOURCES += \
     Resources.qrc
