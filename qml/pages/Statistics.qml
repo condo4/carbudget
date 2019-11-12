@@ -35,11 +35,9 @@ Page {
     property int beginIndex: manager.car.beginIndex
     property int endIndex: manager.car.endIndex
     property real distanceunitfactor: 1
-    property real distanceunit
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceUnit
-        if(distanceunit === "mi")
+        if(manager.car.distanceUnit === "mi")
         {
             distanceunitfactor = 1.609
         }
