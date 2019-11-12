@@ -106,7 +106,7 @@ Page {
                 width: page.width;
                 height: page.height / 2;
                 chartAnimated: false;
-                chartOptions: ({scaleFontSize: 24, scaleFontColor: "#fff"});
+                chartOptions: ({scaleFontSize: Theme.fontSizeExtraSmall, scaleFontColor: Theme.primaryColor});
                 chartType: Charts.ChartType.LINE;
                 chartData: manager.car.chartData;
             }
