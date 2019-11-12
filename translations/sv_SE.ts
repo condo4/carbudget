@@ -472,27 +472,27 @@
 <context>
     <name>CostView</name>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="54"/>
+        <location filename="../qml/pages/CostView.qml" line="59"/>
         <source>Cost List</source>
         <translation>Kostnadslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="58"/>
+        <location filename="../qml/pages/CostView.qml" line="63"/>
         <source>Add Cost</source>
         <translation>Lägg till kostnad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="79"/>
+        <location filename="../qml/pages/CostView.qml" line="84"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="84"/>
+        <location filename="../qml/pages/CostView.qml" line="89"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="86"/>
+        <location filename="../qml/pages/CostView.qml" line="91"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>
@@ -1016,37 +1016,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="71"/>
         <source>Tank List</source>
         <translation>Tankningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="75"/>
         <source>Add tank</source>
         <translation>Lägg till tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="84"/>
+        <location filename="../qml/pages/TankView.qml" line="79"/>
         <source>Manage stations</source>
         <translation>Hantera stationer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="83"/>
         <source>Manage fuel types</source>
         <translation>Hantera bränsletyper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="110"/>
+        <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="117"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="119"/>
+        <location filename="../qml/pages/TankView.qml" line="111"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>

@@ -472,27 +472,27 @@
 <context>
     <name>CostView</name>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="54"/>
+        <location filename="../qml/pages/CostView.qml" line="59"/>
         <source>Cost List</source>
         <translation>Список автомобилей</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="58"/>
+        <location filename="../qml/pages/CostView.qml" line="63"/>
         <source>Add Cost</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="79"/>
+        <location filename="../qml/pages/CostView.qml" line="84"/>
         <source>Modify</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="84"/>
+        <location filename="../qml/pages/CostView.qml" line="89"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="86"/>
+        <location filename="../qml/pages/CostView.qml" line="91"/>
         <source>Deleting</source>
         <translation>Удаляется</translation>
     </message>
@@ -1016,37 +1016,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="71"/>
         <source>Tank List</source>
         <translation>Список заправок</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="75"/>
         <source>Add tank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="84"/>
+        <location filename="../qml/pages/TankView.qml" line="79"/>
         <source>Manage stations</source>
         <translation type="unfinished">Редактировать АЗС</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="83"/>
         <source>Manage fuel types</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="110"/>
+        <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Modify</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="117"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="119"/>
+        <location filename="../qml/pages/TankView.qml" line="111"/>
         <source>Deleting</source>
         <translation>Удаляется</translation>
     </message>
