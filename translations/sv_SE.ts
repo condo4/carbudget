@@ -852,27 +852,27 @@
 <context>
     <name>Statistics</name>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="58"/>
+        <location filename="../qml/pages/Statistics.qml" line="56"/>
         <source>Consumption</source>
         <translation>Förbrukning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="66"/>
+        <location filename="../qml/pages/Statistics.qml" line="64"/>
         <source>Costs</source>
         <translation>Kostnader</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="74"/>
+        <location filename="../qml/pages/Statistics.qml" line="72"/>
         <source>Fuel price</source>
         <translation>Bränslepris</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="94"/>
+        <location filename="../qml/pages/Statistics.qml" line="92"/>
         <source>Statistics</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="100"/>
+        <location filename="../qml/pages/Statistics.qml" line="98"/>
         <source>Distance</source>
         <translation>Distans</translation>
     </message>
