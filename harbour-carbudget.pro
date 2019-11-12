@@ -83,7 +83,10 @@ DISTFILES += \
     qml/pages/FueltypeEntry.qml \
     qml/Application.qml \
     qml/cover/CoverPage.qml \
-    qml/jbQuick/Charts/*.js \
+    qmlModules/jbQuick/Charts/qmldir \
+    qmlModules/jbQuick/Charts/*.qml \
+    qmlModules/jbQuick/Charts/*.js \
+    qmlModules/jbQuick/Charts/*.md \
     rpm/CarBudget.yaml \
     rpm/CarBudget.spec \
     harbour-carbudget.desktop \
@@ -102,7 +105,16 @@ TRANSLATIONS = translations/de_DE.ts \
                translations/ru_RU.ts \
                translations/sv_SE.ts
 
-QML_IMPORT_PATH += ./qml
+QML_IMPORT_PATH += ./qmlModules
+
+
+jbcharts.files = \
+    $$files(qmlModules/jbQuick/Charts/qmldir) \
+    $$files(qmlModules/jbQuick/Charts/*.qml) \
+    $$files(qmlModules/jbQuick/Charts/*.js) \
+    $$files(qmlModules/jbQuick/Charts/*.md)
+jbcharts.path = /usr/share/$${TARGET}/qmlModules/jbQuick/Charts
+INSTALLS += jbcharts
 
 RESOURCES += \
     Resources.qrc
