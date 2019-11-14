@@ -35,11 +35,9 @@ Page {
     property int beginIndex: manager.car.beginIndex
     property int endIndex: manager.car.endIndex
     property real distanceunitfactor: 1
-    property real distanceunit
 
     Component.onCompleted: {
-        distanceunit = manager.car.distanceunity
-        if(distanceunit == "mi")
+        if(manager.car.distanceUnit === "mi")
         {
             distanceunitfactor = 1.609
         }
@@ -108,7 +106,7 @@ Page {
                 width: page.width;
                 height: page.height / 2;
                 chartAnimated: false;
-                chartOptions: ({scaleFontSize: 24, scaleFontColor: "#fff"});
+                chartOptions: ({scaleFontSize: Theme.fontSizeExtraSmall, scaleFontColor: Theme.primaryColor});
                 chartType: Charts.ChartType.LINE;
                 chartData: manager.car.chartData;
             }

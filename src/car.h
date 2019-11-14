@@ -24,13 +24,13 @@
 
 #include <QObject>
 #include <QStringList>
-#include <tank.h>
-#include <cost.h>
-#include <tire.h>
-#include <tiremount.h>
-#include <fueltype.h>
-#include <station.h>
-#include <costtype.h>
+#include "tank.h"
+#include "cost.h"
+#include "tire.h"
+#include "tiremount.h"
+#include "fueltype.h"
+#include "station.h"
+#include "costtype.h"
 #include <QtQuick>
 #include <QtSql/QtSql>
 #include "charttypes.h"

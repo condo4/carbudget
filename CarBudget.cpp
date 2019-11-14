@@ -25,13 +25,13 @@
 
 #include <sailfishapp.h>
 #include <QSettings>
-#include "tank.h"
-#include "cost.h"
-#include "tire.h"
-#include "station.h"
-#include "car.h"
-#include "carmanager.h"
-#include "filemodel.h"
+#include "src/tank.h"
+#include "src/cost.h"
+#include "src/tire.h"
+#include "src/station.h"
+#include "src/car.h"
+#include "src/carmanager.h"
+#include "src/filemodel.h"
 #include "qmlLibs/qquickfolderlistmodel.h"
 
 #include <QtCore/QTranslator>
@@ -79,7 +79,8 @@ int main(int argc, char *argv[])
 
     CarManager manager;
 
-    view->engine()->addImportPath("/usr/share/harbour-carbudget/qml");
+
+    view->engine()->addImportPath("/usr/share/harbour-carbudget/qmlModules");
     view->rootContext()->setContextProperty("manager", &manager);
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();

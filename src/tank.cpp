@@ -21,8 +21,8 @@
 
 #include "tank.h"
 #include <QDebug>
-#include <car.h>
-#include <carmanager.h>
+#include "car.h"
+#include "carmanager.h"
 
 Tank::Tank(Car *parent) :
     CarEvent(parent),

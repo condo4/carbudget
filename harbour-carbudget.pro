@@ -15,35 +15,35 @@ QT += sql xml
 DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
 HEADERS += \
-    tank.h \
-    car.h \
-    station.h \
-    cost.h \
-    tire.h \
-    carmanager.h \
-    fueltype.h \
-    costtype.h \
-    carevent.h \
-    tiremount.h \
-    filemodel.h \
-    statfileinfo.h \
-    globals.h \
-    charttypes.h
+    src/tank.h \
+    src/car.h \
+    src/station.h \
+    src/cost.h \
+    src/tire.h \
+    src/carmanager.h \
+    src/fueltype.h \
+    src/costtype.h \
+    src/carevent.h \
+    src/tiremount.h \
+    src/filemodel.h \
+    src/statfileinfo.h \
+    src/globals.h \
+    src/charttypes.h
 
 SOURCES += CarBudget.cpp \
-    tank.cpp \
-    car.cpp \
-    station.cpp \
-    cost.cpp \
-    tire.cpp \
-    carmanager.cpp \
-    fueltype.cpp \
-    costtype.cpp \
-    carevent.cpp \
-    tiremount.cpp \
-    filemodel.cpp \
-    statfileinfo.cpp \
-    globals.cpp
+    src/tank.cpp \
+    src/car.cpp \
+    src/station.cpp \
+    src/cost.cpp \
+    src/tire.cpp \
+    src/carmanager.cpp \
+    src/fueltype.cpp \
+    src/costtype.cpp \
+    src/carevent.cpp \
+    src/tiremount.cpp \
+    src/filemodel.cpp \
+    src/statfileinfo.cpp \
+    src/globals.cpp
     
 DISTFILES += \
     qml/pages/CostEntry.qml \
@@ -83,7 +83,10 @@ DISTFILES += \
     qml/pages/FueltypeEntry.qml \
     qml/Application.qml \
     qml/cover/CoverPage.qml \
-    qml/jbQuick/Charts/*.js \
+    qmlModules/jbQuick/Charts/qmldir \
+    qmlModules/jbQuick/Charts/*.qml \
+    qmlModules/jbQuick/Charts/*.js \
+    qmlModules/jbQuick/Charts/*.md \
     rpm/CarBudget.yaml \
     rpm/CarBudget.spec \
     harbour-carbudget.desktop \
@@ -102,6 +105,16 @@ TRANSLATIONS = translations/de_DE.ts \
                translations/ru_RU.ts \
                translations/sv_SE.ts
 
+QML_IMPORT_PATH += ./qmlModules
+
+
+jbcharts.files = \
+    $$files(qmlModules/jbQuick/Charts/qmldir) \
+    $$files(qmlModules/jbQuick/Charts/*.qml) \
+    $$files(qmlModules/jbQuick/Charts/*.js) \
+    $$files(qmlModules/jbQuick/Charts/*.md)
+jbcharts.path = /usr/share/$${TARGET}/qmlModules/jbQuick/Charts
+INSTALLS += jbcharts
 
 RESOURCES += \
     Resources.qrc

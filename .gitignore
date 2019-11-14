@@ -1,29 +1,9 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-obj
-moc_*
-*.pro.user*
-CarBudget
-Makefile
-rpm/CarBudget.spec
-rpm/harbour-carbudget.spec
-
-# Compiled translation files
+*.autosave
+*.old
+*.bak
+*.tmp
+*.pro.user
+*.pro.user.*
 *.qm
-
-# Generated RPM packages
-*.rpm
-
-# Compiled binary
-harbour-carbudget
+*.spec
+*.spec.*

@@ -30,6 +30,7 @@ Page {
     property string distanceunit
     property real distanceunitfactor : 1.0
     property real consumptionfactor : 1.0
+    property variant tanklist: manager.car.tanks
     property variant consumptionAvg :  [manager.car.consumption * 0.92,
                                         manager.car.consumption * 0.94,
                                         manager.car.consumption * 0.96,
@@ -39,14 +40,8 @@ Page {
                                         manager.car.consumption * 1.04,
                                         manager.car.consumption * 1.06,
                                         manager.car.consumption * 1.08]
-    property bool dirtyData : true
 
-    onStatusChanged: {
-        if(status == PageStatus.Activating && dirtyData) {
-            fillListModel()
-            dirtyData = false
-        }
-    }
+    onTanklistChanged: fillListModel()
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceUnit
@@ -108,10 +103,7 @@ Page {
                 menu: ContextMenu {
                     MenuItem {
                         text: qsTr("Modify")
-                        onClicked: {
-                            dirtyData = true
-                            pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
-                        }
+                        onClicked: pageStack.push(Qt.resolvedUrl("TankEntry.qml"), { tank: model.modelData })
                     }
                     MenuItem {
                         text: qsTr("Delete")
@@ -248,12 +240,10 @@ Page {
     function fillListModel()
     {
         listModel.clear();
-        var tanklist = manager.car.tanks;
-        for (var i = 0;i < tanklist.length ;i++)
+        for (var i = 0; i < tanklist.length ; i++)
         {
-            if (filter === "" || filter === manager.car.getFuelTypeName(tanklist[i].fuelType))
+            if(filter === "" || filter === tanklist[i].fuelType)
                 listModel.append({"fuel" : tanklist[i]})
         }
-        dirtyData = false
     }
 }

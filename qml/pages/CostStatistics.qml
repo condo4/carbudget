@@ -29,7 +29,7 @@ Page {
     property string type: "costs"
     property real distanceunitfactor: 1
     Component.onCompleted: {
-        if(manager.car.distanceunity == "mi")
+        if(manager.car.distanceUnit === "mi")
         {
             distanceunitfactor = 1.609
         }

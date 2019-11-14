@@ -27,11 +27,11 @@ Page {
     property real distanceunitfactor: 1
     property real consumptionfactor : 1.0
     Component.onCompleted: {
-        if(manager.car.distanceunity == "mi")
+        if(manager.car.distanceUnit === "mi")
         {
             distanceunitfactor = 1.609
         }
-        if(manager.car.consumptionUnit == 'mpg')
+        if(manager.car.consumptionUnit === 'mpg')
         {
             consumptionfactor = 4.546*100/1.609
         }
@@ -76,11 +76,11 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text : if ( manager.car.consumptionUnit == 'l/100km') {
+                        text : if ( manager.car.consumptionUnit === 'l/100km') {
                             manager.car.budget_consumption_byType(model.modelData.id).toFixed(2) + " l";
                         }
                         else {
-                            if ( manager.car.consumptionUnit == 'mpg') {
+                            if ( manager.car.consumptionUnit === 'mpg') {
                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_byType(model.modelData.id)).toFixed(2));
                             }
                         }
@@ -102,11 +102,11 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text : if ( manager.car.consumptionUnit == 'l/100km') {
+                        text : if ( manager.car.consumptionUnit === 'l/100km') {
                             manager.car.budget_consumption_min_byType(model.modelData.id).toFixed(2) + " l";
                         }
                         else {
-                            if ( manager.car.consumptionUnit == 'mpg') {
+                            if ( manager.car.consumptionUnit === 'mpg') {
                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_min_byType(model.modelData.id)).toFixed(2));
                             }
                         }
@@ -128,11 +128,11 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text : if ( manager.car.consumptionUnit == 'l/100km') {
+                        text : if ( manager.car.consumptionUnit === 'l/100km') {
                             manager.car.budget_consumption_max_byType(model.modelData.id).toFixed(2) + " l";
                         }
                         else {
-                            if ( manager.car.consumptionUnit == 'mpg') {
+                            if ( manager.car.consumptionUnit === 'mpg') {
                                 qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_max_byType(model.modelData.id)).toFixed(2));
                             }
                         }

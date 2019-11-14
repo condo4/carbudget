@@ -472,27 +472,27 @@
 <context>
     <name>CostView</name>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="54"/>
+        <location filename="../qml/pages/CostView.qml" line="59"/>
         <source>Cost List</source>
         <translation>Kostnadslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="58"/>
+        <location filename="../qml/pages/CostView.qml" line="63"/>
         <source>Add Cost</source>
         <translation>Lägg till kostnad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="79"/>
+        <location filename="../qml/pages/CostView.qml" line="84"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="84"/>
+        <location filename="../qml/pages/CostView.qml" line="89"/>
         <source>Remove</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CostView.qml" line="86"/>
+        <location filename="../qml/pages/CostView.qml" line="91"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>
@@ -564,6 +564,21 @@
         <location filename="../qml/pages/DirectoryPage.qml" line="101"/>
         <source>No files</source>
         <translation>Inga filer</translation>
+    </message>
+</context>
+<context>
+    <name>FileModel</name>
+    <message>
+        <location filename="../src/filemodel.cpp" line="295"/>
+        <location filename="../src/filemodel.cpp" line="329"/>
+        <source>Folder does not exist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/filemodel.cpp" line="299"/>
+        <location filename="../src/filemodel.cpp" line="335"/>
+        <source>No permission to read the folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -669,6 +684,29 @@
         <location filename="../qml/pages/MycarImport.qml" line="59"/>
         <source>Import</source>
         <translation>Importera</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/globals.cpp" line="48"/>
+        <source>%1 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/globals.cpp" line="51"/>
+        <source>%1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/globals.cpp" line="54"/>
+        <source>%1 MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/globals.cpp" line="56"/>
+        <source>%1 GB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -814,27 +852,27 @@
 <context>
     <name>Statistics</name>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="58"/>
+        <location filename="../qml/pages/Statistics.qml" line="56"/>
         <source>Consumption</source>
         <translation>Förbrukning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="66"/>
+        <location filename="../qml/pages/Statistics.qml" line="64"/>
         <source>Costs</source>
         <translation>Kostnader</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="74"/>
+        <location filename="../qml/pages/Statistics.qml" line="72"/>
         <source>Fuel price</source>
         <translation>Bränslepris</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="94"/>
+        <location filename="../qml/pages/Statistics.qml" line="92"/>
         <source>Statistics</source>
         <translation>Statistik</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Statistics.qml" line="100"/>
+        <location filename="../qml/pages/Statistics.qml" line="98"/>
         <source>Distance</source>
         <translation>Distans</translation>
     </message>
@@ -978,37 +1016,37 @@
 <context>
     <name>TankView</name>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="76"/>
+        <location filename="../qml/pages/TankView.qml" line="71"/>
         <source>Tank List</source>
         <translation>Tankningslista</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="80"/>
+        <location filename="../qml/pages/TankView.qml" line="75"/>
         <source>Add tank</source>
         <translation>Lägg till tankning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="84"/>
+        <location filename="../qml/pages/TankView.qml" line="79"/>
         <source>Manage stations</source>
         <translation>Hantera stationer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="88"/>
+        <location filename="../qml/pages/TankView.qml" line="83"/>
         <source>Manage fuel types</source>
         <translation>Hantera bränsletyper</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="110"/>
+        <location filename="../qml/pages/TankView.qml" line="105"/>
         <source>Modify</source>
         <translation>Ändra</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="117"/>
+        <location filename="../qml/pages/TankView.qml" line="109"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankView.qml" line="119"/>
+        <location filename="../qml/pages/TankView.qml" line="111"/>
         <source>Deleting</source>
         <translation>Tar bort</translation>
     </message>

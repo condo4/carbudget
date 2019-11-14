@@ -29,6 +29,9 @@ Page {
     allowedOrientations: Orientation.All
     property string distanceunit
     property real distanceunitfactor: 1
+    property variant costList: manager.car.costs
+
+    onCostListChanged: fillListModel()
 
     Component.onCompleted: {
         distanceunit = manager.car.distanceUnit
@@ -36,6 +39,8 @@ Page {
         {
             distanceunitfactor = 1.609
         }
+        if(listModel.count === 0)
+            fillListModel()
     }
 
     Drawer {
@@ -155,10 +160,10 @@ Page {
     // Fill list model
     function fillListModel()
     {
-        var costList = manager.car.costs;
-        for (var i = 0;i < costList.length ;i++)
+        listModel.clear()
+        for (var i = 0; i < costList.length; i++)
         {
-            if(filter === "" || filter === manager.car.getCostTypeName(costList[i].costType))
+            if(filter === "" || filter === costList[i].costType)
                 listModel.append({"cost" : costList[i]})
         }
         console.log("List Model filled")

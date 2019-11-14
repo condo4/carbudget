@@ -25,7 +25,7 @@
 #include <QObject>
 #include <QStringList>
 #include <QQmlListProperty>
-#include <car.h>
+#include "car.h"
 
 class CarManager : public QObject
 {

@@ -21,7 +21,7 @@
 
 #include "cost.h"
 #include <QDebug>
-#include <car.h>
+#include "car.h"
 
 Cost::Cost(Car *parent) :
     CarEvent(parent),
