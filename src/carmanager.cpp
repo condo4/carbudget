@@ -180,7 +180,7 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
     // This does not overwrite existing database file.
     // Home directory: /home/nemo
     // Data directory: /home/nemo/.local/share/harbour-carbudget/harbour-carbudget/
-    bool fileMoved;
+    bool fileCopied;
     qDebug() << "Trying to open backup file" << filename;
     QSqlDatabase tempDB = QSqlDatabase::addDatabase("QSQLITE", "tempDB");
     tempDB.setDatabaseName(filename);
@@ -214,17 +214,22 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
     }
 
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    fileMoved = QFile::rename(filename,             dataPath + QDir::separator() + carName);
-    qDebug() << "Moving"  << (filename) << "to" << (dataPath + QDir::separator() + carName)<< (fileMoved ? "" : "failed");
-    if(fileMoved) {
+    QFile backupFile(filename);
+    fileCopied = backupFile.copy(dataPath + QDir::separator() + carName);
+    qDebug() << QString("Source: ").arg(filename);
+    qDebug() << QString("Destination: %2").arg(dataPath + QDir::separator() + carName);
+    QString result;
+    if(fileCopied) {
         refresh();
-        return QString("OK");
+        result = "OK";
     }
     else if(QFile::exists(dataPath + QDir::separator() + carName)) {
-        return QString("FILE_EXISTS");
+        result = "FILE_EXISTS";
     } else {
-        return QString("UNKNOWN");
+        result = "UNKNOWN";
     }
+    qDebug() << QString("File copy result: %1").arg(result);
+    return result;
 }
 
 void CarManager::importFromMyCar(QString filename, QString name)
