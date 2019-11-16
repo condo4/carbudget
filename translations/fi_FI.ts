@@ -171,30 +171,27 @@
 <context>
     <name>CarBudgetImport</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="54"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="51"/>
         <source>Enter car name</source>
         <translation>Syötä auton nimi</translation>
     </message>
-</context>
-<context>
-    <name>CarBudgetImportError</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImportError.qml" line="35"/>
-        <source>Error</source>
-        <translation>Virhe</translation>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="70"/>
+        <source>Import</source>
+        <translation>Tuo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImportError.qml" line="44"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="78"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
         <translation>Valittua tiedostoa ei voitu tuoda, sillä valittu auton nimi on jo käytössä.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImportError.qml" line="46"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="80"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
         <translation>Valittua tiedostoa ei voitu tuoda, sillä se ei ole CarBudget-ohjelman tietokantatiedosto.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImportError.qml" line="48"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="82"/>
         <source>Could not import selected file. Unknown error.</source>
         <translation>Valittua tiedostoa ei voitu tuoda. Tuntematon virhe.</translation>
     </message>
