@@ -72,7 +72,6 @@ DISTFILES += \
     qml/pages/CarBudgetImport.qml \
     qml/pages/CostStatistics.qml \
     qml/pages/TiremountEdit.qml \
-    qml/pages/CarBudgetImportError.qml \
     qml/pages/ConsumptionStatistics.qml \
     qml/pages/TireView.qml \
     qml/pages/StationEntry.qml \
