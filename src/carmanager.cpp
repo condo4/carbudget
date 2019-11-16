@@ -216,7 +216,7 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QFile backupFile(filename);
     fileCopied = backupFile.copy(dataPath + QDir::separator() + carName);
-    qDebug() << QString("Source: ").arg(filename);
+    qDebug() << QString("Source: %1").arg(filename);
     qDebug() << QString("Destination: %2").arg(dataPath + QDir::separator() + carName);
     QString result;
     if(fileCopied) {
