@@ -60,6 +60,8 @@ Page {
 
                     validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{4,16}$/ }
                     EnterKey.enabled: text.length >= 4 && acceptableInput == true
+
+                    onFocusChanged: if(focus) errorLabel.text = ""
                 }
 
                 Button {
@@ -70,9 +72,24 @@ Page {
                         var result = manager.importFromCarBudget(filename, newCarNameField.text+".cbg")
                         if(result === "OK")
                             pageStack.replaceAbove(null, Qt.resolvedUrl("CarView.qml"))
+                        else if(result === "FILE_EXISTS")
+                            errorLabel.text = qsTr("Could not import selected file, because the car name chosen already exists.")
+                        else if(result === "DB_ERROR")
+                            errorLabel.text = qsTr("Could not import selected file, because the file is not a valid CarBudet database file.")
                         else
-                            pageStack.push(Qt.resolvedUrl("CarBudgetImportError.qml"), {errorDescription: _importResult})
+                            errorLabel.text = qsTr("Could not import selected file. Unknown error.")
                     }
+                }
+
+                Label {
+                    id: errorLabel
+                    horizontalAlignment: Text.AlignHCenter
+                    width: column.width
+                    anchors.leftMargin: Theme.paddingLarge * 2
+                    anchors.rightMargin: Theme.paddingLarge * 2
+                    color: Theme.highlightColor
+                    font.pixelSize: Theme.fontSizeMedium
+                    wrapMode: Text.Wrap
                 }
             }
         }
