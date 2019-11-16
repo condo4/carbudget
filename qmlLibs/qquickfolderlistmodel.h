@@ -51,7 +51,6 @@ class QQuickFolderListModelPrivate;
 class QQuickFolderListModel : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
-    Q_ENUMS(SortField)
     Q_INTERFACES(QQmlParserStatus)
 //![class begin]
 
@@ -110,6 +109,7 @@ public:
     void setNameFilters(const QStringList &filters);
 
     enum SortField { Unsorted, Name, Time, Size, Type };
+    Q_ENUM(SortField)
     SortField sortField() const;
     void setSortField(SortField field);
 

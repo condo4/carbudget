@@ -197,7 +197,7 @@ QString QQuickFolderListModelPrivate::resolvePath(const QUrl &path)
     QUrl localUrl = QUrl(localPath);
     QString fullPath = localUrl.path();
     if (localUrl.scheme().length())
-      fullPath = localUrl.scheme() + ":" + fullPath;
+      fullPath = localUrl.scheme() + QLatin1Char(':') + fullPath;
     return QDir::cleanPath(fullPath);
 }
 
@@ -440,9 +440,9 @@ void QQuickFolderListModel::setFolder(const QUrl &folder)
 /*!
    \qmlproperty url FolderListModel::rootFolder
 
-   When the rootFolder is set, then this folder will
-   be threated as the root in the file system, so that
-   you can only travers sub folders from this rootFolder.
+   When this property is set, the given folder will
+   be treated as the root in the file system, so that
+   you can only traverse subfolders within it.
 */
 QUrl QQuickFolderListModel::rootFolder() const
 {
@@ -531,6 +531,7 @@ void QQuickFolderListModel::componentComplete()
     QString localPath = QQmlFile::urlToLocalFileOrQrc(d->currentDir);
     if (localPath.isEmpty() || !QDir(localPath).exists())
         setFolder(QUrl::fromLocalFile(QDir::currentPath()));
+    d->fileInfoThread.start(QThread::LowPriority);
 }
 
 /*!
