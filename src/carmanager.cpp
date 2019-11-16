@@ -201,6 +201,7 @@ QString CarManager::importFromCarBudget(QString filename, QString carName)
                 }
             }
         }
+        tempDB.close();
     }
     else {
         qDebug() << tempDB.lastError();
