@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml-controls/main.qml</file>
+        <file>qml-controls/CarView.qml</file>
+        <file>qml-controls/CarViewForm.ui.qml</file>
+        <file>qml-controls/CarEntry.qml</file>
+        <file>qml-controls/CarEntryForm.ui.qml</file>
+        <file>picture/Dollar.png</file>
+        <file>picture/Pump.png</file>
+        <file>picture/Wheel.png</file>
+        <file>picture/Wrench.png</file>
+        <file>qml-controls/TankView.qml</file>
+        <file>qml-controls/TankViewForm.ui.qml</file>
+        <file>qml-controls/TankListItem.qml</file>
+        <file>qml-controls/TankListItemForm.ui.qml</file>
+        <file>qml-controls/TankEntry.qml</file>
+        <file>qml-controls/TankEntryForm.ui.qml</file>
+        <file>qml-controls/DialogStations.qml</file>
+        <file>qml-controls/DialogStationsForm.ui.qml</file>
+    </qresource>
+</RCC>

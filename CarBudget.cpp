@@ -18,12 +18,17 @@
  * Authors: Fabien Proriol
  */
 
-
+#ifdef SAILFISH
+#include <sailfishapp.h>
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
+#else
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#endif
 
-#include <sailfishapp.h>
 #include <QSettings>
 #include "src/tank.h"
 #include "src/cost.h"
@@ -52,8 +57,14 @@ int main(int argc, char *argv[])
 
     qDebug() << "Starting CarBudget" << APP_VERSION;
 
+#ifdef SAILFISH
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQuickView *view = SailfishApp::createView();
+#else
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication *app = new QGuiApplication(argc, argv);
+    QQmlApplicationEngine engine;
+#endif
 
     QTranslator translator;
     if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), "/usr/share/harbour-carbudget/translations/"))
@@ -63,8 +74,10 @@ int main(int argc, char *argv[])
 
     app->setApplicationVersion(QString(APP_VERSION));
 
+#ifdef SAILFISH
     // To circumvent Jolla Harbour limitation on QML import.
     qmlRegisterType<QQuickFolderListModel>("harbour.carbudget",1,0,"FolderListModel");
+#endif
 
     qmlRegisterType<Tank>(      "harbour.carbudget",1,0,"Tank");
     qmlRegisterType<FuelType>(  "harbour.carbudget",1,0,"FuelType");
@@ -79,14 +92,22 @@ int main(int argc, char *argv[])
 
     CarManager manager;
 
-
+#ifdef SAILFISH
     view->engine()->addImportPath("/usr/share/harbour-carbudget/qmlModules");
     view->rootContext()->setContextProperty("manager", &manager);
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();
+#else
+    engine.rootContext()->setContextProperty("manager", &manager);
+    engine.load(QUrl(QStringLiteral("qrc:/qml-controls/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
+
+#endif
 
     int errorlevel = app->exec();
     qDebug() << "CarBudget exited normally.";
+    delete app;
     return errorlevel;
 }
 

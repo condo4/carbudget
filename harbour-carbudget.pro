@@ -12,7 +12,7 @@ CONFIG += sailfishapp
 
 QT += sql xml
 
-DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
+DEFINES += SAILFISH APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
 HEADERS += \
     src/tank.h \
