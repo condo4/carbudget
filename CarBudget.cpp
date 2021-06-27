@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
 
     view->engine()->addImportPath("/usr/share/harbour-carbudget/qmlModules");
     view->rootContext()->setContextProperty("manager", &manager);
+    view->rootContext()->setContextProperty("downloadPath", QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();
 
