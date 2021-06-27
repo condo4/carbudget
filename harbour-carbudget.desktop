@@ -3,5 +3,12 @@ Type=Application
 X-Nemo-Application-Type=silica-qt5
 Name=CarBudget
 Icon=harbour-carbudget
-Exec=harbour-carbudget
+Exec=/usr/bin/sailjail -p harbour-carbudget.desktop /usr/bin/harbour-carbudget
 
+[X-Sailjail]
+Permissions=Downloads
+OrganizationName=harbour-carbudget
+ApplicationName=harbour-carbudget
+
+[X-HarbourBackup]
+BackupPathList=.local/share/harbour-carbudget/harbour-carbudget/:.config/harbour-carbudget/

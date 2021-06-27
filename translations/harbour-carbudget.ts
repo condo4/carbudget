@@ -38,7 +38,7 @@
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
-        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <source>Creating the backup was successful. The selected car has been exported to the Downloads directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

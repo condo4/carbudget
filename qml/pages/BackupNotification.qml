@@ -41,7 +41,7 @@ Page {
             font.pixelSize: Theme.fontSizeLarge
             text: {
                 if(backupOK == true)
-                    return qsTr("Creating the backup was successful. The selected car has been exported to your home directory.")
+                    return qsTr("Creating the backup was successful. The selected car has been exported to the Downloads directory.")
                 else
                     return qsTr("There was an error during the backup operation.")
             }

@@ -42,7 +42,7 @@ Page {
 
         FolderListModel {
             id: folderModel
-            folder: folderName.length > 0 ? folderName : "file:///home/nemo"
+            folder: folderName.length > 0 ? folderName : "file:///home/defaultuser/Downloads"
             nameFilters: ["*.xml", "*.db", "*.cbg"]
             showDirsFirst: true
             showDotAndDotDot: showFolderUp

@@ -38,8 +38,8 @@
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
-        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
-        <translation>Varmuuskopion luominen onnistui. Valittu auto on kopioitu kotikansioosi.</translation>
+        <source>Creating the backup was successful. The selected car has been exported to the Downloads directory.</source>
+        <translation>Varmuuskopion luominen onnistui. Valittu auto on kopioitu Lataukset-kansioon.</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="46"/>

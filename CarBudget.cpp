@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
     qDebug() << "Starting CarBudget" << APP_VERSION;
 
     QGuiApplication *app = SailfishApp::application(argc, argv);
+    app->setOrganizationName("harbour-carbudget");
+    app->setApplicationName("harbour-carbudget");
     QQuickView *view = SailfishApp::createView();
 
     QTranslator translator;
