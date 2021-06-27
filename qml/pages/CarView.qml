@@ -48,8 +48,9 @@ Page {
         Label {
             id: welcomeTextA
             anchors.top: parent.top
-            width: parent.width
+            width: parent.width - Theme.paddingLarge*2
             height: parent.height / 2
+            x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeHuge
             color: Theme.highlightColor
             text: qsTr("Welcome to CarBudget!")
@@ -62,8 +63,9 @@ Page {
             id: welcomeTextB
             anchors.top: welcomeTextA.bottom
             anchors.bottom: parent.bottom
-            width: parent.width
+            width: parent.width - Theme.paddingLarge*2
             height: parent.height / 2
+            x: Theme.paddingLarge
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
             text: qsTr("Please create a new car or import data from another application using the pulley menu.")
