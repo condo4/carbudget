@@ -19,7 +19,7 @@
  * Provides list view of all cars to import from a fuelpad  backup file
  */
 
-import QtQuick 2.0
+import QtQuick 2.6
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0

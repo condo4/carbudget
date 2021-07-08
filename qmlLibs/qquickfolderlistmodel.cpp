@@ -274,7 +274,7 @@ QString QQuickFolderListModelPrivate::resolvePath(const QUrl &path)
     of QML files in a \l ListView:
 
     \qml
-    import QtQuick 2.0
+    import QtQuick 2.6
     import Qt.labs.folderlistmodel 2.1
 
     ListView {
