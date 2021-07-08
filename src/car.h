@@ -169,13 +169,13 @@ public:
 
     unsigned long int getDistance(QDate Date);
 
-    Q_INVOKABLE double budgetFuel_byType(unsigned int id);
-    Q_INVOKABLE double budgetFuelTotal_byType(unsigned int id);
-    Q_INVOKABLE double budget_consumption_byType(unsigned int id);
-    Q_INVOKABLE double budget_consumption_max_byType(unsigned int id);
-    Q_INVOKABLE double budget_consumption_min_byType(unsigned int id);
-    Q_INVOKABLE double budgetCostTotal_byType(unsigned int id);
-    Q_INVOKABLE double budgetCost_byType(unsigned int id);
+    Q_INVOKABLE double budgetFuel_byType(int id);
+    Q_INVOKABLE double budgetFuelTotal_byType(int id);
+    Q_INVOKABLE double budget_consumption_byType(int id);
+    Q_INVOKABLE double budget_consumption_max_byType(int id);
+    Q_INVOKABLE double budget_consumption_min_byType(int id);
+    Q_INVOKABLE double budgetCostTotal_byType(int id);
+    Q_INVOKABLE double budgetCost_byType(int id);
     Q_INVOKABLE void setChartTypeOilPrice();
     Q_INVOKABLE void setChartTypeConsumption();
     Q_INVOKABLE void setChartTypeCosts();
@@ -196,7 +196,7 @@ public:
     unsigned int getChartEndIndex();
 
 signals:
-    void numTanksChanged(unsigned int numTanks);
+    void numTanksChanged(int numTanks);
     void consumptionChanged(double consumption);
     void consumptionMaxChanged(double consumptionMax);
     void consumptionLastChanged(double consumptionLast);
@@ -239,22 +239,22 @@ public slots:
     void addNewFuelType(QString fuelType);
     void delFuelType(FuelType *fuelType);
     FuelType* findFuelType(QString name);
-    QString getFuelTypeName(unsigned int id);
+    QString getFuelTypeName(int id);
     void addNewStation(QString station);
     void delStation(Station *station);
     Station* findStation(QString name);
-    QString getStationName(unsigned int id);
+    QString getStationName(int id);
     void addNewCostType(QString costType);
     void delCostType(CostType *costType);
     CostType* findCostType(QString name);
-    QString getCostTypeName(unsigned int id);
-    void addNewCost(QDate date, unsigned int distance, unsigned int costType,QString description, double price);
+    QString getCostTypeName(int id);
+    void addNewCost(QDate date, unsigned int distance, int costType, QString description, double price);
     void delCost(Cost *cost);
 
     Tire* addNewTire(QDate buyDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
     Tire* modifyTire(Tire* tire, QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity);
     void delTire(Tire *tire);
-    QString getTireName(unsigned int id);
+    QString getTireName(int id);
 
     void mountTire(QDate mountDate, unsigned int distance, Tire *tire);
     void umountTire(QDate umountDate, unsigned int distance, Tire *tire, bool trashit=false);

@@ -36,11 +36,11 @@ class Cost : public CarEvent
 private:
     QString _description;
     double _cost;
-    unsigned int _costType;
+    int _costType;
 
 public:
-    explicit Cost(Car *parent = 0);
-    explicit Cost(QDate date,unsigned int distance,  unsigned int costType, QString desc, double cost, unsigned int id = 0, Car *parent = 0);
+    explicit Cost(Car *parent = nullptr);
+    explicit Cost(QDate date, unsigned int distance, int costType, QString desc, double cost, unsigned int id = 0, Car *parent = nullptr);
 
 signals:
     void descriptionChanged();
@@ -54,8 +54,8 @@ public slots:
     double cost() const;
     void setCost(double cost);
 
-    unsigned int costType() const;
-    void setCostType(unsigned int costType);
+    int costType() const;
+    void setCostType(int costType);
 
     void save();
     void remove();

@@ -46,7 +46,7 @@ class Tire : public QObject
     Q_PROPERTY(bool      mountable  READ mountable                              NOTIFY mountChanged)
     Q_PROPERTY(unsigned int  distance READ distance                             NOTIFY mountChanged)
 
-    Q_PROPERTY(unsigned int id          READ id          WRITE setId            NOTIFY idChanged )
+    Q_PROPERTY(int id                READ id          WRITE setId            NOTIFY idChanged )
 private:
     Car *_car;
     int _id;
@@ -63,8 +63,8 @@ private:
     unsigned int _quantity;
 
 public:
-    explicit Tire(Car *parent = 0);
-    explicit Tire(QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = 0);
+    explicit Tire(Car *parent = nullptr);
+    explicit Tire(QDate buyDate, QDate trashDate, QString name, QString manufacturer, QString model, double price, unsigned int quantity = 4, int id = -1, Car *parent = nullptr);
 
     QString name() const;
     void setName(QString name);
@@ -94,8 +94,8 @@ public:
     bool mounted() const;
     bool mountable() const;
 
-    unsigned int id() const;
-    void setId(unsigned int id);
+    int id() const;
+    void setId(int id);
 
 signals:
     void nameChanged();

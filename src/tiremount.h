@@ -41,21 +41,21 @@ class TireMount : public QObject
 
 private:
     Car *_car;
-    unsigned int _tire;
+    int _tire;
     CarEvent *_mountEvent;
     CarEvent *_unmountEvent;
     const QDate _notUnmounted;
 
 public:
-    explicit TireMount(Car *parent = 0);
-    explicit TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance,unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance,unsigned int tire, Car* parent);
-    unsigned int tire() const;
+    explicit TireMount(Car *parent = nullptr);
+    explicit TireMount(unsigned int mountid, QDate mountDate, unsigned int mountDistance,unsigned int unmountid, QDate unmountDate, unsigned int unmountDistance, int tire, Car* parent);
+    int tire() const;
     unsigned int mountDistance() const;
     QDateTime mountDate() const;
-    unsigned int mountid() const;
+    int mountid() const;
     unsigned int unmountDistance() const;
     QDateTime unmountDate() const;
-    unsigned int unmountid() const;
+    int unmountid() const;
     void setMountDistance(unsigned int distance);
     void setMountdate(QDateTime date);
     void setUnmountDistance(unsigned int distance);
@@ -63,7 +63,7 @@ public:
     void setUnmountEvent(CarEvent *ev);
 
     QString tireName() const;
-    void setTire(unsigned int tire);
+    void setTire(int tire);
 
 
 signals:

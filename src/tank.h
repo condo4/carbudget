@@ -42,7 +42,6 @@ class Tank : public CarEvent
     Q_PROPERTY(QString      stationName  READ stationName                         NOTIFY stationChanged )
     Q_PROPERTY(QString      note         READ note        WRITE setNote           NOTIFY noteChanged )
     Q_PROPERTY(QDate        date         READ getDate     WRITE setDate           NOTIFY dateChanged )
-    Q_PROPERTY(unsigned int distance     READ getDistance WRITE setDistance       NOTIFY distanceChanged )
 
 
 private:
@@ -51,19 +50,16 @@ private:
     double _quantity;
     double _price;
     bool _full;
-    unsigned int _station;
-    unsigned int _fuelType;
+    int _station;
+    int _fuelType;
     QString _note;
 
 public:
-    explicit Tank(Car *parent = 0);
-    explicit Tank(QDate date, unsigned int distance, double quantity, double price, bool full,unsigned int fuelType,  unsigned int station, unsigned int id, QString note, Car* parent);
+    explicit Tank(Car *parent = nullptr);
+    explicit Tank(QDate date, unsigned int distance, double quantity, double price, bool full, int fuelType,  int station, unsigned int id, QString note, Car* parent);
 
     void setDate(QDate date);
-    QDate getDate();
-
-    void setDistance(unsigned int distance);
-    unsigned int getDistance();
+    QDate getDate() const;
 
     double quantity() const;
     void setQuantity(double quantity);
@@ -79,13 +75,13 @@ public:
     double costsOn100() const;
     unsigned int newDistance() const;
 
-    unsigned int station() const;
+    int station() const;
     QString stationName() const;
-    void setStation(unsigned int station);
+    void setStation(int station);
 
-    unsigned int fuelType() const;
+    int fuelType() const;
     QString fuelTypename() const;
-    void setFuelType(unsigned int fuelType);
+    void setFuelType(int fuelType);
 
     QString note() const;
     void setNote(QString note);

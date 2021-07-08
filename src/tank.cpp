@@ -36,7 +36,7 @@ Tank::Tank(Car *parent) :
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, unsigned int id, QString note, Car *parent):
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, int fuelType, int station, unsigned int id, QString note, Car *parent):
     CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
@@ -54,21 +54,11 @@ void Tank::setDate(QDate date)
     emit dateChanged();
 }
 
-QDate Tank::getDate()
+QDate Tank::getDate() const
 {
     return _date;
 }
 
-void Tank::setDistance(unsigned int distance)
-{
-    this->_distance = distance;
-    emit distanceChanged();
-}
-
-unsigned int Tank::getDistance()
-{
-    return _distance;
-}
 
 double Tank::quantity() const
 {
@@ -135,8 +125,8 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
         return 0.0;
     }
 
-    const Tank *previous = _car->previousTank(_distance);
-    double value;
+    const Tank *previous = _car->previousTank(distance());
+    double value = 0;
     if (type == chartTypeConsumptionOf100)
     {
         value = this->quantity();
@@ -145,7 +135,7 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
     {
         value = this->price();
     }
-    while(previous != NULL)
+    while(previous != nullptr)
     {
         if (!(previous->full()))
         {
@@ -163,26 +153,26 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
         }
         else break;
     }
-    if (previous==NULL) return 0.0;
-    if (_distance ==previous->distance()) return 0.0;
-    return value / ((_distance - previous->distance()) / 100.0);
+    if (previous == nullptr) return 0.0;
+    if (distance() == previous->distance()) return 0.0;
+    return value / ((distance() - previous->distance()) / 100.0);
 }
 
 
 unsigned int Tank::newDistance() const
 {
-    const Tank *previous = _car->previousTank(_distance);
-    if(previous == NULL)
+    const Tank *previous = _car->previousTank(distance());
+    if(previous == nullptr)
         return 0;
-    return _distance - previous->distance();
+    return distance() - previous->distance();
 }
 
-unsigned int Tank::station() const
+int Tank::station() const
 {
     return _station;
 }
 
-void Tank::setStation(unsigned int station)
+void Tank::setStation(int station)
 {
     _station = station;
     emit stationChanged();
@@ -193,12 +183,12 @@ QString Tank::fuelTypename() const
     return _car->getFuelTypeName(_fuelType);
 }
 
-unsigned int Tank::fuelType() const
+int Tank::fuelType() const
 {
     return _fuelType;
 }
 
-void Tank::setFuelType(unsigned int fuelType)
+void Tank::setFuelType(int fuelType)
 {
     _fuelType = fuelType;
     emit fuelTypeChanged();
