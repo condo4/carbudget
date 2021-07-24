@@ -93,6 +93,8 @@ int main(int argc, char *argv[])
 
     int errorlevel = app->exec();
     qDebug() << "CarBudget exited normally.";
+    delete view;
+    delete app;
     return errorlevel;
 }
 
