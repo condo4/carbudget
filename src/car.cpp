@@ -39,27 +39,35 @@ bool sortFuelTypeById(const FuelType *c1, const FuelType *c2) { return c1->id() 
 bool sortStationByQuantity(const Station *c1, const Station *c2) { return c1->quantity() > c2->quantity(); }
 bool sortTireMountByDistance (const TireMount *s1, const TireMount * s2) { return s1->mountDistance() > s2->mountDistance(); }
 
-void Car::_dbInit()
+void Car::_dbLoad()
 {
-    if(this->db.contains("CarManagerDatabase")) {
-        this->db.close();
+    _dbLoading=true;
+    if(db.contains("CarManagerDatabase")) {
+        if(db.isOpen())
+            db.close();
         QSqlDatabase::removeDatabase("CarManagerDatabase");
     }
 
-    this->db = QSqlDatabase::addDatabase("QSQLITE", "CarManagerDatabase");
+    db = QSqlDatabase::addDatabase("QSQLITE", "CarManagerDatabase");
 
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + _name + ".cbg";
-    this->db.setDatabaseName(db_name);
+    db.setDatabaseName(db_name);
 
-    bool databaseOK = this->db.open();
+    bool databaseOK = db.open();
     qDebug() << "Opening database file" << db_name << (databaseOK ? "succeeded" : "failed");
-}
 
-void Car::_dbLoad()
-{
     qDebug() << "Loading database...";
-    _dbLoading=true;
-    QSqlQuery query(this->db);
+    QSqlQuery query(db);
+
+    this->_dbUpgrade();
+
+    qDebug() << "Database version" << this->_dbGetVersion();
+
+    if(this->_dbGetVersion() < DB_VERSION)
+    {
+        qDebug() << "Database is uninitialised or corrupted. Creating database...";
+        this->_manager->createTables(db);
+    }
 
     _tankList.clear();
     _stationList.clear();
@@ -68,6 +76,7 @@ void Car::_dbLoad()
     _costTypeList.clear();
     _tireList.clear();
     _tireMountList.clear();
+
     if(query.exec("SELECT event,date(date),distance,quantity,price,full,station,fueltype,note FROM TankList, Event WHERE TankList.event == Event.id;"))
     {
         while(query.next())
@@ -212,13 +221,28 @@ void Car::_dbLoad()
     {
         qDebug() << "Failed to load tire mounts:" << query.lastError();
     }
+    qDebug() << "Loaded" << _tankList.count() << "fuel refills";
+    qDebug() << "Loaded" << _stationList.count() << "gas stations";
+    qDebug() << "Loaded" << _tireList.count() << "sets of tires";
+    qDebug() << "Loaded" << _costList.count() << "bills";
+    qDebug() << "Loaded" << _fuelTypeList.count() << "fuel types";
+    qDebug() << "Loaded" << _costTypeList.count() << "cost types";
+    qDebug() << "Loaded" << _tireMountList.count() << "tire mounts";
+
+    // Create the "Not set" slots
+    this->_stationList.append(new Station(this));
+    this->_fuelTypeList.append(new FuelType(this));
+    this->_costTypeList.append(new CostType(this));
+
     if (!_tankList.empty()) std::sort(_tankList.begin(),    _tankList.end(),    sortTankByDistance);
     if (!_costList.empty()) std::sort(_costList.begin(),    _costList.end(),    sortCostByDate);
     if (!_stationList.empty()) std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     if (!_fuelTypeList.empty()) std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     if (!_costTypeList.empty()) std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     if (!_tireMountList.empty())  std::sort(_tireMountList.begin(),_tireMountList.end(),sortTireMountByDistance);
+
     _dbLoading=false;
+
     emit numTanksChanged(_tankList.count());
     emit consumptionChanged(this->consumption());
     emit consumptionMaxChanged(this->consumptionMax());
@@ -228,13 +252,6 @@ void Car::_dbLoad()
     emit maxDistanceChanged(this->maxDistance());
     emit minDistanceChanged(this->minDistance());
     emit lastFuelStationChanged(_tankList.isEmpty() ? 0 : _tankList.first()->station());
-    qDebug() << "Loaded" << _tankList.count() << "fuel refills";
-    qDebug() << "Loaded" << _stationList.count() << "gas stations";
-    qDebug() << "Loaded" << _tireList.count() << "sets of tires";
-    qDebug() << "Loaded" << _costList.count() << "bills";
-    qDebug() << "Loaded" << _fuelTypeList.count() << "fuel types";
-    qDebug() << "Loaded" << _costTypeList.count() << "cost types";
-    qDebug() << "Loaded" << _tireMountList.count() << "tire mounts";
 }
 
 int Car::_dbGetVersion()
@@ -324,19 +341,6 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 {
     connect(this,SIGNAL(lastFuelStationChanged(int)), SLOT(setLastFuelStation(int)));
 
-    this->_dbInit();
-    _dbLoading=false;
-    if(this->_dbGetVersion() < 1)
-    {
-        qDebug() << "Database is uninitialised or corrupted. Creating database...";
-        this->_manager->createTables(this->db);
-    }
-
-    if(this->_dbGetVersion() < DB_VERSION)
-        this->_dbUpgrade();
-
-    qDebug() << "Database version" << this->_dbGetVersion();
-
     this->_dbLoad();
 
     make();
@@ -352,13 +356,6 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
     buyingDate();
     sellingPrice();
     lifetime();
-
-    this->_stationList.append(new Station);
-    std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
-    this->_fuelTypeList.append(new FuelType);
-    std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
-    this->_costTypeList.append(new CostType);
-    std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
 
     _beginChartIndex = numTanks() - 2; // -2 is the one with the first valid data
     _endChartIndex = 0;
@@ -634,20 +631,7 @@ const Tank *Car::previousTank(unsigned int distance) const
 void Car::setCar(QString name)
 {
     _name = name;
-    _tankList.clear();
-    _fuelTypeList.clear();
-    _stationList.clear();
-    _tireList.clear();
-    _costList.clear();
-    this->_dbInit();
-
-    if(this->_dbGetVersion() < DB_VERSION)
-        this->_dbUpgrade();
-
     this->_dbLoad();
-
-    this->_stationList.append(new Station);
-    std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
 }
 
 unsigned long int Car::getDistance(QDate date)
