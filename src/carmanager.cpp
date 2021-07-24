@@ -57,10 +57,10 @@ CarManager::CarManager(QObject *parent) :
     refresh();
 
     if(_cars.contains(settings.value("SelectedCar","").toString())) {
-        _car = new Car(settings.value("SelectedCar").toString());
+        _car = new Car(settings.value("SelectedCar").toString(), this);
     }
     else if(_cars.count() == 1) {
-        _car = new Car(QString(_cars.first()));
+        _car = new Car(QString(_cars.first()), this);
     }
     else {
         _car = NULL;
