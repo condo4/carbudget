@@ -83,7 +83,6 @@ void CarManager::selectCar(QString name)
     settings.setValue("SelectedCar",name);
     if(_car != NULL) delete _car;
     _car = new Car(name);
-    emit carChanged();
 }
 
 void CarManager::delCar(QString name)
