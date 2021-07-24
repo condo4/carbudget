@@ -65,8 +65,6 @@ CarManager::CarManager(QObject *parent) :
     else {
         _car = NULL;
     }
-    emit carsChanged();
-    emit carChanged();
 }
 
 QStringList CarManager::cars()
