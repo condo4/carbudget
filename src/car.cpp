@@ -1715,7 +1715,6 @@ unsigned int Car::lifetime()
         {
             qDebug() << "Default lifetime not set in database, set to 0";
             query.exec("INSERT INTO CarBudget (id, value) VALUES ('lifetime','0');");
-            _lifetime = 0;
         }
     }
     return _lifetime;
