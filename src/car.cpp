@@ -339,21 +339,26 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
     this->_dbLoad();
 
-    _defaultFuelType = 0;
+    make();
+    model();
+    year();
+    licensePlate();
+    numTires();
+    defaultFuelType();
+    distanceUnit();
+    consumptionUnit();
+    buyingPrice();
+    currency();
+    buyingDate();
+    sellingPrice();
+    lifetime();
+
     this->_stationList.append(new Station);
     std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     this->_fuelTypeList.append(new FuelType);
     std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     this->_costTypeList.append(new CostType);
     std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
-    make();
-    model();
-    year();
-    licensePlate();
-    numTires();
-    buyingPrice();
-    sellingPrice();
-    lifetime();
 
     _beginChartIndex = numTanks() - 2; // -2 is the one with the first valid data
     _endChartIndex = 0;
