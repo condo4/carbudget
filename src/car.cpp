@@ -219,7 +219,7 @@ void Car::_dbLoad()
     if (!_costTypeList.empty()) std::sort(_costTypeList.begin(), _costTypeList.end(), sortCostTypeById);
     if (!_tireMountList.empty())  std::sort(_tireMountList.begin(),_tireMountList.end(),sortTireMountByDistance);
     _dbLoading=false;
-    numTanksChanged(_tankList.count());
+    emit numTanksChanged(_tankList.count());
     emit consumptionChanged(this->consumption());
     emit consumptionMaxChanged(this->consumptionMax());
     emit consumptionLastChanged(this->consumptionLast());
