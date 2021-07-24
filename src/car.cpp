@@ -997,6 +997,9 @@ void Car::delFuelType(FuelType *fuelType)
             tank->setFuelType(0);
         }
     }
+    if(_defaultFuelType == fuelTypeId) {
+        setDefaultFuelType(0);
+    }
     emit fuelTypesChanged();
     fuelType->deleteLater();
 }
