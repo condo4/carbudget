@@ -241,14 +241,12 @@ int Car::_dbGetVersion()
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM sqlite_master where type='table' and name='CarBudget';"))
+    if(query.exec("SELECT count(*) FROM sqlite_master where type='table' and name='CarBudget';") && query.next())
     {
-        query.next();
         if(query.value(0).toInt() != 0)
         {
-            if(query.exec("SELECT value FROM CarBudget WHERE id='version';"))
+            if(query.exec("SELECT value FROM CarBudget WHERE id='version';") && query.next())
             {
-                query.next();
                 return query.value(0).toString().toInt();
             }
         }
@@ -1372,8 +1370,7 @@ QString Car::make()
     if(_make.length() < 1) {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='make';")) {
-            query.next();
+        if(query.exec("SELECT value FROM CarBudget WHERE id='make';") && query.next()) {
             _make = query.value(0).toString();
             qDebug() << "Found car manufacturer in database:" << _make;
         }
@@ -1392,9 +1389,8 @@ void Car::setMake(QString make)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='make';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='make';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('make','%1');").arg(make));
         else
@@ -1411,8 +1407,7 @@ QString Car::model()
     if(_model.length() < 1) {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='model';")) {
-            query.next();
+        if(query.exec("SELECT value FROM CarBudget WHERE id='model';") && query.next()) {
             _model = query.value(0).toString();
             qDebug() << "Found car model in database:" << _model;
         }
@@ -1431,9 +1426,8 @@ void Car::setModel(QString model)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='model';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='model';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('model','%1');").arg(model));
         else
@@ -1450,8 +1444,7 @@ int Car::year()
     if(_year < 1000 || _year > 9999) {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='year';")) {
-            query.next();
+        if(query.exec("SELECT value FROM CarBudget WHERE id='year';") && query.next()) {
             _year = query.value(0).toInt();
             qDebug() << "Found car manufacture year in database:" << _year;
         }
@@ -1470,9 +1463,8 @@ void Car::setYear(int year)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='year';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='year';") && query.next())
     {
-        query.next();
         if(year < 1000) year = 1000;
         if(year > 9999) year = 9999;
         if(query.value(0).toString().toInt() < 1)
@@ -1491,8 +1483,7 @@ QString Car::licensePlate()
     if(_licensePlate.length() < 1) {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='licensePlate';")) {
-            query.next();
+        if(query.exec("SELECT value FROM CarBudget WHERE id='licensePlate';") && query.next()) {
             _licensePlate = query.value(0).toString();
             qDebug() << "Found car license plate in database:" << _licensePlate;
         }
@@ -1508,9 +1499,8 @@ void Car::setLicensePlate(QString licensePlate)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='licensePlate';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='licensePlate';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('licensePlate','%1');").arg(licensePlate));
         else
@@ -1528,9 +1518,8 @@ QString Car::currency()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='currency';") && query.next())
         {
-            query.next();
             _currency = query.value(0).toString();
             qDebug() << "Find currency in database:" << _currency;
         }
@@ -1549,9 +1538,8 @@ void Car::setCurrency(QString currency)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='currency';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='currency';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('currency','%1');").arg(currency));
         else
@@ -1569,9 +1557,8 @@ QString Car::distanceUnit()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='distanceunity';") && query.next())
         {
-            query.next();
             _distanceUnit = query.value(0).toString();
             qDebug() << "Find distanceUnit in database:" << _distanceUnit;
         }
@@ -1590,9 +1577,8 @@ void Car::setDistanceUnit(QString distanceUnit)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='distanceunity';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='distanceunity';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('distanceunity','%1');").arg(distanceUnit));
         else
@@ -1610,9 +1596,8 @@ unsigned int Car::numTires()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='nbtire';") && query.next())
         {
-            query.next();
             _numTires = query.value(0).toInt();
             qDebug() << "Number of tires:" << _numTires;
         }
@@ -1631,9 +1616,8 @@ void Car::setNbtire(unsigned int numTires)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='nbtire';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='nbtire';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('nbtire','%1');").arg(numTires));
         else
@@ -1651,9 +1635,8 @@ double Car::buyingPrice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingprice';") && query.next())
         {
-            query.next();
             _buyingPrice = query.value(0).toDouble();
             qDebug() << "Car purchase price:" << _buyingPrice;
         }
@@ -1671,9 +1654,8 @@ void Car::setBuyingprice(double price)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingprice';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingprice';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingprice','%1');").arg(price));
         else
@@ -1691,9 +1673,8 @@ double Car::sellingPrice()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='sellingprice';") && query.next())
         {
-            query.next();
             _sellingPrice = query.value(0).toDouble();
             qDebug() << "Find sellingPrice in database:" << _sellingPrice;
         }
@@ -1711,9 +1692,8 @@ void Car::setSellingprice(double price)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='sellingprice';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='sellingprice';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('sellingprice','%1');").arg(price));
         else
@@ -1731,9 +1711,8 @@ unsigned int Car::lifetime()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='lifetime';") && query.next())
         {
-            query.next();
             _lifetime = query.value(0).toInt();
             qDebug() << "Find lifetime in database:" << _lifetime;
         }
@@ -1751,9 +1730,8 @@ void Car::setLifetime(int months)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='lifetime';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='lifetime';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('lifetime','%1');").arg(months));
         else
@@ -1771,9 +1749,8 @@ QDate Car::buyingDate()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='buyingdate';") && query.next())
         {
-            query.next();
             _buyingDate = QDate::fromString(query.value(0).toString());
             qDebug() << "Find buying date in database:" << _buyingDate;
         }
@@ -1790,10 +1767,9 @@ QDate Car::buyingDate()
 void Car::setBuyingdate(QDate date)
 {
     QSqlQuery query(this->db);
-    qDebug() << "setBuyingdate invoked";
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingdate';"))
+
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='buyingdate';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('buyingdate','%1');").arg(date.toString()));
         else
@@ -1832,9 +1808,8 @@ QString Car::consumptionUnit()
     {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';"))
+        if(query.exec("SELECT value FROM CarBudget WHERE id='consumptionunit';") && query.next())
         {
-            query.next();
             _consumptionUnit = query.value(0).toString();
             qDebug() << "Consumption unit in database:" << _consumptionUnit;
         }
@@ -1853,9 +1828,8 @@ void Car::setConsumptionUnit(QString consumptionUnit)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='consumptionunit';"))
+    if(query.exec("SELECT count(*) FROM CarBudget WHERE id='consumptionunit';") && query.next())
     {
-        query.next();
         if(query.value(0).toString().toInt() < 1)
             query.exec(QString("INSERT INFO CarBudget (id, value) VALUES ('consumptionunit','%1');").arg(consumptionUnit));
         else
@@ -1872,8 +1846,7 @@ int Car::getDefaultFuelType()
     if(_defaultFuelType < 0 || _defaultFuelType > 9999) {
         QSqlQuery query(this->db);
 
-        if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';")) {
-            query.next();
+        if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';") && query.next()) {
             _defaultFuelType = query.value(0).toInt();
             qDebug() << "Found default fuel type in database:" << _defaultFuelType;
         }
@@ -1892,18 +1865,20 @@ void Car::setDefaultFuelType(int defaultFuelType)
 {
     QSqlQuery query(this->db);
 
-    if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';"))
-    {
-        if(defaultFuelType < 0 || defaultFuelType > 9999) _defaultFuelType = 0;
-        if(query.next()) {
-            query.exec(QString("UPDATE CarBudget SET value=%1 WHERE id='defaultFuelType';").arg(defaultFuelType));
-        }
-        else {
-            query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType',%1);").arg(defaultFuelType));
-        }
+    if(defaultFuelType < 0 || defaultFuelType > 9999) _defaultFuelType = 0;
 
+    if(query.exec("SELECT value FROM CarBudget WHERE id='defaultFuelType';") && query.next())
+    {
+        query.exec(QString("UPDATE CarBudget SET value=%1 WHERE id='defaultFuelType';").arg(defaultFuelType));
         qDebug() << "Changed default fuel type in database:" << _defaultFuelType << ">>" << defaultFuelType;
     }
+    else
+    {
+        qDebug() << "Car default fuel type not in database, defaulting to 0";
+        query.exec(QString("INSERT INTO CarBudget (id, value) VALUES ('defaultFuelType',%1);").arg(defaultFuelType));
+    }
+
+
     _defaultFuelType = defaultFuelType;
     emit defaultFuelTypeChanged();
 }
