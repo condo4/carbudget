@@ -25,6 +25,7 @@
 
 #include <sailfishapp.h>
 #include <QSettings>
+#include <QLocale>
 #include "src/tank.h"
 #include "src/cost.h"
 #include "src/tire.h"
@@ -57,8 +58,10 @@ int main(int argc, char *argv[])
     app->setApplicationName("harbour-carbudget");
     QQuickView *view = SailfishApp::createView();
 
+    QLocale systemLocale;
+
     QTranslator translator;
-    if(translator.load((QLocale::system().name() != "C")?(QLocale::system().name()):("en_GB"), "/usr/share/harbour-carbudget/translations/"))
+    if(translator.load((systemLocale.name() != "C")?(systemLocale.name()):("en_GB"), "/usr/share/harbour-carbudget/translations/"))
     {
         QGuiApplication::installTranslator(&translator);
     }
@@ -78,13 +81,13 @@ int main(int argc, char *argv[])
     qmlRegisterType<Car>(       "harbour.carbudget",1,0,"Car");
     qmlRegisterType<FileModel>( "harbour.carbudget",1,0,"FileModel");
 
-
     CarManager manager;
-
 
     view->engine()->addImportPath("/usr/share/harbour-carbudget/qmlModules");
     view->rootContext()->setContextProperty("manager", &manager);
     view->rootContext()->setContextProperty("downloadPath", QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
+    view->rootContext()->setContextProperty("systemCurrencySymbol", systemLocale.currencySymbol());
+    view->rootContext()->setContextProperty("systemDistanceUnit", QString(systemLocale.measurementSystem() == 0 ? "km" : "mi"));
     view->setSource(SailfishApp::pathTo("qml/Application.qml"));
     view->showFullScreen();
 
