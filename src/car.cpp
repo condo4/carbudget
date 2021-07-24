@@ -339,6 +339,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
     this->_dbLoad();
 
+    _defaultFuelType = 0;
     this->_stationList.append(new Station);
     std::sort(_stationList.begin(), _stationList.end(), sortStationByQuantity);
     this->_fuelTypeList.append(new FuelType);
@@ -969,18 +970,19 @@ void Car::addNewFuelType(QString name)
 
 void Car::delFuelType(FuelType *fuelType)
 {
-    qDebug() << "Remove Fuel Type" << fuelType->id();
+    int fuelTypeId = fuelType->id();
+    qDebug() << "Remove Fuel Type" << fuelTypeId;
     _fuelTypeList.removeAll(fuelType);
     if (!_fuelTypeList.empty()) std::sort(_fuelTypeList.begin(), _fuelTypeList.end(), sortFuelTypeById);
     QSqlQuery query(db);
-    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fuelType->id());
+    QString sql = QString("UPDATE TankList SET Fueltype = 0 WHERE fueltype=%1;").arg(fuelTypeId);
 
     if(query.exec(sql)) {
-        QString sql2 = QString("DELETE FROM FueltypeList WHERE id=%1;").arg(fuelType->id());
+        QString sql2 = QString("DELETE FROM FueltypeList WHERE id=%1;").arg(fuelTypeId);
         qDebug() << sql2;
         if(query.exec(sql2))
         {
-            qDebug() << "DELETE Fueltype in database with id" << fuelType->id();
+            qDebug() << "DELETE Fueltype in database with id" << fuelTypeId;
             db.commit();
         }
         else {
@@ -991,7 +993,7 @@ void Car::delFuelType(FuelType *fuelType)
         qDebug() << "Error during DELETE Fueltype in database" << query.lastError();
     }
     foreach(Tank *tank, _tankList) {
-        if(tank->fuelType() == fuelType->id()) {
+        if(tank->fuelType() == fuelTypeId) {
             tank->setFuelType(0);
         }
     }
