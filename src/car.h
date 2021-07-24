@@ -273,7 +273,7 @@ public slots:
     int year();
     void setYear(int year);
 
-    int getDefaultFuelType();
+    int defaultFuelType();
     void setDefaultFuelType(int fuelType);
 
     void setLastFuelStation(int station);

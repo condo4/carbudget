@@ -1846,7 +1846,7 @@ void Car::setConsumptionUnit(QString consumptionUnit)
     emit consumptionUnitChanged();
 }
 
-int Car::getDefaultFuelType()
+int Car::defaultFuelType()
 {
     if(_defaultFuelType < 0 || _defaultFuelType > 9999) {
         QSqlQuery query(this->db);
