@@ -337,7 +337,7 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent), _chartType(cha
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _numTires(0),_buyingPrice(0),_sellingPrice(0),_lifetime(0), _chartType(chartTypeConsumptionOf100)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name)
 {
     connect(this,SIGNAL(lastFuelStationChanged(int)), SLOT(setLastFuelStation(int)));
 
@@ -359,6 +359,7 @@ Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), 
 
     _beginChartIndex = numTanks() - 2; // -2 is the one with the first valid data
     _endChartIndex = 0;
+    _chartType=chartTypeConsumptionOf100;
 }
 
 unsigned int Car::numTanks() const
