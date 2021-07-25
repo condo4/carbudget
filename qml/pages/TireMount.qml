@@ -65,7 +65,7 @@ Dialog {
                 placeholderText: label
                 focus: true
                 width: parent.width
-                validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
+                validator: IntValidator { bottom: 0; top: 999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: accept()

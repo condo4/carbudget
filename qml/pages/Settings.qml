@@ -79,7 +79,7 @@ Dialog {
                 focus: true
                 label: qsTr("Car manufacturer")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_\- ]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: acceptableInput
                 EnterKey.onClicked: model.focus = true
@@ -92,7 +92,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Car model")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_\- ]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: acceptableInput
                 EnterKey.onClicked: year.focus = true
@@ -119,7 +119,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("License plate number")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{1,32}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_\- ]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: acceptableInput
                 EnterKey.onClicked: numTires.focus = true
@@ -175,7 +175,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 label: qsTr("Primary Fuel Type")
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^.+$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_\- ]{1,32}$/ }
                 color: errorHighlight ? Theme.highlightColor : Theme.primaryColor
                 EnterKey.enabled: acceptableInput
                 EnterKey.onClicked: {
