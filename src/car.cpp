@@ -1410,7 +1410,6 @@ QString Car::model()
         {
             qDebug() << "Default car model not set in database, defaulting to empty";
             query.exec("INSERT INTO CarBudget (id, value) VALUES ('model','');");
-            _model = "";
         }
     }
 
@@ -1481,10 +1480,6 @@ QString Car::licensePlate()
         if(query.exec("SELECT value FROM CarBudget WHERE id='licensePlate';") && query.next()) {
             _licensePlate = query.value(0).toString();
             qDebug() << "Found car license plate in database:" << _licensePlate;
-        }
-        if(_licensePlate.length() < 1)
-        {
-            _licensePlate = "";
         }
     }
     return _licensePlate;
@@ -1639,7 +1634,6 @@ double Car::buyingPrice()
         {
             qDebug() << "Car purchase price not set, assuming 0";
             query.exec("INSERT INTO CarBudget (id, value) VALUES ('buyingprice','0');");
-            _buyingPrice = 0;
         }
     }
     return _buyingPrice;
@@ -1677,7 +1671,6 @@ double Car::sellingPrice()
         {
             qDebug() << "Selling price not set in database, set to 0";
             query.exec("INSERT INTO CarBudget (id, value) VALUES ('sellingprice','0');");
-            _sellingPrice = 0;
         }
     }
     return _sellingPrice;
