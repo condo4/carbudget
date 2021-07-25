@@ -34,17 +34,17 @@
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="35"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sauvegarde</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
-        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
-        <translation type="unfinished"></translation>
+        <source>Creating the backup was successful. The selected car has been exported to the Downloads directory.</source>
+        <translation type="unfinished">La création de la sauvegarde a réussi. La voiture sélectionnée a été exportée vers le répertoire Téléchargements.</translation>
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="46"/>
         <source>There was an error during the backup operation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Une erreur s&apos;est produite lors de l&apos;opération de sauvegarde.</translation>
     </message>
 </context>
 <context>
@@ -171,62 +171,29 @@
 <context>
     <name>CarBudgetImport</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="51"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="49"/>
         <source>Enter car name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nom du Véhicule</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="70"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="65"/>
         <source>Import</source>
         <translation>Importer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="78"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="73"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossible d&apos;importer le fichier sélectionné, car une voiture avec le nom choisi existe déjà.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="80"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="75"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossible d&apos;importer le fichier sélectionné, car le fichier n&apos;est pas un fichier de base de données CarBudet valide.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="82"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="77"/>
         <source>Could not import selected file. Unknown error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CarCreate</name>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="42"/>
-        <source>Create new car</source>
-        <translation>Nouveau véhicule</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="49"/>
-        <source>Short car name</source>
-        <translation>Nom du Véhicule</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="61"/>
-        <source>Car manufacturer</source>
-        <translation>Constructeur</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="72"/>
-        <source>Car model</source>
-        <translation>Modèle</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="83"/>
-        <source>Car manufacture year</source>
-        <translation>Année de fabrication</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="95"/>
-        <source>License plate number</source>
-        <translation type="unfinished">Plaque d&apos;immatriculation</translation>
+        <translation type="unfinished">Impossible d&apos;importer le fichier sélectionné. Erreur inconnue.</translation>
     </message>
 </context>
 <context>
@@ -301,38 +268,38 @@
     <name>CarView</name>
     <message>
         <location filename="../qml/pages/CarView.qml" line="40"/>
-        <location filename="../qml/pages/CarView.qml" line="85"/>
+        <location filename="../qml/pages/CarView.qml" line="87"/>
         <source>Import Car</source>
         <translation>Importer une voiture</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="44"/>
-        <location filename="../qml/pages/CarView.qml" line="89"/>
+        <location filename="../qml/pages/CarView.qml" line="91"/>
         <source>Create new car</source>
         <translation>Nouveau véhicule</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="55"/>
+        <location filename="../qml/pages/CarView.qml" line="56"/>
         <source>Welcome to CarBudget!</source>
         <translation>Bienvenue sur CarBudget !</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="69"/>
+        <location filename="../qml/pages/CarView.qml" line="71"/>
         <source>Please create a new car or import data from another application using the pulley menu.</source>
         <translation>Créez un nouveau véhicule ou importez des données grace au menu déroulant.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="97"/>
+        <location filename="../qml/pages/CarView.qml" line="99"/>
         <source>Car List</source>
         <translation>Liste des véhicules</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="113"/>
+        <location filename="../qml/pages/CarView.qml" line="115"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sauvegarde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="120"/>
+        <location filename="../qml/pages/CarView.qml" line="122"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -725,79 +692,85 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="46"/>
+        <location filename="../qml/pages/Settings.qml" line="50"/>
+        <source>Create new car</source>
+        <translation>Nouveau véhicule</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="51"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="54"/>
+        <location filename="../qml/pages/Settings.qml" line="57"/>
+        <source>Short car name</source>
+        <translation>Nom du Véhicule</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="80"/>
         <source>Car manufacturer</source>
         <translation>Fabricant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="65"/>
+        <location filename="../qml/pages/Settings.qml" line="93"/>
         <source>Car model</source>
         <translation>Modèle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="77"/>
+        <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>Car manufacture year</source>
-        <translation type="unfinished">Année de fabrication</translation>
+        <translation>Année de fabrication</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="90"/>
+        <location filename="../qml/pages/Settings.qml" line="120"/>
         <source>License plate number</source>
         <translation>Plaque d&apos;immatriculation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="102"/>
-        <source>Currency</source>
-        <translation>Monnaie</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="114"/>
-        <source>Distance Unit</source>
-        <translation>Unité de distance</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="134"/>
-        <source>Consumption Unit</source>
-        <translation>Unité de consommation</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Primary Fuel Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Number of wheels</source>
         <translation>Nombre de roues</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="178"/>
-        <source>2, 4, 6 or 8</source>
-        <translation>2, 4, 6 ou 8</translation>
+        <location filename="../qml/pages/Settings.qml" line="152"/>
+        <location filename="../qml/pages/Settings.qml" line="176"/>
+        <source>Primary Fuel Type</source>
+        <translation type="unfinished">Type de carburant primaire</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="201"/>
-        <source>Buying date</source>
-        <translation>Date d&apos;achat</translation>
+        <location filename="../qml/pages/Settings.qml" line="193"/>
+        <source>Distance Unit</source>
+        <translation>Unité de distance</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="230"/>
+        <source>Consumption Unit</source>
+        <translation>Unité de consommation</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="265"/>
         <source>Buying Price</source>
         <translation>Prix d&apos;achat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="222"/>
-        <source>Selling Price (est.)</source>
-        <translation>Prix de vente estimé</translation>
+        <location filename="../qml/pages/Settings.qml" line="278"/>
+        <source>Currency</source>
+        <translation>Monnaie</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="233"/>
+        <location filename="../qml/pages/Settings.qml" line="315"/>
+        <source>Buying date</source>
+        <translation>Date d&apos;achat</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="325"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Durée de vie estimé (en mois)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="339"/>
+        <source>Selling Price (est.)</source>
+        <translation>Prix de vente estimé</translation>
     </message>
 </context>
 <context>
@@ -939,7 +912,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Note</translation>
     </message>
 </context>
 <context>

@@ -171,62 +171,29 @@
 <context>
     <name>CarBudgetImport</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="51"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="49"/>
         <source>Enter car name</source>
         <translation>Syötä auton nimi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="70"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="65"/>
         <source>Import</source>
         <translation>Tuo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="78"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="73"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
         <translation>Valittua tiedostoa ei voitu tuoda, sillä valittu auton nimi on jo käytössä.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="80"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="75"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
         <translation>Valittua tiedostoa ei voitu tuoda, sillä se ei ole CarBudget-ohjelman tietokantatiedosto.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="82"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="77"/>
         <source>Could not import selected file. Unknown error.</source>
         <translation>Valittua tiedostoa ei voitu tuoda. Tuntematon virhe.</translation>
-    </message>
-</context>
-<context>
-    <name>CarCreate</name>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="42"/>
-        <source>Create new car</source>
-        <translation>Lisää uusi auto</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="49"/>
-        <source>Short car name</source>
-        <translation>Auton lyhyt nimi</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="61"/>
-        <source>Car manufacturer</source>
-        <translation>Auton merkki</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="72"/>
-        <source>Car model</source>
-        <translation>Auton malli</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="83"/>
-        <source>Car manufacture year</source>
-        <translation>Auton vuosimalli</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="95"/>
-        <source>License plate number</source>
-        <translation>Rekisterinumero</translation>
     </message>
 </context>
 <context>
@@ -301,38 +268,38 @@
     <name>CarView</name>
     <message>
         <location filename="../qml/pages/CarView.qml" line="40"/>
-        <location filename="../qml/pages/CarView.qml" line="85"/>
+        <location filename="../qml/pages/CarView.qml" line="87"/>
         <source>Import Car</source>
         <translation>Tuo auto</translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="44"/>
-        <location filename="../qml/pages/CarView.qml" line="89"/>
+        <location filename="../qml/pages/CarView.qml" line="91"/>
         <source>Create new car</source>
         <translation>Lisää uusi auto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="55"/>
+        <location filename="../qml/pages/CarView.qml" line="56"/>
         <source>Welcome to CarBudget!</source>
         <translation>Tervetuloa CarBudgetiin!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="69"/>
+        <location filename="../qml/pages/CarView.qml" line="71"/>
         <source>Please create a new car or import data from another application using the pulley menu.</source>
         <translation>Aloita käyttö luomalla uusi auto tai tuomalla tiedot toisesta ohjelmasta vetovalikon avulla.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="97"/>
+        <location filename="../qml/pages/CarView.qml" line="99"/>
         <source>Car List</source>
         <translation>Autoluettelo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="113"/>
+        <location filename="../qml/pages/CarView.qml" line="115"/>
         <source>Backup</source>
         <translation>Varmuuskopioi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="120"/>
+        <location filename="../qml/pages/CarView.qml" line="122"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
@@ -725,79 +692,85 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="46"/>
+        <location filename="../qml/pages/Settings.qml" line="50"/>
+        <source>Create new car</source>
+        <translation>Lisää uusi auto</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="51"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="54"/>
+        <location filename="../qml/pages/Settings.qml" line="57"/>
+        <source>Short car name</source>
+        <translation>Auton lyhyt nimi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="80"/>
         <source>Car manufacturer</source>
         <translation>Auton merkki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="65"/>
+        <location filename="../qml/pages/Settings.qml" line="93"/>
         <source>Car model</source>
         <translation>Auton malli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="77"/>
+        <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>Car manufacture year</source>
         <translation>Auton vuosimalli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="90"/>
+        <location filename="../qml/pages/Settings.qml" line="120"/>
         <source>License plate number</source>
         <translation>Rekisterinumero</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="102"/>
-        <source>Currency</source>
-        <translation>Valuutta</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="114"/>
-        <source>Distance Unit</source>
-        <translation>Matkayksikkö</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="134"/>
-        <source>Consumption Unit</source>
-        <translation>Kulutusyksikkö</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Primary Fuel Type</source>
-        <translation>Ensisijainen polttoaine</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Number of wheels</source>
         <translation>Renkaiden lukumäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="178"/>
-        <source>2, 4, 6 or 8</source>
-        <translation>2, 4, 6 tai 8</translation>
+        <location filename="../qml/pages/Settings.qml" line="152"/>
+        <location filename="../qml/pages/Settings.qml" line="176"/>
+        <source>Primary Fuel Type</source>
+        <translation>Ensisijainen polttoaine</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="201"/>
-        <source>Buying date</source>
-        <translation>Ostopäivämäärä</translation>
+        <location filename="../qml/pages/Settings.qml" line="193"/>
+        <source>Distance Unit</source>
+        <translation>Matkayksikkö</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="230"/>
+        <source>Consumption Unit</source>
+        <translation>Kulutusyksikkö</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="265"/>
         <source>Buying Price</source>
         <translation>Ostohinta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="222"/>
-        <source>Selling Price (est.)</source>
-        <translation>Myyntihinta (arvio)</translation>
+        <location filename="../qml/pages/Settings.qml" line="278"/>
+        <source>Currency</source>
+        <translation>Valuutta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="233"/>
+        <location filename="../qml/pages/Settings.qml" line="315"/>
+        <source>Buying date</source>
+        <translation>Ostopäivämäärä</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="325"/>
         <source>Lifetime (in months, est.)</source>
         <translation>Käyttöikä (kuukautta)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="339"/>
+        <source>Selling Price (est.)</source>
+        <translation>Myyntihinta (arvio)</translation>
     </message>
 </context>
 <context>

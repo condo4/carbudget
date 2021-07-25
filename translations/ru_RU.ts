@@ -38,7 +38,7 @@
     </message>
     <message>
         <location filename="../qml/pages/BackupNotification.qml" line="44"/>
-        <source>Creating the backup was successful. The selected car has been exported to your home directory.</source>
+        <source>Creating the backup was successful. The selected car has been exported to the Downloads directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -171,61 +171,28 @@
 <context>
     <name>CarBudgetImport</name>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="51"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="49"/>
         <source>Enter car name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="70"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="65"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="78"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="73"/>
         <source>Could not import selected file, because the car name chosen already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="80"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="75"/>
         <source>Could not import selected file, because the file is not a valid CarBudet database file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarBudgetImport.qml" line="82"/>
+        <location filename="../qml/pages/CarBudgetImport.qml" line="77"/>
         <source>Could not import selected file. Unknown error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CarCreate</name>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="42"/>
-        <source>Create new car</source>
-        <translation>Добавить машину</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="49"/>
-        <source>Short car name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="61"/>
-        <source>Car manufacturer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="72"/>
-        <source>Car model</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="83"/>
-        <source>Car manufacture year</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/CarCreate.qml" line="95"/>
-        <source>License plate number</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -301,38 +268,38 @@
     <name>CarView</name>
     <message>
         <location filename="../qml/pages/CarView.qml" line="40"/>
-        <location filename="../qml/pages/CarView.qml" line="85"/>
+        <location filename="../qml/pages/CarView.qml" line="87"/>
         <source>Import Car</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/CarView.qml" line="44"/>
-        <location filename="../qml/pages/CarView.qml" line="89"/>
+        <location filename="../qml/pages/CarView.qml" line="91"/>
         <source>Create new car</source>
         <translation type="unfinished">Добавить машину</translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="55"/>
+        <location filename="../qml/pages/CarView.qml" line="56"/>
         <source>Welcome to CarBudget!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="69"/>
+        <location filename="../qml/pages/CarView.qml" line="71"/>
         <source>Please create a new car or import data from another application using the pulley menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="97"/>
+        <location filename="../qml/pages/CarView.qml" line="99"/>
         <source>Car List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="113"/>
+        <location filename="../qml/pages/CarView.qml" line="115"/>
         <source>Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/CarView.qml" line="120"/>
+        <location filename="../qml/pages/CarView.qml" line="122"/>
         <source>Remove</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -725,78 +692,84 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="46"/>
+        <location filename="../qml/pages/Settings.qml" line="50"/>
+        <source>Create new car</source>
+        <translation>Добавить машину</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="51"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="54"/>
+        <location filename="../qml/pages/Settings.qml" line="57"/>
+        <source>Short car name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="80"/>
         <source>Car manufacturer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="65"/>
+        <location filename="../qml/pages/Settings.qml" line="93"/>
         <source>Car model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="77"/>
+        <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>Car manufacture year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="90"/>
+        <location filename="../qml/pages/Settings.qml" line="120"/>
         <source>License plate number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="102"/>
-        <source>Currency</source>
-        <translation>Валюта</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="114"/>
-        <source>Distance Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="134"/>
-        <source>Consumption Unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="155"/>
-        <source>Primary Fuel Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/Settings.qml" line="177"/>
+        <location filename="../qml/pages/Settings.qml" line="133"/>
         <source>Number of wheels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="178"/>
-        <source>2, 4, 6 or 8</source>
+        <location filename="../qml/pages/Settings.qml" line="152"/>
+        <location filename="../qml/pages/Settings.qml" line="176"/>
+        <source>Primary Fuel Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="201"/>
-        <source>Buying date</source>
+        <location filename="../qml/pages/Settings.qml" line="193"/>
+        <source>Distance Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="211"/>
+        <location filename="../qml/pages/Settings.qml" line="230"/>
+        <source>Consumption Unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="265"/>
         <source>Buying Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="222"/>
-        <source>Selling Price (est.)</source>
+        <location filename="../qml/pages/Settings.qml" line="278"/>
+        <source>Currency</source>
+        <translation>Валюта</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="315"/>
+        <source>Buying date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Settings.qml" line="233"/>
+        <location filename="../qml/pages/Settings.qml" line="325"/>
         <source>Lifetime (in months, est.)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/Settings.qml" line="339"/>
+        <source>Selling Price (est.)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
