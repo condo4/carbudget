@@ -337,7 +337,7 @@ Car::Car(CarManager *parent) : QObject(parent), _manager(parent), _chartType(cha
 
 }
 
-Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name)
+Car::Car(QString name, CarManager *parent) : QObject(parent), _manager(parent), _name(name), _year(0), _numTires(0), _buyingPrice(0), _sellingPrice(0), _lifetime(0)
 {
     connect(this,SIGNAL(lastFuelStationChanged(int)), SLOT(setLastFuelStation(int)));
 
