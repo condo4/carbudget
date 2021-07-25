@@ -82,7 +82,6 @@ DISTFILES += \
     qml/pages/StationEntry.qml \
     qml/pages/SelectTankDate.qml \
     qml/pages/Statistics.qml \
-    qml/pages/CarCreate.qml \
     qml/pages/DirectoryPage.qml \
     qml/pages/FueltypeEntry.qml \
     qml/Application.qml \

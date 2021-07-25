@@ -42,7 +42,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"), { newCarMode: true })
             }
         }
         Label {
@@ -89,7 +89,7 @@ Page {
             }
             MenuItem {
                 text: qsTr("Create new car")
-                onClicked: pageStack.push(Qt.resolvedUrl("CarCreate.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"), { newCarMode: true })
             }
         }
 
