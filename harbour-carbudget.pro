@@ -14,6 +14,11 @@ QT += sql xml
 
 DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
+CONFIG(release, debug|release) {
+    DEFINES += QT_NO_DEBUG
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
 HEADERS += \
     src/tank.h \
     src/car.h \

@@ -261,7 +261,9 @@ public slots:
 
     int tireMounted() const;
 
+#ifndef QT_NO_DEBUG
     void simulation();
+#endif
 
     QString make();
     void setMake(QString make);

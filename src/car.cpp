@@ -1875,6 +1875,7 @@ void Car::setLastFuelStation(int station) {
     _lastFuelStation = station;
 }
 
+#ifndef QT_NO_DEBUG
 void Car::simulation()
 {
     Tire *winter1, *winter2, *summer1;
@@ -2002,4 +2003,4 @@ void Car::simulation()
     this->mountTire(QDate(2012,10,10), km, winter1);
     this->mountTire(QDate(2012,10,10), km, winter2);
 }
-
+#endif
