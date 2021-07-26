@@ -536,13 +536,13 @@
         <location filename="../src/filemodel.cpp" line="295"/>
         <location filename="../src/filemodel.cpp" line="329"/>
         <source>Folder does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappen finns inte</translation>
     </message>
     <message>
         <location filename="../src/filemodel.cpp" line="299"/>
         <location filename="../src/filemodel.cpp" line="335"/>
         <source>No permission to read the folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Läsbehörighet saknas för mappen</translation>
     </message>
 </context>
 <context>
@@ -655,22 +655,22 @@
     <message>
         <location filename="../src/globals.cpp" line="48"/>
         <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 byte</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="51"/>
         <source>%1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kB</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="54"/>
         <source>%1 MB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 MB</translation>
     </message>
     <message>
         <location filename="../src/globals.cpp" line="56"/>
         <source>%1 GB</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 GB</translation>
     </message>
 </context>
 <context>
