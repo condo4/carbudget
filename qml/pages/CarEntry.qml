@@ -58,7 +58,7 @@ Page {
 
             MenuItem {
                 text: qsTr("Settings")
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"), { newCarMode: false })
             }
 
             MenuItem {

@@ -86,7 +86,7 @@ Dialog {
                 label: manager.car.distanceUnit
                 placeholderText: qsTr("Odometer")
 
-                validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
+                validator: IntValidator { bottom: 0; top: 99999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -100,7 +100,7 @@ Dialog {
                 label: qsTr("Quantity")
                 placeholderText: label
 
-                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
+                validator: DoubleValidator { bottom: 0; top: 99999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -113,7 +113,7 @@ Dialog {
                 label: qsTr("Total Price")
                 placeholderText: label
                 anchors { left: parent.left; right: parent.right }
-                validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
+                validator: DoubleValidator { bottom: 0; top: 99999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: cbfuelType.focus = true
@@ -124,7 +124,7 @@ Dialog {
                 id: unitpriceinput
                 label: qsTr("Unit Price")
                 anchors { left: parent.left; right: parent.right }
-                validator: RegExpValidator { regExp: /^[0-9\.,]{1,6}$/ }
+                validator: DoubleValidator { bottom: 0; top: 99999999 }
                 readOnly: true
                 text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
             }

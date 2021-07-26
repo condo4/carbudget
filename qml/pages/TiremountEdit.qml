@@ -68,7 +68,7 @@ Dialog {
                 label: manager.car.distanceUnit
                 placeholderText: label
 
-                validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
+                validator: IntValidator { bottom: 0; top: 99999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
 
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
@@ -100,7 +100,7 @@ Dialog {
                 focus: true
                 label: manager.car.distanceUnit
                 placeholderText: label
-                validator: RegExpValidator { regExp: /^[0-9]{1,7}$/ }
+                validator: IntValidator { bottom: 0; top: 99999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"

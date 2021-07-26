@@ -14,6 +14,11 @@ QT += sql xml
 
 DEFINES += APP_VERSION=\"\\\"$${VERSION}\\\"\"
 
+CONFIG(release, debug|release) {
+    DEFINES += QT_NO_DEBUG
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
 HEADERS += \
     src/tank.h \
     src/car.h \
@@ -77,7 +82,6 @@ DISTFILES += \
     qml/pages/StationEntry.qml \
     qml/pages/SelectTankDate.qml \
     qml/pages/Statistics.qml \
-    qml/pages/CarCreate.qml \
     qml/pages/DirectoryPage.qml \
     qml/pages/FueltypeEntry.qml \
     qml/Application.qml \

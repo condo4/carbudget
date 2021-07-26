@@ -127,7 +127,7 @@ Dialog {
                 label: qsTr("Price")
                 placeholderText: label
 
-                validator: RegExpValidator { regExp: /^[0-9\.,]{1,7}$/ }
+                validator: DoubleValidator { bottom: 0; top: 999999 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = true
@@ -140,7 +140,7 @@ Dialog {
                 label: qsTr("Quantity")
                 placeholderText: label
 
-                validator: RegExpValidator { regExp: /^[2,4,6,8]$/ }
+                validator: IntValidator { bottom: 1; top: 99 }
                 inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoPrediction
                 EnterKey.enabled: text.length > 0 && acceptableInput == true
                 EnterKey.onClicked: quantityinput.focus = false

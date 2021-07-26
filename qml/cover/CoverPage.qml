@@ -121,7 +121,7 @@ CoverBackground {
             iconSource: "image://theme/icon-cover-new"
             onTriggered: {
                 app.activate()
-                pageStack.push(Qt.resolvedUrl("../pages/CarCreate.qml"))
+                pageStack.push(Qt.resolvedUrl("../pages/Settings.qml"), { newCarMode: true })
             }
         }
     }

@@ -56,7 +56,7 @@ Page {
                 label: newName
                 placeholderText: label
                 text: label
-                validator: RegExpValidator { regExp: /^[0-9A-Za-z_-]{4,16}$/ }
+                validator: RegExpValidator { regExp: /^[0-9A-Za-z_\- ]{1,32}$/ }
                 EnterKey.enabled: text.length >= 4 && acceptableInput == true
                 onFocusChanged: if(focus) errorLabel.text = ""
             }

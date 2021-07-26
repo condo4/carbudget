@@ -122,7 +122,6 @@ private:
 
     bool _dbLoading;
 
-    void _dbInit();
     void _dbLoad();
     int _dbGetVersion();
     double _amortisation();
@@ -262,7 +261,9 @@ public slots:
 
     int tireMounted() const;
 
+#ifndef QT_NO_DEBUG
     void simulation();
+#endif
 
     QString make();
     void setMake(QString make);
@@ -273,7 +274,7 @@ public slots:
     int year();
     void setYear(int year);
 
-    int getDefaultFuelType();
+    int defaultFuelType();
     void setDefaultFuelType(int fuelType);
 
     void setLastFuelStation(int station);

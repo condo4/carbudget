@@ -57,16 +57,14 @@ CarManager::CarManager(QObject *parent) :
     refresh();
 
     if(_cars.contains(settings.value("SelectedCar","").toString())) {
-        _car = new Car(settings.value("SelectedCar").toString());
+        _car = new Car(settings.value("SelectedCar").toString(), this);
     }
     else if(_cars.count() == 1) {
-        _car = new Car(QString(_cars.first()));
+        _car = new Car(QString(_cars.first()), this);
     }
     else {
         _car = NULL;
     }
-    emit carsChanged();
-    emit carChanged();
 }
 
 QStringList CarManager::cars()
@@ -85,7 +83,6 @@ void CarManager::selectCar(QString name)
     settings.setValue("SelectedCar",name);
     if(_car != NULL) delete _car;
     _car = new Car(name);
-    emit carChanged();
 }
 
 void CarManager::delCar(QString name)
@@ -121,6 +118,8 @@ bool CarManager::backupCar(QString name)
 
 void CarManager::createCar(QString name)
 {
+    // This needs to be done in a separate scope...
+    {
     QString db_name = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator() + name + ".cbg";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "createCar");
     db.setDatabaseName(db_name);
@@ -132,6 +131,9 @@ void CarManager::createCar(QString name)
     qDebug() << "DB:" << db_name;
     createTables(db);
     db.close();
+    }
+
+    // ...so removeDatabase is happy.
     QSqlDatabase::removeDatabase("createCar");
     refresh();
 }
