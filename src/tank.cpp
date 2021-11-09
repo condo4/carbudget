@@ -36,11 +36,12 @@ Tank::Tank(Car *parent) :
     connect(this,SIGNAL(distanceChanged()), SIGNAL(consumptionChanged()));
 }
 
-Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, int fuelType, int station, unsigned int id, QString note, Car *parent):
+Tank::Tank(QDate date, unsigned int distance, double quantity, double price, bool full, bool missed, int fuelType, int station, unsigned int id, QString note, Car *parent):
     CarEvent(date, distance, id, parent),
     _quantity(quantity),
     _price(price),
     _full(full),
+    _missed(missed),
     _station(station),
     _fuelType(fuelType),
     _note(note)
@@ -101,6 +102,17 @@ void Tank::setFull(bool full)
     emit fullChanged(full);
 }
 
+bool Tank::missed() const
+{
+    return _missed;
+}
+
+void Tank::setMissed(bool missed)
+{
+    _missed = missed;
+    emit missedChanged(missed);
+}
+
 QString Tank::stationName() const
 {
     return _car->getStationName(_station);
@@ -119,41 +131,38 @@ double Tank::costsOn100() const
 double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
 {
     if (!full()) return 0.0;
+    if (missed()) return 0.0;
 
     if (type != chartTypeConsumptionOf100 && type != chartTypeCostsOf100)
     {
         return 0.0;
     }
 
+    const auto getValue = [&type](const Tank* tank) {
+        if (type == chartTypeConsumptionOf100)
+        {
+            return tank->quantity();
+        }
+        else if (type == chartTypeCostsOf100)
+        {
+            return tank->price();
+        }
+        return 0.0;
+    };
+
     const Tank *previous = _car->previousTank(distance());
-    double value = 0;
-    if (type == chartTypeConsumptionOf100)
-    {
-        value = this->quantity();
-    }
-    else if (type == chartTypeCostsOf100)
-    {
-        value = this->price();
-    }
+    double value = getValue(this);
     while(previous != nullptr)
     {
-        if (!(previous->full()))
+        if (!(previous->missed()) && !(previous->full()))
         {
-            if (type == chartTypeConsumptionOf100)
-            {
-                // qDebug() << "prevous distance is " << previous->quantity();
-                value += previous->quantity();
-            }
-            else if (type == chartTypeCostsOf100)
-            {
-                // qDebug() << "prevous price is " << previous->price();
-                value += previous->price();
-            }
+            value += getValue(previous);
             previous = _car->previousTank(previous->distance());
         }
         else break;
     }
     if (previous == nullptr) return 0.0;
+    if (previous->missed() && !previous->full()) return 0.0;
     if (distance() == previous->distance()) return 0.0;
     return value / ((distance() - previous->distance()) / 100.0);
 }
@@ -213,7 +222,7 @@ void Tank::save()
         if(_eventId)
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,station,fueltype,note) VALUES(%1,%2,%3,%4,%5,%6,'%7')").arg(_eventId).arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_fuelType).arg(_note);
+            QString sql = QString("INSERT INTO TankList (event,quantity,price,full,missed,station,fueltype,note) VALUES(%1,%2,%3,%4,%5,%6,%7,'%8')").arg(_eventId).arg(_quantity).arg(_price).arg(_full).arg(_missed).arg(_station).arg(_fuelType).arg(_note);
             if(query.exec(sql))
             {
                 qDebug() << "Create Tank in database with id " << _eventId;
@@ -233,7 +242,7 @@ void Tank::save()
         if(saveEvent())
         {
             QSqlQuery query(_car->db);
-            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, station=%4, fueltype=%5, note='%6' WHERE event=%7;").arg(_quantity).arg(_price).arg(_full).arg(_station).arg(_fuelType).arg(_note).arg(_eventId);
+            QString sql = QString("UPDATE TankList SET quantity=%1, price=%2, full=%3, missed=%4, station=%5, fueltype=%6, note='%7' WHERE event=%8;").arg(_quantity).arg(_price).arg(_full).arg(_missed).arg(_station).arg(_fuelType).arg(_note).arg(_eventId);
             if(query.exec(sql))
             {
                 qDebug() << "Update Tank in database with id " << _eventId;

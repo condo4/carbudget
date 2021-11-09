@@ -179,6 +179,14 @@ Dialog {
                 id: fullinput
                 text: qsTr("Full tank")
                 checked: true
+                onCheckedChanged: missedinput.focus = true
+            }
+
+            TextSwitch {
+                anchors { left: parent.left; right: parent.right }
+                id: missedinput
+                text: qsTr("Missed tank")
+                checked: false
                 onCheckedChanged: noteinput.focus = true
             }
 
@@ -204,6 +212,7 @@ Dialog {
             quantityinput.text = tank.quantity.toLocaleString(Qt.locale(),'f',2)
             priceinput.text = tank.price.toLocaleString(Qt.locale(),'f',2)
             fullinput.checked = tank.full
+            missedinput.checked = tank.missed
             fuelType = tank.fuelType
             station = tank.station
             noteinput.text = tank.note
@@ -251,14 +260,15 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
+            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, missedinput.checked, fuelType, station, noteinput.text)
         }
         else
         {
             tank.date = tank_date
             tank.distance = kminput.text * distanceunitfactor
             tank.full = fullinput.checked
-            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, fuelType, station, noteinput.text)
+            tank.missed = missedinput.checked
+            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, missedinput.checked, fuelType, station, noteinput.text)
         }
     }
 }

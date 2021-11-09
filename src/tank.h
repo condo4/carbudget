@@ -33,6 +33,7 @@ class Tank : public CarEvent
     Q_PROPERTY(double       quantity     READ quantity    WRITE setQuantity       NOTIFY quantityChanged )
     Q_PROPERTY(double       price        READ price       WRITE setPrice          NOTIFY priceChanged )
     Q_PROPERTY(bool         full         READ full        WRITE setFull           NOTIFY fullChanged )
+    Q_PROPERTY(bool         missed       READ missed      WRITE setMissed         NOTIFY missedChanged )
     Q_PROPERTY(unsigned int station      READ station     WRITE setStation        NOTIFY stationChanged )
     Q_PROPERTY(double       consumption  READ consumption                         NOTIFY consumptionChanged )
     Q_PROPERTY(double       pricePerUnit READ pricePerUnit                        NOTIFY pricePerUnitChanged )
@@ -50,13 +51,14 @@ private:
     double _quantity;
     double _price;
     bool _full;
+    bool _missed;
     int _station;
     int _fuelType;
     QString _note;
 
 public:
     explicit Tank(Car *parent = nullptr);
-    explicit Tank(QDate date, unsigned int distance, double quantity, double price, bool full, int fuelType,  int station, unsigned int id, QString note, Car* parent);
+    explicit Tank(QDate date, unsigned int distance, double quantity, double price, bool full, bool missed, int fuelType,  int station, unsigned int id, QString note, Car* parent);
 
     void setDate(QDate date);
     QDate getDate() const;
@@ -70,6 +72,9 @@ public:
 
     bool full() const;
     void setFull(bool full);
+
+    bool missed() const;
+    void setMissed(bool missed);
 
     double consumption() const;
     double costsOn100() const;
@@ -93,6 +98,7 @@ signals:
     void previousChanged();
     void stationChanged();
     void fullChanged(bool full);
+    void missedChanged(bool missed);
     void consumptionChanged();
     void fuelTypeChanged();
     void noteChanged();
