@@ -138,35 +138,49 @@ double Tank::calcCostsOrConsumptionType(enum chartTypeTankStatistics type) const
         return 0.0;
     }
 
-    const auto getValue = [&type](const Tank* tank) {
+    const auto tour = getTour();
+
+    if (tour.distance > 0)
+    {
         if (type == chartTypeConsumptionOf100)
         {
-            return tank->quantity();
+            return tour.quantity / (tour.distance / 100.0);
         }
         else if (type == chartTypeCostsOf100)
         {
-            return tank->price();
+            return tour.price / (tour.distance / 100.0);
         }
-        return 0.0;
-    };
+    }
+    return 0.0;
+}
+
+Tour Tank::getTour() const {
+    Tour temporaryTour;
+    Tour invalidTour{0,0,0};
+
+    if (!full()) return invalidTour;
+    if (missed()) return invalidTour;
 
     const Tank *previous = _car->previousTank(distance());
-    double value = getValue(this);
+    temporaryTour.price = price();
+    temporaryTour.quantity = quantity();
+
     while(previous != nullptr)
     {
         if (!(previous->missed()) && !(previous->full()))
         {
-            value += getValue(previous);
+            temporaryTour.price += previous->price();
+            temporaryTour.quantity += previous->quantity();
             previous = _car->previousTank(previous->distance());
         }
         else break;
     }
-    if (previous == nullptr) return 0.0;
-    if (previous->missed() && !previous->full()) return 0.0;
-    if (distance() == previous->distance()) return 0.0;
-    return value / ((distance() - previous->distance()) / 100.0);
+    if (previous == nullptr) return invalidTour;
+    if (previous->missed() && !previous->full()) return invalidTour;
+    if (distance() == previous->distance()) return invalidTour;
+    temporaryTour.distance = distance() - previous->distance();
+    return temporaryTour;
 }
-
 
 unsigned int Tank::newDistance() const
 {

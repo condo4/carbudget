@@ -373,27 +373,23 @@ unsigned int Car::numTanks() const
 double Car::consumption() const
 {
     if (_tankList.empty()) return 0.0;
-    unsigned long int maxDistance = 0;
-    unsigned long int minDistance = 999999999;
-    double totalConsumption = 0;
-    double partConsumption = 0;
+    unsigned long int totalDistance = 0;
+    double totalQuantity = 0;
+
     foreach(Tank *tank, _tankList)
     {
-        if(tank->full())
-        {
-            totalConsumption += partConsumption;
-            partConsumption = 0;
-            if(tank->distance() > maxDistance)
-                maxDistance = tank->distance();
-            if(tank->distance() < minDistance)
-                minDistance = tank->distance();
-        }
-        if(maxDistance > 0)
-            partConsumption += tank->quantity();
+        if (tank->full()) {
 
+            const auto tour = tank->getTour();
+            if (tour.distance > 0) {
+                totalQuantity += tour.quantity;
+                totalDistance += tour.distance;
+            }
+        }
     }
-    if((maxDistance == 0) || (maxDistance == minDistance)) return 0;
-    return totalConsumption / ((maxDistance - minDistance)/ 100.0);
+
+    if(totalDistance == 0) return 0;
+    return totalQuantity / (totalDistance/ 100.0);
 }
 
 double Car::consumptionMax() const

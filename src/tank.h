@@ -27,6 +27,12 @@
 #include "carevent.h"
 #include "charttypes.h"
 
+struct Tour {
+    double quantity;
+    double price;
+    unsigned long distance;
+};
+
 class Tank : public CarEvent
 {
     Q_OBJECT
@@ -76,6 +82,7 @@ public:
     bool missed() const;
     void setMissed(bool missed);
 
+    Tour getTour() const;
     double consumption() const;
     double costsOn100() const;
     unsigned int newDistance() const;
