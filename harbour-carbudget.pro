@@ -90,9 +90,10 @@ DISTFILES += \
     qmlModules/jbQuick/Charts/*.qml \
     qmlModules/jbQuick/Charts/*.js \
     qmlModules/jbQuick/Charts/*.md \
-    rpm/CarBudget.yaml \
     rpm/CarBudget.spec \
     harbour-carbudget.desktop \
+    rpm/harbour-carbudget.yaml \
+    rpm/harbour-carbudget.spec \
     translations/*.ts
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
