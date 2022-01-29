@@ -73,7 +73,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                   ("%1 %2 / 100 %3").arg(manager.car.budget.toFixed(2)).arg(manager.car.currency).arg(manager.car.distanceUnit)
+                   ("%1 %2 / 100 %3").arg(manager.car.budget.toLocaleString(Qt.locale(),'f',2)).arg(manager.car.currency).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
@@ -84,7 +84,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    ("%1l / 100%2").arg(manager.car.consumption.toFixed(2)).arg(manager.car.distanceUnit)
+                    ("%1l / 100%2").arg(manager.car.consumption.toLocaleString(Qt.locale(),'f',2)).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }

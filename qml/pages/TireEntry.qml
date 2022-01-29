@@ -154,7 +154,7 @@ Dialog {
         {
             buy_date = tire.buyDate
             trash_date = tire.trashDate
-            priceinput.text = tire.price
+            priceinput.text = tire.price.toLocaleString(Qt.locale(),'f',2)
             quantityinput.text = tire.quantity
             modelinput.text = tire.modelname
             manufacturerinput.text = tire.manufacturer

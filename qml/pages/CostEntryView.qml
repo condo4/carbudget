@@ -137,7 +137,7 @@ Page {
                         width:(parent.width-parent.spacing)/2
                     }
                     Text {
-                        text: cost.cost
+                        text: cost.cost.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

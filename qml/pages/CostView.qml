@@ -141,7 +141,7 @@ Page {
                         id: tPrice
                         anchors.top: tDate.bottom
                         anchors.right: tDate.right
-                        text: model.modelData.cost + manager.car.currency;
+                        text: model.modelData.cost.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor

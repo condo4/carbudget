@@ -182,7 +182,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Bills: %1%").arg((manager.car.budgetCostTotal*100/manager.car.budgetTotal).toFixed(2))
+                        text : qsTr("Bills: %1%").arg((manager.car.budgetCostTotal*100/manager.car.budgetTotal).toLocaleString(Qt.locale(),'f',2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -210,7 +210,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Fuel: %1%").arg((manager.car.budgetFuelTotal*100/manager.car.budgetTotal).toFixed(2))
+                        text : qsTr("Fuel: %1%").arg((manager.car.budgetFuelTotal*100/manager.car.budgetTotal).toLocaleString(Qt.locale(),'f',2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -238,7 +238,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Tires: %1%").arg((manager.car.budgetTireTotal*100/manager.car.budgetTotal).toFixed(2))
+                        text : qsTr("Tires: %1%").arg((manager.car.budgetTireTotal*100/manager.car.budgetTotal).toLocaleString(Qt.locale(),'f',2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -266,7 +266,7 @@ Page {
                     Text {
                         width: 0.5 * parent.width
                         height: parent.height
-                        text : qsTr("Invest: %1%").arg((manager.car.budgetInvestTotal*100/manager.car.budgetTotal).toFixed(2))
+                        text : qsTr("Invest: %1%").arg((manager.car.budgetInvestTotal*100/manager.car.budgetTotal).toLocaleString(Qt.locale(),'f',2))
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor
                         horizontalAlignment: Text.AlignLeft
@@ -297,7 +297,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text :  (manager.car.maxDistance/distanceunitfactor).toFixed(0)
+                            text :  (manager.car.maxDistance/distanceunitfactor).toFixed(0)+" "+manager.car.distanceUnit
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -316,7 +316,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text :  ((manager.car.maxDistance - manager.car.minDistance)/distanceunitfactor).toFixed(0)
+                            text :  ((manager.car.maxDistance - manager.car.minDistance)/distanceunitfactor).toFixed(0)+" "+manager.car.distanceUnit
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -364,7 +364,7 @@ Page {
                                     }
                                     Text {
                                         width:parent.width/2
-                                        text :  manager.car.fuelTotal.toFixed(2) + " l"
+                                        text :  manager.car.fuelTotal.toLocaleString(Qt.locale(),'f',2) + " l"
                                         font.pixelSize: Theme.fontSizeMedium
                                         color: Theme.primaryColor
                                         horizontalAlignment: Text.AlignRight
@@ -384,11 +384,11 @@ Page {
                                     Text {
                                         width:parent.width/2
                                         text: if ( manager.car.consumptionUnit === 'l/100km') {
-                                            manager.car.consumption.toFixed(2)+ " l";
+                                            manager.car.consumption.toLocaleString(Qt.locale(),'f',2)+ " l";
                                         }
                                         else {
                                             if ( manager.car.consumptionUnit === 'mpg') {
-                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toLocaleString(Qt.locale(),'f',2))
                                             }
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -410,11 +410,11 @@ Page {
                                     Text {
                                         width:parent.width/2
                                         text : if (manager.car.consumptionUnit === 'l/100km') {
-                                            manager.car.consumptionMin.toFixed(2) + " l"
+                                            manager.car.consumptionMin.toLocaleString(Qt.locale(),'f',2) + " l"
                                         }
                                         else {
                                             if ( manager.car.consumptionUnit === 'mpg') {
-                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMin).toFixed(2))
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMin).toLocaleString(Qt.locale(),'f',2))
                                             }
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -436,11 +436,11 @@ Page {
                                     Text {
                                         width:parent.width/2
                                         text :  if ( manager.car.consumptionUnit === 'l/100km') {
-                                            manager.car.consumptionMax.toFixed(2) + " l"
+                                            manager.car.consumptionMax.toLocaleString(Qt.locale(),'f',2) + " l"
                                         }
                                         else {
                                             if ( manager.car.consumptionUnit === 'mpg') {
-                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMax).toFixed(2))
+                                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.consumptionMax).toLocaleString(Qt.locale(),'f',2))
                                             }
                                         }
                                         font.pixelSize: Theme.fontSizeMedium
@@ -494,7 +494,7 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budgetFuelTotal.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetFuelTotal.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -526,7 +526,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : manager.car.budgetCostTotal.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetCostTotal.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -557,7 +557,7 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budgetTireTotal.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetTireTotal.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -588,7 +588,7 @@ Page {
                             Text {
                                 anchors.right:parent.right
                                 width:parent.width/2
-                                text : manager.car.budgetInvestTotal.toFixed(2) + " " + manager.car.currency
+                                text : manager.car.budgetInvestTotal.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -608,7 +608,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text : manager.car.budgetTotal.toFixed(2) + " " + manager.car.currency
+                            text : manager.car.budgetTotal.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight
@@ -653,7 +653,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budgetFuel*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetFuel*distanceunitfactor).toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -685,7 +685,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budgetCost*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetCost*distanceunitfactor).toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -717,7 +717,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budgetTire*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetTire*distanceunitfactor).toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -749,7 +749,7 @@ Page {
                             Text {
                                 width:parent.width/2
                                 anchors.right:parent.right
-                                text : (manager.car.budgetInvest*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                                text : (manager.car.budgetInvest*distanceunitfactor).toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                                 font.pixelSize: Theme.fontSizeMedium
                                 color: Theme.primaryColor
                                 horizontalAlignment: Text.AlignRight
@@ -769,7 +769,7 @@ Page {
                         }
                         Text {
                             width:parent.width/2
-                            text : (manager.car.budget*distanceunitfactor).toFixed(2) + " " + manager.car.currency
+                            text : (manager.car.budget*distanceunitfactor).toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                             font.pixelSize: Theme.fontSizeMedium
                             color: Theme.primaryColor
                             horizontalAlignment: Text.AlignRight

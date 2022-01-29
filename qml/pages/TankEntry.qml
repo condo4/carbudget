@@ -126,7 +126,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 validator: DoubleValidator { bottom: 0; top: 99999999 }
                 readOnly: true
-                text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toFixed(3) || 0
+                text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toLocaleString(Qt.locale(),'f',3) || 0
             }
             ComboBox {
                 id: cbfuelType
@@ -201,8 +201,8 @@ Dialog {
         {
             tank_date = tank.date
             kminput.text = (tank.distance / distanceunitfactor).toFixed(0)
-            quantityinput.text = tank.quantity
-            priceinput.text = tank.price
+            quantityinput.text = tank.quantity.toLocaleString(Qt.locale(),'f',2)
+            priceinput.text = tank.price.toLocaleString(Qt.locale(),'f',2)
             fullinput.checked = tank.full
             fuelType = tank.fuelType
             station = tank.station
