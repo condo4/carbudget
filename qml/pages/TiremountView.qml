@@ -49,7 +49,7 @@ Page {
         model: manager.car.tireMounts
 
         delegate: ListItem {
-            width: parent.width
+            width: parent.width - 2*Theme.paddingMedium
             showMenuOnPressAndHold: true
 
             menu: ContextMenu {

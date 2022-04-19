@@ -127,7 +127,7 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text : model.total.toFixed(2) + " " + manager.car.currency
+                        text : model.total.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
                         font.family: "monospaced"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

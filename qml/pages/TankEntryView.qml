@@ -124,7 +124,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: tank.quantity.toFixed(2)
+                    text: tank.quantity.toLocaleString(Qt.locale(),'f',2)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -146,7 +146,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: tank.price
+                    text: tank.price.toLocaleString(Qt.locale(),'f',2)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -168,7 +168,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: (tank.price / tank.quantity).toFixed(3)
+                    text: (tank.price / tank.quantity).toLocaleString(Qt.locale(),'f',3)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

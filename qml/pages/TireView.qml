@@ -133,7 +133,7 @@ Page {
                         width: parent.width / 2
                     }
                     Text {
-                        text: model.modelData.price + manager.car.currency;
+                        text: model.modelData.price.toLocaleString(Qt.locale(),'f',2)+" "+manager.car.currency;
                         font.bold: model.modelData.mounted
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall

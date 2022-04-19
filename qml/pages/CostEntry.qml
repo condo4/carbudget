@@ -143,7 +143,7 @@ Dialog {
             kminput.text = (cost.distance / distanceunitfactor)
             costType = cost.costType
             descinput.text = cost.description
-            costinput.text = cost.cost
+            costinput.text = cost.cost.toLocaleString(Qt.locale(),'f',2)
             for(var i=0; i<costTypeslistrepeater.count; i++)
             {
                 if(costTypeslistrepeater.itemAt(i).dbid === cost.costType)

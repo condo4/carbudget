@@ -92,20 +92,20 @@ Page {
                 x: Theme.paddingLarge
                 text:
                     if ( manager.car.consumptionUnit === "l/100km" ) {
-                        qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toFixed(2))
+                        qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toLocaleString(Qt.locale(),'f',2))
                     }
                     else if ( manager.car.consumptionUnit === "mpg" ) {
-                        qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toFixed(2))
+                        qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toLocaleString(Qt.locale(),'f',2))
                     }
             }
             Label {
                 x: Theme.paddingLarge
                 text:
                     if ( manager.car.consumptionUnit === "l/100km" ) {
-                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionLast.toFixed(2))
+                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionLast.toLocaleString(Qt.locale(),'f',2))
                     }
                     else if ( manager.car.consumptionUnit === "mpg" ) {
-                        qsTr("Last: %L1 mpg").arg(((consumptionfactor * 1/manager.car.consumptionLast)).toFixed(2))
+                        qsTr("Last: %L1 mpg").arg(((consumptionfactor * 1/manager.car.consumptionLast)).toLocaleString(Qt.locale(),'f',2))
                     }
                 color: {
                     if(manager.car.consumptionLast === 0) return Theme.primaryColor

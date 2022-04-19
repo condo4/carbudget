@@ -77,11 +77,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_byType(model.modelData.id).toFixed(2) + " l";
+                            manager.car.budget_consumption_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_byType(model.modelData.id)).toFixed(2));
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
                             }
                         }
                         font.family: "monospaced"
@@ -103,11 +103,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_min_byType(model.modelData.id).toFixed(2) + " l";
+                            manager.car.budget_consumption_min_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_min_byType(model.modelData.id)).toFixed(2));
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_min_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
                             }
                         }
                         font.family: "monospaced"
@@ -129,11 +129,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_max_byType(model.modelData.id).toFixed(2) + " l";
+                            manager.car.budget_consumption_max_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_max_byType(model.modelData.id)).toFixed(2));
+                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_max_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
                             }
                         }
                         font.family: "monospaced"
