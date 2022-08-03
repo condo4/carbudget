@@ -151,7 +151,7 @@ bool CarManager::createTables(QSqlDatabase db)
     sqlQueries.append(QString("CREATE TABLE StationList (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"));
     sqlQueries.append(QString("CREATE TABLE TireList (id INTEGER PRIMARY KEY AUTOINCREMENT, buyDate DATE, trashDate DATE DEFAULT NULL, price DOUBLE, quantity INT, name TEXT, manufacturer TEXT, model TEXT);"));
     sqlQueries.append(QString("CREATE TABLE Event (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, distance UNSIGNED BIG INT);"));
-    sqlQueries.append(QString("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, station INTEGER, fuelType INTEGER, note TEXT);"));
+    sqlQueries.append(QString("CREATE TABLE TankList (event INTEGER, quantity DOUBLE, price DOUBLE, full TINYINT, missed TINYINT, station INTEGER, fuelType INTEGER, note TEXT);"));
     sqlQueries.append(QString("CREATE TABLE CostList (event INTEGER, costType INTEGER, cost DOUBLE, desc TEXT);"));
     sqlQueries.append(QString("CREATE TABLE TireUsage (event_mount INTEGER, event_umount INTEGER, tire INTEGER);"));
     sqlQueries.append(QString("CREATE TABLE PeriodicList (id INTEGER PRIMARY KEY AUTOINCREMENT, first DATE, last DATE, cost DOUBLE, desc TEXT, period INTEGER);"));
@@ -316,7 +316,7 @@ void CarManager::importFromMyCar(QString filename, QString name)
                     t_station=station->id();
             }
             if (!n_note.isNull()) t_note = n_note.text();
-            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,t_fuelType,t_station,t_note);
+            _car->addNewTank(t_date,t_distance,t_quantity,t_price,t_refuel_type,false,t_fuelType,t_station,t_note);
         }
     }
     // Now import cost types from bill types;
@@ -489,7 +489,7 @@ void CarManager::importFromFuelpad(QString filename, QString name)
             t_other = query.value(8).toDouble();
             t_notes = query.value(9).toString();
             if (t_fill!=0)
-                _car->addNewTank(t_date,t_km,t_fill,t_price,true,0,0,t_notes);
+                _car->addNewTank(t_date,t_km,t_fill,t_price,true,false,0,0,t_notes);
             if (t_service!=0)
                 _car->addNewCost(t_date,t_km,t_serviceid,t_notes,t_service);
             if (t_oil!=0)

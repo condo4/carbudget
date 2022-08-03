@@ -243,6 +243,28 @@ Page {
                 }
             }
 
+            Row {
+                id: missedtankrow
+                width: parent.width- Theme.paddingMedium - Theme.paddingMedium
+                spacing:Theme.paddingLarge
+                Text {
+                    text: qsTr("Missed tank:")
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignLeft
+                    width:(parent.width-parent.spacing)/2
+                }
+                Text {
+                    text: (tank.missed)?(qsTr("Yes")):(qsTr("No"))
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontSizeMedium
+                    color: Theme.primaryColor
+                    horizontalAlignment: Text.AlignRight
+                    width:(parent.width-parent.spacing)/2
+                }
+            }
+
             Text {
                 width: parent.width- Theme.paddingMedium - Theme.paddingMedium
                 text: qsTr("Note:")

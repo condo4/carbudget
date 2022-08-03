@@ -36,7 +36,7 @@
 #include "charttypes.h"
 
 class CarManager;
-#define DB_VERSION 6
+#define DB_VERSION 7
 
 class Car : public QObject
 {
@@ -231,8 +231,8 @@ signals:
     void licensePlateChanged();
 
 public slots:
-    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
-    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, unsigned int fuelType, unsigned int station, QString note);
+    void addNewTank(QDate date, unsigned int distance, double quantity, double price, bool full, bool missed, unsigned int fuelType, unsigned int station, QString note);
+    Tank* modifyTank(Tank *tank, QDate date, unsigned int distance, double quantity, double price, bool full, bool missed, unsigned int fuelType, unsigned int station, QString note);
     void delTank(Tank *tank);
 
     void addNewFuelType(QString fuelType);
