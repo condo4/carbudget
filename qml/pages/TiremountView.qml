@@ -55,7 +55,7 @@ Page {
             menu: ContextMenu {
                 MenuItem {
                     text: qsTr("Modify")
-                    onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tirmount: model.modelData })
+                    onClicked: pageStack.push(Qt.resolvedUrl("TiremountEdit.qml"), { tireMount: model.modelData })
                 }
             }
 

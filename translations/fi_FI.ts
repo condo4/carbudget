@@ -1097,7 +1097,7 @@
     <message>
         <location filename="../qml/pages/TireView.qml" line="54"/>
         <source>Tire List</source>
-        <translation>Renkassarjat</translation>
+        <translation>Rengassarjat</translation>
     </message>
     <message>
         <location filename="../qml/pages/TireView.qml" line="68"/>
@@ -1107,7 +1107,7 @@
     <message>
         <location filename="../qml/pages/TireView.qml" line="73"/>
         <source>Untrash</source>
-        <translatorcomment>Return tires from trash to storage, ready to be installed agian.</translatorcomment>
+        <translatorcomment>Return tires from trash to storage, ready to be installed again.</translatorcomment>
         <translation>Palauta varastoon</translation>
     </message>
     <message>
@@ -1144,17 +1144,17 @@
 <context>
     <name>TiremountEdit</name>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="43"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="45"/>
         <source>Modify Tire Mount</source>
         <translation>Muokkaa rengasasennusta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="59"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="61"/>
         <source>Mount date</source>
         <translation>Asennuspäivämäärä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="92"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="94"/>
         <source>Unmount date</source>
         <translation>Varastointipäivämäärä</translation>
     </message>

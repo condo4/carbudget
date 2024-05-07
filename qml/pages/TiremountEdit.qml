@@ -27,7 +27,9 @@ Dialog {
     property TireMount tireMount
     property date mountDate
     property date unmountDate
+    property real distanceunitfactor : 1.0
     allowedOrientations: Orientation.All
+
     SilicaFlickable {
         VerticalScrollDecorator {}
 
@@ -110,8 +112,8 @@ Dialog {
     canAccept: mountDistance.acceptableInput && unmountDistance.acceptableInput
 
     onOpened: {
-        distanceunit = manager.car.distanceUnit
-        if(distanceunit == "mi" )
+        var distanceunit = manager.car.distanceUnit
+        if(distanceunit === "mi" )
         {
             distanceunitfactor = 1.609
         }
