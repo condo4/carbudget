@@ -1155,17 +1155,17 @@
 <context>
     <name>TiremountEdit</name>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="43"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="45"/>
         <source>Modify Tire Mount</source>
         <translation>Reifenmotage bearbeiten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="59"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="61"/>
         <source>Mount date</source>
         <translation>Montage Datum</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TiremountEdit.qml" line="92"/>
+        <location filename="../qml/pages/TiremountEdit.qml" line="94"/>
         <source>Unmount date</source>
         <translation>Demontage Datum</translation>
     </message>
