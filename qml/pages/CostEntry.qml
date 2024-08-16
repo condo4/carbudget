@@ -159,7 +159,14 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            manager.car.addNewCost(cost_date,kminput.text * distanceunitfactor,costType,descinput.text,costinput.text.replace(",","."))
+            Number.fromLocaleString(Qt.locale(), myInputField.text)
+            manager.car.addNewCost(
+                cost_date,
+                kminput.text * distanceunitfactor,
+                costType,
+                descinput.text,
+                Number.fromLocaleString(Qt.locale(), costinput.text)
+            )
         }
         else
         {
@@ -167,7 +174,7 @@ Dialog {
             cost.distance = kminput.text * distanceunitfactor
             cost.costType = costType
             cost.description = descinput.text
-            cost.cost = costinput.text.replace(",",".")
+            cost.cost = Number.fromLocaleString(Qt.locale(), costinput.text)
             cost.save()
         }
     }

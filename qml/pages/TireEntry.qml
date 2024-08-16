@@ -147,7 +147,12 @@ Dialog {
             }
         }
     }
-    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput && quantityinput.acceptableInput && quantityinput.text > 1
+    canAccept: priceinput.acceptableInput &&
+        modelinput.acceptableInput &&
+        manufacturerinput.acceptableInput &&
+        nameinput.acceptableInput &&
+        quantityinput.acceptableInput &&
+        quantityinput.text > 1
 
     onOpened: {
         if(tire != undefined)
@@ -170,11 +175,27 @@ Dialog {
     onAccepted: {
         if(tire == undefined)
         {
-            manager.car.addNewTire(buy_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.addNewTire(
+                buy_date,
+                nameinput.text,
+                manufacturerinput.text,
+                modelinput.text,
+                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                quantityinput.text
+            )
         }
         else
         {
-            manager.car.modifyTire(tire, buy_date, trash_date, nameinput.text, manufacturerinput.text, modelinput.text, priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.modifyTire(
+                tire,
+                buy_date,
+                trash_date,
+                nameinput.text,
+                manufacturerinput.text,
+                modelinput.text,
+                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                quantityinput.text
+            )
         }
     }
 }

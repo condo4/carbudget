@@ -126,7 +126,7 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 validator: DoubleValidator { bottom: 0; top: 99999999 }
                 readOnly: true
-                text:  (priceinput.text.replace(",",".") / quantityinput.text.replace(",",".")).toLocaleString(Qt.locale(),'f',3) || 0
+                text:  (Number.fromLocaleString(Qt.locale(), priceinput.text) / Number.fromLocaleString(Qt.locale(), quantityinput.text)).toLocaleString(Qt.locale(),'f',3) || 0
             }
             ComboBox {
                 id: cbfuelType
@@ -260,7 +260,17 @@ Dialog {
     onAccepted: {
         if(tank == undefined)
         {
-            manager.car.addNewTank(tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, missedinput.checked, fuelType, station, noteinput.text)
+            manager.car.addNewTank(
+                tank_date,
+                kminput.text * distanceunitfactor,
+                Number.fromLocaleString(Qt.locale(), quantityinput.text),
+                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                fullinput.checked,
+                missedinput.checked,
+                fuelType,
+                station,
+                noteinput.text
+            )
         }
         else
         {
@@ -268,7 +278,18 @@ Dialog {
             tank.distance = kminput.text * distanceunitfactor
             tank.full = fullinput.checked
             tank.missed = missedinput.checked
-            manager.car.modifyTank(tank, tank_date,kminput.text * distanceunitfactor,quantityinput.text.replace(",","."),priceinput.text.replace(",","."),fullinput.checked, missedinput.checked, fuelType, station, noteinput.text)
+            manager.car.modifyTank(
+                tank,
+                tank_date,
+                kminput.text * distanceunitfactor,
+                Number.fromLocaleString(Qt.locale(), quantityinput.text),
+                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                fullinput.checked,
+                missedinput.checked,
+                fuelType,
+                station,
+                noteinput.text
+            )
         }
     }
 }
