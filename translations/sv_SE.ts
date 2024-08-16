@@ -911,6 +911,11 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="188"/>
+        <source>Missed tank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TankEntry.qml" line="196"/>
         <source>Note</source>
         <translation>Anteckning</translation>
     </message>
@@ -969,16 +974,23 @@
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="237"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="259"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="237"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="259"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TankEntryView.qml" line="248"/>
+        <location filename="../qml/pages/TankEntryView.qml" line="251"/>
+        <source>Missed tank:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TankEntryView.qml" line="270"/>
         <source>Note:</source>
         <translation>Anteckning:</translation>
     </message>
