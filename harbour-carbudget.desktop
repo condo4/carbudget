@@ -4,3 +4,6 @@ X-Nemo-Application-Type=silica-qt5
 Name=CarBudget
 Icon=harbour-carbudget
 Exec=harbour-carbudget
+
+[X-HarbourBackup]
+BackupPathList=.config/harbour-carbudget/:.local/share/harbour-carbudget/
