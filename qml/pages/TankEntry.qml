@@ -21,7 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Dialog {
     property Tank tank
@@ -126,7 +126,8 @@ Dialog {
                 anchors { left: parent.left; right: parent.right }
                 validator: DoubleValidator { bottom: 0; top: 99999999 }
                 readOnly: true
-                text:  (Number.fromLocaleString(Qt.locale(), priceinput.text) / Number.fromLocaleString(Qt.locale(), quantityinput.text)).toLocaleString(Qt.locale(),'f',3) || 0
+                property var _unitPrice: Util.stringToNumber(priceinput.text) / Util.stringToNumber(quantityinput.text)
+                text: (_unitPrice > 0 && _unitPrice < Infinity) ? Util.numberToString(_unitPrice, 3) : Util.numberToString(0, 3)
             }
             ComboBox {
                 id: cbfuelType
@@ -209,8 +210,8 @@ Dialog {
         {
             tank_date = tank.date
             kminput.text = (tank.distance / distanceunitfactor).toFixed(0)
-            quantityinput.text = tank.quantity.toLocaleString(Qt.locale(),'f',2)
-            priceinput.text = tank.price.toLocaleString(Qt.locale(),'f',2)
+            quantityinput.text = Util.numberToString(tank.quantity)
+            priceinput.text = Util.numberToString(tank.price)
             fullinput.checked = tank.full
             missedinput.checked = tank.missed
             fuelType = tank.fuelType
@@ -263,8 +264,8 @@ Dialog {
             manager.car.addNewTank(
                 tank_date,
                 kminput.text * distanceunitfactor,
-                Number.fromLocaleString(Qt.locale(), quantityinput.text),
-                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                Util.stringToNumber(quantityinput.text),
+                Util.stringToNumber(priceinput.text),
                 fullinput.checked,
                 missedinput.checked,
                 fuelType,
@@ -282,8 +283,8 @@ Dialog {
                 tank,
                 tank_date,
                 kminput.text * distanceunitfactor,
-                Number.fromLocaleString(Qt.locale(), quantityinput.text),
-                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                Util.stringToNumber(quantityinput.text),
+                Util.stringToNumber(priceinput.text),
                 fullinput.checked,
                 missedinput.checked,
                 fuelType,

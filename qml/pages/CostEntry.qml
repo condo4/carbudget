@@ -21,7 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Dialog {
     property Cost cost
@@ -143,7 +143,7 @@ Dialog {
             kminput.text = (cost.distance / distanceunitfactor)
             costType = cost.costType
             descinput.text = cost.description
-            costinput.text = cost.cost.toLocaleString(Qt.locale(),'f',2)
+            costinput.text = Util.numberToString(cost.cost)
             for(var i=0; i<costTypeslistrepeater.count; i++)
             {
                 if(costTypeslistrepeater.itemAt(i).dbid === cost.costType)
@@ -159,13 +159,13 @@ Dialog {
     onAccepted: {
         if(cost == undefined)
         {
-            Number.fromLocaleString(Qt.locale(), myInputField.text)
+            Util.stringToNumber(myInputField.text)
             manager.car.addNewCost(
                 cost_date,
                 kminput.text * distanceunitfactor,
                 costType,
                 descinput.text,
-                Number.fromLocaleString(Qt.locale(), costinput.text)
+                Util.stringToNumber(costinput.text)
             )
         }
         else
@@ -174,7 +174,7 @@ Dialog {
             cost.distance = kminput.text * distanceunitfactor
             cost.costType = costType
             cost.description = descinput.text
-            cost.cost = Number.fromLocaleString(Qt.locale(), costinput.text)
+            cost.cost = Util.stringToNumber(costinput.text)
             cost.save()
         }
     }

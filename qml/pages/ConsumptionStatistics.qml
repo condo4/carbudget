@@ -21,6 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
+import "../js/util.js" as Util
 
 Page {
     allowedOrientations: Orientation.All
@@ -77,11 +78,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
+                            Util.numberToString(manager.car.budget_consumption_byType(model.modelData.id)) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
+                                qsTr("%L1 mpg").arg(Util.numberToString(consumptionfactor / manager.car.budget_consumption_byType(model.modelData.id)));
                             }
                         }
                         font.family: "monospaced"
@@ -103,11 +104,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_min_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
+                            Util.numberToString(manager.car.budget_consumption_min_byType(model.modelData.id)) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_min_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
+                                qsTr("%L1 mpg").arg(Util.numberToString(consumptionfactor / manager.car.budget_consumption_min_byType(model.modelData.id)));
                             }
                         }
                         font.family: "monospaced"
@@ -129,11 +130,11 @@ Page {
                     Text {
                         width:parent.width/2
                         text : if ( manager.car.consumptionUnit === 'l/100km') {
-                            manager.car.budget_consumption_max_byType(model.modelData.id).toLocaleString(Qt.locale(),'f',2) + " l";
+                            Util.numberToString(manager.car.budget_consumption_max_byType(model.modelData.id)) + " l";
                         }
                         else {
                             if ( manager.car.consumptionUnit === 'mpg') {
-                                qsTr("%L1 mpg").arg((consumptionfactor * 1/manager.car.budget_consumption_max_byType(model.modelData.id)).toLocaleString(Qt.locale(),'f',2));
+                                qsTr("%L1 mpg").arg(Util.numberToString(consumptionfactor / manager.car.budget_consumption_max_byType(model.modelData.id)));
                             }
                         }
                         font.family: "monospaced"

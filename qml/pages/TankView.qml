@@ -22,7 +22,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Page {
     property string filter: ""
@@ -162,7 +162,7 @@ Page {
                         id: tConsumption
                         anchors.top: tDistance.bottom
                         anchors.left: parent.left
-                        text: model.modelData.pricePerUnit.toLocaleString(Qt.locale(),'f',3)+" "+manager.car.currency + "/l";
+                        text: Util.numberToString(model.modelData.pricePerUnit) + " " + manager.car.currency + "/l";
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
@@ -176,7 +176,7 @@ Page {
                         anchors.left: tConsumption.right
                         width: parent.width / 5
 
-                        text: model.modelData.quantity.toLocaleString(Qt.locale(),'f',2) + "l"
+                        text: Util.numberToString(model.modelData.quantity) + "l"
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
@@ -190,7 +190,7 @@ Page {
                         anchors.left: tAmount.right
                         width: parent.width / 5
 
-                        text: model.modelData.price.toLocaleString(Qt.locale(),'f',2)+" "+manager.car.currency;
+                        text: Util.numberToString(model.modelData.price) + " " + manager.car.currency;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.secondaryColor
@@ -205,10 +205,10 @@ Page {
                         width: parent.width / 5 * 2
 
                         text: if ( manager.car.consumptionUnit === "l/100km") {
-                                  model.modelData.consumption.toLocaleString(Qt.locale(),'f',2)+ "l/100km";
+                                  Util.numberToString(model.modelData.consumption) + "l/100km";
                               }
                               else if ( manager.car.consumptionUnit === "mpg") {
-                                  ("%L1 mpg").arg((consumptionfactor * 1/model.modelData.consumption).toLocaleString(Qt.locale(),'f',2))
+                                  ("%L1 mpg").arg(Util.numberToString(consumptionfactor / model.modelData.consumption))
                               }
 
                         visible: model.modelData.consumption > 0

@@ -22,7 +22,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Dialog {
     property Tire tire
@@ -159,7 +159,7 @@ Dialog {
         {
             buy_date = tire.buyDate
             trash_date = tire.trashDate
-            priceinput.text = tire.price.toLocaleString(Qt.locale(),'f',2)
+            priceinput.text = Util.numberToString(tire.price)
             quantityinput.text = tire.quantity
             modelinput.text = tire.modelname
             manufacturerinput.text = tire.manufacturer
@@ -180,7 +180,7 @@ Dialog {
                 nameinput.text,
                 manufacturerinput.text,
                 modelinput.text,
-                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                Util.stringToNumber(priceinput.text),
                 quantityinput.text
             )
         }
@@ -193,7 +193,7 @@ Dialog {
                 nameinput.text,
                 manufacturerinput.text,
                 modelinput.text,
-                Number.fromLocaleString(Qt.locale(), priceinput.text),
+                Util.stringToNumber(priceinput.text),
                 quantityinput.text
             )
         }

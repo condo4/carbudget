@@ -21,6 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
+import "../js/util.js" as Util
 
 Page {
     property string filter: ""
@@ -141,7 +142,7 @@ Page {
                         id: tPrice
                         anchors.top: tDate.bottom
                         anchors.right: tDate.right
-                        text: model.modelData.cost.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency;
+                        text: Util.numberToString(model.modelData.cost) + " " + manager.car.currency;
                         font.family: Theme.fontFamily
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor

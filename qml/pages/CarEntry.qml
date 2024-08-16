@@ -21,7 +21,7 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
-
+import "../js/util.js" as Util
 
 Page {
     id: carEntryPage
@@ -92,20 +92,20 @@ Page {
                 x: Theme.paddingLarge
                 text:
                     if ( manager.car.consumptionUnit === "l/100km" ) {
-                        qsTr("Consumption: %L1 l/100km").arg(manager.car.consumption.toLocaleString(Qt.locale(),'f',2))
+                        qsTr("Consumption: %L1 l/100km").arg(Util.numberToString(manager.car.consumption))
                     }
                     else if ( manager.car.consumptionUnit === "mpg" ) {
-                        qsTr("Consumption: %L1 mpg").arg((consumptionfactor * 1/manager.car.consumption).toLocaleString(Qt.locale(),'f',2))
+                        qsTr("Consumption: %L1 mpg").arg(Util.numberToString(consumptionfactor / manager.car.consumption))
                     }
             }
             Label {
                 x: Theme.paddingLarge
                 text:
                     if ( manager.car.consumptionUnit === "l/100km" ) {
-                        qsTr("Last: %L1 l/100km").arg(manager.car.consumptionLast.toLocaleString(Qt.locale(),'f',2))
+                        qsTr("Last: %L1 l/100km").arg(Util.numberToString(manager.car.consumptionLast))
                     }
                     else if ( manager.car.consumptionUnit === "mpg" ) {
-                        qsTr("Last: %L1 mpg").arg(((consumptionfactor * 1/manager.car.consumptionLast)).toLocaleString(Qt.locale(),'f',2))
+                        qsTr("Last: %L1 mpg").arg(Util.numberToString(consumptionfactor / manager.car.consumptionLast))
                     }
                 color: {
                     if(manager.car.consumptionLast === 0) return Theme.primaryColor

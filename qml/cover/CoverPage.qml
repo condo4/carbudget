@@ -20,6 +20,7 @@
 
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import "../js/util.js" as Util
 
 CoverBackground {
     // Show main content only if the car exists
@@ -73,7 +74,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                   ("%1 %2 / 100 %3").arg(manager.car.budget.toLocaleString(Qt.locale(),'f',2)).arg(manager.car.currency).arg(manager.car.distanceUnit)
+                   ("%1 %2 / 100 %3").arg(Util.numberToString(manager.car.budget)).arg(manager.car.currency).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
@@ -84,7 +85,7 @@ CoverBackground {
                 if(nullCar)
                     return ""
                 else
-                    ("%1l / 100%2").arg(manager.car.consumption.toLocaleString(Qt.locale(),'f',2)).arg(manager.car.distanceUnit)
+                    ("%1l / 100%2").arg(Util.numberToString(manager.car.consumption)).arg(manager.car.distanceUnit)
             }
             font.pixelSize: Theme.fontSizeSmall
         }
