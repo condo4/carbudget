@@ -21,7 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Page {
         allowedOrientations: Orientation.All
@@ -124,7 +124,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: tank.quantity.toLocaleString(Qt.locale(),'f',2)
+                    text: Util.numberToString(tank.quantity)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -146,7 +146,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: tank.price.toLocaleString(Qt.locale(),'f',2)
+                    text: Util.numberToString(tank.price)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor
@@ -168,7 +168,7 @@ Page {
                     width:(parent.width-parent.spacing)/2
                 }
                 Text {
-                    text: (tank.price / tank.quantity).toLocaleString(Qt.locale(),'f',3)
+                    text: Util.numberToString(tank.price / tank.quantity)
                     font.family: Theme.fontFamily
                     font.pixelSize: Theme.fontSizeMedium
                     color: Theme.primaryColor

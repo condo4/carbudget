@@ -21,6 +21,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
+import "../js/util.js" as Util
 
 Page {
     allowedOrientations: Orientation.All
@@ -127,7 +128,7 @@ Page {
                     }
                     Text {
                         width:parent.width/2
-                        text : model.total.toLocaleString(Qt.locale(),'f',2) + " " + manager.car.currency
+                        text: Util.numberToString(model.total) + " " + manager.car.currency
                         font.family: "monospaced"
                         font.pixelSize: Theme.fontSizeMedium
                         color: Theme.primaryColor

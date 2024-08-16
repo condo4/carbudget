@@ -22,7 +22,7 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
 import harbour.carbudget 1.0
-
+import "../js/util.js" as Util
 
 Dialog {
     property Tire tire
@@ -147,14 +147,19 @@ Dialog {
             }
         }
     }
-    canAccept: priceinput.acceptableInput && modelinput.acceptableInput && manufacturerinput.acceptableInput && nameinput.acceptableInput && quantityinput.acceptableInput && quantityinput.text > 1
+    canAccept: priceinput.acceptableInput &&
+        modelinput.acceptableInput &&
+        manufacturerinput.acceptableInput &&
+        nameinput.acceptableInput &&
+        quantityinput.acceptableInput &&
+        quantityinput.text > 1
 
     onOpened: {
         if(tire != undefined)
         {
             buy_date = tire.buyDate
             trash_date = tire.trashDate
-            priceinput.text = tire.price.toLocaleString(Qt.locale(),'f',2)
+            priceinput.text = Util.numberToString(tire.price)
             quantityinput.text = tire.quantity
             modelinput.text = tire.modelname
             manufacturerinput.text = tire.manufacturer
@@ -170,11 +175,27 @@ Dialog {
     onAccepted: {
         if(tire == undefined)
         {
-            manager.car.addNewTire(buy_date,nameinput.text,manufacturerinput.text,modelinput.text,priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.addNewTire(
+                buy_date,
+                nameinput.text,
+                manufacturerinput.text,
+                modelinput.text,
+                Util.stringToNumber(priceinput.text),
+                quantityinput.text
+            )
         }
         else
         {
-            manager.car.modifyTire(tire, buy_date, trash_date, nameinput.text, manufacturerinput.text, modelinput.text, priceinput.text.replace(",","."), quantityinput.text )
+            manager.car.modifyTire(
+                tire,
+                buy_date,
+                trash_date,
+                nameinput.text,
+                manufacturerinput.text,
+                modelinput.text,
+                Util.stringToNumber(priceinput.text),
+                quantityinput.text
+            )
         }
     }
 }
