@@ -912,7 +912,7 @@
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="189"/>
         <source>Missed tank</source>
-        <translation type="unfinished"></translation>
+        <translation>Missad tank</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntry.qml" line="197"/>
@@ -987,7 +987,7 @@
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="251"/>
         <source>Missed tank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Missad tank:</translation>
     </message>
     <message>
         <location filename="../qml/pages/TankEntryView.qml" line="270"/>
